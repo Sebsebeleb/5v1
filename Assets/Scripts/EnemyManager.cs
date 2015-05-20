@@ -1,30 +1,85 @@
-﻿using System.Security.Cryptography.X509Certificates;
+﻿using System;
 using UnityEngine;
-using System.Collections;
+using Random = UnityEngine.Random;
 
 public static class EnemyManager
 {
 
     public static GameObject CorpseEnemy;
-	
+
+    public static EnemySpawnList SpawnList;
+
 
     public static void KillEnemy(Enemy enemy)
     {
+        GameObject.Destroy(enemy);
+
+        int x = enemy.x;
+        int y = enemy.y;
+
         //Make a new corpse enemy
         SpawnEnemy(CorpseEnemy, enemy.x, enemy.y);
 
-        GameObject.Destroy(enemy);
     }
 
     public static void SpawnEnemy(GameObject enemy, int x, int y)
     {
-	        GameObject newEnemy = GameObject.Instantiate(enemy.gameObject);
+        CheckCurrent(enemy, x, y);
 
-	        Enemy enemyBehaviour = newEnemy.GetComponent<Enemy>();
-	        GridManager.TileMap.EnemySetAt(x, y, enemyBehaviour);
+        GameObject newEnemy = GameObject.Instantiate(enemy.gameObject);
 
-	        enemyBehaviour.x = x;
-	        enemyBehaviour.y = y;
-        
+        Enemy enemyBehaviour = newEnemy.GetComponent<Enemy>();
+        GridManager.TileMap.EnemySetAt(x, y, enemyBehaviour);
+
+        enemyBehaviour.x = x;
+        enemyBehaviour.y = y;
+    }
+
+    /// <summary>
+    /// Makes a check on the current enemy in the grid
+    /// </summary>
+    private static void CheckCurrent(GameObject toSpawn, int x, int y)
+    {
+        Enemy enemy = GridManager.TileMap.GetAt(x, y);
+        if (enemy != null)
+        {
+
+            //A corpse is ok, just remove it and go on. Its also ok to spawn a corpse
+            if (enemy.tag == "Corpse" || toSpawn.tag == "Corpse")
+            {
+                GameObject.Destroy(enemy);
+            }
+            else
+            {
+                // Something is trying to spawn an enemy on top of an exisiting enemy.
+                throw new Exception("SpawnOnTopOfExisitingEnemyError");
+            }
+        }
+    }
+
+    public static void SpawnRandomEnemy(int x, int y)
+    {
+        GameObject newEnemy = RollEnemy();
+
+        SpawnEnemy(newEnemy, x, y);
+    }
+
+
+
+    //Rolls a new enemy based on various factors.
+    private static GameObject RollEnemy(EnemySpawnList spawnList)
+    {
+        int max = spawnList.possible.Count;
+        int roll = Random.RandomRange(0, max - 1);
+
+        GameObject rolled = spawnList.possible[roll];
+
+        return rolled;
+    }
+
+    // USe the currently selected spawn list
+    private static GameObject RollEnemy()
+    {
+        return RollEnemy(SpawnList);
     }
 }

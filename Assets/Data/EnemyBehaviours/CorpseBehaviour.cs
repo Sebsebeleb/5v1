@@ -12,4 +12,10 @@ public class CorpseBehaviour : MonoBehaviour {
 	void Update () {
 	
 	}
+
+    void DoRespawn()
+    {
+        Enemy enemy = GetComponent<Enemy>();
+        EnemyManager.SpawnRandomEnemy(enemy.x, enemy.y);
+    }
 }
