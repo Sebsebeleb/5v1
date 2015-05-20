@@ -11,6 +11,8 @@ public class EnemyDisplay : MonoBehaviour
     public Text Attack;
     public Text Defense;
 
+    public Image EnemyImage;
+
     private GridButtonBehaviour gridbutton;
 
     private Enemy enemy;
@@ -32,6 +34,8 @@ public class EnemyDisplay : MonoBehaviour
         Name.text = enemy.name;
         Health.text = enemy.damagable.CurrentHealth.ToString();
         Cooldown.text = enemy.countdown.CurrentCountdown.ToString();
+
+        EnemyImage.sprite = enemy.GetComponent<DisplayData>().Image;
 
     }
 }

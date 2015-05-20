@@ -1,6 +1,6 @@
 ﻿using System;
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 
 // Namespace should be self-contained
 // TODO: Should be generic (instead of always using Enemy)

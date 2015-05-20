@@ -32,5 +32,7 @@ public class Damagable : MonoBehaviour
         if (givexp) {
             GameObject.FindWithTag("Player").GetComponent<PlayerExperience>().GiveXp(2);
         }
+
+        EnemyManager.KillEnemy(enemy);
     }
 }

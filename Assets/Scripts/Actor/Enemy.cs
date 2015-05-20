@@ -13,12 +13,14 @@ public class Enemy : MonoBehaviour
     }
 
     private CountdownBehaviour _countdown;
-
     public CountdownBehaviour countdown
     {
         get { return _countdown; }
     }
     #endregion
+
+    [HideInInspector] public int x;
+    [HideInInspector] public int y;
 
     void Awake()
     {
