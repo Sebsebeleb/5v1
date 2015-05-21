@@ -1,23 +1,17 @@
-﻿using Event;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CountdownBehaviour : MonoBehaviour
 {
-    public readonly int MaxCountdown;
+    public int MaxCountdown;
     public int CurrentCountdown;
 
     private Enemy _enemy;
+    private AI _brain;
 
     void Awake()
     {
         _enemy = GetComponent<Enemy>();
-
-        OnCountedDown callback = OnCountedDown;
-        EventManager.Register(Events.OnCountedDown, callback);
-    }
-
-    private void OnCountedDown(CountedDownArgs args)
-    {
+        _brain = GetComponent<AI>();
 
     }
 
@@ -27,13 +21,13 @@ public class CountdownBehaviour : MonoBehaviour
 
         if (CurrentCountdown <= 0)
         {
-            DoAction();
             CurrentCountdown = MaxCountdown;
+            DoAction();
         }
     }
 
     private void DoAction()
     {
-        EventManager.Notify(Events.OnCountedDown, new CountedDownArgs(_enemy));
+        _brain.Think();
     }
 }

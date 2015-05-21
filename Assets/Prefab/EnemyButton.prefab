@@ -448,6 +448,7 @@ MonoBehaviour:
   Cooldown: {fileID: 11445108}
   Attack: {fileID: 11440704}
   Defense: {fileID: 11458636}
+  EnemyImage: {fileID: 11421000}
 --- !u!114 &11429374
 MonoBehaviour:
   m_ObjectHideFlags: 1

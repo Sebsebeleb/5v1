@@ -11,6 +11,9 @@ GameObject:
   - 114: {fileID: 11411678}
   - 114: {fileID: 11444694}
   - 114: {fileID: 11497004}
+  - 114: {fileID: 11445386}
+  - 114: {fileID: 11454970}
+  - 114: {fileID: 11443350}
   m_Layer: 0
   m_Name: Test
   m_TagString: Untagged
@@ -41,6 +44,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed5f9ce13ade50a4dadc0a327d6e2242, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  x: 0
+  y: 0
+--- !u!114 &11443350
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 168242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be521bd1f02466146badac50437839ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11444694
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -52,7 +68,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc0370d1d5e53274489021cfa71b3dbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MaxCountdown: 6
   CurrentCountdown: 6
+--- !u!114 &11445386
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 168242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfa48ab3e57b40240b79fae51bb44a0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Image: {fileID: 21300000, guid: e2d4ac83553e88649b6ae92e2bee4a00, type: 3}
+--- !u!114 &11454970
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 168242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90ac232f9e436eb4791cf6bf7b67b6bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11497004
 MonoBehaviour:
   m_ObjectHideFlags: 1

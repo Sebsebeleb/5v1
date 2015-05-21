@@ -12,13 +12,13 @@ public static class EnemyManager
 
     public static void KillEnemy(Enemy enemy)
     {
-        GameObject.Destroy(enemy);
 
         int x = enemy.x;
         int y = enemy.y;
 
+
         //Make a new corpse enemy
-        SpawnEnemy(CorpseEnemy, enemy.x, enemy.y);
+        SpawnEnemy(CorpseEnemy, x, y);
 
     }
 
@@ -26,7 +26,7 @@ public static class EnemyManager
     {
         CheckCurrent(enemy, x, y);
 
-        GameObject newEnemy = GameObject.Instantiate(enemy.gameObject);
+        GameObject newEnemy = GameObject.Instantiate(enemy);
 
         Enemy enemyBehaviour = newEnemy.GetComponent<Enemy>();
         GridManager.TileMap.EnemySetAt(x, y, enemyBehaviour);
@@ -47,7 +47,7 @@ public static class EnemyManager
             //A corpse is ok, just remove it and go on. Its also ok to spawn a corpse
             if (enemy.tag == "Corpse" || toSpawn.tag == "Corpse")
             {
-                GameObject.Destroy(enemy);
+                GameObject.Destroy(enemy.gameObject);
             }
             else
             {

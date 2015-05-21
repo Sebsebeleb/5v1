@@ -10,7 +10,7 @@ public class Damagable : MonoBehaviour
 
     private Enemy enemy;
 
-    void Start()
+    void Awake()
     {
         enemy = GetComponent<Enemy>();
     }
@@ -20,11 +20,24 @@ public class Damagable : MonoBehaviour
         CurrentHealth -= damage;
 
         if (CurrentHealth <= 0) {
-            Die();
+            if (gameObject.tag == "Player") {
+                Lose();
+            }
+            else {
+                Die();
+            }
         }
 
 
         EventManager.Notify(Events.OnActorTookDamage, new TookDamageArgs(enemy, damage));
+    }
+
+    /// <summary>
+    /// Called when the player loses
+    /// </summary>
+    private void Lose()
+    {
+        Debug.Log("You lost!");
     }
 
     public void Die(bool givexp = true)
