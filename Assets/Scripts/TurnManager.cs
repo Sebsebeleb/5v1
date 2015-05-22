@@ -4,7 +4,7 @@ using UnityEngine;
 public class TurnManager : MonoBehaviour
 {
 
-    private int BossCounter = 80;
+    public int BossCounter = 80;
 
 
     public void UseTurn()
