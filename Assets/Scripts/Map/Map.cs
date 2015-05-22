@@ -35,9 +35,9 @@ namespace Map
         /// <param name="y">y position</param>
         /// <param name="adjacancy">The method to determine adjaceny. See: AdjacenyType</param>
         /// <returns>All T adjacent to given position</returns>
-        public System.Collections.Generic.List<Enemy> GetAdjacent(int x, int y, AdjacancyType adjacancy = AdjacancyType.Ortho)
+        public List<Enemy> GetAdjacent(int x, int y, AdjacancyType adjacancy = AdjacancyType.Ortho)
         {
-            System.Collections.Generic.List<Enemy> results = new System.Collections.Generic.List<Enemy>();
+            List<Enemy> results = new List<Enemy>();
 
             switch (adjacancy)
             {
@@ -49,7 +49,7 @@ namespace Map
                         int checkX = (int)(x + delta.x);
                         int checkY = (int)(y + delta.y);
 
-                        if (IsOutOfBounds(checkX, checkY))
+                        if (!IsOutOfBounds(checkX, checkY))
                         {
                             results.Add(this.GetAt(checkX, checkY));
                         }
@@ -79,11 +79,11 @@ namespace Map
         /// <returns></returns>
         public bool IsOutOfBounds(int x, int y)
         {
-            if (x < 0 || x > _width)
+            if (x < 0 || x > _width-1)
             {
                 return true;
             }
-            if (y < 0 || y > _height)
+            if (y < 0 || y > _height-1)
             {
                 return true;
             }

@@ -1,10 +1,13 @@
-﻿using System;
+﻿using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerTargeting : MonoBehaviour
 {
 
-    public Skill SelectedSkill;
+    public ToggleGroup SkillGroupRef;
+
+
     private GameObject _player;
     private AttackBehaviour _playerAttack;
 
@@ -22,17 +25,33 @@ public class PlayerTargeting : MonoBehaviour
     public void TargetGrid(int x, int y)
     {
         Enemy target = GridManager.TileMap.GetAt(x, y);
-        if (SelectedSkill != null)
+
+        // Did we actually do soemthing that should take a turn?
+        bool usedAction = false;
+
+        // Target skill
+        if (SkillGroupRef.AnyTogglesOn())
         {
-            throw new NotImplementedException();
+            Toggle active = SkillGroupRef.ActiveToggles().ToList()[0];
+            BaseSkill skill = active.GetComponent<SkillUseButton>().AssociatedSkill;
+
+            if (skill.CanTargetGrid(x, y))
+            {
+                usedAction = true;
+                skill.UseOnTargetGrid(x, y);
+            }
         }
-        else
+        else // Else, target regular attack
         {
             if (_playerAttack.CanAttack(x, y))
             {
+                usedAction = true;
                 _playerAttack.DoAttack(target);
-                turn.UseTurn();
             }
+        }
+        if (usedAction)
+        {
+            turn.UseTurn();
         }
     }
 }
