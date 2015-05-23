@@ -10,11 +10,11 @@ public static class EnemyManager
     public static EnemySpawnList SpawnList;
 
 
-    public static void KillEnemy(Enemy enemy)
+    public static void KillEnemy(Actor actor)
     {
 
-        int x = enemy.x;
-        int y = enemy.y;
+        int x = actor.x;
+        int y = actor.y;
 
 
         //Make a new corpse enemy
@@ -28,11 +28,11 @@ public static class EnemyManager
 
         GameObject newEnemy = GameObject.Instantiate(enemy);
 
-        Enemy enemyBehaviour = newEnemy.GetComponent<Enemy>();
-        GridManager.TileMap.EnemySetAt(x, y, enemyBehaviour);
+        Actor actorBehaviour = newEnemy.GetComponent<Actor>();
+        GridManager.TileMap.EnemySetAt(x, y, actorBehaviour);
 
-        enemyBehaviour.x = x;
-        enemyBehaviour.y = y;
+        actorBehaviour.x = x;
+        actorBehaviour.y = y;
     }
 
     /// <summary>
@@ -40,14 +40,14 @@ public static class EnemyManager
     /// </summary>
     private static void CheckCurrent(GameObject toSpawn, int x, int y)
     {
-        Enemy enemy = GridManager.TileMap.GetAt(x, y);
-        if (enemy != null)
+        Actor actor = GridManager.TileMap.GetAt(x, y);
+        if (actor != null)
         {
 
             //A corpse is ok, just remove it and go on. Its also ok to spawn a corpse
-            if (enemy.tag == "Corpse" || toSpawn.tag == "Corpse")
+            if (actor.tag == "Corpse" || toSpawn.tag == "Corpse")
             {
-                GameObject.Destroy(enemy.gameObject);
+                GameObject.Destroy(actor.gameObject);
             }
             else
             {
@@ -70,7 +70,7 @@ public static class EnemyManager
     private static GameObject RollEnemy(EnemySpawnList spawnList)
     {
         int max = spawnList.possible.Count;
-        int roll = Random.RandomRange(0, max - 1);
+        int roll = Random.Range(0, max);
 
         GameObject rolled = spawnList.possible[roll];
 

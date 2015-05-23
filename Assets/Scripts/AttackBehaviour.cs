@@ -3,7 +3,7 @@
 public class AttackBehaviour : MonoBehaviour
 {
 
-    public void DoAttack(Enemy target)
+    public void DoAttack(Actor target)
     {
         int damage = 1;
 

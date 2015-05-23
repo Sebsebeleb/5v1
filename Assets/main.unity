@@ -643,7 +643,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: 'Bosscounter
+
+'
 --- !u!222 &989273978
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -827,7 +829,7 @@ MonoBehaviour:
   startingEnemies:
   - {fileID: 168242, guid: d9b4c5ede3d06854eb7fa488f1208462, type: 2}
   - {fileID: 168242, guid: d9b4c5ede3d06854eb7fa488f1208462, type: 2}
-  - {fileID: 168242, guid: d9b4c5ede3d06854eb7fa488f1208462, type: 2}
+  - {fileID: 168242, guid: 44e9d6a215f1eb3458b53d08ae8eb62a, type: 2}
   - {fileID: 168242, guid: d9b4c5ede3d06854eb7fa488f1208462, type: 2}
   - {fileID: 168242, guid: d9b4c5ede3d06854eb7fa488f1208462, type: 2}
   - {fileID: 168242, guid: d9b4c5ede3d06854eb7fa488f1208462, type: 2}
@@ -1030,7 +1032,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: PlayerHP
 --- !u!222 &1464339546
 CanvasRenderer:
   m_ObjectHideFlags: 0

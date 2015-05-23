@@ -9,6 +9,7 @@ namespace Event
         OnTurn,
         OnCountedDown,
         OnActorTookDamage,
+        ActorDied,
     }
 
     #region delegates
@@ -19,6 +20,8 @@ namespace Event
 
     public delegate void OnActorTookDamage(TookDamageArgs args);
 
+    public delegate void ActorDied(Actor who);
+
     #endregion
 
 
@@ -26,10 +29,10 @@ namespace Event
 
     public struct TookDamageArgs
     {
-        public Enemy Actor;
+        public Actor Actor;
         public int Damage;
 
-        public TookDamageArgs(Enemy _actor, int _damage)
+        public TookDamageArgs(Actor _actor, int _damage)
         {
             Actor = _actor;
             Damage = _damage;
@@ -38,9 +41,9 @@ namespace Event
 
     public struct CountedDownArgs
     {
-        public Enemy Actor;
+        public Actor Actor;
 
-        public CountedDownArgs(Enemy actor)
+        public CountedDownArgs(Actor actor)
         {
             Actor = actor;
         }
@@ -58,7 +61,8 @@ namespace Event
         public static void Notify(Events ev, object args)
         {
             // Ignore event if not yet initalized
-            if (!_listeners.ContainsKey(ev)) {
+            if (!_listeners.ContainsKey(ev))
+            {
                 return;
             }
             foreach (Delegate listener in _listeners[ev])
@@ -70,7 +74,8 @@ namespace Event
         public static void Register(Events evn, Delegate func)
         {
             // Create event if it doesnt exist
-            if (!_listeners.ContainsKey(evn)) {
+            if (!_listeners.ContainsKey(evn))
+            {
                 _listeners[evn] = new List<Delegate>();
             }
 

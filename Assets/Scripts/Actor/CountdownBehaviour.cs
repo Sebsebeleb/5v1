@@ -5,12 +5,12 @@ public class CountdownBehaviour : MonoBehaviour
     public int MaxCountdown;
     public int CurrentCountdown;
 
-    private Enemy _enemy;
+    private Actor _actor;
     private AI _brain;
 
     void Awake()
     {
-        _enemy = GetComponent<Enemy>();
+        _actor = GetComponent<Actor>();
         _brain = GetComponent<AI>();
 
     }

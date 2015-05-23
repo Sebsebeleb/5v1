@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using Event;
+﻿using Event;
 using UnityEngine;
 
 public class Damagable : MonoBehaviour
@@ -8,28 +6,31 @@ public class Damagable : MonoBehaviour
     public int MaxHealth;
     public int CurrentHealth;
 
-    private Enemy enemy;
+    private Actor actor;
 
     void Awake()
     {
-        enemy = GetComponent<Enemy>();
+        actor = GetComponent<Actor>();
     }
 
     public void TakeDamage(int damage)
     {
         CurrentHealth -= damage;
 
-        if (CurrentHealth <= 0) {
-            if (gameObject.tag == "Player") {
+        if (CurrentHealth <= 0)
+        {
+            if (gameObject.tag == "Player")
+            {
                 Lose();
             }
-            else {
+            else
+            {
                 Die();
             }
         }
 
 
-        EventManager.Notify(Events.OnActorTookDamage, new TookDamageArgs(enemy, damage));
+        EventManager.Notify(Events.OnActorTookDamage, new TookDamageArgs(actor, damage));
     }
 
     /// <summary>
@@ -42,10 +43,13 @@ public class Damagable : MonoBehaviour
 
     public void Die(bool givexp = true)
     {
-        if (givexp) {
+        if (givexp)
+        {
             GameObject.FindWithTag("Player").GetComponent<PlayerExperience>().GiveXp(2);
         }
 
-        EnemyManager.KillEnemy(enemy);
+        //TODO: Consider; Should this object have this responsibility?
+        EventManager.Notify(Events.ActorDied, actor);
+        EnemyManager.KillEnemy(actor);
     }
 }

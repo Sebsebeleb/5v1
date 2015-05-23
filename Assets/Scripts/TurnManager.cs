@@ -1,5 +1,4 @@
-﻿using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class TurnManager : MonoBehaviour
 {
@@ -17,8 +16,9 @@ public class TurnManager : MonoBehaviour
         }
         else
         {
-            foreach (Enemy enemy in GridManager.TileMap.GetAll()) {
-
+            // TODO: Sort it properly (unless it already is)
+            foreach (Actor enemy in GridManager.TileMap.GetAll())
+            {
                 if (!enemy) continue;
 
                 enemy.countdown.Countdown();

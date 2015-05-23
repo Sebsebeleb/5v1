@@ -15,15 +15,15 @@ namespace Data.Skills
             base.UseOnTargetGrid(x, y);
 
             // All of our final targets
-            List<Enemy> finalTargets = new List<Enemy>();
+            List<Actor> finalTargets = new List<Actor>();
             finalTargets.Add(GridManager.TileMap.GetAt(x, y));
 
             // The possible candidates for the "secondary adjacent enemy" part
-            List<Enemy> validSecondaryTargets = new List<Enemy>();
+            List<Actor> validSecondaryTargets = new List<Actor>();
 
-            List<Enemy> adjacent = GridManager.TileMap.GetAdjacent(x, y, AdjacancyType.Ortho);
+            List<Actor> adjacent = GridManager.TileMap.GetAdjacent(x, y, AdjacancyType.Ortho);
 
-            foreach (Enemy enemy in adjacent)
+            foreach (Actor enemy in adjacent)
             {
                 if (enemy.tag != "Corpse")
                 {
@@ -32,12 +32,14 @@ namespace Data.Skills
             }
 
             // If any legal targets left, select a random one
-            if (validSecondaryTargets.Count > 0) {
+            if (validSecondaryTargets.Count > 0)
+            {
                 validSecondaryTargets.Shuffle();
                 finalTargets.Add(validSecondaryTargets[0]);
             }
 
-            foreach (Enemy enemy in finalTargets) {
+            foreach (Actor enemy in finalTargets)
+            {
                 enemy.damagable.TakeDamage(8);
             }
 

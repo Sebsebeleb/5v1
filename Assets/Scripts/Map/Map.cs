@@ -18,14 +18,14 @@ namespace Map
         private int _width;
         private int _height;
 
-        private Enemy[] _tiles;
+        private Actor[] _tiles;
 
         public GridMap(int width, int height)
         {
             _width = width;
             _height = height;
 
-            _tiles = new Enemy[_width * _height];
+            _tiles = new Actor[_width * _height];
         }
 
         /// <summary>
@@ -35,9 +35,9 @@ namespace Map
         /// <param name="y">y position</param>
         /// <param name="adjacancy">The method to determine adjaceny. See: AdjacenyType</param>
         /// <returns>All T adjacent to given position</returns>
-        public List<Enemy> GetAdjacent(int x, int y, AdjacancyType adjacancy = AdjacancyType.Ortho)
+        public List<Actor> GetAdjacent(int x, int y, AdjacancyType adjacancy = AdjacancyType.Ortho)
         {
-            List<Enemy> results = new List<Enemy>();
+            List<Actor> results = new List<Actor>();
 
             switch (adjacancy)
             {
@@ -66,9 +66,9 @@ namespace Map
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns>T at position given</returns>
-        public Enemy GetAt(int x, int y)
+        public Actor GetAt(int x, int y)
         {
-            return (Enemy)_tiles[x + y * _width];
+            return (Actor)_tiles[x + y * _width];
         }
 
         /// <summary>
@@ -79,11 +79,11 @@ namespace Map
         /// <returns></returns>
         public bool IsOutOfBounds(int x, int y)
         {
-            if (x < 0 || x > _width-1)
+            if (x < 0 || x > _width - 1)
             {
                 return true;
             }
-            if (y < 0 || y > _height-1)
+            if (y < 0 || y > _height - 1)
             {
                 return true;
             }
@@ -91,17 +91,17 @@ namespace Map
             return false;
         }
 
-        public IEnumerable<Enemy> GetAll()
+        public IEnumerable<Actor> GetAll()
         {
-            return new List<Enemy>(_tiles);
+            return new List<Actor>(_tiles);
         }
 
-        public void EnemySetAt(int i, Enemy who)
+        public void EnemySetAt(int i, Actor who)
         {
             _tiles[i] = who;
         }
 
-        public void EnemySetAt(int x, int y, Enemy who)
+        public void EnemySetAt(int x, int y, Actor who)
         {
             _tiles[x + y * _width] = who;
         }

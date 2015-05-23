@@ -2,7 +2,7 @@
 using System.Collections;
 
 // Main access point for accessing the enemy
-public class Enemy : MonoBehaviour
+public class Actor : MonoBehaviour
 {
     #region Cached components
 
@@ -17,6 +17,13 @@ public class Enemy : MonoBehaviour
     {
         get { return _countdown; }
     }
+
+    private EffectHolder _effects;
+    public EffectHolder effects
+    {
+        get { return _effects; }
+    }
+
     #endregion
 
     [HideInInspector] public int x;
@@ -26,6 +33,7 @@ public class Enemy : MonoBehaviour
     {
         _damagable = GetComponent<Damagable>();
         _countdown = GetComponent<CountdownBehaviour>();
+        _effects = GetComponent<EffectHolder>();
     }
 
     void Update()

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 using View;
 
@@ -15,7 +14,7 @@ public class EnemyDisplay : MonoBehaviour
 
     private GridButtonBehaviour gridbutton;
 
-    private Enemy enemy;
+    private Actor actor;
 
     void Awake()
     {
@@ -29,13 +28,18 @@ public class EnemyDisplay : MonoBehaviour
 
     void Update()
     {
-        enemy = GridManager.TileMap.GetAt(gridbutton.x, gridbutton.y);
+        actor = GridManager.TileMap.GetAt(gridbutton.x, gridbutton.y);
 
-        Name.text = enemy.name;
-        Health.text = enemy.damagable.CurrentHealth.ToString();
-        Cooldown.text = enemy.countdown.CurrentCountdown.ToString();
+        string actualName = actor.name;
+        // Strip "(Clone)"
+        while (actualName.EndsWith("(Clone)")) {
+            actualName = actualName.Substring(0, actualName.Length - 7);
+        }
+        Name.text = actualName;
+        Health.text = actor.damagable.CurrentHealth.ToString();
+        Cooldown.text = actor.countdown.CurrentCountdown.ToString();
 
-        EnemyImage.sprite = enemy.GetComponent<DisplayData>().Image;
+        EnemyImage.sprite = actor.GetComponent<DisplayData>().Image;
 
     }
 }

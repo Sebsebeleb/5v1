@@ -24,7 +24,7 @@ public class PlayerTargeting : MonoBehaviour
 
     public void TargetGrid(int x, int y)
     {
-        Enemy target = GridManager.TileMap.GetAt(x, y);
+        Actor target = GridManager.TileMap.GetAt(x, y);
 
         // Did we actually do soemthing that should take a turn?
         bool usedAction = false;
