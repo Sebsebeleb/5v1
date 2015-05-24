@@ -32,7 +32,8 @@ public class EnemyDisplay : MonoBehaviour
 
         string actualName = actor.name;
         // Strip "(Clone)"
-        while (actualName.EndsWith("(Clone)")) {
+        while (actualName.EndsWith("(Clone)"))
+        {
             actualName = actualName.Substring(0, actualName.Length - 7);
         }
         Name.text = actualName;
@@ -40,6 +41,20 @@ public class EnemyDisplay : MonoBehaviour
         Cooldown.text = actor.countdown.CurrentCountdown.ToString();
 
         EnemyImage.sprite = actor.GetComponent<DisplayData>().Image;
+
+        // Make attack text TODO: Should only be updated when attack is updated
+        string attackText = actor.attack.CalculateAttack().ToString();
+        //If enemy has bonus attack, display it in green. If negative, red
+        if (actor.attack.BonusAttack > 0)
+        {
+            attackText = RichTextUtilities.FontColor("#20DD20FF", attackText);
+        }
+        else if (actor.attack.BonusAttack < 0)
+        {
+            attackText = RichTextUtilities.FontColor("#DD2020FF", attackText);
+        }
+
+        Attack.text = attackText;
 
     }
 }

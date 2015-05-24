@@ -25,6 +25,18 @@ namespace BaseClasses
             Destroyed();
         }
 
+        // Should be called when the effects wants to remove itself
+        protected void ForceRemoveMe()
+        {
+            owner.effects.RemoveEffect(this);
+        }
+
+        
+        // ------------------
+        // Use these ONLY for initalization and deconstruction of stuff like event registering
+        // TODO: Maybe these should be done in overrided constructor and deconstructor instead of having explicit function for them?
+        // ------------------
+
         // Called when this is effect is made, used for initalisation and subscribing to events
         protected virtual void Created()
         {
@@ -37,10 +49,15 @@ namespace BaseClasses
 
         }
 
-        // Should be called when this effect should be removed
-        protected void ForceRemove()
+
+        // ------------------
+        // Use these functions for actually doing stuff to the actor
+        // ------------------
+
+        // called when it is actually added to an actor and Owner is initalized
+        public virtual void OnAdded()
         {
-            owner.effects.RemoveEffect(this);
+            
         }
 
         // Called when it is removed from owning actor
@@ -49,16 +66,23 @@ namespace BaseClasses
 
         }
 
+
         // Called each turn
         public virtual void OnTurn()
         {
 
         }
 
+        // -------------------
+        // These are called by the system
+        // -------------------
+
         // Called when this is applied to an actor
         public void SetOwner(Actor who)
         {
             owner = who;
+            OnAdded();
         }
+
     }
 }

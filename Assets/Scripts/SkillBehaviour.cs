@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using Data.Skills;
+﻿using Data.Skills;
 using UnityEngine;
-using System.Collections;
 
 public class SkillBehaviour : MonoBehaviour
 {
@@ -9,7 +7,8 @@ public class SkillBehaviour : MonoBehaviour
 
     void Start()
     {
-        if (StartingSkills.Length> 4) {
+        if (StartingSkills.Length > 4)
+        {
             Debug.LogError("Too many items in starting skills");
         }
 

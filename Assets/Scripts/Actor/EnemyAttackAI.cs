@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 
-public class EnemyAttackBehaviour : MonoBehaviour
+public class EnemyAttackAI : MonoBehaviour
 {
 
     private AI _brain;
+    private Actor actor;
 
     private GameObject player;
     private Damagable playerDamage;
@@ -14,6 +15,7 @@ public class EnemyAttackBehaviour : MonoBehaviour
         playerDamage = player.GetComponent<Damagable>();
 
         _brain = GetComponent<AI>();
+        actor = GetComponent<Actor>();
     }
 
     void Start()
@@ -33,6 +35,6 @@ public class EnemyAttackBehaviour : MonoBehaviour
 
     private void AttackPlayer()
     {
-        playerDamage.TakeDamage(4);
+        playerDamage.TakeDamage(actor.attack.Attack);
     }
 }

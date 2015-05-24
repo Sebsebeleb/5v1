@@ -1,6 +1,5 @@
 ﻿using BaseClasses;
 using Event;
-using UnityEngine;
 
 namespace Data.Effects
 {
@@ -11,9 +10,12 @@ namespace Data.Effects
     /// </summary>
     public class BuffAllyOnDeath : Effect
     {
+        // ----------------------------
+        // Only initalization stuff here
+        // ----------------------------
+
         protected override void Created()
         {
-            Debug.Log("Helloo");
             base.Created();
 
             ActorDied callback = OnActorDied;
@@ -22,26 +24,27 @@ namespace Data.Effects
 
         protected override void Destroyed()
         {
-            Debug.Log("Helloo");
             base.Destroyed();
 
             ActorDied callback = OnActorDied;
             EventManager.UnRegister(Events.ActorDied, callback);
         }
 
+        // ----------------------------
+        // Actual effect behaviour here
+        // ----------------------------
+
         void OnActorDied(Actor who)
         {
-            Debug.Log("Helloo");
             if (who == owner)
             {
                 TriggerEffect();
-                ForceRemove();
+                ForceRemoveMe();
             }
         }
 
         private void TriggerEffect()
         {
-            Debug.Log("Helloo");
             foreach (Actor actor in GridManager.TileMap.GetAdjacent(owner.x, owner.y))
             {
                 actor.effects.AddEffect(new BuffEffect());
@@ -51,7 +54,19 @@ namespace Data.Effects
 
         private class BuffEffect : Effect
         {
+            public override void OnAdded()
+            {
+                base.OnAdded();
 
+                owner.attack.BonusAttack += 2;
+            }
+
+            public override void OnRemoved()
+            {
+                base.OnRemoved();
+
+                owner.attack.BonusAttack -= 2;
+            }
         }
 
     }

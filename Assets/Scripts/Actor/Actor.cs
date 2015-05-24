@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 // Main access point for accessing the enemy
 public class Actor : MonoBehaviour
@@ -24,16 +23,25 @@ public class Actor : MonoBehaviour
         get { return _effects; }
     }
 
+    private AttackBehaviour _attack;
+    public AttackBehaviour attack
+    {
+        get { return _attack; }
+    }
+
     #endregion
 
-    [HideInInspector] public int x;
-    [HideInInspector] public int y;
+    [HideInInspector]
+    public int x;
+    [HideInInspector]
+    public int y;
 
     void Awake()
     {
         _damagable = GetComponent<Damagable>();
         _countdown = GetComponent<CountdownBehaviour>();
         _effects = GetComponent<EffectHolder>();
+        _attack = GetComponent<AttackBehaviour>();
     }
 
     void Update()

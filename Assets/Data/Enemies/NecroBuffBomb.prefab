@@ -16,6 +16,7 @@ GameObject:
   - 114: {fileID: 11443350}
   - 114: {fileID: 11416514}
   - 114: {fileID: 11400554}
+  - 114: {fileID: 11466594}
   m_Layer: 0
   m_Name: NecroBuffBomb
   m_TagString: Untagged
@@ -107,7 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfa48ab3e57b40240b79fae51bb44a0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Image: {fileID: 21300000, guid: e2d4ac83553e88649b6ae92e2bee4a00, type: 3}
+  Image: {fileID: 21300022, guid: e2d4ac83553e88649b6ae92e2bee4a00, type: 3}
 --- !u!114 &11454970
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -119,6 +120,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90ac232f9e436eb4791cf6bf7b67b6bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11466594
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 168242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 282150c180c8eea47b6939bdb088934d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartingBaseAttack: 4
+  BonusAttack: 0
 --- !u!114 &11497004
 MonoBehaviour:
   m_ObjectHideFlags: 1
