@@ -34,6 +34,20 @@ public class Damagable : MonoBehaviour
     }
 
     /// <summary>
+    /// Heal current health. Returns total amount healed
+    /// </summary>
+    /// <param name="amount">Amount to heal</param>
+    /// <returns>The actual amount that was healed</returns>
+    public int Heal(int amount)
+    {
+        int oldHP = CurrentHealth;
+
+        CurrentHealth = Mathf.Min(CurrentHealth + amount, MaxHealth);
+
+        return CurrentHealth - oldHP;
+    }
+
+    /// <summary>
     /// Called when the player loses
     /// </summary>
     private void Lose()

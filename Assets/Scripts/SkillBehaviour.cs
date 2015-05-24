@@ -14,5 +14,6 @@ public class SkillBehaviour : MonoBehaviour
 
         //TODO: temp solution
         StartingSkills[0] = new Cleave();
+        StartingSkills[1] = new Bloodlust();
     }
 }
