@@ -827,7 +827,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingEnemies:
-  - {fileID: 168242, guid: d9b4c5ede3d06854eb7fa488f1208462, type: 2}
+  - {fileID: 168242, guid: d6369e59e3a432244ac4c51e556326e5, type: 2}
   - {fileID: 168242, guid: d9b4c5ede3d06854eb7fa488f1208462, type: 2}
   - {fileID: 168242, guid: 44e9d6a215f1eb3458b53d08ae8eb62a, type: 2}
   - {fileID: 168242, guid: d9b4c5ede3d06854eb7fa488f1208462, type: 2}

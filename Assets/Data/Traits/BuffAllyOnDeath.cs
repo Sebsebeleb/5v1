@@ -47,27 +47,8 @@ namespace Data.Effects
         {
             foreach (Actor actor in GridManager.TileMap.GetAdjacent(owner.x, owner.y))
             {
-                actor.effects.AddEffect(new BuffEffect());
-            }
-            int b = 2;
-        }
-
-        private class BuffEffect : Effect
-        {
-            public override void OnAdded()
-            {
-                base.OnAdded();
-
-                owner.attack.BonusAttack += 2;
-            }
-
-            public override void OnRemoved()
-            {
-                base.OnRemoved();
-
-                owner.attack.BonusAttack -= 2;
+                actor.effects.AddEffect(new AttackBuff(2));
             }
         }
-
     }
 }

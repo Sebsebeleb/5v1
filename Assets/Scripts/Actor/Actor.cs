@@ -29,6 +29,12 @@ public class Actor : MonoBehaviour
         get { return _attack; }
     }
 
+    private AI _ai;
+    public AI ai
+    {
+        get { return _ai; }
+    }
+
     #endregion
 
     [HideInInspector]
@@ -42,6 +48,7 @@ public class Actor : MonoBehaviour
         _countdown = GetComponent<CountdownBehaviour>();
         _effects = GetComponent<EffectHolder>();
         _attack = GetComponent<AttackBehaviour>();
+        _ai = GetComponent<AI>();
     }
 
     void Update()
