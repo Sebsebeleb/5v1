@@ -14,20 +14,26 @@ public class EnemySpawnListEditor : Editor
         AssetDatabase.Refresh();
     }
 
+    // TODO: FIXME: This should not be commited.
     public override void OnInspectorGUI()
     {
         EnemySpawnList list = target as EnemySpawnList;
 
         serializedObject.Update();
-        var myIterator = serializedObject.FindProperty("possible");
+        var myIterator = serializedObject.FindProperty("Entries");
 
-        GUILayout.Label("hello");
-        while (true) {
-            var myRect = GUILayoutUtility.GetRect(0f, 16f);
-            var showChildren = EditorGUI.PropertyField(myRect, myIterator);
-            if (!myIterator.NextVisible(showChildren)) {
+        while (true)
+        {
+            //EditorGUILayout.Separator();
+            //GUILayoutUtility.BeginGroup("Item");
+            var showChildren = EditorGUILayout.PropertyField(myIterator, true);
+            if (!myIterator.NextVisible(showChildren))
+            {
                 break;
             }
+
+            //EditorGUILayout.IntField("Test", 2);
+            //GUILayoutUtility.EndGroup("Item");
         }
 
         serializedObject.ApplyModifiedProperties();
@@ -35,4 +41,14 @@ public class EnemySpawnListEditor : Editor
         EditorUtility.SetDirty(list);
     }
 
+    /*public override void OnInspectorGUI()
+    {
+        EnemySpawnList list = target as EnemySpawnList;
+
+        serializedObject.Update();
+
+        var enemies = serializedObject.FindProperty("possible");
+
+        enemies.
+    }*/
 }

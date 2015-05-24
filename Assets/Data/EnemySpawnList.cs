@@ -10,5 +10,14 @@ using UnityEngine;
 public class EnemySpawnList : ScriptableObject
 {
     [SerializeField]
-    public List<GameObject> possible = new List<GameObject>();
+    public List<EnemyEntry> Entries = new List<EnemyEntry>();
+
+    [Serializable]
+    public class EnemyEntry
+    {
+        public GameObject Enemy;
+        public bool FrontRow = true;
+        public bool BackRow = true;
+        public int SpawnChance;
+    }
 }

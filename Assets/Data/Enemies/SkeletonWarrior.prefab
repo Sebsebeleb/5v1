@@ -17,7 +17,7 @@ GameObject:
   - 114: {fileID: 11443350}
   - 114: {fileID: 11452428}
   m_Layer: 0
-  m_Name: Test
+  m_Name: SkeletonWarrior
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

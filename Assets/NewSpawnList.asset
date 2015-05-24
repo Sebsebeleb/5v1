@@ -11,5 +11,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f61c70d414e588b44a44ac233f381572, type: 3}
   m_Name: NewSpawnList
   m_EditorClassIdentifier: 
-  possible:
-  - {fileID: 168242, guid: d9b4c5ede3d06854eb7fa488f1208462, type: 2}
+  Entries:
+  - Enemy: {fileID: 168242, guid: 44e9d6a215f1eb3458b53d08ae8eb62a, type: 2}
+    FrontRow: 1
+    BackRow: 1
+    SpawnChance: 1
+  - Enemy: {fileID: 168242, guid: d6369e59e3a432244ac4c51e556326e5, type: 2}
+    FrontRow: 0
+    BackRow: 1
+    SpawnChance: 3
+  - Enemy: {fileID: 168242, guid: d9b4c5ede3d06854eb7fa488f1208462, type: 2}
+    FrontRow: 1
+    BackRow: 0
+    SpawnChance: 6

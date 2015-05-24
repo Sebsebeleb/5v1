@@ -59,7 +59,7 @@ public static class EnemyManager
 
     public static void SpawnRandomEnemy(int x, int y)
     {
-        GameObject newEnemy = RollEnemy();
+        GameObject newEnemy = RollEnemy(x, y);
 
         SpawnEnemy(newEnemy, x, y);
     }
@@ -67,19 +67,56 @@ public static class EnemyManager
 
 
     //Rolls a new enemy based on various factors.
-    private static GameObject RollEnemy(EnemySpawnList spawnList)
+    private static GameObject RollEnemy(EnemySpawnList spawnList, int x, int y)
     {
-        int max = spawnList.possible.Count;
-        int roll = Random.Range(0, max);
+        int TotalChance = 0;
 
-        GameObject rolled = spawnList.possible[roll];
 
-        return rolled;
+        foreach (EnemySpawnList.EnemyEntry entry in spawnList.Entries)
+        {
+            // Ignore unspawnable
+            if (!CanSpawnEnemyAt(entry, x, y)) continue;
+
+            TotalChance += entry.SpawnChance;
+        }
+
+        int roll = Random.Range(0, TotalChance);
+
+        int currentChanceCount = 0;
+        foreach (EnemySpawnList.EnemyEntry entry in SpawnList.Entries)
+        {
+            // Ignore unspawnable
+            if (!CanSpawnEnemyAt(entry, x, y)) continue;
+
+            if (roll < currentChanceCount + entry.SpawnChance)
+            {
+                return entry.Enemy;
+            }
+            currentChanceCount += entry.SpawnChance;
+        }
+        Debug.LogError("Something went wrong with spawning. No enemy was chosen for some reason");
+        return spawnList.Entries[0].Enemy;
     }
 
+
     // USe the currently selected spawn list
-    private static GameObject RollEnemy()
+    private static GameObject RollEnemy(int x, int y)
     {
-        return RollEnemy(SpawnList);
+        return RollEnemy(SpawnList, x, y);
+    }
+
+    // Checks stuff like if the enemy is allowed to spawn in that row
+    private static bool CanSpawnEnemyAt(EnemySpawnList.EnemyEntry entry, int x, int y)
+    {
+        if (y == 0)
+        {
+            return entry.BackRow;
+        }
+        if (y == 1)
+        {
+            return entry.FrontRow;
+        }
+
+        return true;
     }
 }
