@@ -21,7 +21,7 @@ public class BaseSkill
 
     public virtual void UseOnTargetGrid(int x, int y)
     {
-        this.CurrentCooldown = BaseCooldown;
+        this.CurrentCooldown = this.BaseCooldown;
 
         if (!CanTargetGrid(x, y))
         {
