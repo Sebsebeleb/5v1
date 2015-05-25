@@ -4,10 +4,14 @@ namespace Data.Skills
 {
     public class Bloodlust : BaseSkill
     {
-        public new string SkillName = "Bloodlust";
 
-        public new string Tooltip =
-            "Deal 150% damage to an enemy. If this attack kills it, gain life equal to the enemy's hp";
+        public Bloodlust()
+        {
+            SkillName = "Bloodlust";
+            Tooltip = "Deal 150% damage to an enemy. If this attack kills it, gain life equal to the enemy's hp";
+            BaseCooldown = 12;
+
+        }
 
         public override void UseOnTargetGrid(int x, int y)
         {

@@ -35,7 +35,7 @@ public class PlayerTargeting : MonoBehaviour
             Toggle active = SkillGroupRef.ActiveToggles().ToList()[0];
             BaseSkill skill = active.GetComponent<SkillUseButton>().AssociatedSkill;
 
-            if (skill.CanTargetGrid(x, y))
+            if (skill.CanTargetGrid(x, y) && skill.CanUse(x, y))
             {
                 usedAction = true;
                 skill.UseOnTargetGrid(x, y);
@@ -49,6 +49,7 @@ public class PlayerTargeting : MonoBehaviour
                 _playerAttack.DoAttack(target);
             }
         }
+
         if (usedAction)
         {
             turn.UseTurn();

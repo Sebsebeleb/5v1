@@ -16,4 +16,14 @@ public class SkillBehaviour : MonoBehaviour
         StartingSkills[0] = new Cleave();
         StartingSkills[1] = new Bloodlust();
     }
+
+
+    public void CountDown()
+    {
+        foreach (var skill in StartingSkills) {
+            if (skill == null) continue;
+            skill.CurrentCooldown--;
+            skill.CurrentCooldown = Mathf.Max(skill.CurrentCooldown, 0);
+        }
+    }
 }
