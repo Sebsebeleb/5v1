@@ -5,13 +5,15 @@ public class TurnManager : MonoBehaviour
 
     public int BossCounter = 80;
 
-    private GameObject player;
-    private SkillBehaviour playerSkills;
+    private GameObject _player;
+    private SkillBehaviour _playerSkills;
+    private EffectHolder _playerEffects;
 
     void Awake()
     {
-        player = GameObject.FindWithTag("Player");
-        playerSkills = player.GetComponent<SkillBehaviour>();
+        _player = GameObject.FindWithTag("Player");
+        _playerSkills = _player.GetComponent<SkillBehaviour>();
+        _playerEffects = _player.GetComponent<EffectHolder>();
     }
 
 
@@ -36,7 +38,11 @@ public class TurnManager : MonoBehaviour
 
     private void UpdatePlayer()
     {
-        playerSkills.CountDown();
+        // Uugh this is kinda dirty...
+        _playerSkills.CountDown();
+        _playerEffects.OnTurn();
+
+        
     }
 
     private void InitBoss()

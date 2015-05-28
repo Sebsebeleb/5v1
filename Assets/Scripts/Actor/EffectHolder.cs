@@ -14,9 +14,13 @@ public class EffectHolder : MonoBehaviour, IEnumerable
     {
         actor = GetComponent<Actor>();
     }
-    //Public api
 
-    public void DoTurn()
+    public void OnTurn() // broadcasted by countdown behaviour
+    {
+        DoTurn();
+    }
+
+    private void DoTurn()
     {
         List<Effect> deadEffects = new List<Effect>();
 
@@ -38,6 +42,8 @@ public class EffectHolder : MonoBehaviour, IEnumerable
             RemoveEffect(deadEffect);
         }
     }
+
+    //Public api
 
     public void RemoveEffect(Effect effect)
     {

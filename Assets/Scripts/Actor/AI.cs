@@ -43,7 +43,6 @@ public class AI : MonoBehaviour
         }
     }
 
-
     public void Think()
     {
         // Free actions are used first

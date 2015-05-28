@@ -18,11 +18,13 @@ public class CountdownBehaviour : MonoBehaviour
     public void Countdown()
     {
         CurrentCountdown--;
+        BroadcastMessage("OnTurn");
 
         if (CurrentCountdown <= 0)
         {
             CurrentCountdown = MaxCountdown;
             DoAction();
+            BroadcastMessage("OnAct");
         }
     }
 
