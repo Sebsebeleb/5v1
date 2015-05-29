@@ -14,6 +14,7 @@ namespace Data.Effects
         // Only initalization stuff here
         // ----------------------------
 
+
         protected override void Created()
         {
             base.Created();

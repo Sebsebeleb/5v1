@@ -1,6 +1,8 @@
 ﻿//Instatiates and adds to EventHolder all specified (by name) of this creature
+
 using BaseClasses;
 using System;
+using System.Globalization;
 using System.Reflection;
 using UnityEngine;
 
@@ -35,8 +37,9 @@ public class ApplyEffectsOnLoad : MonoBehaviour
     private static Effect LoadEffect(string name)
     {
 
-        var effInstance = Activator.CreateInstance(assembly.FullName, "Data.Effects." + name);
-        var test = effInstance.Unwrap() as Effect;
+        var typ = assembly.GetType("Data.Effects." + name);
+        var effInstance = Activator.CreateInstance(typ);
+        var test = effInstance as Effect;
 
         return test;
 

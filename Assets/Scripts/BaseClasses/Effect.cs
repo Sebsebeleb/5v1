@@ -14,7 +14,13 @@ namespace BaseClasses
         public bool Purgable = false;
         public int Duration;
 
-        public Effect(int duration = 0)
+        public Effect()
+        {
+            IsInfinite = true;
+            Duration = -1;
+            Created();
+        }
+        public Effect(int duration)
         {
             Duration = duration;
             Created();

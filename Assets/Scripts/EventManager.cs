@@ -16,8 +16,6 @@ namespace Event
 
     public delegate void OnTurn();
 
-    public delegate void OnCountedDown(CountedDownArgs args);
-
     public delegate void OnActorTookDamage(TookDamageArgs args);
 
     public delegate void ActorDied(Actor who);
@@ -36,16 +34,6 @@ namespace Event
         {
             Actor = _actor;
             Damage = _damage;
-        }
-    }
-
-    public struct CountedDownArgs
-    {
-        public Actor Actor;
-
-        public CountedDownArgs(Actor actor)
-        {
-            Actor = actor;
         }
     }
 

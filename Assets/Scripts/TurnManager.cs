@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Event;
+using UnityEngine;
 
 public class TurnManager : MonoBehaviour
 {
@@ -34,6 +35,8 @@ public class TurnManager : MonoBehaviour
 
             enemy.countdown.Countdown();
         }
+
+        EventManager.Notify(Events.OnTurn, null);
     }
 
     private void UpdatePlayer()

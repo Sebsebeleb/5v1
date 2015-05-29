@@ -24,7 +24,7 @@ public class CountdownBehaviour : MonoBehaviour
         {
             CurrentCountdown = MaxCountdown;
             DoAction();
-            BroadcastMessage("OnAct");
+            BroadcastMessage("OnAct", SendMessageOptions.DontRequireReceiver);
         }
     }
 

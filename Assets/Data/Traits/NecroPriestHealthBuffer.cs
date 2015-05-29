@@ -9,6 +9,7 @@ namespace Data.Effects
     {
         private int _attackBonus = 2;
 
+
         public override void OnAdded()
         {
             base.OnAdded();
