@@ -81,6 +81,7 @@ GameObject:
   - 114: {fileID: 11434656}
   - 114: {fileID: 11404100}
   - 114: {fileID: 11421880}
+  - 114: {fileID: 11425822}
   m_Layer: 5
   m_Name: EnemyButton
   m_TagString: Untagged
@@ -449,6 +450,18 @@ MonoBehaviour:
   Attack: {fileID: 11440704}
   Defense: {fileID: 11458636}
   EnemyImage: {fileID: 11421000}
+--- !u!114 &11425822
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 127462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b11366604dcc66c48ac634833d47d2c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InspectorPanel: {fileID: 0}
 --- !u!114 &11429374
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -508,19 +521,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 11494122}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11404100}
-        m_MethodName: Clicked
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
-            Culture=neutral, PublicKeyToken=null
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &11440704
