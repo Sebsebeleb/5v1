@@ -20,13 +20,16 @@ public class EnemyAttackAI : MonoBehaviour
 
     void Start()
     {
-        _brain.AddAction(AttackAction);
+        AI.AiAction attackAction = new AI.AiAction();
+        attackAction.Name = "Attack";
+        attackAction.Description = "Attacks you for x damage";
+        attackAction.Callback = AttackPlayer;
+        attackAction.CalcPriority = CalculatePriority;
+        attackAction.IsFreeAction = false;
+        
+        _brain.AddAction(attackAction);
     }
 
-    private AI.ActionPriority AttackAction()
-    {
-        return new AI.ActionPriority(CalculatePriority(), AttackPlayer);
-    }
 
     private int CalculatePriority()
     {

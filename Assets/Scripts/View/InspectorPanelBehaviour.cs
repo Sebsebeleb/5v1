@@ -31,10 +31,39 @@ public class InspectorPanelBehaviour : MonoBehaviour{
 		ActorHPText.text = string.Format("{0}/{1}", who.damagable.CurrentHealth, who.damagable.MaxHealth);
 		ActorAttackText.text = who.attack.Attack.ToString();
 		ActorCooldownText.text = string.Format("{0}({1})", who.countdown.CurrentCountdown, who.countdown.MaxCountdown);
+		
+		PopulateActions(who);
 	}
 
-	private void PopulateActions(){
+	private void PopulateActions(Actor who){
+		// TODO: Also temp solutuion, reset the gameobjects.
+		foreach(Transform child in ActionsHolder){
+			Destroy(child.gameObject);
+		}
+		// End 
+		AI brain = who.GetComponent<AI>();
 
+		if (!brain){
+			return;
+		}
+		
+		
+		foreach (AI.AiAction action in brain.GetStandardActions()){
+			CreateActionEntry(action);	
+		}
+		
+		foreach (AI.AiAction freeAction in brain.GetFreeActions()){
+			CreateActionEntry(freeAction);
+		}
+		
+	}
+	
+	private void CreateActionEntry(AI.AiAction action){
+		GameObject item = Instantiate(ActionItemPrefab) as GameObject;
+		item.transform.SetParent(ActionsHolder);
+
+		// TODO: this is a temp solution
+		item.GetComponentInChildren<Text> ().text = action.Name;
 	}
 
 	private void PopulateEffects(){

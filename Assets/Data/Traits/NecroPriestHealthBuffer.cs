@@ -14,7 +14,14 @@ namespace Data.Effects
         {
             base.OnAdded();
 
-            owner.ai.AddAction(() => new AI.ActionPriority(-1, DoBuff), freeAction:true);
+            AI.AiAction buffAction = new AI.AiAction();
+            buffAction.Name = "Priestly Buff";
+            buffAction.Description = "Buffs a random creature, increasing it's attack by " + RichTextUtilities.FontColor("#FF2222", "2") + ".";            
+            buffAction.Callback = DoBuff;
+            buffAction.CalcPriority = () => -1;
+            buffAction.IsFreeAction = true;
+            
+            owner.ai.AddAction(buffAction);
         }
 
         private void DoBuff()
