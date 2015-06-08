@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class InspectorPanelBehaviour : MonoBehaviour{
 	public GameObject ActionItemPrefab;
@@ -12,6 +13,10 @@ public class InspectorPanelBehaviour : MonoBehaviour{
 	
 	public Transform ActionsHolder;
 	public Transform EffectsHolder;
+	// The panel that can display detailed information about actions and effects
+	public Transform DescriptionPanel;
+	
+	private Dictionary<Transform, AI.AiAction> _actionEntries = new Dictionary<Transform, AI.AiAction>();
 	
 	public void Update(){
 		// Check if user wants to exit this screen
@@ -64,6 +69,20 @@ public class InspectorPanelBehaviour : MonoBehaviour{
 
 		// TODO: this is a temp solution
 		item.GetComponentInChildren<Text> ().text = action.Name;
+		
+		// Store a reference so we can retrieve it later if we want to get the description
+		_actionEntries.Add(item.transform, action);
+	}
+	
+	public void DisplayDescriptionForAction(Transform actionEntry){
+		AI.AiAction action = _actionEntries[actionEntry];
+		
+		DisplayDescriptionOf(action.Description);
+	}
+	
+	private void DisplayDescriptionOf(string description){
+		DescriptionPanel.gameObject.SetActive(true);
+		DescriptionPanel.GetComponentInChildren<Text>().text = description;
 	}
 
 	private void PopulateEffects(){

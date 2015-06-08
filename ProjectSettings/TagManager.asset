@@ -6,6 +6,7 @@ TagManager:
   tags:
   - GM
   - Corpse
+  - InspectorPanel
   layers:
   - Default
   - TransparentFX
