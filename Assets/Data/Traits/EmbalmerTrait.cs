@@ -8,6 +8,19 @@ namespace Data.Effects
         private const int BonusPerCorpse = 2;
         private int _currentBonus = 0;
 
+        public EmbalmerTrait() : base(){
+            Description = new EffectDescription(
+                "Grave strength",
+                describe
+            );     
+        }
+        
+        private string describe(){
+            return string.Format("Has {0} bonus attack for each adjacent corpse. \nCurrently: {1}", 
+                RichTextUtilities.Bold(RichTextUtilities.FontColor("#FF1111", BonusPerCorpse.ToString())),
+                RichTextUtilities.Bold(RichTextUtilities.FontColor("#FF1111", _currentBonus.ToString()))
+            );
+        }
 
         protected override void Created()
         {

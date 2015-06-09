@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using BaseClasses;
 
 public class InspectorPanelBehaviour : MonoBehaviour{
 	public GameObject ActionItemPrefab;
@@ -16,7 +17,9 @@ public class InspectorPanelBehaviour : MonoBehaviour{
 	// The panel that can display detailed information about actions and effects
 	public Transform DescriptionPanel;
 	
+	// TODO: Refactor please. This should only need one interface, not two seperate lists
 	private Dictionary<Transform, AI.AiAction> _actionEntries = new Dictionary<Transform, AI.AiAction>();
+	private Dictionary<Transform, Effect> _effectEntries = new Dictionary<Transform, Effect>();
 	
 	public void Update(){
 		// Check if user wants to exit this screen
@@ -38,6 +41,7 @@ public class InspectorPanelBehaviour : MonoBehaviour{
 		ActorCooldownText.text = string.Format("{0}({1})", who.countdown.CurrentCountdown, who.countdown.MaxCountdown);
 		
 		PopulateActions(who);
+		PopulateEffects(who);
 	}
 
 	private void PopulateActions(Actor who){
@@ -75,9 +79,15 @@ public class InspectorPanelBehaviour : MonoBehaviour{
 	}
 	
 	public void DisplayDescriptionForAction(Transform actionEntry){
-		AI.AiAction action = _actionEntries[actionEntry];
+		// TODO: Refactor pls
+		if (!_actionEntries.ContainsKey(actionEntry)){
+			DisplayDescriptionOf(_effectEntries[actionEntry].Description.GetDescription());
+		}
+		else{
+			AI.AiAction action = _actionEntries[actionEntry];
+			DisplayDescriptionOf(action.Description());	
+		}
 		
-		DisplayDescriptionOf(action.Description);
 	}
 	
 	private void DisplayDescriptionOf(string description){
@@ -85,8 +95,24 @@ public class InspectorPanelBehaviour : MonoBehaviour{
 		DescriptionPanel.GetComponentInChildren<Text>().text = description;
 	}
 
-	private void PopulateEffects(){
-
+	private void PopulateEffects(Actor who){
+		/// TODO: Temp solution
+		foreach(Transform child in EffectsHolder){
+			Destroy(child.gameObject);
+		}
+		
+		foreach(Effect eff in who.GetComponent<EffectHolder>()){
+			CreateEffectEntry(eff);
+		}
+	}
+	
+	private void CreateEffectEntry(Effect eff){
+		GameObject item = Instantiate(ActionItemPrefab) as GameObject;
+		item.transform.SetParent(EffectsHolder);
+		
+		item.GetComponentInChildren<Text>().text = eff.Description.Name;
+		
+		_effectEntries.Add(item.transform, eff);
 	}
 }
 

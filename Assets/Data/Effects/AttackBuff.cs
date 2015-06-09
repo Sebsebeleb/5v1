@@ -4,11 +4,19 @@ using BaseClasses;
 
 class AttackBuff : Effect
 {
+    
+    
     private int bonus;
 
-    public AttackBuff(int attackBonus)
+    public AttackBuff(int attackBonus) : base()
     {
         bonus = attackBonus;
+    }
+    
+    // description: Pass it to describe the way it was buffed
+    public AttackBuff(int attackBonus, EffectDescription description) : base(){
+        bonus = attackBonus;
+        Description = description;
     }
 
     public override void OnAdded()

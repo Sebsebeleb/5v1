@@ -5,7 +5,14 @@ internal class Blocking : Effect
     public Blocking(int duration)
         : base(duration)
     {
-
+        Description = new EffectDescription(
+            "Blocking",
+            describe
+        );
+    }
+    
+    private string describe(){
+        return "You are invulnerable!";
     }
 
     public override void OnAdded()

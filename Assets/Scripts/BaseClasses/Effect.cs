@@ -1,4 +1,4 @@
-﻿
+﻿using System;
 
 namespace BaseClasses
 {
@@ -13,6 +13,10 @@ namespace BaseClasses
         // If it is purgable, effect cleansing will remove it
         public bool Purgable = false;
         public int Duration;
+        // If it is a trait, it is inherit and not temporary, and should be described on the creature description as a trait rather than effect
+        public bool IsTrait = false;
+        
+        public EffectDescription Description = new EffectDescription("OOPS Missing description", () => "Oops");
 
         public Effect()
         {
@@ -90,5 +94,16 @@ namespace BaseClasses
             OnAdded();
         }
 
+    }
+    
+    // Holds the data for 
+    public class EffectDescription{
+        public string Name;
+        public Func<string> GetDescription;
+        
+        public EffectDescription(string name, Func<string> description){
+            Name = name;
+            GetDescription = description;
+        }
     }
 }

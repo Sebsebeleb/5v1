@@ -9,7 +9,7 @@ public class CorpseBehaviour : MonoBehaviour
         // Should be the only action the "ai" can do, which is to spawn a new enemy
         AI.AiAction respawnAction = new AI.AiAction();
         respawnAction.Name = "Reincarnate";
-        respawnAction.Description = "Spawns a new creature";
+        respawnAction.Description = () => "Spawns a new creature";
         respawnAction.CalcPriority = () => 10000;
         respawnAction.Callback = DoRespawn;
         respawnAction.IsFreeAction = false;

@@ -11,11 +11,6 @@ public class PlayerExperience : MonoBehaviour
     
     void Start(){
         level = 1;
-        
-        foreach(int i in new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}){
-            level = i;
-            Debug.Log(xpNeeded);
-        }
     }
 
     public void GiveXp(int xp)

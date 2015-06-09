@@ -16,12 +16,16 @@ namespace Data.Effects
 
             AI.AiAction buffAction = new AI.AiAction();
             buffAction.Name = "Priestly Buff";
-            buffAction.Description = "Buffs a random creature, increasing it's attack by " + RichTextUtilities.FontColor("#FF2222", "2") + ".";            
+            buffAction.Description = GetDescription;            
             buffAction.Callback = DoBuff;
             buffAction.CalcPriority = () => -1;
             buffAction.IsFreeAction = true;
             
             owner.ai.AddAction(buffAction);
+        }
+        
+        private string GetDescription(){
+            return "Buffs a random creature, increasing it's attack by " + RichTextUtilities.Bold(RichTextUtilities.FontColor("#FF2222", "2"));
         }
 
         private void DoBuff()
