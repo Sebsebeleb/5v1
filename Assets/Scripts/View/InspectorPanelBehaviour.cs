@@ -12,14 +12,14 @@ public class InspectorPanelBehaviour : MonoBehaviour{
 	public Text ActorAttackText;
 	public Text ActorCooldownText;
 	
-	public Transform ActionsHolder;
-	public Transform EffectsHolder;
+	public Transform ActionsParent;
+	public Transform EffectsParent;
 	// The panel that can display detailed information about actions and effects
 	public Transform DescriptionPanel;
 	
 	// TODO: Refactor please. This should only need one interface, not two seperate lists
-	private Dictionary<Transform, AI.AiAction> _actionEntries = new Dictionary<Transform, AI.AiAction>();
 	private Dictionary<Transform, Effect> _effectEntries = new Dictionary<Transform, Effect>();
+	private Dictionary<Transform, ITooltip> _entries = new Dictionary<Transform, ITooltip>();
 	
 	public void Update(){
 		// Check if user wants to exit this screen
@@ -46,7 +46,7 @@ public class InspectorPanelBehaviour : MonoBehaviour{
 
 	private void PopulateActions(Actor who){
 		// TODO: Also temp solutuion, reset the gameobjects.
-		foreach(Transform child in ActionsHolder){
+		foreach(Transform child in ActionsParent){
 			Destroy(child.gameObject);
 		}
 		// End 
@@ -56,38 +56,32 @@ public class InspectorPanelBehaviour : MonoBehaviour{
 			return;
 		}
 		
-		
 		foreach (AI.AiAction action in brain.GetStandardActions()){
-			CreateActionEntry(action);	
+			CreateEntry(action, ActionsParent);	
 		}
 		
 		foreach (AI.AiAction freeAction in brain.GetFreeActions()){
-			CreateActionEntry(freeAction);
+			CreateEntry(freeAction, ActionsParent);
 		}
 		
 	}
 	
-	private void CreateActionEntry(AI.AiAction action){
+	// Holder is the transform it should be the child of
+	private void CreateEntry(ITooltip entryData, Transform holder){
 		GameObject item = Instantiate(ActionItemPrefab) as GameObject;
-		item.transform.SetParent(ActionsHolder);
+		item.transform.SetParent(holder);
 
 		// TODO: this is a temp solution
-		item.GetComponentInChildren<Text> ().text = action.Name;
+		item.GetComponentInChildren<Text> ().text = entryData.GetName();
 		
 		// Store a reference so we can retrieve it later if we want to get the description
-		_actionEntries.Add(item.transform, action);
+		_entries.Add(item.transform, entryData);
 	}
 	
-	public void DisplayDescriptionForAction(Transform actionEntry){
+	public void DisplayDescriptionForEntry(Transform entry){
 		// TODO: Refactor pls
-		if (!_actionEntries.ContainsKey(actionEntry)){
-			DisplayDescriptionOf(_effectEntries[actionEntry].Description.GetDescription());
-		}
-		else{
-			AI.AiAction action = _actionEntries[actionEntry];
-			DisplayDescriptionOf(action.Description());	
-		}
-		
+			ITooltip data = _entries[entry];
+			DisplayDescriptionOf(data.GetTooltip());	
 	}
 	
 	private void DisplayDescriptionOf(string description){
@@ -97,22 +91,18 @@ public class InspectorPanelBehaviour : MonoBehaviour{
 
 	private void PopulateEffects(Actor who){
 		/// TODO: Temp solution
-		foreach(Transform child in EffectsHolder){
+		foreach(Transform child in EffectsParent){
 			Destroy(child.gameObject);
 		}
 		
 		foreach(Effect eff in who.GetComponent<EffectHolder>()){
-			CreateEffectEntry(eff);
+			if (eff.IsTrait){
+				CreateEntry(eff, ActionsParent);
+			}
+			else{
+				CreateEntry(eff, EffectsParent);
+			}
 		}
-	}
-	
-	private void CreateEffectEntry(Effect eff){
-		GameObject item = Instantiate(ActionItemPrefab) as GameObject;
-		item.transform.SetParent(EffectsHolder);
-		
-		item.GetComponentInChildren<Text>().text = eff.Description.Name;
-		
-		_effectEntries.Add(item.transform, eff);
 	}
 }
 

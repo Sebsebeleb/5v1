@@ -2,7 +2,7 @@
 
 namespace BaseClasses
 {
-    public class Effect
+    public class Effect : ITooltip
     {
 
         protected Actor owner;
@@ -16,7 +16,7 @@ namespace BaseClasses
         // If it is a trait, it is inherit and not temporary, and should be described on the creature description as a trait rather than effect
         public bool IsTrait = false;
         
-        public EffectDescription Description = new EffectDescription("OOPS Missing description", () => "Oops");
+        protected EffectDescription Description = new EffectDescription("OOPS Missing description", () => "Oops");
 
         public Effect()
         {
@@ -93,10 +93,18 @@ namespace BaseClasses
             owner = who;
             OnAdded();
         }
+        
+        public string GetTooltip(){
+            return Description.GetDescription();
+        }
+        
+        public string GetName(){
+            return Description.Name;
+        }
 
     }
     
-    // Holds the data for 
+    // Holds the data for tooltip 
     public class EffectDescription{
         public string Name;
         public Func<string> GetDescription;
@@ -106,4 +114,5 @@ namespace BaseClasses
             GetDescription = description;
         }
     }
+    
 }

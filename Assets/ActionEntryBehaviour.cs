@@ -13,6 +13,6 @@ public class ActionEntryBehaviour : MonoBehaviour {
 	
 	}
 	public void ShowDescription(){
-		GameObject.FindWithTag("InspectorPanel").GetComponent<InspectorPanelBehaviour>().DisplayDescriptionForAction(transform);
+		GameObject.FindWithTag("InspectorPanel").GetComponent<InspectorPanelBehaviour>().DisplayDescriptionForEntry(transform);
 	}
 }

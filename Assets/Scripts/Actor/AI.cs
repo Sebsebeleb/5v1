@@ -54,11 +54,20 @@ public class AI : MonoBehaviour
     }
     
     // The class used to describe an action
-    public class AiAction {
+    public class AiAction : ITooltip {
         public string Name;
         public Func<string> Description; // A method that describes this action. Can be rich text
         public GetPriority CalcPriority; // Method to call to calculate priority
         public bool IsFreeAction; // If it is free it will be performed in addition to the chose standard action
         public Action Callback; // The method to call if we perform this action
+        
+        // ITooltip methods
+        public string GetTooltip(){
+            return Description();
+        }
+        
+        public string GetName(){
+            return Name;
+        }
     }
 }
