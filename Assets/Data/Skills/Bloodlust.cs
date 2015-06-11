@@ -37,5 +37,13 @@ namespace Data.Skills
                 playerActor.damagable.Heal(healAmount);
             }
         }
+        
+        public override string GetName(){
+            return SkillName;
+        }
+        
+        public override string GetTooltip(){
+            return Tooltip;
+        }
     }
 }

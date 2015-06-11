@@ -10,6 +10,7 @@ namespace Event
         OnCountedDown,
         OnActorTookDamage,
         ActorDied,
+        PlayerLeveledUp,
     }
 
     #region delegates
@@ -19,6 +20,8 @@ namespace Event
     public delegate void OnActorTookDamage(TookDamageArgs args);
 
     public delegate void ActorDied(Actor who);
+    
+    public delegate void PlayerLeveledUp(int level);
 
     #endregion
 
@@ -36,6 +39,7 @@ namespace Event
             Damage = _damage;
         }
     }
+    
 
     #endregion
 

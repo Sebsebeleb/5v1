@@ -50,6 +50,14 @@ namespace Data.Skills
             }
 
         }
+        
+        public override string GetName(){
+            return SkillName;
+        }
+        
+        public override string GetTooltip(){
+            return Tooltip;
+        }
     }
 
 }

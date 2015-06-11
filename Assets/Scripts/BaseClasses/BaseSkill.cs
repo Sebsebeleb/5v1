@@ -1,6 +1,6 @@
 ﻿using System;
 
-public class BaseSkill
+public abstract class BaseSkill : ITooltip
 {
 
     public string SkillName = "Undefined";
@@ -34,4 +34,8 @@ public class BaseSkill
     {
         return CurrentCooldown <= 0;
     }
+    
+    public abstract string GetName();
+    
+    public abstract string GetTooltip();
 }

@@ -2,9 +2,9 @@
 using UnityEngine;
 
 public class PlayerExperience : MonoBehaviour
-{
+{   
     public int level;
-    private int xp;
+    private int _xp;
     private int xpNeeded{
         get {return CalculateXpNeeded();}
     }
@@ -15,19 +15,21 @@ public class PlayerExperience : MonoBehaviour
 
     public void GiveXp(int xp)
     {
-        xp += xp;
+        _xp += xp;
         
         CheckLevelup();
     }
     
     private void CheckLevelup(){
-        if (xp >= xpNeeded){
+        if (_xp >= xpNeeded){
             Levelup();
         }
     }
     
     public void Levelup(){
-        
+        _xp = _xp - xpNeeded;        
+        level++;
+        Event.EventManager.Notify(Event.Events.PlayerLeveledUp, null);
     }
     
     private int CalculateXpNeeded(){
@@ -35,6 +37,14 @@ public class PlayerExperience : MonoBehaviour
         xpNeed = Mathf.Pow(level, 2.6f) * 0.3f + level * 2 + 10;
         
         return Mathf.CeilToInt(xpNeed);
+    }
+    
+    public int GetCurrentXP(){
+        return _xp;
+    }
+    
+    public int GetNeededXP(){
+        return xpNeeded;
     }
     
 }
