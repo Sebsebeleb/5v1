@@ -15,11 +15,11 @@ public class LearnableSkillBehaviour : MonoBehaviour, IPointerEnterHandler, IPoi
 	}
 	
 	public void OnPointerEnter(PointerEventData data){
-		RectTransform trans = GetComponent<RectTransform> ();
+		/*RectTransform trans = GetComponent<RectTransform> ();
 		
 		Vector2 bottom = GetComponentInChildren<RectTransform> ().anchoredPosition;
 		Vector2 pos = new Vector2 (bottom.x, bottom.y);
-		_tooltip.SetTooltip (pos, _skill.GetName (), _skill.GetTooltip ());
+		_tooltip.SetTooltip (pos, _skill.GetName (), _skill.GetTooltip ());*/
 	}
 	
 	public void OnPointerExit(PointerEventData data){

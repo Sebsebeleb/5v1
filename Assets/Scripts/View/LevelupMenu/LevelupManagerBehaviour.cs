@@ -30,13 +30,14 @@ public class LevelupManagerBehaviour : MonoBehaviour
 		gameObject.SetActive(true);
 		foreach (BaseSkill skill in skills){
 			GameObject entry = Instantiate(SkillEntryPrefab) as GameObject;
-			Debug.Log(entry.transform.parent);
 			entry.transform.SetParent(SkillsParent);
-			Debug.Log(entry.transform.parent);
-			Debug.Log(SkillsParent);
 			
 			LearnableSkillBehaviour behaviour = entry.GetComponent<LearnableSkillBehaviour>();
 			behaviour.SetSkill(skill);
 		}	
 	}	
+	
+	public void ConfirmLevelup(){
+		
+	}
 }

@@ -34,6 +34,11 @@ public class Actor : MonoBehaviour
     {
         get { return _ai; }
     }
+    
+    private Status _status;
+    public Status status{
+        get { return _status; }
+    }
 
     #endregion
 
@@ -49,6 +54,7 @@ public class Actor : MonoBehaviour
         _effects = GetComponent<EffectHolder>();
         _attack = GetComponent<AttackBehaviour>();
         _ai = GetComponent<AI>();
+        _status = GetComponent<Status>();
     }
 
     void Update()

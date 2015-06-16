@@ -10,6 +10,7 @@ public class PlayerTargeting : MonoBehaviour
 
     private GameObject _player;
     private AttackBehaviour _playerAttack;
+    private Actor _playerActor;
 
     private TurnManager turn;
 
@@ -18,6 +19,7 @@ public class PlayerTargeting : MonoBehaviour
 
         _player = GameObject.FindWithTag("Player");
         _playerAttack = _player.GetComponent<AttackBehaviour>();
+        _playerActor = _player.GetComponent<Actor>();
 
         turn = GameObject.FindWithTag("GM").GetComponent<TurnManager>();
     }
@@ -35,7 +37,8 @@ public class PlayerTargeting : MonoBehaviour
             Toggle active = SkillGroupRef.ActiveToggles().ToList()[0];
             BaseSkill skill = active.GetComponent<SkillUseButton>().AssociatedSkill;
 
-            if (skill.CanTargetGrid(x, y) && skill.CanUse(x, y))
+            //TODO: Error log telling the reason
+            if (skill.CanTargetGrid(x, y) && skill.CanUse(x, y) && !_playerActor.status.Silenced)
             {
                 usedAction = true;
                 skill.UseOnTargetGrid(x, y);
