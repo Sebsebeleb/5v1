@@ -1,10 +1,14 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelupManagerBehaviour : MonoBehaviour
 {
 	public Transform SkillsParent;
 	public GameObject SkillEntryPrefab;
-	
+	public ToggleGroup Toggles;
+	public SkillBehaviour PlayerSkills;
+
 	void Awake(){
 		//delegateeventCallback = OnPlayerLevel;
 		Event.PlayerLeveledUp callback = OnPlayerLevel;
@@ -17,17 +21,31 @@ public class LevelupManagerBehaviour : MonoBehaviour
 	
 	// notused parameter is a lazy as fuck way of dealing with the event manager.
 	private void OnPlayerLevel(int i){
-		BaseSkill[] skills = new BaseSkill[3]{
+		List<BaseSkill> skills = new List<BaseSkill>(){
 			new Data.Skills.Block(),
 			new Data.Skills.Bloodlust(),
 			new Data.Skills.Cleave()
 		};
 		
-		Init(skills);
+		List<BaseSkill> finalChoices = new List<BaseSkill>(skills);
+		
+		foreach(BaseSkill skill in skills){
+			if (PlayerSkills.KnowsSkill(skill)){
+				finalChoices.Remove(skill);
+			}
+		}
+		
+		Init(finalChoices.ToArray());
 	}
 	
 	public void Init(BaseSkill[] skills){
 		gameObject.SetActive(true);
+		
+		// Cleanup old
+		foreach(Transform child in SkillsParent.transform){
+			Destroy(child.gameObject);
+		}
+		
 		foreach (BaseSkill skill in skills){
 			GameObject entry = Instantiate(SkillEntryPrefab) as GameObject;
 			entry.transform.SetParent(SkillsParent);
@@ -38,6 +56,23 @@ public class LevelupManagerBehaviour : MonoBehaviour
 	}	
 	
 	public void ConfirmLevelup(){
-		
+		bool success = false;
+		Toggle[] toggles = SkillsParent.GetComponentsInChildren<Toggle> ();
+		foreach(Toggle toggle in toggles){
+			if (toggle.isOn) {
+				learnSkill(toggle.GetComponentInParent<LearnableSkillBehaviour>());
+				success = true;
+					break;	
+			}
+		}
+
+		if (success){
+		gameObject.SetActive(false);		
+						
+		}
+	}
+
+	private void learnSkill(LearnableSkillBehaviour skillButton){
+		PlayerSkills.LearnSkill(skillButton.skill);
 	}
 }

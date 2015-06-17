@@ -19,7 +19,8 @@ public class SkillUseButton : MonoBehaviour
     // The skill that should be used if this button is pressed when targeting
     public BaseSkill AssociatedSkill
     {
-        get { return _playerSkills.StartingSkills[SkillIndex]; }
+        
+        get { return _playerSkills.GetKnownSkills()[SkillIndex]; }
     }
 
     // The #n skill that should be used on player's SkillBehaviour when this is used
