@@ -38,10 +38,31 @@ public class InspectorPanelBehaviour : MonoBehaviour{
 		ActorDescription.text = "Not yet implemented";
 		ActorHPText.text = string.Format("{0}/{1}", who.damagable.CurrentHealth, who.damagable.MaxHealth);
 		ActorAttackText.text = who.attack.Attack.ToString();
-		ActorCooldownText.text = string.Format("{0}({1})", who.countdown.CurrentCountdown, who.countdown.MaxCountdown);
+		
+		if (who.countdown != null){
+			ActorCooldownText.text = string.Format("{0}({1})", who.countdown.CurrentCountdown, who.countdown.MaxCountdown);
+		}
+		else{
+			ActorCooldownText.text = "";
+		}
 		
 		PopulateActions(who);
 		PopulateEffects(who);
+		if (who.GetComponent<SkillBehaviour>() != null){
+			PopulateSkills(who);
+		}
+	}
+	
+	//For the player's skills
+	private void PopulateSkills(Actor who){
+		if (who.tag != "Player"){
+			Debug.LogWarning("Uuh, non-player has skills?");
+		}
+		SkillBehaviour playerSkills = who.GetComponent<SkillBehaviour>();
+		
+		foreach(BaseSkill skill in playerSkills.GetKnownSkills()){
+			CreateEntry(skill, ActionsParent);
+		}
 	}
 
 	private void PopulateActions(Actor who){
