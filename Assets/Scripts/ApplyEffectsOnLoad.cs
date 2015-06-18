@@ -20,7 +20,8 @@ public class ApplyEffectsOnLoad : MonoBehaviour
 
     private void Start()
     {
-        assembly.GetName();
+        Debug.Log("Hi");
+        Debug.Log(assembly.GetName());
         foreach (string effectName in InitialEffects)
         {
             Effect eff = LoadEffect(effectName);
