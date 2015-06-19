@@ -8,8 +8,8 @@ namespace Data.Skills
         public Bloodlust()
         {
             SkillName = "Bloodlust";
-            Tooltip = "Deal 150% damage to an enemy. If this attack kills it, gain life equal to the enemy's hp";
-            BaseCooldown = 12;
+            Tooltip = "Deal 200% damage to an enemy. If this attack kills it, gain life equal to twice the enemy's hp (from before the attack)";
+            BaseCooldown = 10;
 
         }
 
@@ -19,7 +19,7 @@ namespace Data.Skills
 
             Actor targetedEnemy = GridManager.TileMap.GetAt(x, y);
 
-            int healAmount = targetedEnemy.damagable.CurrentHealth;
+            int healAmount = targetedEnemy.damagable.CurrentHealth * 2;
 
             //TODO: This currently assumes the player is casting it. Bad?
             GameObject player = GameObject.FindWithTag("Player");
@@ -27,7 +27,7 @@ namespace Data.Skills
             Actor playerActor = player.GetComponent<Actor>();
 
 
-            int tempBonus = playerAttack.CalculateAttack() / 2;
+            int tempBonus = playerAttack.CalculateAttack();
             playerAttack.BonusAttack += tempBonus;
             playerAttack.DoAttack(targetedEnemy);
             playerAttack.BonusAttack -= tempBonus;

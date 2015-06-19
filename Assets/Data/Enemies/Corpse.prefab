@@ -144,7 +144,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 1
   CurrentHealth: 1
-  IsInvulnerable: 0
+  IsInvulnerable: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

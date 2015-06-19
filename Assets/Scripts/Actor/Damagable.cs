@@ -79,7 +79,7 @@ public class Damagable : MonoBehaviour
     {
         if (givexp)
         {
-            GameObject.FindWithTag("Player").GetComponent<PlayerExperience>().GiveXp(2);
+            GameObject.FindWithTag("Player").GetComponent<PlayerExperience>().GiveXp(3);
         }
 
         //TODO: Consider; Should this object have this responsibility?

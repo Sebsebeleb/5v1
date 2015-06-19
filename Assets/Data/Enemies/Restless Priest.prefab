@@ -19,7 +19,7 @@ GameObject:
   - 114: {fileID: 11466594}
   - 114: {fileID: 11427106}
   m_Layer: 0
-  m_Name: NecroPriest
+  m_Name: Restless Priest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

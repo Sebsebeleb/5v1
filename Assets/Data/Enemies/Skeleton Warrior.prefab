@@ -13,13 +13,12 @@ GameObject:
   - 114: {fileID: 11497004}
   - 114: {fileID: 11445386}
   - 114: {fileID: 11454970}
+  - 114: {fileID: 11409998}
   - 114: {fileID: 11443350}
-  - 114: {fileID: 11416514}
-  - 114: {fileID: 11400554}
-  - 114: {fileID: 11466594}
-  - 114: {fileID: 11483440}
+  - 114: {fileID: 11452428}
+  - 114: {fileID: 11433782}
   m_Layer: 0
-  m_Name: NecroBuffBomb
+  m_Name: Skeleton Warrior
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37,7 +36,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11400554
+--- !u!114 &11409998
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -45,11 +44,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 168242}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db4346147877e5946b76ac8a94b47ed3, type: 3}
+  m_Script: {fileID: 11500000, guid: 68803aabbfc13734abe2f3fce3f968b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InitialEffects:
-  - BuffAllyOnDeath
 --- !u!114 &11411678
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -63,7 +60,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   x: 0
   y: 0
---- !u!114 &11416514
+--- !u!114 &11433782
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -71,7 +68,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 168242}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68803aabbfc13734abe2f3fce3f968b2, type: 3}
+  m_Script: {fileID: 11500000, guid: 73c5834e94b12e041b9cba1c67d2e69b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &11443350
@@ -109,19 +106,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfa48ab3e57b40240b79fae51bb44a0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Image: {fileID: 21300000, guid: 294ba1cd97d7bcd498e86c06cbf05533, type: 3}
---- !u!114 &11454970
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 168242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90ac232f9e436eb4791cf6bf7b67b6bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &11466594
+  Image: {fileID: 21300000, guid: d16ba7ab357d7ee41a95056559c98998, type: 3}
+--- !u!114 &11452428
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -132,9 +118,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 282150c180c8eea47b6939bdb088934d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartingBaseAttack: 4
+  StartingBaseAttack: 2
   BonusAttack: 0
---- !u!114 &11483440
+--- !u!114 &11454970
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -142,7 +128,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 168242}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73c5834e94b12e041b9cba1c67d2e69b, type: 3}
+  m_Script: {fileID: 11500000, guid: 90ac232f9e436eb4791cf6bf7b67b6bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &11497004
@@ -156,8 +142,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a891ef91937f9174481ad6bf04508495, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 10
-  CurrentHealth: 5
+  MaxHealth: 6
+  CurrentHealth: 6
   IsInvulnerable: 0
 --- !u!1001 &100100000
 Prefab:
