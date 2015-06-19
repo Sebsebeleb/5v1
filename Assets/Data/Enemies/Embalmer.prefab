@@ -17,6 +17,7 @@ GameObject:
   - 114: {fileID: 11443350}
   - 114: {fileID: 11452428}
   - 114: {fileID: 11492422}
+  - 114: {fileID: 11457068}
   m_Layer: 0
   m_Name: Embalmer
   m_TagString: Untagged
@@ -118,6 +119,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 90ac232f9e436eb4791cf6bf7b67b6bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11457068
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 168242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73c5834e94b12e041b9cba1c67d2e69b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &11492422

@@ -17,6 +17,7 @@ GameObject:
   - 114: {fileID: 11416514}
   - 114: {fileID: 11400554}
   - 114: {fileID: 11466594}
+  - 114: {fileID: 11427106}
   m_Layer: 0
   m_Name: NecroPriest
   m_TagString: Untagged
@@ -71,6 +72,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 68803aabbfc13734abe2f3fce3f968b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11427106
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 168242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73c5834e94b12e041b9cba1c67d2e69b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &11443350
@@ -146,6 +158,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 10
   CurrentHealth: 5
+  IsInvulnerable: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

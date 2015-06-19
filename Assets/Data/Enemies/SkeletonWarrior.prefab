@@ -16,6 +16,7 @@ GameObject:
   - 114: {fileID: 11409998}
   - 114: {fileID: 11443350}
   - 114: {fileID: 11452428}
+  - 114: {fileID: 11433782}
   m_Layer: 0
   m_Name: SkeletonWarrior
   m_TagString: Untagged
@@ -59,6 +60,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   x: 0
   y: 0
+--- !u!114 &11433782
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 168242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73c5834e94b12e041b9cba1c67d2e69b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11443350
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -94,7 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfa48ab3e57b40240b79fae51bb44a0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Image: {fileID: 21300000, guid: 9c80558ea9e31644d9f9b5b241feb1f0, type: 3}
+  Image: {fileID: 21300000, guid: d16ba7ab357d7ee41a95056559c98998, type: 3}
 --- !u!114 &11452428
 MonoBehaviour:
   m_ObjectHideFlags: 1

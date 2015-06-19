@@ -17,9 +17,15 @@ public class CountdownBehaviour : MonoBehaviour
 
     public void Countdown()
     {
-        CurrentCountdown--;
         BroadcastMessage("OnTurn");
+        
+        // If we are stunned, we do not cooldown
+        if (_actor.status.Stunned){
+            return;
+        }
+        
 
+        CurrentCountdown--;
         if (CurrentCountdown <= 0)
         {
             CurrentCountdown = MaxCountdown;

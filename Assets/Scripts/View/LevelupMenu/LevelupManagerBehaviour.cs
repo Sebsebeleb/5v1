@@ -24,7 +24,8 @@ public class LevelupManagerBehaviour : MonoBehaviour
 		List<BaseSkill> skills = new List<BaseSkill>(){
 			new Data.Skills.Block(),
 			new Data.Skills.Bloodlust(),
-			new Data.Skills.Cleave()
+			new Data.Skills.Cleave(),
+			new Data.Skills.Stun(),
 		};
 		
 		List<BaseSkill> finalChoices = new List<BaseSkill>(skills);

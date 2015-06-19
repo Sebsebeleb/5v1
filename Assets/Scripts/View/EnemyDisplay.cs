@@ -38,7 +38,13 @@ public class EnemyDisplay : MonoBehaviour
         }
         Name.text = actualName;
         Health.text = actor.damagable.CurrentHealth.ToString();
-        Cooldown.text = actor.countdown.CurrentCountdown.ToString();
+
+        //If the enemy is stunned, changed font color
+        string countdownText = actor.countdown.CurrentCountdown.ToString();
+        if (actor.status.Stunned){
+            countdownText = RichTextUtilities.FontColor("#4040FF", countdownText);
+        }
+        Cooldown.text = countdownText;
 
         EnemyImage.sprite = actor.GetComponent<DisplayData>().Image;
 
