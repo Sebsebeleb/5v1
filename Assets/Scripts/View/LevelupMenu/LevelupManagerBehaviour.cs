@@ -57,6 +57,7 @@ public class LevelupManagerBehaviour : MonoBehaviour
 	}	
 	
 	public void ConfirmLevelup(){
+		// Check if the player has made a skil choice
 		bool success = false;
 		Toggle[] toggles = SkillsParent.GetComponentsInChildren<Toggle> ();
 		foreach(Toggle toggle in toggles){
@@ -67,9 +68,9 @@ public class LevelupManagerBehaviour : MonoBehaviour
 			}
 		}
 
-		if (success){
-		gameObject.SetActive(false);		
-						
+		// When there are no more skills to learn, let the player just exit regardless
+		if (success || toggles.Length == 0){
+			gameObject.SetActive(false);		
 		}
 	}
 

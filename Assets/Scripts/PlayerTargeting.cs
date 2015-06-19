@@ -42,6 +42,7 @@ public class PlayerTargeting : MonoBehaviour
             {
                 usedAction = true;
                 skill.UseOnTargetGrid(x, y);
+				SkillGroupRef.SetAllTogglesOff();
             }
         }
         else // Else, target regular attack
