@@ -65,19 +65,26 @@ public static class EnemyManager
     }
 
 
+    // Returns a higher and higher number as the bosscounter reaches 0
+    private static int CalculateDifficultAdd(){
+        return (int) ((80-TurnManager.BossCounter) * 0.20);
+    }
 
     //Rolls a new enemy based on various factors.
     private static GameObject RollEnemy(EnemySpawnList spawnList, int x, int y)
     {
         int TotalChance = 0;
-
+        
+        // The difficult add is the number added to all rolls (to increase the chance of spawning rarer enemies as the game progresses
+        int difficultyAdd = CalculateDifficultAdd();
 
         foreach (EnemySpawnList.EnemyEntry entry in spawnList.Entries)
         {
             // Ignore unspawnable
             if (!CanSpawnEnemyAt(entry, x, y)) continue;
 
-            TotalChance += entry.SpawnChance;
+            TotalChance += entry.SpawnChance + difficultyAdd;
+            
         }
 
         int roll = Random.Range(0, TotalChance);
@@ -88,11 +95,11 @@ public static class EnemyManager
             // Ignore unspawnable
             if (!CanSpawnEnemyAt(entry, x, y)) continue;
 
-            if (roll < currentChanceCount + entry.SpawnChance)
+            if (roll < currentChanceCount + entry.SpawnChance + difficultyAdd)
             {
                 return entry.Enemy;
             }
-            currentChanceCount += entry.SpawnChance;
+            currentChanceCount += entry.SpawnChance + difficultyAdd;
         }
         Debug.LogError("Something went wrong with spawning. No enemy was chosen for some reason");
         return spawnList.Entries[0].Enemy;

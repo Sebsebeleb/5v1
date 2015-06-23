@@ -9,8 +9,6 @@ namespace Data.Skills
             SkillName = "Stun";
             Tooltip = "Stun an enemy for 5 turns";
             BaseCooldown = 11;
-
-            CurrentCooldown = BaseCooldown;
         }
         public override void UseOnTargetGrid(int x, int y)
         {

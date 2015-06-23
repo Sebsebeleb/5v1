@@ -31,6 +31,7 @@ public class CountdownBehaviour : MonoBehaviour
             CurrentCountdown = MaxCountdown;
             DoAction();
             BroadcastMessage("OnAct", SendMessageOptions.DontRequireReceiver);
+            Event.EventManager.Notify(Event.Events.ActorActed, _actor);
         }
     }
 

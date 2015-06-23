@@ -15,16 +15,16 @@ MonoBehaviour:
   - Enemy: {fileID: 168242, guid: 44e9d6a215f1eb3458b53d08ae8eb62a, type: 2}
     FrontRow: 1
     BackRow: 1
-    SpawnChance: 1
-  - Enemy: {fileID: 168242, guid: d6369e59e3a432244ac4c51e556326e5, type: 2}
-    FrontRow: 0
-    BackRow: 1
     SpawnChance: 3
+  - Enemy: {fileID: 168242, guid: d6369e59e3a432244ac4c51e556326e5, type: 2}
+    FrontRow: 1
+    BackRow: 1
+    SpawnChance: 22
   - Enemy: {fileID: 168242, guid: d9b4c5ede3d06854eb7fa488f1208462, type: 2}
     FrontRow: 1
-    BackRow: 0
-    SpawnChance: 6
+    BackRow: 1
+    SpawnChance: 40
   - Enemy: {fileID: 168242, guid: bd17785c512479b4e97a6b67e1103e02, type: 2}
     FrontRow: 1
     BackRow: 1
-    SpawnChance: 4
+    SpawnChance: 5

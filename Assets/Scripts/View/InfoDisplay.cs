@@ -26,7 +26,7 @@ public class InfoDisplay : MonoBehaviour
     void Update()
     {
         PlayerHealthText.text = _playerHealth.CurrentHealth.ToString() + "/" + _playerHealth.MaxHealth.ToString();
-        BossCounterText.text = _turnManager.BossCounter.ToString();
+        BossCounterText.text = TurnManager.BossCounter.ToString();
         PlayerXPText.text = _experience.GetCurrentXP() + "/" + _experience.GetNeededXP();
     }
 }

@@ -12,8 +12,6 @@ namespace Data.Skills
             SkillName = "Cleave";
             Tooltip = "Deal 8 damage to target and one random adjacent enemy";
             BaseCooldown = 10;
-
-            CurrentCooldown = BaseCooldown;
         }
 
         public override void UseOnTargetGrid(int x, int y)

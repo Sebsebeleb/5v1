@@ -11,6 +11,7 @@ namespace Event
         OnActorTookDamage,
         ActorDied,
         PlayerLeveledUp,
+        ActorActed, // Called when an enemy acts (it performs attacks etc.)
     }
 
     #region delegates
@@ -22,6 +23,8 @@ namespace Event
     public delegate void ActorDied(Actor who);
     
     public delegate void PlayerLeveledUp(int level);
+    
+    public delegate void OnActorActed(Actor who);
 
     #endregion
 

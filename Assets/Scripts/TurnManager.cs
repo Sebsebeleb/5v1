@@ -4,7 +4,7 @@ using UnityEngine;
 public class TurnManager : MonoBehaviour
 {
 
-    public int BossCounter = 80;
+    public static int BossCounter = 80;
 
     private GameObject _player;
     private SkillBehaviour _playerSkills;

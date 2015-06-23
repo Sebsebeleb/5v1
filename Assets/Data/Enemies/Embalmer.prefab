@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 282150c180c8eea47b6939bdb088934d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartingBaseAttack: 1
+  StartingBaseAttack: 2
   BonusAttack: 0
 --- !u!114 &11454970
 MonoBehaviour:

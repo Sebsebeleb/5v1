@@ -9,8 +9,6 @@ namespace Data.Skills
             SkillName = "Block";
             Tooltip = "Block all damage that would be dealt for two turns";
             BaseCooldown = 18;
-
-            CurrentCooldown = BaseCooldown;
         }
         public override void UseOnTargetGrid(int x, int y)
         {
