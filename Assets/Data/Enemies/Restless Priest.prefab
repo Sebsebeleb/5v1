@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfa48ab3e57b40240b79fae51bb44a0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Image: {fileID: 21300026, guid: e2d4ac83553e88649b6ae92e2bee4a00, type: 3}
+  Image: {fileID: 21300000, guid: d16ba7ab357d7ee41a95056559c98998, type: 3}
 --- !u!114 &11454970
 MonoBehaviour:
   m_ObjectHideFlags: 1
