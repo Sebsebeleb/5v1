@@ -34,6 +34,14 @@ public static class EnemyManager
         actorBehaviour.x = x;
         actorBehaviour.y = y;
     }
+    
+    public static void SpawnBoss(){
+        SpawnEnemy(SpawnList.Boss, 1, 0);
+        SpawnRandomEnemy(0, 0);
+        SpawnRandomEnemy(0, 1);
+        SpawnRandomEnemy(2, 0);
+        SpawnRandomEnemy(2, 1);
+    }
 
     /// <summary>
     /// Makes a check on the current enemy in the grid

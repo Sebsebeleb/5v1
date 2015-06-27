@@ -11,6 +11,8 @@ public class EnemySpawnList : ScriptableObject
 {
     [SerializeField]
     public List<EnemyEntry> Entries = new List<EnemyEntry>();
+    [SerializeField]
+    public GameObject Boss;
 
     [Serializable]
     public class EnemyEntry

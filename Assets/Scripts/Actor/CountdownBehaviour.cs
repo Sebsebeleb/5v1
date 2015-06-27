@@ -23,6 +23,10 @@ public class CountdownBehaviour : MonoBehaviour
         if (_actor.status.Stunned){
             return;
         }
+        // If we are a corpse, and the boss wave has started, do not countdown
+        if (TurnManager.BossCounter <= 0 && gameObject.tag == "Corpse"){
+            return;
+        }
         
 
         CurrentCountdown--;

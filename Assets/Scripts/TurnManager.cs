@@ -22,11 +22,14 @@ public class TurnManager : MonoBehaviour
     {
         UpdatePlayer();
         //First we countdown the boss stuff
-        BossCounter--;
-        if (BossCounter <= 0)
-        {
-            InitBoss();
+        if (BossCounter > 0){
+            BossCounter--;
+            if (BossCounter <= 0)
+            {
+                InitBoss();
+            }                    
         }
+    
 
         // TODO: Sort it properly (unless it already is)
         foreach (Actor enemy in GridManager.TileMap.GetAll())
@@ -50,6 +53,10 @@ public class TurnManager : MonoBehaviour
 
     private void InitBoss()
     {
-
+        foreach(Actor enemy in GridManager.TileMap.GetAll()){
+            EnemyManager.KillEnemy(enemy);
+        }
+        
+        EnemyManager.SpawnBoss();
     }
 }
