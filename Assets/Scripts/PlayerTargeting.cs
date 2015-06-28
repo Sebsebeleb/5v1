@@ -26,6 +26,9 @@ public class PlayerTargeting : MonoBehaviour
 
     public void TargetGrid(int x, int y)
     {
+        if (AnimationManager.IsAnimating()){
+            return;
+        }
         Actor target = GridManager.TileMap.GetAt(x, y);
 
         // Did we actually do soemthing that should take a turn?

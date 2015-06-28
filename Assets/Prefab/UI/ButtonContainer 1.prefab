@@ -47,6 +47,8 @@ GameObject:
   - 114: {fileID: 11405244}
   - 114: {fileID: 11440414}
   - 114: {fileID: 11407202}
+  - 95: {fileID: 9578638}
+  - 114: {fileID: 11496376}
   m_Layer: 5
   m_Name: EnemyButtonNEW
   m_TagString: Untagged
@@ -524,6 +526,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!95 &9578638
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 119600}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ae7d4daea4cf0f54b95b0a8a2f9ffca9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11402716
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1192,6 +1211,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11496376
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 119600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2285af95b7a1b94e907d2525bcb8f04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11497450
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1911,7 +1941,7 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 119600}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -.250181675, w: .968198955}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

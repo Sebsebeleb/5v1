@@ -1,4 +1,6 @@
-﻿using Event;
+﻿using System;
+using System.Collections;
+using Event;
 using UnityEngine;
 
 public class TurnManager : MonoBehaviour
@@ -20,7 +22,16 @@ public class TurnManager : MonoBehaviour
 
     public void UseTurn()
     {
+        StartCoroutine(processTurn());
+    }
+    
+    private IEnumerator processTurn(){
         UpdatePlayer();
+        
+        while(AnimationManager.IsAnimating()){
+            yield return 0;
+        }   
+        
         //First we countdown the boss stuff
         if (BossCounter > 0){
             BossCounter--;
@@ -34,6 +45,10 @@ public class TurnManager : MonoBehaviour
         // TODO: Sort it properly (unless it already is)
         foreach (Actor enemy in GridManager.TileMap.GetAll())
         {
+            while(AnimationManager.IsAnimating()){
+                yield return 0;
+            }
+               
             if (!enemy) continue;
 
             enemy.countdown.Countdown();

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -37,18 +38,27 @@ public class AI : MonoBehaviour
         return _actions;
     }
 
-    public void Think()
+    public IEnumerator Think()
     {
         // Free actions are used first
         foreach (AiAction freeAction in _freeActions) {
+            while(AnimationManager.IsAnimating()){
+                yield return 0;
+            }
             freeAction.Callback();
+            AnimationManager.RegisterAnimation();
+            
         }
 
         
         _actions.Sort((a, b) => a.CalcPriority().CompareTo(b.CalcPriority()));
 
         if (_actions.Count >= 1){
+            while(AnimationManager.IsAnimating()){
+                yield return 0;
+            }
             _actions[0].Callback();
+            AnimationManager.RegisterAnimation();            
         }
 
     }
