@@ -8,6 +8,7 @@ TagManager:
   - Corpse
   - InspectorPanel
   - TooltipDisplayer
+  - MainCanvas
   layers:
   - Default
   - TransparentFX

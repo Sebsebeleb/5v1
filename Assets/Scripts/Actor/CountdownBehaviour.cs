@@ -41,7 +41,6 @@ public class CountdownBehaviour : MonoBehaviour
 
     private void DoAction()
     {
-        AnimationManager.RegisterAnimation();
         StartCoroutine(_brain.Think());
     }
 }

@@ -53,8 +53,11 @@ public class EffectHolder : MonoBehaviour, IEnumerable
 
     public void AddEffect(Effect effect)
     {
+        if (gameObject.tag != "Player"){
+            Event.EventManager.Notify(Event.Events.PreEnemmyEffectApplied, new Event.PreEnemyEffectAppliedArgs(actor, effect));
+        }
         effect.SetOwner(actor);
-        _effects.Add(effect);
+        _effects.Add(effect);   
     }
 
     public bool HasEffect(Effect effect)

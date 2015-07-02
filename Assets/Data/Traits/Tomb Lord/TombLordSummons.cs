@@ -15,6 +15,7 @@ namespace Data.Effects
 
             AI.AiAction summonAction = new AI.AiAction();
             summonAction.Name = "Greater Reanimation";
+            summonAction.AnimationName = "Attack";
             summonAction.Description = GetDescription;            
             summonAction.Callback = DoSummon;
             summonAction.CalcPriority = () => -1;

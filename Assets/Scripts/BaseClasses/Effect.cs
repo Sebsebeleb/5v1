@@ -2,7 +2,7 @@
 
 namespace BaseClasses
 {
-    public class Effect : ITooltip
+    public abstract class Effect : ITooltip, IAnimatableChange
     {
 
         protected Actor owner;
@@ -100,6 +100,15 @@ namespace BaseClasses
         
         public string GetName(){
             return Description.Name;
+        }
+        
+        // IAnimatableChange methods
+        
+        public virtual bool ShouldAnimate(){
+            return false;
+        }
+        public virtual ChangeAnimation GetAnimationInfo(){
+            return new ChangeAnimation();
         }
 
     }

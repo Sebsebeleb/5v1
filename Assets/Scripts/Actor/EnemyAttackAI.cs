@@ -22,6 +22,7 @@ public class EnemyAttackAI : MonoBehaviour
     {
         AI.AiAction attackAction = new AI.AiAction();
         attackAction.Name = "Attack";
+        attackAction.AnimationName = "Attack";
         attackAction.Description = GetDescription;
         attackAction.Callback = AttackPlayer;
         attackAction.CalcPriority = CalculatePriority;

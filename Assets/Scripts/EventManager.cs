@@ -12,6 +12,8 @@ namespace Event
         ActorDied,
         PlayerLeveledUp,
         ActorActed, // Called when an enemy acts (it performs attacks etc.)
+        PreEnemyAction, // Called right before an enemy executes an action, passign the action taken
+        PreEnemmyEffectApplied, //Called right before an effect is applied to an enemy
     }
 
     #region delegates
@@ -25,6 +27,10 @@ namespace Event
     public delegate void PlayerLeveledUp(int level);
     
     public delegate void OnActorActed(Actor who);
+    
+    public delegate void OnPreEnemyAction(OnPreEnemyActionArgs args);
+    
+    public delegate void OnPreEnemyEffectApplied(PreEnemyEffectAppliedArgs args);
 
     #endregion
 
@@ -40,6 +46,26 @@ namespace Event
         {
             Actor = _actor;
             Damage = _damage;
+        }
+    }
+    
+    public struct OnPreEnemyActionArgs{
+        public Actor who;
+        public AI.AiAction action;
+        
+        public OnPreEnemyActionArgs(Actor _who, AI.AiAction _action){
+            who = _who;
+            action = _action;
+        }
+    }
+    
+    public struct PreEnemyEffectAppliedArgs{
+        public Actor who;
+        public BaseClasses.Effect effect;
+        
+        public PreEnemyEffectAppliedArgs(Actor _who, BaseClasses.Effect _effect){
+            who = _who;
+            effect = _effect;
         }
     }
     

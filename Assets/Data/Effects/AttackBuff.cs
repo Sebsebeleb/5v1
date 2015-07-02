@@ -1,5 +1,5 @@
 ﻿
-// A simple generic attack buff
+// A simple generic attack buff TODO: Remame into priestly buff due to aniamtins/tooltips
 using BaseClasses;
 
 class AttackBuff : Effect
@@ -8,16 +8,16 @@ class AttackBuff : Effect
     
     private int bonus;
 
-    public AttackBuff(int attackBonus) : base()
-    {
-        bonus = attackBonus;
-    }
     
     // description: Pass it to describe the way it was buffed
-    public AttackBuff(int attackBonus, EffectDescription description) : base(){
+    public AttackBuff(int attackBonus) : base(){
         bonus = attackBonus;
-        Description = description;
+        
+        
+        Description = new EffectDescription("Priestly buff", () => "Attack increased by " + bonus);
     }
+    
+    
 
     public override void OnAdded()
     {
@@ -32,4 +32,18 @@ class AttackBuff : Effect
 
         owner.attack.BonusAttack -= bonus;
     }
+
+    public override bool ShouldAnimate(){
+        return true;
+    }
+    
+    public override ChangeAnimation GetAnimationInfo(){
+        ChangeAnimation a = new ChangeAnimation();
+        a.SpawnHoverText = true;
+        a.IconName = "Cross";
+        
+        return a;
+    }
+    
+
 }

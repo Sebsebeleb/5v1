@@ -16,10 +16,16 @@ namespace Data.Effects
 
             AI.AiAction buffAction = new AI.AiAction();
             buffAction.Name = "Priestly Buff";
+            buffAction.AnimationName = "Attack";
             buffAction.Description = GetDescription;            
             buffAction.Callback = DoBuff;
             buffAction.CalcPriority = () => -1;
             buffAction.IsFreeAction = true;
+            buffAction.animateThis = true;
+            
+            //Animation info
+            buffAction.AnimationInfo = new ChangeAnimation();
+            buffAction.AnimationInfo.SpawnHoverText = true;
             
             owner.ai.AddAction(buffAction);
         }

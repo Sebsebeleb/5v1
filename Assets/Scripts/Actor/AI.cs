@@ -5,11 +5,16 @@ using UnityEngine;
 
 public class AI : MonoBehaviour
 {
+    private Actor owner;
 
     public delegate int GetPriority();
 
     private List<AiAction> _actions = new List<AiAction>();
     private List<AiAction> _freeActions = new List<AiAction>();
+    
+    void Awake(){
+        owner = GetComponent<Actor>();
+    }
 
     // Register an action the ai can do with 0 arguments, returning an ACtionPriorty describing the priority of it and the action to take if it is chosen
     /// <summary>
@@ -45,6 +50,7 @@ public class AI : MonoBehaviour
             while(AnimationManager.IsAnimating()){
                 yield return 0;
             }
+            Event.EventManager.Notify(Event.Events.PreEnemyAction, new Event.OnPreEnemyActionArgs(owner, freeAction));
             freeAction.Callback();
             AnimationManager.RegisterAnimation();
             
@@ -57,6 +63,7 @@ public class AI : MonoBehaviour
             while(AnimationManager.IsAnimating()){
                 yield return 0;
             }
+            Event.EventManager.Notify(Event.Events.PreEnemyAction, new Event.OnPreEnemyActionArgs(owner, _actions[0]));
             _actions[0].Callback();
             AnimationManager.RegisterAnimation();            
         }
@@ -64,12 +71,17 @@ public class AI : MonoBehaviour
     }
     
     // The class used to describe an action
-    public class AiAction : ITooltip {
+    public class AiAction : ITooltip, IAnimatableChange {
         public string Name;
+        public string AnimationName; //Name of animation trigger to launch when this action is taken.        
         public Func<string> Description; // A method that describes this action. Can be rich text
         public GetPriority CalcPriority; // Method to call to calculate priority
         public bool IsFreeAction; // If it is free it will be performed in addition to the chose standard action
         public Action Callback; // The method to call if we perform this action
+        // IanimatableChange related stuff
+        public bool animateThis;
+        public ChangeAnimation AnimationInfo;
+        
         
         // ITooltip methods
         public string GetTooltip(){
@@ -78,6 +90,15 @@ public class AI : MonoBehaviour
         
         public string GetName(){
             return Name;
+        }
+        
+        // IAnimatableChange methods
+        
+        public bool ShouldAnimate(){
+            return animateThis;
+        }
+        public ChangeAnimation GetAnimationInfo(){
+            return AnimationInfo; // A default aniamtion has no info anyway
         }
     }
 }
