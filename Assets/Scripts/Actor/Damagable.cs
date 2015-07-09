@@ -3,8 +3,26 @@ using UnityEngine;
 
 public class Damagable : MonoBehaviour
 {
-    public int MaxHealth;
-    public int CurrentHealth;
+
+    // Public fields for setting up inital stats in UNITY!
+    #region basestats
+    [SerializeField]
+    private int BaseHealth;
+
+    #endregion
+
+    private HealthData data;
+
+    public int MaxHealth{
+        get {return data.MaxHealth;}
+        set {data.MaxHealth = value;}
+    }
+    public int CurrentHealth{
+        get {return data.CurrentHealth;}
+        set {data.CurrentHealth = value;}
+    }
+
+
 
     public float DamageReductionPercent { get; set; }
 
@@ -15,6 +33,12 @@ public class Damagable : MonoBehaviour
     void Awake()
     {
         actor = GetComponent<Actor>();
+    }
+
+    void Start(){
+        MaxHealth = BaseHealth;
+        CurrentHealth = MaxHealth;
+
     }
 
     public void TakeDamage(int damage)
@@ -85,5 +109,13 @@ public class Damagable : MonoBehaviour
         //TODO: Consider; Should this object have this responsibility?
         EventManager.Notify(Events.ActorDied, actor);
         EnemyManager.KillEnemy(actor);
+    }
+
+    public HealthData _GetRawData(){
+        return data;
+    }
+
+    public void _SetRawData(HealthData _data){
+        data = _data;
     }
 }
