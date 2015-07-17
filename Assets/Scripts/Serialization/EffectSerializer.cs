@@ -1,27 +1,17 @@
-/// Intermediate class for serializing effects
-
-
 using BaseClasses;
 using System.Reflection;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
-using System.IO;
-using System.Linq;
-using System.Security;
-using System.Security.Permissions;
 
 
-[assembly : ReflectionPermission(SecurityAction.RequestMinimum, Flags=ReflectionPermissionFlag.AllFlags)]
 
 namespace IntermediateSerializers
 {
-    //[ReflectionPermission(SecurityAction.RequestMinimum, Flags=ReflectionPermissionFlag.AllFlags)]
+
+    /// Intermediate class for serializing effects
     public static class EffectSerializer
     {
-        private static Assembly ass;
-        private static ReflectionPermission perm = new ReflectionPermission(PermissionState.Unrestricted);
-
         // The flags used to lookup the fields for serialization of fields
         const BindingFlags flags = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance;
 
@@ -49,6 +39,7 @@ namespace IntermediateSerializers
 
         }
 
+        // Loads all effects from a dictionary (From a save file)
         public static Effect[] Deserialize(List<Dictionary<string, object>> data)
         {
             Effect[] result = new Effect[data.Count];
@@ -60,13 +51,9 @@ namespace IntermediateSerializers
 
                 // Then create a new instance of the class using the default parameterless constructor
                 var instance = typ.GetConstructor(Type.EmptyTypes).Invoke(null);
-                Debug.Log("We made an instance: " + instance);
 
                 // Finally populate it with the field data
                 foreach(var fieldInfos in (effData["Fields"] as Dictionary<string, object>)){
-                    Debug.Log("Trying to set " + fieldInfos.Key + " to " + fieldInfos.Value + " of type: " + typ.FullName);
-                    Debug.Log("HELOOOO");
-                    Debug.Log(typ.GetField(fieldInfos.Key, flags).IsPrivate == true);
                     typ.GetField(fieldInfos.Key, flags).SetValue(instance, fieldInfos.Value, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance, null, null);
                 }
 
@@ -79,8 +66,7 @@ namespace IntermediateSerializers
         }
 
 
-        // Uses reflection to save all the fields that should be saved to the dict
-        //[ReflectionPermission(SecurityAction.RequestRefuse, Flags=ReflectionPermissionFlag.AllFlags)]
+        // Uses reflection to save all the fields that should be saved to the dict for the given effect.
         private static Dictionary<string, object> SaveFields(Effect eff)
         {
 			Dictionary<string, object> fields = new Dictionary<string, object>();
@@ -93,24 +79,11 @@ namespace IntermediateSerializers
                 if (info.MemberType != MemberTypes.Field){
                     continue;
                 }
-                Debug.Log("Looking for: " + info.Name);
-                Debug.Log("Looking on: " + eff);
-                Debug.Log(eff.GetType());
-                Debug.Log(eff.GetType().GetField(info.Name));
                 var a = eff.GetType();
                 var b = a.GetField(info.Name);
-                Debug.Log(a);
-                Debug.Log(b);
                 var v = eff.GetType().GetField(info.Name, flags);
-                Debug.Log(v.IsPrivate == true);
                 fields[info.Name] = eff.GetType().GetField(info.Name, flags).GetValue(eff);
-                Debug.Log(fields[info.Name]);
             }
-
-            Debug.Log(fields.Count);
-            Debug.Log("Hello, writing");
-            File.WriteAllLines("tmp_" + typ.Name + ".txt",
-            fields.Select(x => "[" + x.Key + " " + x.Value + "]").ToArray());
 
 			return fields;
 

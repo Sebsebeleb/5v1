@@ -20,6 +20,8 @@ public class EnemyDisplay : MonoBehaviour
     {
         gridbutton = GetComponent<GridButtonBehaviour>();
 
+
+        // Register a callback to be called after a game was loaded, to correctly update display
         Event.OnGameDeserialized callback = GameWasLoaded;
         Event.EventManager.Register(Event.Events.GameDeserialized, callback);
     }
@@ -73,7 +75,7 @@ public class EnemyDisplay : MonoBehaviour
 
         GameObject prefab = GameResources.GetEnemyByID(actor.enemyTypeID);
 
-        // A pretty silly way, but it should work.
+        // A pretty silly way, but it works. Basically, since name and image is usually only set when the enemy is spawned, we force it to change.
         actor.GetComponent<DisplayData>().Image = prefab.GetComponent<DisplayData>().Image;
         actor.name = prefab.name;
 

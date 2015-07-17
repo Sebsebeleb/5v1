@@ -1,12 +1,11 @@
 using UnityEngine;
 using System.Collections.Generic;
-using System;
-using System.IO;
 
 // Middle-man class for loading various game assets
 public static class GameResources
 {
 
+    // The folder where all the enemy types are stored
     private const string SearchPath = "Enemies";
 
 
@@ -24,7 +23,6 @@ public static class GameResources
 
         if (enemy == null)
         {
-            Debug.LogError(new Exception("Error loading EnemyType with id: " + id));
             return null;
         }
 
@@ -39,7 +37,6 @@ public static class GameResources
     {
         foreach (GameObject go in Resources.LoadAll<GameObject>(SearchPath))
         {
-            Debug.Log("Hello, looking at: "+go.name);
             Actor act = go.GetComponent<Actor>();
 
             // If it doesn't have an actor component, it isnt an enemy type

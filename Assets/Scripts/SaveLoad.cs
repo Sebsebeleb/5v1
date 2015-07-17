@@ -42,18 +42,26 @@ public class SaveLoad : MonoBehaviour {
     }
 
 
+    ///
+    /// Entry points to save/load functionality.
+    ///
+
+    // Saves the game under /savedGames.sav on persistentDataPath under a binary format
     public void Save() {
         MakeSaveGameData();
         SaveToFile();
     }
 
+    // Loads the game from /savedGames.sav on persistantDataPath from a binary format
     public void Load() {
         if(File.Exists(Application.persistentDataPath + "/savedGames.sav")) {
+            // First open file and get the binary data;
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(Application.persistentDataPath + "/savedGames.sav", FileMode.Open);
             data = (SaveState)bf.Deserialize(file);
             file.Close();
 
+            // Now use this data to initalize the new game state
             InitializeSave();
         }
     }
@@ -71,36 +79,20 @@ public class SaveLoad : MonoBehaviour {
     private SaveState MakeSaveGameData(){
         SaveState data = new SaveState();
 
-        //data.turnData = managerObject.GetComponent<TurnManager>();
-        //data.enemyMap = GridManager.TileMap;
-
         SavePlayer();
         SaveEnemies();
 
         return data;
     }
 
+    // Initializes all the data loaded from the save
     private void InitializeSave(){
-
-        //TurnManager lTurn = data.turnData;
-        //GridManager.TileMap = data.enemyMap;
 
         LoadPlayer();
         LoadEnemies();
 
         Event.EventManager.Notify(Event.Events.GameDeserialized, null);
-
-
-        //Debug.Log(data.enemyMap.GetAll());
     }
-
-    /*private void Test(){
-        Assembly ass = Assembly.GetCallingAssembly();
-        var f = ass.GetType("Asd").GetFields();
-        foreach(FieldInfo fi in f){
-            var a = fi.GetCustomAttributes(typeof(System.SerializableAttribute), false);
-        }
-    }*/
 
     ///
     /// Various functions for saving/loading different parts of the game
@@ -135,9 +127,8 @@ public class SaveLoad : MonoBehaviour {
         }
     }
 
+    // Convert an enemy to an ActorState for serialization.
     private ActorState SaveEnemy(GameObject enemy){
-        //Ideas for saving enemies: Move all stuff in Start() to a new method called "OnSpawn()" which is called by EnemyManager
-        //'s SpawnEnemy(), and give SpawnEnemy a parameter "DoInit" defaulting to true. If "DoInit" is not true, it does not call OnSpawn()
         ActorState actData = new ActorState();
 
         Actor act = enemy.GetComponent<Actor>();
@@ -161,6 +152,7 @@ public class SaveLoad : MonoBehaviour {
         }
     }
 
+    // Initalizes enemies using data loaded as ActorState from a saved game
     private void LoadEnemy(ActorState enemyData){
         int x = enemyData.GridX;
         int y = enemyData.GridY;
@@ -169,17 +161,10 @@ public class SaveLoad : MonoBehaviour {
 
         enemyActor.enemyTypeID = enemyData.EnemyTypeID;
 
-        Debug.Log("Deserializing damagable");
         enemyActor.damagable._SetRawData(enemyData.Health);
-        Debug.Log("Deserializing attack");
         enemyActor.attack._SetRawData(enemyData.Attack);
-        Debug.Log("Deserializing countdown");
         enemyActor.countdown._SetRawData(enemyData.Countdown);
 
-        Debug.Log("Deserializing effects");
         enemyActor.effects._SetRawData(IntermediateSerializers.EffectSerializer.Deserialize(enemyData.EffectHolderEffects));
-
-        //TODO attempt for effects: use reflection to parse a data field into a dict, serialize the dict, and on deserialize:
-        //create a new instance and again use reflection to populate with info from dict
     }
 }

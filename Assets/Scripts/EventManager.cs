@@ -89,9 +89,6 @@ namespace Event
         //    private Dictionary<Delegate>
         public static void Notify(Events ev, object args)
         {
-            Debug.Log("Event being called: " + ev);
-
-            Debug.Log("With argument: " + (args == null).ToString());
             // Ignore event if not yet initalized
             if (!_listeners.ContainsKey(ev))
             {

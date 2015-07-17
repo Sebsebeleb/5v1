@@ -14,6 +14,12 @@ public static class Utils
             return _player;
         }
     }
+
+    // These are used to get a reference to map position/player of enemies. The mapping is as following for enemies (0 is player) on the map
+    // _______
+    // |1|2|3|
+    // |4|5|6|
+    //
     public static int ActorToID(Actor act)
     {
         if (act.gameObject.tag == "Player")
