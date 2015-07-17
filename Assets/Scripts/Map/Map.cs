@@ -71,6 +71,10 @@ namespace Map
             return (Actor)_tiles[x + y * _width];
         }
 
+        public Actor GetFromIndex(int i){
+            return _tiles[i];
+        }
+
         /// <summary>
         /// Is this position outside of the map?
         /// </summary>

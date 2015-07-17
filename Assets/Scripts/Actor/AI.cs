@@ -11,7 +11,7 @@ public class AI : MonoBehaviour
 
     private List<AiAction> _actions = new List<AiAction>();
     private List<AiAction> _freeActions = new List<AiAction>();
-    
+
     void Awake(){
         owner = GetComponent<Actor>();
     }
@@ -27,18 +27,18 @@ public class AI : MonoBehaviour
         if (action.IsFreeAction)
         {
             _freeActions.Add(action);
-            
+
         }
         else
         {
             _actions.Add(action);
         }
     }
-    
+
     public List<AiAction> GetFreeActions(){
         return _freeActions;
     }
-    
+
     public List<AiAction> GetStandardActions(){
         return _actions;
     }
@@ -53,10 +53,10 @@ public class AI : MonoBehaviour
             Event.EventManager.Notify(Event.Events.PreEnemyAction, new Event.OnPreEnemyActionArgs(owner, freeAction));
             freeAction.Callback();
             AnimationManager.RegisterAnimation();
-            
+
         }
 
-        
+
         _actions.Sort((a, b) => a.CalcPriority().CompareTo(b.CalcPriority()));
 
         if (_actions.Count >= 1){
@@ -65,15 +65,16 @@ public class AI : MonoBehaviour
             }
             Event.EventManager.Notify(Event.Events.PreEnemyAction, new Event.OnPreEnemyActionArgs(owner, _actions[0]));
             _actions[0].Callback();
-            AnimationManager.RegisterAnimation();            
+            AnimationManager.RegisterAnimation();
         }
 
     }
-    
+
     // The class used to describe an action
+    [System.Serializable]
     public class AiAction : ITooltip, IAnimatableChange {
         public string Name;
-        public string AnimationName; //Name of animation trigger to launch when this action is taken.        
+        public string AnimationName; //Name of animation trigger to launch when this action is taken.
         public Func<string> Description; // A method that describes this action. Can be rich text
         public GetPriority CalcPriority; // Method to call to calculate priority
         public bool IsFreeAction; // If it is free it will be performed in addition to the chose standard action
@@ -81,19 +82,19 @@ public class AI : MonoBehaviour
         // IanimatableChange related stuff
         public bool animateThis;
         public ChangeAnimation AnimationInfo;
-        
-        
+
+
         // ITooltip methods
         public string GetTooltip(){
             return Description();
         }
-        
+
         public string GetName(){
             return Name;
         }
-        
+
         // IAnimatableChange methods
-        
+
         public bool ShouldAnimate(){
             return animateThis;
         }

@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 68803aabbfc13734abe2f3fce3f968b2, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11411678
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -57,8 +57,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ed5f9ce13ade50a4dadc0a327d6e2242, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   x: 0
   y: 0
 --- !u!114 &11433782
@@ -70,8 +70,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 73c5834e94b12e041b9cba1c67d2e69b, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11443350
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -81,8 +81,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: be521bd1f02466146badac50437839ac, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11444694
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -92,10 +92,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cc0370d1d5e53274489021cfa71b3dbf, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
-  MaxCountdown: 6
-  CurrentCountdown: 6
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartMaxCountdown: 6
 --- !u!114 &11445386
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -105,8 +104,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dfa48ab3e57b40240b79fae51bb44a0b, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   Image: {fileID: 21300000, guid: 8ad3942baecaf404db082273cde056d9, type: 3}
 --- !u!114 &11452428
 MonoBehaviour:
@@ -117,8 +116,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 282150c180c8eea47b6939bdb088934d, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   StartingBaseAttack: 2
 --- !u!114 &11454970
 MonoBehaviour:
@@ -129,8 +128,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 90ac232f9e436eb4791cf6bf7b67b6bc, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11484394
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -140,8 +139,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db4346147877e5946b76ac8a94b47ed3, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   InitialEffects:
   - SkeletonGrowth
 --- !u!114 &11497004
@@ -153,11 +152,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a891ef91937f9174481ad6bf04508495, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   BaseHealth: 6
-  MaxHealth: 0
-  CurrentHealth: 0
   IsInvulnerable: 0
 --- !u!1001 &100100000
 Prefab:

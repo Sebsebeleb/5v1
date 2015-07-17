@@ -4,7 +4,7 @@ public class AttackBehaviour : MonoBehaviour
 {
 
     // The actual stats relating to attacking. This can be saved/loaded etc.
-    private AttackData data;
+    private AttackData data = new AttackData();
 
     // For inspector
     public int StartingBaseAttack;

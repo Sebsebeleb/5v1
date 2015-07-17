@@ -15,7 +15,7 @@ public class SaveLoad : MonoBehaviour {
 
         public ActorState[] Enemies;
 
-        public AttackData PlayerAttack;
+        public ActorState Player;
         public HealthData PlayerHealth;
 	}
 
@@ -26,6 +26,8 @@ public class SaveLoad : MonoBehaviour {
         public int GridY;
         public AttackData Attack;
         public HealthData Health;
+        public CountdownData Countdown;
+        public List<Dictionary<string, object>> EffectHolderEffects;
     }
 
     private GameObject managerObject;
@@ -104,15 +106,17 @@ public class SaveLoad : MonoBehaviour {
     private void SavePlayer(){
         Actor act = Player.GetComponent<Actor>();
 
-        data.PlayerAttack = act.attack._GetRawData();
-        data.PlayerHealth = act.damagable._GetRawData();
+        data.Player.Attack = act.attack._GetRawData();
+        data.Player.Health = act.damagable._GetRawData();
+        data.Player.EffectHolderEffects = IntermediateSerializers.EffectSerializer.Serialize(act.effects._GetRawData());
 
     }
     private void LoadPlayer(){
         Actor act = Player.GetComponent<Actor>();
 
-        act.attack._SetRawData(data.PlayerAttack);
-        act.damagable._SetRawData(data.PlayerHealth);
+        act.attack._SetRawData(data.Player.Attack);
+        act.damagable._SetRawData(data.Player.Health);
+        act.effects._SetRawData(IntermediateSerializers.EffectSerializer.Deserialize(data.Player.EffectHolderEffects));
     }
 
     private void SaveEnemies(){
@@ -126,8 +130,6 @@ public class SaveLoad : MonoBehaviour {
 
             i++;
         }
-
-
     }
 
     private ActorState SaveEnemy(GameObject enemy){
@@ -141,6 +143,8 @@ public class SaveLoad : MonoBehaviour {
 
         actData.Attack = act.attack._GetRawData();
         actData.Health = act.damagable._GetRawData();
+        actData.Countdown = act.countdown._GetRawData();
+        actData.EffectHolderEffects =IntermediateSerializers.EffectSerializer.Serialize(act.effects._GetRawData());
 
         return actData;
     }
@@ -157,7 +161,17 @@ public class SaveLoad : MonoBehaviour {
 
         Actor enemyActor = GridManager.TileMap.GetAt(x, y);
 
+        Debug.Log("Deserializing damagable");
         enemyActor.damagable._SetRawData(enemyData.Health);
+        Debug.Log("Deserializing attack");
         enemyActor.attack._SetRawData(enemyData.Attack);
+        Debug.Log("Deserializing countdown");
+        enemyActor.countdown._SetRawData(enemyData.Countdown);
+
+        Debug.Log("Deserializing effects");
+        enemyActor.effects._SetRawData(IntermediateSerializers.EffectSerializer.Deserialize(enemyData.EffectHolderEffects));
+
+        //TODO attempt for effects: use reflection to parse a data field into a dict, serialize the dict, and on deserialize:
+        //create a new instance and again use reflection to populate with info from dict
     }
 }

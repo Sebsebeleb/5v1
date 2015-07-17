@@ -57,7 +57,7 @@ public class EffectHolder : MonoBehaviour, IEnumerable
             Event.EventManager.Notify(Event.Events.PreEnemmyEffectApplied, new Event.PreEnemyEffectAppliedArgs(actor, effect));
         }
         effect.SetOwner(actor);
-        _effects.Add(effect);   
+        _effects.Add(effect);
     }
 
     public bool HasEffect(Effect effect)
@@ -73,5 +73,19 @@ public class EffectHolder : MonoBehaviour, IEnumerable
     public IEnumerator GetEnumerator()
     {
         return _effects.GetEnumerator();
+    }
+
+    ///
+    /// For save/load
+    ///
+
+    // Returns an array of all effects
+    public Effect[] _GetRawData(){
+        return _effects.ToArray();
+    }
+
+    public void _SetRawData(Effect[] _data){
+        _effects.Clear();
+        _effects.AddRange(_data);
     }
 }

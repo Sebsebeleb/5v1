@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace Data.Skills
 {
+    [System.Serializable]
     public class Cleave : BaseSkill
     {
         private int damage = 8;
@@ -48,11 +49,11 @@ namespace Data.Skills
             }
 
         }
-        
+
         public override string GetName(){
             return SkillName;
         }
-        
+
         public override string GetTooltip(){
             return Tooltip;
         }

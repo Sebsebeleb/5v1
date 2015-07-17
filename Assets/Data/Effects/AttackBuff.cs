@@ -2,48 +2,61 @@
 // A simple generic attack buff TODO: Remame into priestly buff due to aniamtins/tooltips
 using BaseClasses;
 
-class AttackBuff : Effect
+namespace Data.Effects
 {
-    
-    
-    private int bonus;
 
-    
-    // description: Pass it to describe the way it was buffed
-    public AttackBuff(int attackBonus) : base(){
-        bonus = attackBonus;
-        
-        
-        Description = new EffectDescription("Priestly buff", () => "Attack increased by " + bonus);
-    }
-    
-    
-
-    public override void OnAdded()
+    [System.Serializable]
+    public class AttackBuff : Effect
     {
-        base.OnAdded();
 
-        owner.attack.BonusAttack += bonus;
+
+        private int bonus;
+
+
+
+        // An empty constructor has to be provided for serialization
+        public AttackBuff(){
+            bonus = 0;
+
+            Description = new EffectDescription("Priestly buff", () => "Attack increased by " + bonus);
+
+        }
+
+        public AttackBuff(int attackBonus) : base()
+        {
+            bonus = attackBonus;
+
+            Description = new EffectDescription("Priestly buff", () => "Attack increased by " + bonus);
+        }
+
+
+
+        public override void OnAdded()
+        {
+            base.OnAdded();
+
+            owner.attack.BonusAttack += bonus;
+        }
+
+        public override void OnRemoved()
+        {
+            base.OnRemoved();
+
+            owner.attack.BonusAttack -= bonus;
+        }
+
+        public override bool ShouldAnimate()
+        {
+            return true;
+        }
+
+        public override ChangeAnimation GetAnimationInfo()
+        {
+            ChangeAnimation a = new ChangeAnimation();
+            a.SpawnHoverText = true;
+            a.IconName = "Cross";
+
+            return a;
+        }
     }
-
-    public override void OnRemoved()
-    {
-        base.OnRemoved();
-
-        owner.attack.BonusAttack -= bonus;
-    }
-
-    public override bool ShouldAnimate(){
-        return true;
-    }
-    
-    public override ChangeAnimation GetAnimationInfo(){
-        ChangeAnimation a = new ChangeAnimation();
-        a.SpawnHoverText = true;
-        a.IconName = "Cross";
-        
-        return a;
-    }
-    
-
 }

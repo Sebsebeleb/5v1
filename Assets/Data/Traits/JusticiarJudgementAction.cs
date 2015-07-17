@@ -3,6 +3,7 @@ using Event;
 
 namespace Data.Effects
 {
+    [System.Serializable]
     public class JusticiarJudgementAction : Effect
     {
         private const int duration = 2;
@@ -11,11 +12,11 @@ namespace Data.Effects
             Description = new EffectDescription(
                 "Judgement",
                 describe
-            );     
+            );
         }
-        
+
         private string describe(){
-            return string.Format("Judges the player, preventing skills from being used for {0} turns.", 
+            return string.Format("Judges the player, preventing skills from being used for {0} turns.",
                 RichTextUtilities.Bold(RichTextUtilities.FontColor("#FFFF11", duration.ToString()))
             );
         }
@@ -26,14 +27,14 @@ namespace Data.Effects
 
             /*AI.AiAction judgeaction = new AI.AiAction();
             buffAction.Name = "Judgement";
-            buffAction.Description = describe;            
+            buffAction.Description = describe;
             buffAction.Callback = DoJudgement;
             buffAction.CalcPriority = () => -1;
             buffAction.IsFreeAction = true;*/
-            
+
             //owner.ai.AddAction(buffAction);
         }
-        
+
         private void DoJudgement(){
             //GameObject.FindWithTag("Player").GetComponent<EffectHolder>().AddEffect()
         }

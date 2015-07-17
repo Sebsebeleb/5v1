@@ -2,6 +2,7 @@
 
 namespace Data.Skills
 {
+    [System.Serializable]
     class Block : BaseSkill
     {
         public Block()
@@ -18,11 +19,11 @@ namespace Data.Skills
 
             player.GetComponent<EffectHolder>().AddEffect(new Blocking(2));
         }
-        
+
         public override string GetName(){
             return SkillName;
         }
-        
+
         public override string GetTooltip(){
             return Tooltip;
         }

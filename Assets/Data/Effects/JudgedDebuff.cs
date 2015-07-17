@@ -1,5 +1,6 @@
 using BaseClasses;
 
+[System.Serializable]
 internal class Judged : Effect
 {
     public Judged(int duration)
@@ -10,7 +11,7 @@ internal class Judged : Effect
             describe
         );
     }
-    
+
     private string describe(){
         return "You cannot use skills!";
     }

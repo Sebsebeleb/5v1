@@ -109,6 +109,7 @@ public class Damagable : MonoBehaviour
         //TODO: Consider; Should this object have this responsibility?
         EventManager.Notify(Events.ActorDied, actor);
         EnemyManager.KillEnemy(actor);
+
     }
 
     public HealthData _GetRawData(){

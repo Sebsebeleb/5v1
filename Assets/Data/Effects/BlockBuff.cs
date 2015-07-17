@@ -1,5 +1,6 @@
 ﻿using BaseClasses;
 
+[System.Serializable]
 internal class Blocking : Effect
 {
     public Blocking(int duration)
@@ -10,7 +11,7 @@ internal class Blocking : Effect
             describe
         );
     }
-    
+
     private string describe(){
         return "You are invulnerable!";
     }

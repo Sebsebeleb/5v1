@@ -5,6 +5,7 @@ using UnityEngine;
 namespace Data.Effects
 {
     // The priest will buff a random enemy's attack each turn
+    [System.Serializable]
     internal class NecroPriestHealthBuffer : Effect
     {
         private int _attackBonus = 2;
@@ -17,19 +18,19 @@ namespace Data.Effects
             AI.AiAction buffAction = new AI.AiAction();
             buffAction.Name = "Priestly Buff";
             buffAction.AnimationName = "Attack";
-            buffAction.Description = GetDescription;            
+            buffAction.Description = GetDescription;
             buffAction.Callback = DoBuff;
             buffAction.CalcPriority = () => -1;
             buffAction.IsFreeAction = true;
             buffAction.animateThis = true;
-            
+
             //Animation info
             buffAction.AnimationInfo = new ChangeAnimation();
             buffAction.AnimationInfo.SpawnHoverText = true;
-            
+
             owner.ai.AddAction(buffAction);
         }
-        
+
         private string GetDescription(){
             return "Buffs a random creature, increasing it's attack by " + RichTextUtilities.Bold(RichTextUtilities.FontColor("#FF2222", "2"));
         }

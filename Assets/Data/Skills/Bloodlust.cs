@@ -2,6 +2,7 @@
 
 namespace Data.Skills
 {
+    [System.Serializable]
     public class Bloodlust : BaseSkill
     {
 
@@ -37,11 +38,11 @@ namespace Data.Skills
                 playerActor.damagable.Heal(healAmount);
             }
         }
-        
+
         public override string GetName(){
             return SkillName;
         }
-        
+
         public override string GetTooltip(){
             return Tooltip;
         }

@@ -8,6 +8,7 @@ namespace Data.Effects
     /// <summary>
     /// Buffs all adjacent enemies when killed
     /// </summary>
+    [System.Serializable]
     public class BuffAllyOnDeath : Effect
     {
         // ----------------------------
@@ -16,13 +17,13 @@ namespace Data.Effects
 
         public BuffAllyOnDeath() : base(){
             IsTrait = true;
-            
+
             Description = new EffectDescription(
                 "Unstable Energies",
                 describe
             );
         }
-        
+
         private string describe(){
             return "When this creature dies, it will buff all adjacent enemies' attack by " +
             RichTextUtilities.Bold(RichTextUtilities.FontColor("#FF2222", "2"));

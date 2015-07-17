@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace Data.Skills
 {
+    [System.Serializable]
     class Stun : BaseSkill
     {
         public Stun()
@@ -15,14 +16,14 @@ namespace Data.Skills
             base.UseOnTargetGrid(x, y);
 
 			Actor enemy = GridManager.TileMap.GetAt(x, y);
-			
+
             enemy.GetComponent<EffectHolder>().AddEffect(new Stunned(5));
         }
-        
+
         public override string GetName(){
             return SkillName;
         }
-        
+
         public override string GetTooltip(){
             return Tooltip;
         }

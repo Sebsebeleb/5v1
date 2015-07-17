@@ -94,8 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc0370d1d5e53274489021cfa71b3dbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxCountdown: 8
-  CurrentCountdown: 8
+  StartMaxCountdown: 8
 --- !u!114 &11449448
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -142,8 +141,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BaseHealth: 1
-  MaxHealth: 0
-  CurrentHealth: 0
   IsInvulnerable: 1
 --- !u!1001 &100100000
 Prefab:
