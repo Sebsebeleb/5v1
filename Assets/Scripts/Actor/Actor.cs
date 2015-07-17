@@ -49,6 +49,13 @@ public class Actor : MonoBehaviour
     [HideInInspector]
     public int y;
 
+    // Display name of the actor
+    public readonly string ActorName;
+
+    // The ID of an enemy, used to find the correct data (from serialization for instance) using GameResources.
+    [SerializeField]
+    public int enemyTypeID;
+
     void Awake()
     {
         _damagable = GetComponent<Damagable>();

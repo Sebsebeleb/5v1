@@ -22,6 +22,7 @@ public class SaveLoad : MonoBehaviour {
     [System.Serializable]
     // All save data related to a single enemy
     private struct ActorState{
+        public int EnemyTypeID;
         public int GridX;
         public int GridY;
         public AttackData Attack;
@@ -87,6 +88,8 @@ public class SaveLoad : MonoBehaviour {
         LoadPlayer();
         LoadEnemies();
 
+        Event.EventManager.Notify(Event.Events.GameDeserialized, null);
+
 
         //Debug.Log(data.enemyMap.GetAll());
     }
@@ -138,6 +141,9 @@ public class SaveLoad : MonoBehaviour {
         ActorState actData = new ActorState();
 
         Actor act = enemy.GetComponent<Actor>();
+
+        actData.EnemyTypeID = act.enemyTypeID;
+
         actData.GridX = act.x;
         actData.GridY = act.y;
 
@@ -160,6 +166,8 @@ public class SaveLoad : MonoBehaviour {
         int y = enemyData.GridY;
 
         Actor enemyActor = GridManager.TileMap.GetAt(x, y);
+
+        enemyActor.enemyTypeID = enemyData.EnemyTypeID;
 
         Debug.Log("Deserializing damagable");
         enemyActor.damagable._SetRawData(enemyData.Health);

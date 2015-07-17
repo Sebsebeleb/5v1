@@ -19,6 +19,9 @@ public class EnemyDisplay : MonoBehaviour
     void Awake()
     {
         gridbutton = GetComponent<GridButtonBehaviour>();
+
+        Event.OnGameDeserialized callback = GameWasLoaded;
+        Event.EventManager.Register(Event.Events.GameDeserialized, callback);
     }
 
     void Start()
@@ -61,6 +64,18 @@ public class EnemyDisplay : MonoBehaviour
         }
 
         Attack.text = attackText;
+
+    }
+
+    // This is called after loadign a save, correts its image and name display
+    private void GameWasLoaded(object notactuallyused=null){
+        actor = GridManager.TileMap.GetAt(gridbutton.x, gridbutton.y);
+
+        GameObject prefab = GameResources.GetEnemyByID(actor.enemyTypeID);
+
+        // A pretty silly way, but it should work.
+        actor.GetComponent<DisplayData>().Image = prefab.GetComponent<DisplayData>().Image;
+        actor.name = prefab.name;
 
     }
 }

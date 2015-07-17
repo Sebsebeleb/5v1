@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Event
 {
@@ -14,6 +15,9 @@ namespace Event
         ActorActed, // Called when an enemy acts (it performs attacks etc.)
         PreEnemyAction, // Called right before an enemy executes an action, passign the action taken
         PreEnemmyEffectApplied, //Called right before an effect is applied to an enemy
+
+        // Some events that aren't related to actual gameplay
+        GameDeserialized, // Called after the game has loaded a save, used by EnemyDisplay so it knows to update itself
     }
 
     #region delegates
@@ -23,14 +27,18 @@ namespace Event
     public delegate void OnActorTookDamage(TookDamageArgs args);
 
     public delegate void ActorDied(Actor who);
-    
+
     public delegate void PlayerLeveledUp(int level);
-    
+
     public delegate void OnActorActed(Actor who);
-    
+
     public delegate void OnPreEnemyAction(OnPreEnemyActionArgs args);
-    
+
     public delegate void OnPreEnemyEffectApplied(PreEnemyEffectAppliedArgs args);
+
+    // Events that are not related to actual gameplay
+
+    public delegate void OnGameDeserialized();
 
     #endregion
 
@@ -48,27 +56,27 @@ namespace Event
             Damage = _damage;
         }
     }
-    
+
     public struct OnPreEnemyActionArgs{
         public Actor who;
         public AI.AiAction action;
-        
+
         public OnPreEnemyActionArgs(Actor _who, AI.AiAction _action){
             who = _who;
             action = _action;
         }
     }
-    
+
     public struct PreEnemyEffectAppliedArgs{
         public Actor who;
         public BaseClasses.Effect effect;
-        
+
         public PreEnemyEffectAppliedArgs(Actor _who, BaseClasses.Effect _effect){
             who = _who;
             effect = _effect;
         }
     }
-    
+
 
     #endregion
 
@@ -78,9 +86,12 @@ namespace Event
 
         private static Dictionary<Events, List<Delegate>> _listeners = new Dictionary<Events, List<Delegate>>();
 
-        //    private Dictionary<Delegate> 
+        //    private Dictionary<Delegate>
         public static void Notify(Events ev, object args)
         {
+            Debug.Log("Event being called: " + ev);
+
+            Debug.Log("With argument: " + (args == null).ToString());
             // Ignore event if not yet initalized
             if (!_listeners.ContainsKey(ev))
             {
