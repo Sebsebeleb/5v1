@@ -61,6 +61,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   x: 0
   y: 0
+  enemyTypeID: 1
 --- !u!114 &11433782
 MonoBehaviour:
   m_ObjectHideFlags: 1

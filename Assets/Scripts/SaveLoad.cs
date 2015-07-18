@@ -157,8 +157,17 @@ public class SaveLoad : MonoBehaviour {
         int x = enemyData.GridX;
         int y = enemyData.GridY;
 
+        // First we destroy the old one
+        Actor oldActor = GridManager.TileMap.GetAt(x, y);
+        EnemyManager.KillEnemy(oldActor);
+
+        // Now we create a new one from the template
+        GameObject enemyPrefab = GameResources.GetEnemyByID(enemyData.EnemyTypeID);
+        EnemyManager.SpawnEnemy(enemyPrefab, x, y, false);
+
         Actor enemyActor = GridManager.TileMap.GetAt(x, y);
 
+        // Then populate it's data
         enemyActor.enemyTypeID = enemyData.EnemyTypeID;
 
         enemyActor.damagable._SetRawData(enemyData.Health);

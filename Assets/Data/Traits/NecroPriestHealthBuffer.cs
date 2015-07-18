@@ -5,10 +5,13 @@ using UnityEngine;
 namespace Data.Effects
 {
     // The priest will buff a random enemy's attack each turn
-    [System.Serializable]
     internal class NecroPriestHealthBuffer : Effect
     {
         private int _attackBonus = 2;
+
+        public NecroPriestHealthBuffer() : base() {
+            IsTrait = true;
+        }
 
 
         public override void OnAdded()

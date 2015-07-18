@@ -37,7 +37,7 @@ public class CountdownBehaviour : MonoBehaviour
 
     }
 
-    void Start(){
+    void OnSpawn(){
         data.MaxCountdown = StartMaxCountdown;
         data.CurrentCountdown = data.MaxCountdown;
     }

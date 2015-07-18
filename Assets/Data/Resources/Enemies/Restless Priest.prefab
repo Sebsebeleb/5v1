@@ -48,7 +48,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db4346147877e5946b76ac8a94b47ed3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InitialEffects:
+  InitialEffects: []
+  Traits:
   - NecroPriestHealthBuffer
 --- !u!114 &11411678
 MonoBehaviour:
@@ -63,6 +64,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   x: 0
   y: 0
+  enemyTypeID: 0
 --- !u!114 &11416514
 MonoBehaviour:
   m_ObjectHideFlags: 1

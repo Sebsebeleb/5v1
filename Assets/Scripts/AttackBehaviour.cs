@@ -13,7 +13,10 @@ public class AttackBehaviour : MonoBehaviour
     #region properties
     public int BonusAttack{
         get {return data.BonusAttack;}
-        set {data.BonusAttack = value;}
+        set {
+            data.BonusAttack = value;
+            Debug.Log("Bonus attacked set to: " + value);
+            }
     }
 
     #endregion
@@ -26,6 +29,12 @@ public class AttackBehaviour : MonoBehaviour
 
     void Start()
     {
+        if (tag == "Player"){
+            OnSpawn();
+        }
+    }
+
+    void OnSpawn(){
         data.BaseAttack = StartingBaseAttack;
     }
 

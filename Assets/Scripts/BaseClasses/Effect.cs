@@ -14,10 +14,10 @@ namespace BaseClasses
         // The ID that will actually be serialized to get a refernce
         protected int _ownerID;
 
-        protected Actor owner{
-            get {return Utils.IDToActor(_ownerID);}
-            set {_ownerID = Utils.ActorToID(value);}
-        }
+        [NonSerialized]
+        public Actor owner;
+        
+        private bool _ownerSet = false;
 
         // If it is infinite, it will not countdown and disappear on its own
         public bool IsInfinite = false;
@@ -44,7 +44,7 @@ namespace BaseClasses
         }
 
 
-        // FIXME: This system is broken. 
+        // FIXME: This system is broken.
         ~Effect()
         {
             Destroyed();
@@ -54,6 +54,11 @@ namespace BaseClasses
         protected void ForceRemoveMe()
         {
             owner.effects.RemoveEffect(this);
+        }
+
+        // Called by the system to destroy this
+        public void Destroy(){
+            Destroyed();
         }
 
 

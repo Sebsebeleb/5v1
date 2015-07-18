@@ -32,6 +32,9 @@ namespace IntermediateSerializers
                 // Now save all of the fields of the dictionary under Fields
                 effectData["Fields"] = SaveFields(eff);
 
+                // Special field, we cannot store the actual enemy so we store it's position instead
+                effectData["ActorPosition"] = Utils.ActorToID(eff.owner);
+
                 dict.Add(effectData);
             }
 
@@ -50,12 +53,15 @@ namespace IntermediateSerializers
                 var typ = assemb.GetType(effData["Class"] as string);
 
                 // Then create a new instance of the class using the default parameterless constructor
-                var instance = typ.GetConstructor(Type.EmptyTypes).Invoke(null);
+                Effect instance = typ.GetConstructor(Type.EmptyTypes).Invoke(null) as Effect;
 
                 // Finally populate it with the field data
                 foreach(var fieldInfos in (effData["Fields"] as Dictionary<string, object>)){
                     typ.GetField(fieldInfos.Key, flags).SetValue(instance, fieldInfos.Value, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance, null, null);
                 }
+
+                // Load the special actor field
+                instance.owner = Utils.IDToActor((int) effData["ActorPosition"]);
 
                 //Now store it in the result
                 result[i] = instance as Effect;
@@ -69,6 +75,8 @@ namespace IntermediateSerializers
         // Uses reflection to save all the fields that should be saved to the dict for the given effect.
         private static Dictionary<string, object> SaveFields(Effect eff)
         {
+            Debug.Log("Serializing: " + eff);
+            
 			Dictionary<string, object> fields = new Dictionary<string, object>();
             Type typ = eff.GetType();
             var f = typ.GetMembers(flags);
@@ -79,10 +87,17 @@ namespace IntermediateSerializers
                 if (info.MemberType != MemberTypes.Field){
                     continue;
                 }
-                var a = eff.GetType();
-                var b = a.GetField(info.Name);
-                var v = eff.GetType().GetField(info.Name, flags);
-                fields[info.Name] = eff.GetType().GetField(info.Name, flags).GetValue(eff);
+                // Ignore fields with the NonSerialized attribute
+                if (info.GetCustomAttributes(typeof(NonSerializedAttribute), false).Length != 0){
+                    continue;
+                }
+                var effectType = eff.GetType();
+                var fieldInfo = effectType.GetField(info.Name, flags);
+                var value = fieldInfo.GetValue(eff);
+
+                fields[info.Name] = value;
+
+                Debug.Log(info.Name + " = " + value);
             }
 
 			return fields;

@@ -9,6 +9,8 @@ using UnityEngine;
 public class ApplyEffectsOnLoad : MonoBehaviour
 {
     public string[] InitialEffects;
+    // These are added even if the game is loaded
+    public string[] Traits;
 
     private static Assembly assembly = Assembly.GetCallingAssembly();
     private EffectHolder _effects;
@@ -20,13 +22,27 @@ public class ApplyEffectsOnLoad : MonoBehaviour
 
     private void Start()
     {
-        assembly.GetName();
+        AddTraits();
+    }
+
+    public void OnSpawn(){
+        AddEffects();
+    }
+
+    // Call this to apply the effects.
+    private void AddEffects(){
         foreach (string effectName in InitialEffects)
         {
             Effect eff = LoadEffect(effectName);
             _effects.AddEffect(eff);
         }
+    }
 
+    private void AddTraits(){
+        foreach(string effectName in Traits){
+            Effect eff = LoadEffect(effectName);
+            _effects.AddEffect(eff);
+        }
     }
 
     /// <summary>

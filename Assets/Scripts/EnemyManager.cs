@@ -22,11 +22,20 @@ public static class EnemyManager
 
     }
 
-    public static void SpawnEnemy(GameObject enemy, int x, int y)
+    public static void SpawnEnemy(GameObject enemy, int x, int y, bool InitializeStartEffects = true)
     {
         CheckCurrent(enemy, x, y);
 
         GameObject newEnemy = GameObject.Instantiate(enemy);
+        if (InitializeStartEffects)
+        {
+            newEnemy.BroadcastMessage("OnSpawn", SendMessageOptions.DontRequireReceiver);
+/*            ApplyEffectsOnLoad startEffects = newEnemy.GetComponent<ApplyEffectsOnLoad>();
+            if (startEffects != null)
+            {
+                startEffects.AddEffects();
+            }*/
+        }
 
         Actor actorBehaviour = newEnemy.GetComponent<Actor>();
         GridManager.TileMap.EnemySetAt(x, y, actorBehaviour);
@@ -34,8 +43,9 @@ public static class EnemyManager
         actorBehaviour.x = x;
         actorBehaviour.y = y;
     }
-    
-    public static void SpawnBoss(){
+
+    public static void SpawnBoss()
+    {
         SpawnEnemy(SpawnList.Boss, 1, 0);
         SpawnRandomEnemy(0, 0);
         SpawnRandomEnemy(0, 1);
@@ -74,15 +84,16 @@ public static class EnemyManager
 
 
     // Returns a higher and higher number as the bosscounter reaches 0
-    private static int CalculateDifficultAdd(){
-        return (int) ((80-TurnManager.BossCounter) * 0.20);
+    private static int CalculateDifficultAdd()
+    {
+        return (int)((80 - TurnManager.BossCounter) * 0.20);
     }
 
     //Rolls a new enemy based on various factors.
     private static GameObject RollEnemy(EnemySpawnList spawnList, int x, int y)
     {
         int TotalChance = 0;
-        
+
         // The difficult add is the number added to all rolls (to increase the chance of spawning rarer enemies as the game progresses
         int difficultyAdd = CalculateDifficultAdd();
 
@@ -92,7 +103,7 @@ public static class EnemyManager
             if (!CanSpawnEnemyAt(entry, x, y)) continue;
 
             TotalChance += entry.SpawnChance + difficultyAdd;
-            
+
         }
 
         int roll = Random.Range(0, TotalChance);

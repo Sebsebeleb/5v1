@@ -24,34 +24,37 @@ public class TurnManager : MonoBehaviour
     {
         StartCoroutine(processTurn());
     }
-    
+
     private IEnumerator processTurn(){
         UpdatePlayer();
-        
+
         while(AnimationManager.IsAnimating()){
             yield return 0;
-        }   
-        
+        }
+
         //First we countdown the boss stuff
         if (BossCounter > 0){
             BossCounter--;
             if (BossCounter <= 0)
             {
                 InitBoss();
-            }                    
+            }
         }
-    
 
+
+        Debug.Log("New turn");
         // TODO: Sort it properly (unless it already is)
         foreach (Actor enemy in GridManager.TileMap.GetAll())
         {
             while(AnimationManager.IsAnimating()){
                 yield return 0;
             }
-               
+
             if (!enemy) continue;
 
             enemy.countdown.Countdown();
+
+            Debug.Log("COunting down: " + enemy.name + " which is at: " + enemy.x + ", " + enemy.y);
         }
 
         EventManager.Notify(Events.OnTurn, null);
@@ -63,7 +66,7 @@ public class TurnManager : MonoBehaviour
         _playerSkills.CountDown();
         _playerEffects.OnTurn();
 
-        
+
     }
 
     private void InitBoss()
@@ -71,7 +74,7 @@ public class TurnManager : MonoBehaviour
         foreach(Actor enemy in GridManager.TileMap.GetAll()){
             EnemyManager.KillEnemy(enemy);
         }
-        
+
         EnemyManager.SpawnBoss();
     }
 }

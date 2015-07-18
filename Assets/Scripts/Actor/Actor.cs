@@ -35,6 +35,7 @@ public class Actor : MonoBehaviour
     public AI ai
     {
         get { return _ai; }
+        set { _ai = value; } // For serialization
     }
 
     private Status _status;

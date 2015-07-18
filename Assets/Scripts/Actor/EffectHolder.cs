@@ -9,6 +9,15 @@ public class EffectHolder : MonoBehaviour, IEnumerable
     private Actor actor;
 
     private List<Effect> _effects = new List<Effect>();
+    // This list holds all traits, traits are related to the enemy type and will not be serialized/deserialized,
+    // and thus should not be added after initalization of the actor
+    private List<Effect> _traits = new List<Effect>();
+
+    ~EffectHolder(){
+        foreach(Effect eff in _effects){
+            RemoveEffect(eff);
+        }
+    }
 
     void Awake()
     {
@@ -53,11 +62,19 @@ public class EffectHolder : MonoBehaviour, IEnumerable
 
     public void AddEffect(Effect effect)
     {
+
+        Debug.Log("Effect added: " + effect);
         if (gameObject.tag != "Player"){
             Event.EventManager.Notify(Event.Events.PreEnemmyEffectApplied, new Event.PreEnemyEffectAppliedArgs(actor, effect));
         }
         effect.SetOwner(actor);
-        _effects.Add(effect);
+
+        if (effect.IsTrait){
+            _traits.Add(effect);
+        }
+        else{
+            _effects.Add(effect);
+        }
     }
 
     public bool HasEffect(Effect effect)
@@ -85,7 +102,14 @@ public class EffectHolder : MonoBehaviour, IEnumerable
     }
 
     public void _SetRawData(Effect[] _data){
-        _effects.Clear();
+        Debug.Log("All effects removed");
+        Effect[] deleteEffs = new Effect[_effects.Count];
+        _effects.CopyTo(deleteEffs);
+        foreach(Effect eff in deleteEffs){
+            RemoveEffect(eff);
+        }
+
+        Debug.Log("Effects populate, num of effects: " + _data.Length);
         _effects.AddRange(_data);
     }
 }

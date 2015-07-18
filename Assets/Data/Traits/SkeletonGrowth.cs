@@ -1,6 +1,8 @@
 using BaseClasses;
 using Event;
 using System.Runtime.Serialization;
+using System;
+using UnityEngine;
 
 namespace Data.Effects
 {
@@ -33,8 +35,16 @@ namespace Data.Effects
             EventManager.Register(Events.ActorActed, callback);
         }
 
+        protected override void Destroyed()
+        {
+            base.Destroyed();
+
+        }
+
         private void IncreaseStrength(Actor who)
         {
+            Debug.Log("IncreaseStrengh called, we are " + who + " at " + who.x + ", " + who.y);
+            Debug.Log("Owner's countdown is: " + owner.countdown.CurrentCountdown);
 			if (who != owner){
                 return;
             }

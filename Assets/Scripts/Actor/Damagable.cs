@@ -33,12 +33,19 @@ public class Damagable : MonoBehaviour
     void Awake()
     {
         actor = GetComponent<Actor>();
+
     }
 
     void Start(){
+        if (tag == "Player"){
+            OnSpawn();
+        }
+    }
+
+    public void OnSpawn(){
+        Debug.Log("hello setting hp to: " + BaseHealth);
         MaxHealth = BaseHealth;
         CurrentHealth = MaxHealth;
-
     }
 
     public void TakeDamage(int damage)

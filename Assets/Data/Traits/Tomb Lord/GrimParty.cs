@@ -12,11 +12,11 @@ namespace Data.Effects
             Description = new EffectDescription(
                 "Dead Party",
                 describe
-            );     
+            );
         }
-        
+
         private string describe(){
-            return string.Format("Has {0} bonus attack for each alive enemy. \nCurrently: {1}", 
+            return string.Format("Has {0} bonus attack for each alive enemy. \nCurrently: {1}",
                 RichTextUtilities.Bold(RichTextUtilities.FontColor("#FF1111", BonusPerEnemy.ToString())),
                 RichTextUtilities.Bold(RichTextUtilities.FontColor("#FF1111", _currentBonus.ToString()))
             );

@@ -15,9 +15,6 @@ public class EffectIconAnimation : MonoBehaviour
 		icon = GetComponent<Image>();
 	}
 
-	void Start(){
-	}
-
 	// TODO: stop old animation or use a queue
 	public void StartAnimation(string iconName){
 		icon.sprite = getSprite (iconName);
