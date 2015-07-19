@@ -4,24 +4,26 @@ using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using System.Reflection;
+using System;
+using System.Xml.Serialization;
 
 public class SaveLoad : MonoBehaviour {
 
 	// A class for saving all the game data
     [System.Serializable]
-	private struct SaveState{
-		//public TurnManager turnData;
-        //public Map.GridMap enemyMap; //For GridManager.TileMap
+	public struct SaveState{
+        public int BossCounter;
 
         public ActorState[] Enemies;
 
         public ActorState Player;
-        public HealthData PlayerHealth;
+        public int PlayerLevel;
+        public int PlayerExp;
 	}
 
     [System.Serializable]
     // All save data related to a single enemy
-    private struct ActorState{
+    public struct ActorState{
         public int EnemyTypeID;
         public int GridX;
         public int GridY;
@@ -77,10 +79,12 @@ public class SaveLoad : MonoBehaviour {
 
     /// Constructs the data to be saved
     private SaveState MakeSaveGameData(){
-        SaveState data = new SaveState();
+        data = new SaveState();
 
         SavePlayer();
         SaveEnemies();
+
+        data.BossCounter = TurnManager.BossCounter;
 
         return data;
     }
@@ -90,6 +94,8 @@ public class SaveLoad : MonoBehaviour {
 
         LoadPlayer();
         LoadEnemies();
+
+        TurnManager.BossCounter = data.BossCounter;
 
         Event.EventManager.Notify(Event.Events.GameDeserialized, null);
     }
@@ -105,6 +111,11 @@ public class SaveLoad : MonoBehaviour {
         data.Player.Health = act.damagable._GetRawData();
         data.Player.EffectHolderEffects = IntermediateSerializers.EffectSerializer.Serialize(act.effects._GetRawData());
 
+        PlayerExperience pe = act.GetComponent<PlayerExperience>();
+
+        data.PlayerExp = pe.GetCurrentXP();
+        data.PlayerLevel = pe.level;
+
     }
     private void LoadPlayer(){
         Actor act = Player.GetComponent<Actor>();
@@ -112,6 +123,11 @@ public class SaveLoad : MonoBehaviour {
         act.attack._SetRawData(data.Player.Attack);
         act.damagable._SetRawData(data.Player.Health);
         act.effects._SetRawData(IntermediateSerializers.EffectSerializer.Deserialize(data.Player.EffectHolderEffects));
+
+        PlayerExperience pe = act.GetComponent<PlayerExperience>();
+
+        pe._SetRawExp(data.PlayerExp);
+        pe.level = data.PlayerLevel;
     }
 
     private void SaveEnemies(){
