@@ -75,8 +75,7 @@ namespace IntermediateSerializers
         // Uses reflection to save all the fields that should be saved to the dict for the given effect.
         private static Dictionary<string, object> SaveFields(Effect eff)
         {
-            Debug.Log("Serializing: " + eff);
-            
+
 			Dictionary<string, object> fields = new Dictionary<string, object>();
             Type typ = eff.GetType();
             var f = typ.GetMembers(flags);
@@ -97,7 +96,6 @@ namespace IntermediateSerializers
 
                 fields[info.Name] = value;
 
-                Debug.Log(info.Name + " = " + value);
             }
 
 			return fields;

@@ -63,7 +63,6 @@ public class EffectHolder : MonoBehaviour, IEnumerable
     public void AddEffect(Effect effect)
     {
 
-        Debug.Log("Effect added: " + effect);
         if (gameObject.tag != "Player"){
             Event.EventManager.Notify(Event.Events.PreEnemmyEffectApplied, new Event.PreEnemyEffectAppliedArgs(actor, effect));
         }
@@ -102,14 +101,12 @@ public class EffectHolder : MonoBehaviour, IEnumerable
     }
 
     public void _SetRawData(Effect[] _data){
-        Debug.Log("All effects removed");
         Effect[] deleteEffs = new Effect[_effects.Count];
         _effects.CopyTo(deleteEffs);
         foreach(Effect eff in deleteEffs){
             RemoveEffect(eff);
         }
 
-        Debug.Log("Effects populate, num of effects: " + _data.Length);
         _effects.AddRange(_data);
     }
 }

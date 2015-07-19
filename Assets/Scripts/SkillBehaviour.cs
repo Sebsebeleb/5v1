@@ -7,7 +7,7 @@ using UnityEngine;
 public class SkillBehaviour : MonoBehaviour
 {
 	private BaseSkill[] _knownSkills = new BaseSkill[4];
-    
+
     void Start()
     {
         LearnSkill(new Bloodlust());
@@ -22,8 +22,8 @@ public class SkillBehaviour : MonoBehaviour
             skill.CurrentCooldown = Mathf.Max(skill.CurrentCooldown, 0);
         }
     }
-    
-	
+
+
 	public void LearnSkill(BaseSkill skill){
         for (int i = 0; i<4; i++){
             if (_knownSkills[i] == null){
@@ -31,13 +31,12 @@ public class SkillBehaviour : MonoBehaviour
                 return;
             }
         }
-        Debug.LogError("OOPS, Skill was not learned due to being full");
 	}
-	
+
 	public BaseSkill[] GetKnownSkills(){
 		return _knownSkills;
 	}
-    
+
     // TODO: Cleanup shitty code
     public bool KnowsSkill(BaseSkill skill){
         for (int i = 0; i < 4; i++){

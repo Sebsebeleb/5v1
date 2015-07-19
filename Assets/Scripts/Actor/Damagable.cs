@@ -43,7 +43,6 @@ public class Damagable : MonoBehaviour
     }
 
     public void OnSpawn(){
-        Debug.Log("hello setting hp to: " + BaseHealth);
         MaxHealth = BaseHealth;
         CurrentHealth = MaxHealth;
     }

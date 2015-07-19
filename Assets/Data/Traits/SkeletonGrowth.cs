@@ -43,8 +43,6 @@ namespace Data.Effects
 
         private void IncreaseStrength(Actor who)
         {
-            Debug.Log("IncreaseStrengh called, we are " + who + " at " + who.x + ", " + who.y);
-            Debug.Log("Owner's countdown is: " + owner.countdown.CurrentCountdown);
 			if (who != owner){
                 return;
             }

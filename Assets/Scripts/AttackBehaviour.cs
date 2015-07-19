@@ -15,7 +15,6 @@ public class AttackBehaviour : MonoBehaviour
         get {return data.BonusAttack;}
         set {
             data.BonusAttack = value;
-            Debug.Log("Bonus attacked set to: " + value);
             }
     }
 

@@ -42,7 +42,6 @@ public class TurnManager : MonoBehaviour
         }
 
 
-        Debug.Log("New turn");
         // TODO: Sort it properly (unless it already is)
         foreach (Actor enemy in GridManager.TileMap.GetAll())
         {
@@ -54,7 +53,6 @@ public class TurnManager : MonoBehaviour
 
             enemy.countdown.Countdown();
 
-            Debug.Log("COunting down: " + enemy.name + " which is at: " + enemy.x + ", " + enemy.y);
         }
 
         EventManager.Notify(Events.OnTurn, null);
