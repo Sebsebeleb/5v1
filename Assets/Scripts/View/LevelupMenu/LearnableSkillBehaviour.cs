@@ -6,28 +6,28 @@ public class LearnableSkillBehaviour : MonoBehaviour, IPointerEnterHandler, IPoi
 	public BaseSkill skill;
 	public Image Icon;
 	public Text TooltipTitle;
-	public Text TooltipDescription; 
-	
+	public Text TooltipDescription;
+
 	private TooltipDisplayerBehaviour _tooltip;
-	
+
 	public void Awake(){
 		_tooltip = GameObject.FindWithTag("TooltipDisplayer").GetComponent<TooltipDisplayerBehaviour>();
 	}
-	
+
 	public void OnPointerEnter(PointerEventData data){
 		/*RectTransform trans = GetComponent<RectTransform> ();
-		
+
 		Vector2 bottom = GetComponentInChildren<RectTransform> ().anchoredPosition;
 		Vector2 pos = new Vector2 (bottom.x, bottom.y);
 		_tooltip.SetTooltip (pos, skill.GetName (), skill.GetTooltip ());*/
 	}
-	
+
 	public void OnPointerExit(PointerEventData data){
-		
+
 	}
-	
+
 	public void SetSkill(BaseSkill sskill){
-		
+
 		skill = sskill;
 		// TODO: ResourceManager
         Sprite icon = Resources.Load<Sprite>(skill.GetName());
@@ -37,11 +37,11 @@ public class LearnableSkillBehaviour : MonoBehaviour, IPointerEnterHandler, IPoi
         else {
             Icon.sprite = icon;
         }
-		
+
 		TooltipDescription.text = skill.GetTooltip();
 		TooltipTitle.text = skill.GetName();
-		
+
 		GetComponentInChildren<Toggle> ().group = GetComponentInParent<ToggleGroup> ();
 	}
-	
+
 }

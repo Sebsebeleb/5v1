@@ -529,14 +529,13 @@ GameObject:
   - 224: {fileID: 136447007}
   - 222: {fileID: 136447009}
   - 114: {fileID: 136447008}
-  - 114: {fileID: 136447010}
   m_Layer: 5
   m_Name: Levelup Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &136447007
 RectTransform:
   m_ObjectHideFlags: 0
@@ -551,12 +550,12 @@ RectTransform:
   - {fileID: 811724654}
   - {fileID: 156493052}
   - {fileID: 725621809}
-  m_Father: {fileID: 632528852}
-  m_RootOrder: 3
+  m_Father: {fileID: 319512818}
+  m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 776, y: 561}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &136447008
 MonoBehaviour:
@@ -585,21 +584,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 136447006}
---- !u!114 &136447010
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 136447006}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 968eeb6dce1f62645a0b73d47a1a673d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SkillsParent: {fileID: 274371823}
-  SkillEntryPrefab: {fileID: 192384, guid: 8a961b62c65843440a28c4102d6817e7, type: 2}
-  Toggles: {fileID: 274371825}
-  PlayerSkills: {fileID: 1072468362}
 --- !u!1 &148868237
 GameObject:
   m_ObjectHideFlags: 0
@@ -985,7 +969,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22449946, guid: 8a961b62c65843440a28c4102d6817e7, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 439
+      value: 438
       objectReference: {fileID: 0}
     - target: {fileID: 22449946, guid: 8a961b62c65843440a28c4102d6817e7, type: 2}
       propertyPath: m_AnchoredPosition.y
@@ -993,7 +977,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22449946, guid: 8a961b62c65843440a28c4102d6817e7, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 838
+      value: 836
       objectReference: {fileID: 0}
     - target: {fileID: 22449946, guid: 8a961b62c65843440a28c4102d6817e7, type: 2}
       propertyPath: m_SizeDelta.y
@@ -1033,7 +1017,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22405642, guid: 8a961b62c65843440a28c4102d6817e7, type: 2}
       propertyPath: m_SizeDelta.x
-      value: -738
+      value: -736
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8a961b62c65843440a28c4102d6817e7, type: 2}
@@ -1447,6 +1431,56 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 318179426}
+--- !u!1 &319512817
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 319512818}
+  - 114: {fileID: 319512819}
+  m_Layer: 5
+  m_Name: Levelup Menu (holder)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &319512818
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 319512817}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 136447007}
+  m_Father: {fileID: 632528852}
+  m_RootOrder: 3
+  m_AnchorMin: {x: .5, y: .5}
+  m_AnchorMax: {x: .5, y: .5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: .5, y: .5}
+--- !u!114 &319512819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 319512817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 968eeb6dce1f62645a0b73d47a1a673d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SkillsParent: {fileID: 274371823}
+  SkillEntryPrefab: {fileID: 192384, guid: 8a961b62c65843440a28c4102d6817e7, type: 2}
+  Toggles: {fileID: 274371825}
+  PlayerSkills: {fileID: 1072468362}
+  RealHolder: {fileID: 136447006}
 --- !u!224 &329333060 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 22450138, guid: 246508ee029933944868d446640e84bb,
@@ -2148,7 +2182,7 @@ RectTransform:
   - {fileID: 2011357570}
   - {fileID: 420068956}
   - {fileID: 299866227}
-  - {fileID: 136447007}
+  - {fileID: 319512818}
   - {fileID: 1068511505}
   - {fileID: 1642421602}
   - {fileID: 1222383449}
@@ -2707,7 +2741,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 136447010}
+      - m_Target: {fileID: 319512819}
         m_MethodName: ConfirmLevelup
         m_Mode: 1
         m_Arguments:
@@ -3282,7 +3316,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22482622, guid: b6553681f00976b4cae0673bb0a5e8c5, type: 2}
       propertyPath: m_SizeDelta.y
-      value: -13.0201111
+      value: -13.4201202
       objectReference: {fileID: 0}
     - target: {fileID: 22482622, guid: b6553681f00976b4cae0673bb0a5e8c5, type: 2}
       propertyPath: m_AnchorMin.x
@@ -5567,7 +5601,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22482622, guid: b6553681f00976b4cae0673bb0a5e8c5, type: 2}
       propertyPath: m_SizeDelta.y
-      value: -13.0201111
+      value: -13.4201202
       objectReference: {fileID: 0}
     - target: {fileID: 22482622, guid: b6553681f00976b4cae0673bb0a5e8c5, type: 2}
       propertyPath: m_AnchorMin.x
@@ -7234,7 +7268,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22482622, guid: b6553681f00976b4cae0673bb0a5e8c5, type: 2}
       propertyPath: m_SizeDelta.y
-      value: -13.0201111
+      value: -13.4201202
       objectReference: {fileID: 0}
     - target: {fileID: 22482622, guid: b6553681f00976b4cae0673bb0a5e8c5, type: 2}
       propertyPath: m_AnchorMin.x
@@ -7605,7 +7639,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22482622, guid: b6553681f00976b4cae0673bb0a5e8c5, type: 2}
       propertyPath: m_SizeDelta.y
-      value: -13.0201111
+      value: -13.4201202
       objectReference: {fileID: 0}
     - target: {fileID: 22482622, guid: b6553681f00976b4cae0673bb0a5e8c5, type: 2}
       propertyPath: m_AnchorMin.x
