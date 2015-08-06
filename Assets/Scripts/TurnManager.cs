@@ -6,7 +6,8 @@ using UnityEngine;
 public class TurnManager : MonoBehaviour
 {
 
-    public static int BossCounter = 80;
+    public static int BossCounter = 1;
+    public GameObject ZoneSelectionMenu;
 
     private GameObject _player;
     private SkillBehaviour _playerSkills;
@@ -56,6 +57,12 @@ public class TurnManager : MonoBehaviour
         }
 
         EventManager.Notify(Events.OnTurn, null);
+
+        // Check if we defeated the zone
+        if (ZoneWon()){
+            ZoneSelectionMenu.SetActive(true);
+            ZoneSelectionMenu.GetComponent<Zone.ZoneSelectionScreen>().PopulateZones();
+        }
     }
 
     private void UpdatePlayer()
@@ -74,5 +81,20 @@ public class TurnManager : MonoBehaviour
         }
 
         EnemyManager.SpawnBoss();
+    }
+
+    // The zone has been won if 1) the boss has been reached and 2) all enemies are dead
+    private bool ZoneWon(){
+        if (BossCounter > 0){
+            return false;
+        }
+
+        foreach(var enemy in GridManager.TileMap.GetAll()){
+            if (enemy.tag != "Corpse"){
+                return false;
+            }
+        }
+
+        return true;
     }
 }

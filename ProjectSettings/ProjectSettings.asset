@@ -10,7 +10,7 @@ PlayerSettings:
   targetGlesGraphics: -1
   targetIOSGraphics: -1
   targetResolution: 0
-  accelerometerFrequency: 60
+  accelerometerFrequency: 15
   companyName: BadlybadGames
   productName: 5v1mk2
   cloudProjectId: 

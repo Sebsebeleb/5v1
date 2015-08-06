@@ -13,8 +13,9 @@ public static class RichTextUtilities
     {
         return String.Format("<color={0}>{1}</color>", color, text);
     }
-    
+
     public static string Bold(string text){
         return String.Format("<b>{0}</b>", text);
     }
 }
+    
