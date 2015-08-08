@@ -7,7 +7,8 @@ using System.Linq;
 namespace Zone
 {
 
-    enum ZoneTypes{
+    enum ZoneTypes
+    {
         CRYPT,
         FOREST,
         CRYPT_FOREST,
@@ -19,16 +20,6 @@ namespace Zone
         // If a generated zone's difficulty is more than this different than the target difficulty, it isnt valid.
         private const int MAX_DIFFICULT_DEVIATION = 15;
 
-        private static Dictionary<ZoneTypes, Zone> _standardZones;
-        private static Dictionary<ZoneTypes, Zone> StandardZones{
-            get {
-                if (_standardZones == null){
-                    initZoneTypes();
-                }
-                return _standardZones;
-            }
-        }
-
         public static Zone Generate(int difficulty)
         {
             Zone zone = ChooseZoneType();
@@ -37,24 +28,33 @@ namespace Zone
 
             zone.modifiers = modifiers;
 
+            foreach (ZoneModifier mod in zone.modifiers)
+            {
+                mod.ApplyStatModifications(zone);
+            }
+
             return zone;
         }
 
         // Chooses between the base zone types (which decides which denizens will be there etc.)
-        private static Zone ChooseZoneType(){
+        private static Zone ChooseZoneType()
+        {
             // Silly but works
             int i = Random.Range(1, 7);
 
             Zone choice;
 
-            if (i <=3 ){
-                choice = StandardZones[ZoneTypes.CRYPT];
+            if (i <= 3)
+            {
+                choice = BuildZone(ZoneTypes.CRYPT);
             }
-            else if (i <= 5){
-                choice = StandardZones[ZoneTypes.FOREST];
+            else if (i <= 5)
+            {
+                choice = BuildZone(ZoneTypes.FOREST);
             }
-            else{
-                choice = StandardZones[ZoneTypes.CRYPT_FOREST];
+            else
+            {
+                choice = BuildZone(ZoneTypes.CRYPT_FOREST);
             }
 
             return choice;
@@ -80,10 +80,12 @@ namespace Zone
                 int modTries = 100;
 
                 // Generate mods untill one that is valid is found. Valid means it isnt exclusive with other exisitng mods
-                while (currentMods < numMods && modTries > 0){
+                while (currentMods < numMods && modTries > 0)
+                {
                     var mod = GenerateModifier();
 
-                    if (result.TrueForAll((x) => x.Typ != mod.Typ)){
+                    if (result.TrueForAll((x) => x.Typ != mod.Typ))
+                    {
                         result.Add(mod);
                         currentMods++;
                     }
@@ -92,7 +94,8 @@ namespace Zone
 
                 //Check if the difficulty is good.
                 int finalDifficulty = result.Sum((mod) => mod.Difficulty);
-                if (Math.Abs(finalDifficulty - targetDifficulty) < MAX_DIFFICULT_DEVIATION){
+                if (Math.Abs(finalDifficulty - targetDifficulty) < MAX_DIFFICULT_DEVIATION)
+                {
                     success = true;
                 }
 
@@ -113,24 +116,27 @@ namespace Zone
         }
 
         // Defines the base stats for the different zone types
-        private static void initZoneTypes(){
-            _standardZones = new Dictionary<ZoneTypes, Zone>();
+        private static Zone BuildZone(ZoneTypes type)
+        {
+            Zone zone = new Zone();
 
-            Zone crypt = new Zone();
-            crypt.Denizens = "Crypt";
-            crypt.ZoneLength = 60;
+            switch (type)
+            {
+                case ZoneTypes.CRYPT:
+                    zone.Denizens = "Crypt";
+                    zone.ZoneLength = 60;
+                    break;
+                case ZoneTypes.CRYPT_FOREST:
+                    zone.Denizens = "Crypt and Forest";
+                    zone.ZoneLength = 65;
+                    break;
+                case ZoneTypes.FOREST:
+                    zone.Denizens = "Forest";
+                    zone.ZoneLength = 70;
+                    break;
+            }
 
-            Zone forest = new Zone();
-            forest.Denizens = "Forest";
-            forest.ZoneLength = 70;
-
-            Zone cryptAndForest = new Zone();
-            cryptAndForest.Denizens = "Crypt and Forest";
-            cryptAndForest.ZoneLength = 65;
-
-            _standardZones[ZoneTypes.CRYPT] = crypt;
-            _standardZones[ZoneTypes.CRYPT_FOREST] = cryptAndForest;
-            _standardZones[ZoneTypes.FOREST] = forest;
+            return zone;
         }
     }
 

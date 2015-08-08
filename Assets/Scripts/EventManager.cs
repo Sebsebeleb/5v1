@@ -18,6 +18,7 @@ namespace Event
 
         // Some events that aren't related to actual gameplay
         GameDeserialized, // Called after the game has loaded a save, used by EnemyDisplay so it knows to update itself
+        PostEnemySpawned, // Called JUST after an enemy is spawned.
     }
 
     #region delegates
@@ -35,6 +36,8 @@ namespace Event
     public delegate void OnPreEnemyAction(OnPreEnemyActionArgs args);
 
     public delegate void OnPreEnemyEffectApplied(PreEnemyEffectAppliedArgs args);
+
+    public delegate void OnPostEnemySpawned(Actor who);
 
     // Events that are not related to actual gameplay
 

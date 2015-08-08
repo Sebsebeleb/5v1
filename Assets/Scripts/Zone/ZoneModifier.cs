@@ -21,9 +21,9 @@ namespace Zone
         public int Difficulty; // Positive difficulty means this makes a zone more difficult. A negative makes it easier (or more rewarding).
 
         // applied after generation to modify the zone's stats.
-        public virtual void ApplyStatModifications()
+        public virtual void ApplyStatModifications(Zone zone)
         {
-
+            
         }
 
         // called when the zone is actually started, used for initalizing callbacks to zone effects for instance

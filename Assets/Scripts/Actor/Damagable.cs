@@ -1,4 +1,5 @@
-﻿using Event;
+﻿using System;
+using Event;
 using UnityEngine;
 
 public class Damagable : MonoBehaviour
@@ -13,13 +14,21 @@ public class Damagable : MonoBehaviour
 
     private HealthData data;
 
-    public int MaxHealth{
-        get {return data.MaxHealth;}
-        set {data.MaxHealth = value;}
+    public int MaxHealth
+    {
+        get { return data.MaxHealth; }
+        set { data.MaxHealth = value; }
     }
-    public int CurrentHealth{
-        get {return data.CurrentHealth;}
-        set {data.CurrentHealth = value;}
+    public int CurrentHealth
+    {
+        get { return data.CurrentHealth; }
+        set { data.CurrentHealth = value; }
+    }
+
+    public float BonusMaxHealth
+    {
+        get { return data.BonusMaxHealth; }
+        set { data.BonusMaxHealth = value; }
     }
 
 
@@ -36,15 +45,23 @@ public class Damagable : MonoBehaviour
 
     }
 
-    void Start(){
-        if (tag == "Player"){
+    void Start()
+    {
+        if (tag == "Player")
+        {
             OnSpawn();
         }
     }
 
-    public void OnSpawn(){
+    public void OnSpawn()
+    {
         MaxHealth = BaseHealth;
-        CurrentHealth = MaxHealth;
+        int bonusHealth = 0;
+        if (gameObject.tag != "Player")
+        {
+            bonusHealth = (int)Math.Round(MaxHealth * BonusMaxHealth);
+        }
+        CurrentHealth = MaxHealth + bonusHealth;
     }
 
     public void TakeDamage(int damage)
@@ -107,7 +124,8 @@ public class Damagable : MonoBehaviour
 
     public void Die(bool givexp = true)
     {
-        if (givexp)
+        // If we started the boss, enemies dont grant xp anymore (besides defeating the whole boss wave (NYI))
+        if (givexp && TurnManager.BossCounter > 0)
         {
             GameObject.FindWithTag("Player").GetComponent<PlayerExperience>().GiveXp(3);
         }
@@ -118,11 +136,13 @@ public class Damagable : MonoBehaviour
 
     }
 
-    public HealthData _GetRawData(){
+    public HealthData _GetRawData()
+    {
         return data;
     }
 
-    public void _SetRawData(HealthData _data){
+    public void _SetRawData(HealthData _data)
+    {
         data = _data;
     }
 }

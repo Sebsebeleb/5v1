@@ -27,9 +27,13 @@ public static class EnemyManager
         CheckCurrent(enemy, x, y);
 
         GameObject newEnemy = GameObject.Instantiate(enemy);
+        Actor actorBehaviour = newEnemy.GetComponent<Actor>();
         if (InitializeStartEffects)
         {
+            Event.EventManager.Notify(Event.Events.PostEnemySpawned, actorBehaviour);
+
             newEnemy.BroadcastMessage("OnSpawn", SendMessageOptions.DontRequireReceiver);
+
 /*            ApplyEffectsOnLoad startEffects = newEnemy.GetComponent<ApplyEffectsOnLoad>();
             if (startEffects != null)
             {
@@ -37,7 +41,6 @@ public static class EnemyManager
             }*/
         }
 
-        Actor actorBehaviour = newEnemy.GetComponent<Actor>();
         GridManager.TileMap.EnemySetAt(x, y, actorBehaviour);
 
         actorBehaviour.x = x;

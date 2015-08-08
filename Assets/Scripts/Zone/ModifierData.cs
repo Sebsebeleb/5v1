@@ -1,45 +1,59 @@
+using System;
 namespace Zone
 {
 
+    //
+    // Zone modifications
+    //
+
+    public class ZoneLengthReduction : ZoneModifier
+    {
+        public ZoneLengthReduction()
+        {
+            Typ = ModifierType.ZONE_LENGTH;
+
+            Description = "-25% Zone length";
+            Difficulty = -15;
+        }
+
+        public override void ApplyStatModifications(Zone zone)
+        {
+            zone.ZoneLength = (int)Math.Round(zone.ZoneLength * 0.75, 0);
+        }
+    }
+
+    public class ZoneLengthIncrease : ZoneModifier
+    {
+        public ZoneLengthIncrease()
+        {
+            Typ = ModifierType.ZONE_LENGTH;
+
+            Description = "+25% Zone length";
+            Difficulty = 15;
+        }
+
+        public override void ApplyStatModifications(Zone zone)
+        {
+            zone.ZoneLength = (int)Math.Round(zone.ZoneLength * 1.25, 0);
+        }
+    }
+
+    //
+    // Enemy modifications
+    //
+
     public class EnemyHPBonus : ZoneModifier
     {
-
-		//
-		// Zone modifications
-		//
-
-        public class ZoneLengthReduction : ZoneModifier
-        {
-            public ZoneLengthReduction()
-            {
-                Typ = ModifierType.ZONE_LENGTH;
-
-                Description = "-25% Zone length";
-                Difficulty = -10;
-            }
-        }
-
-        public class ZoneLengthIncrease : ZoneModifier
-        {
-            public ZoneLengthIncrease()
-            {
-                Typ = ModifierType.ZONE_LENGTH;
-
-                Description = "+25% Zone length";
-                Difficulty = 20;
-            }
-        }
-
-		//
-		// Enemy modifications
-		//
-
         public EnemyHPBonus()
         {
             Typ = ModifierType.ENEMY_HEALTH;
 
             Description = "+20% Enemy health";
             Difficulty = 10;
+        }
+
+        public override void ApplyStatModifications(Zone zone){
+            zone.EnemyHealthModifier += 0.20f;
         }
     }
 
@@ -52,6 +66,10 @@ namespace Zone
 
             Description = "+20% Enemy damage";
             Difficulty = 15;
+        }
+        
+        public override void ApplyStatModifications(Zone zone){
+            zone.EnemyDamageModifier += 0.20f;
         }
     }
 

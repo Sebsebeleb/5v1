@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class AttackBehaviour : MonoBehaviour
 {
@@ -11,11 +12,10 @@ public class AttackBehaviour : MonoBehaviour
 
     // The regions are for public read/write of data
     #region properties
-    public int BonusAttack{
-        get {return data.BonusAttack;}
-        set {
-            data.BonusAttack = value;
-            }
+    public int BonusAttack
+    {
+        get { return data.BonusAttack; }
+        set { data.BonusAttack = value; }
     }
 
     #endregion
@@ -28,13 +28,22 @@ public class AttackBehaviour : MonoBehaviour
 
     void Start()
     {
-        if (tag == "Player"){
+        if (tag == "Player")
+        {
             OnSpawn();
         }
     }
 
-    void OnSpawn(){
+    void OnSpawn()
+    {
         data.BaseAttack = StartingBaseAttack;
+
+        if (gameObject.tag != "Player")
+        {
+            // Add zone bonus
+            int bonus = (int)Math.Round(StartingBaseAttack * (1.0f - Zone.Zone.current.EnemyDamageModifier));
+        }
+
     }
 
     public void DoAttack(Actor target)
@@ -57,11 +66,13 @@ public class AttackBehaviour : MonoBehaviour
     }
 
     // Return the data object used. Should only be used by serialization classes
-    public AttackData _GetRawData(){
+    public AttackData _GetRawData()
+    {
         return data;
     }
 
-    public void _SetRawData(AttackData _data){
+    public void _SetRawData(AttackData _data)
+    {
         data = _data;
     }
 }
