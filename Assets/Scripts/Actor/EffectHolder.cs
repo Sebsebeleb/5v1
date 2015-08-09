@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class EffectHolder : MonoBehaviour, IEnumerable
 {
@@ -54,9 +55,15 @@ public class EffectHolder : MonoBehaviour, IEnumerable
 
     //Public api
 
-    public void RemoveEffect(Effect effect)
+    ///
+    /// DontDestroy: Only remove the reference, do not actually destroy the effect itself
+    ///
+    public void RemoveEffect(Effect effect, bool DontDestroy=false)
     {
-        effect.OnRemoved();
+        if (!DontDestroy){
+            effect.OnRemoved();
+            effect.Destroy();
+        }
         _effects.Remove(effect);
     }
 
@@ -76,6 +83,18 @@ public class EffectHolder : MonoBehaviour, IEnumerable
         }
     }
 
+    // Checks only if a similiar (same type) effect exists
+    public bool HasEffect(Type effecttype){
+        foreach(Effect eff in _effects){
+            if (eff.GetType() == effecttype){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    //Checks this specific effect (wrong..?)
     public bool HasEffect(Effect effect)
     {
         return _effects.Contains(effect);

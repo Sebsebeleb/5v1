@@ -16,7 +16,7 @@ namespace BaseClasses
 
         [NonSerialized]
         public Actor owner;
-        
+
         private bool _ownerSet = false;
 
         // If it is infinite, it will not countdown and disappear on its own
@@ -51,9 +51,10 @@ namespace BaseClasses
         }
 
         // Should be called when the effects wants to remove itself
-        protected void ForceRemoveMe()
+        // DontDestory: if this is true, the effect itself will not be destroyed. Only the reference to it will be removed from the effectholder
+        protected void ForceRemoveMe(bool DontDestroy=false)
         {
-            owner.effects.RemoveEffect(this);
+            owner.effects.RemoveEffect(this, DontDestroy);
         }
 
         // Called by the system to destroy this

@@ -60,21 +60,25 @@ namespace Event
         }
     }
 
-    public struct OnPreEnemyActionArgs{
+    public struct OnPreEnemyActionArgs
+    {
         public Actor who;
         public AI.AiAction action;
 
-        public OnPreEnemyActionArgs(Actor _who, AI.AiAction _action){
+        public OnPreEnemyActionArgs(Actor _who, AI.AiAction _action)
+        {
             who = _who;
             action = _action;
         }
     }
 
-    public struct PreEnemyEffectAppliedArgs{
+    public struct PreEnemyEffectAppliedArgs
+    {
         public Actor who;
         public BaseClasses.Effect effect;
 
-        public PreEnemyEffectAppliedArgs(Actor _who, BaseClasses.Effect _effect){
+        public PreEnemyEffectAppliedArgs(Actor _who, BaseClasses.Effect _effect)
+        {
             who = _who;
             effect = _effect;
         }
@@ -87,22 +91,30 @@ namespace Event
     public static class EventManager
     {
 
+        // Dead callbacks that are to be removed
+        private static Dictionary<Events, List<Delegate>> _deadListeners = new Dictionary<Events, List<Delegate>>();
+
         private static Dictionary<Events, List<Delegate>> _listeners = new Dictionary<Events, List<Delegate>>();
+
+        // Are we in the middle of processing an event?
+        private static bool IsProcessing;
 
         //    private Dictionary<Delegate>
         public static void Notify(Events ev, object args)
         {
+
             // Ignore event if not yet initalized
             if (!_listeners.ContainsKey(ev))
             {
                 return;
             }
-            foreach (Delegate listener in _listeners[ev])
+            foreach (Delegate listener in _listeners[ev].ToArray())
             {
                 listener.DynamicInvoke(args);
             }
         }
 
+        /// Register a new callback to be called for a specific event
         public static void Register(Events evn, Delegate func)
         {
             // Create event if it doesnt exist

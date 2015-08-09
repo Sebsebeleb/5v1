@@ -14,7 +14,7 @@ public abstract class BaseSkill : ITooltip
         CurrentCooldown = BaseCooldown;
     }
 
-    public virtual bool CanTargetGrid(int x, int y)
+    public bool CanTargetGrid(int x, int y)
     {
         return true;
     }
@@ -34,8 +34,8 @@ public abstract class BaseSkill : ITooltip
     {
         return CurrentCooldown <= 0;
     }
-    
+
     public abstract string GetName();
-    
+
     public abstract string GetTooltip();
 }
