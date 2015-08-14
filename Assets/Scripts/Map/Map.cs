@@ -102,12 +102,25 @@ namespace Map
 
         public void EnemySetAt(int i, Actor who)
         {
-            _tiles[i] = who;
+            int y = (int)Math.Floor((double)i / _width);
+            int x = i % _width;
+
+            EnemySetAt(x, y, who);
         }
 
         public void EnemySetAt(int x, int y, Actor who)
         {
             _tiles[x + y * _width] = who;
+            
+            who.x = x;
+            who.y = y;
+        }
+
+        // Swap the position of two actors
+        public void SwapActors(int x, int y, int x2, int y2){
+            Actor temp = GetAt(x, y);
+            EnemySetAt(x, y, GetAt(x2, y2));
+            EnemySetAt(x2, y2, temp);
         }
     }
 

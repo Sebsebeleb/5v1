@@ -6,7 +6,7 @@ using UnityEngine;
 public class TurnManager : MonoBehaviour
 {
 
-    public static int BossCounter = 1;
+    public static int BossCounter = 60;
     public GameObject ZoneSelectionMenu;
 
     private GameObject _player;

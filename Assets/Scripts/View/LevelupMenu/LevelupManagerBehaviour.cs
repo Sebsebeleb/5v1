@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,17 +30,24 @@ public class LevelupManagerBehaviour : MonoBehaviour
 			new Data.Skills.Cleave(),
 			new Data.Skills.Stun(),
 			new Data.Skills.ArcLighting(),
+			new Data.Skills.Blizzard(),
+			new Data.Skills.Switcheroo(),
 		};
 
+		// Generate a choice of 4 skills for the player to levelup
 		List<BaseSkill> finalChoices = new List<BaseSkill>(skills);
+
 
 		foreach(BaseSkill skill in skills){
 			if (PlayerSkills.KnowsSkill(skill)){
 				finalChoices.Remove(skill);
 			}
 		}
+		finalChoices.Shuffle();
 
-		Init(finalChoices.ToArray());
+		int max = Math.Min(4, finalChoices.Count);
+
+		Init(finalChoices.GetRange(0, max).ToArray());
 	}
 
 	public void Init(BaseSkill[] skills){
