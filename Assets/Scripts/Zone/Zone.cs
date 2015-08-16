@@ -20,12 +20,15 @@ namespace Zone
             get { return _currentZone; }
         }
 
-        public List<ZoneModifier> modifiers = new List<ZoneModifier>();
 
+        public List<ZoneModifier> modifiers = new List<ZoneModifier>();
         public List<EnemySpawnList> spawnLists;
 
         public int ZoneLength; // The bosscounter will start at this number
         public string Denizens;
+
+        // Modifies the diffuculty of enemies spawned. 
+        public float EnemyDifficultyMod = 1.0f;
 
         // Common modifications to the zone
         #region CommonMods

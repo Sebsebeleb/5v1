@@ -11,6 +11,7 @@ namespace Zone
         ENEMY_DAMAGE,
         ENEMY_HEALTH,
         LOOT_AMOUNT,
+        ENEMY_DIFFICULTY,
     }
 
     public abstract class ZoneModifier
@@ -23,7 +24,7 @@ namespace Zone
         // applied after generation to modify the zone's stats.
         public virtual void ApplyStatModifications(Zone zone)
         {
-            
+
         }
 
         // called when the zone is actually started, used for initalizing callbacks to zone effects for instance

@@ -89,7 +89,7 @@ public static class EnemyManager
     // Returns a higher and higher number as the bosscounter reaches 0
     private static int CalculateDifficultAdd()
     {
-        return (int)((80 - TurnManager.BossCounter) * 0.20);
+        return (int)(((Zone.Zone.current.ZoneLength - TurnManager.BossCounter) * 0.20) * Zone.Zone.current.EnemyDifficultyMod);
     }
 
     //Rolls a new enemy based on various factors.

@@ -67,9 +67,24 @@ namespace Zone
             Description = "+20% Enemy damage";
             Difficulty = 15;
         }
-        
+
         public override void ApplyStatModifications(Zone zone){
             zone.EnemyDamageModifier += 0.20f;
+        }
+    }
+
+    public class ZoneEnemyDifficultyIncrease : ZoneModifier
+    {
+        public ZoneEnemyDifficultyIncrease()
+        {
+            Typ = ModifierType.ENEMY_DIFFICULTY;
+
+            Description = "+20% Enemy difficulty";
+            Difficulty = 10;
+        }
+
+        public override void ApplyStatModifications(Zone zone){
+            zone.EnemyDifficultyMod += 0.2f;
         }
     }
 
