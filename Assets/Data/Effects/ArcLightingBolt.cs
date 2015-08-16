@@ -35,7 +35,7 @@ namespace Data.Effects
             //Find a target
             foreach (Actor actr in GridManager.TileMap.GetAdjacent(owner.x, owner.y))
             {
-                if (actr.gameObject.tag != "Corpse" && !actr.effects.HasEffect(typeof(Electrified)))
+                if (actr.gameObject.tag != "Corpse" && !actr.effects.HasEffect<Electrified>())
                 {
                     validTargets.Add(actr);
                 }
@@ -56,5 +56,20 @@ namespace Data.Effects
                 ForceRemoveMe(false);
             }
         }
+
+        public override bool ShouldAnimate()
+        {
+            return true;
+        }
+
+        public override ChangeAnimation GetAnimationInfo()
+        {
+            ChangeAnimation a = new ChangeAnimation();
+            a.SpawnHoverText = true;
+            a.IconName = "Charged";
+
+            return a;
+        }
+
     }
 }

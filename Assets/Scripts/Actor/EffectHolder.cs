@@ -84,9 +84,9 @@ public class EffectHolder : MonoBehaviour, IEnumerable
     }
 
     // Checks only if a similiar (same type) effect exists
-    public bool HasEffect(Type effecttype){
+    public bool HasEffect<T>(){
         foreach(Effect eff in _effects){
-            if (eff.GetType() == effecttype){
+            if (eff is T){
                 return true;
             }
         }
@@ -102,7 +102,7 @@ public class EffectHolder : MonoBehaviour, IEnumerable
 
     public List<Effect> GetEffectsOfType<T>()
     {
-        return _effects.FindAll(effect => typeof(Effect) == typeof(T));
+        return _effects.FindAll(effect => effect is T);
     }
 
     public IEnumerator GetEnumerator()

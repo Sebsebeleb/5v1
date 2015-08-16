@@ -32,6 +32,7 @@ public class LevelupManagerBehaviour : MonoBehaviour
 			new Data.Skills.ArcLighting(),
 			new Data.Skills.Blizzard(),
 			new Data.Skills.Switcheroo(),
+			new Data.Skills.LightningBolt(),
 		};
 
 		// Generate a choice of 4 skills for the player to levelup
