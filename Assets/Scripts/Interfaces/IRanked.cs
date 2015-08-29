@@ -1,0 +1,8 @@
+
+
+/// An IRankCalculatable offers a function to determine what level should be used for an instance based on an arbritary metric
+interface IRankCalculatable{
+
+	int GetRank(int metric);
+
+}

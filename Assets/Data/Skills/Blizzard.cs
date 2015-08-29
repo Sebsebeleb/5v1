@@ -6,7 +6,7 @@ namespace Data.Skills
     public class Blizzard : BaseSkill
     {
 
-        public Blizzard()
+        public Blizzard(int PlayerLevel) : base(PlayerLevel)
         {
             SkillName = "Blizzard";
             Tooltip = "Deal 2 damage to all enemies. Then, if at least 4 enemies survive, stun them for 1 turn";
@@ -40,10 +40,7 @@ namespace Data.Skills
 			}
         }
 
-    public override string GetName()
-        {
-            return SkillName;
-        }
+
 
         public override string GetTooltip()
         {

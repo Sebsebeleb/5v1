@@ -6,7 +6,7 @@ namespace Data.Skills
     class Switcheroo : BaseSkill
     {
 		//TODO: Implement multitargeting and make this "Choose two enemies/corpses and swap their places. If both of them are alive, stun them for 2 turns"
-        public Switcheroo()
+        public Switcheroo(int PlayerLevel) : base(PlayerLevel)
         {
             SkillName = "Switcheroo";
             Tooltip = "Choose an enemy/corpse and swap it with the other enemy in it's column. If they are both enemies, also deal 1 damage and stun for 2 turns";
@@ -28,16 +28,14 @@ namespace Data.Skills
 			if (bothEnemies){
                 enemy.damagable.TakeDamage(1);
                 otherEnemy.damagable.TakeDamage(1);
-                
+
 	            enemy.effects.AddEffect(new Stunned(3));
 				otherEnemy.effects.AddEffect(new Stunned(3));
 			}
 
         }
 
-        public override string GetName(){
-            return SkillName;
-        }
+
 
         public override string GetTooltip(){
             return Tooltip;

@@ -39,7 +39,7 @@ public class LearnableSkillBehaviour : MonoBehaviour, IPointerEnterHandler, IPoi
         }
 
 		TooltipDescription.text = skill.GetTooltip();
-		TooltipTitle.text = skill.GetName();
+		TooltipTitle.text = string.Format("{0} ({1})", skill.GetName(), skill.Rank);
 
 		GetComponentInChildren<Toggle> ().group = GetComponentInParent<ToggleGroup> ();
 	}

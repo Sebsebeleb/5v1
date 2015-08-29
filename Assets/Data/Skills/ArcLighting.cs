@@ -4,11 +4,13 @@ namespace Data.Skills
     public class ArcLighting : BaseSkill
     {
 
-        public ArcLighting()
+        public ArcLighting(int PlayerLevel) : base(PlayerLevel)
         {
-            SkillName = "Arc Lighting";
+            SkillName = "Arc Lightning";
             Tooltip = "Target an enemy an deal 2 damage to them and make them electrified. The bolt will then move to another random adjacent non-electrified enemy and deal 2 damage until there are no targets to jump to. Cannot cast this skill again while the bolt is active.";
             BaseCooldown = 20;
+
+
         }
 
         public override void UseOnTargetGrid(int x, int y)
@@ -23,10 +25,7 @@ namespace Data.Skills
             actr.effects.AddEffect(new Data.Effects.Electrified());
         }
 
-    public override string GetName()
-        {
-            return SkillName;
-        }
+
 
         public override string GetTooltip()
         {

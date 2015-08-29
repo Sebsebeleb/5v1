@@ -5,7 +5,7 @@ namespace Data.Skills
     [System.Serializable]
     class Block : BaseSkill
     {
-        public Block()
+        public Block(int PlayerLevel) : base(PlayerLevel)
         {
             SkillName = "Block";
             Tooltip = "Block all damage that would be dealt for two turns";
@@ -20,9 +20,6 @@ namespace Data.Skills
             player.GetComponent<EffectHolder>().AddEffect(new Blocking(2));
         }
 
-        public override string GetName(){
-            return SkillName;
-        }
 
         public override string GetTooltip(){
             return Tooltip;

@@ -5,7 +5,7 @@ namespace Data.Skills
     [System.Serializable]
     class LightningBolt : BaseSkill
     {
-        public LightningBolt()
+        public LightningBolt(int PlayerLevel) : base(PlayerLevel)
         {
             SkillName = "Lightning Bolt";
             Tooltip = "Deal 4 damage to an enemy and make it electrified. If it was already electrified,remove electrified and deal 1 damage to all other enemies.";
@@ -35,9 +35,6 @@ namespace Data.Skills
 			}
         }
 
-        public override string GetName(){
-            return SkillName;
-        }
 
         public override string GetTooltip(){
             return Tooltip;

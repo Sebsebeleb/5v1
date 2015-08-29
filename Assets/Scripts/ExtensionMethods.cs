@@ -15,4 +15,12 @@ public static class ExtensionMethods
             list[n] = value;
         }
     }
+
+    // Get a random element
+    public static T RandomElement<T>(this IList<T> list){
+        var rng = new Random();
+        int i = rng.Next(0, list.Count);
+
+        return list[i];
+    }
 }

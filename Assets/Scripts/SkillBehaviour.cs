@@ -10,7 +10,7 @@ public class SkillBehaviour : MonoBehaviour
 
     void Start()
     {
-        LearnSkill(new Bloodlust());
+        LearnSkill(new Bloodlust(1));
     }
 
 

@@ -6,7 +6,7 @@ namespace Data.Skills
     public class Bloodlust : BaseSkill
     {
 
-        public Bloodlust()
+        public Bloodlust(int PlayerLevel) : base(PlayerLevel)
         {
             SkillName = "Bloodlust";
             Tooltip = "Deal 200% damage to an enemy. If this attack kills it, gain life equal to twice the enemy's hp (from before the attack)";
@@ -39,9 +39,7 @@ namespace Data.Skills
             }
         }
 
-        public override string GetName(){
-            return SkillName;
-        }
+
 
         public override string GetTooltip(){
             return Tooltip;

@@ -29,7 +29,7 @@ public class PlayerExperience : MonoBehaviour
     public void Levelup(){
         _xp = _xp - xpNeeded;
         level++;
-        Event.EventManager.Notify(Event.Events.PlayerLeveledUp, null);
+        Event.EventManager.Notify(Event.Events.PlayerLeveledUp, level);
     }
 
     private int CalculateXpNeeded(){

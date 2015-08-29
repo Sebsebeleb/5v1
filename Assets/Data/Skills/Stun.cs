@@ -5,7 +5,7 @@ namespace Data.Skills
     [System.Serializable]
     class Stun : BaseSkill
     {
-        public Stun()
+        public Stun(int PlayerLevel) : base(PlayerLevel)
         {
             SkillName = "Stun";
             Tooltip = "Stun an enemy for 5 turns";
@@ -20,9 +20,6 @@ namespace Data.Skills
             enemy.GetComponent<EffectHolder>().AddEffect(new Stunned(5));
         }
 
-        public override string GetName(){
-            return SkillName;
-        }
 
         public override string GetTooltip(){
             return Tooltip;

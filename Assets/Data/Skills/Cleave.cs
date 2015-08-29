@@ -8,7 +8,7 @@ namespace Data.Skills
     {
         private int damage = 8;
 
-        public Cleave()
+        public Cleave(int PlayerLevel) : base(PlayerLevel)
         {
             SkillName = "Cleave";
             Tooltip = "Deal 8 damage to target and one random adjacent enemy";
@@ -50,9 +50,7 @@ namespace Data.Skills
 
         }
 
-        public override string GetName(){
-            return SkillName;
-        }
+
 
         public override string GetTooltip(){
             return Tooltip;
