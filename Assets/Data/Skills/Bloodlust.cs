@@ -9,7 +9,7 @@ namespace Data.Skills
         public Bloodlust(int PlayerLevel) : base(PlayerLevel)
         {
             SkillName = "Bloodlust";
-            Tooltip = "Deal 200% damage to an enemy. If this attack kills it, gain life equal to twice the enemy's hp (from before the attack)";
+            Tooltip = "Deal {0f} damage to an enemy. If this attack kills it, heal life equal to twice the enemy's hp (from before the attack)";
             BaseCooldown = 10;
 
         }
@@ -28,7 +28,7 @@ namespace Data.Skills
             Actor playerActor = player.GetComponent<Actor>();
 
 
-            int tempBonus = playerAttack.CalculateAttack();
+            int tempBonus = playerAttack.CalculateAttack() * ((int) getDamageMultiplier() - 1);
             playerAttack.BonusAttack += tempBonus;
             playerAttack.DoAttack(targetedEnemy);
             playerAttack.BonusAttack -= tempBonus;
@@ -39,10 +39,14 @@ namespace Data.Skills
             }
         }
 
-
+        private float getDamageMultiplier(){
+            return 1.5f+Rank*0.5f;
+        }
 
         public override string GetTooltip(){
-            return Tooltip;
+            string damageMultProp = TextUtilities.FontColor(Colors.DamageValue, getDamageMultiplier().ToString() + "x");
+
+            return string.Format(Tooltip, damageMultProp);
         }
     }
 }

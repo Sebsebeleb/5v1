@@ -17,7 +17,7 @@ namespace Data.Effects
 
         private string describe(){
             return string.Format("Judges the player, preventing skills from being used for {0} turns.",
-                RichTextUtilities.Bold(RichTextUtilities.FontColor("#FFFF11", duration.ToString()))
+                TextUtilities.Bold(TextUtilities.FontColor("#FFFF11", duration.ToString()))
             );
         }
 

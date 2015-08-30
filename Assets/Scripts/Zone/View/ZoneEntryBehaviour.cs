@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using RTT = RichTextUtilities;
+using RTT = TextUtilities;
 
 namespace Zone
 {
@@ -63,7 +63,7 @@ namespace Zone
                     color = "#00FF00";
                 }
 
-                finalString = String.Format("{0} {1}\n", finalString, RichTextUtilities.FontColor(color, mod.Description));
+                finalString = String.Format("{0} {1}\n", finalString, TextUtilities.FontColor(color, mod.Description));
             }
 
             Description.text = finalString;

@@ -9,7 +9,7 @@ namespace Data.Skills
         public Blizzard(int PlayerLevel) : base(PlayerLevel)
         {
             SkillName = "Blizzard";
-            Tooltip = "Deal 2 damage to all enemies. Then, if at least 4 enemies survive, stun them for 1 turn";
+            Tooltip = "Deal {0} damage to all enemies. Then, if at least 4 enemies survive, stun them for {1} turn";
             BaseCooldown = 12;
         }
 
@@ -19,7 +19,7 @@ namespace Data.Skills
 
             // Deal damage
 			foreach(var enemy in GridManager.TileMap.GetAll()){
-				enemy.damagable.TakeDamage(2);
+				enemy.damagable.TakeDamage(getDamage());
 			}
 
             // Check if 4+ alive
@@ -31,7 +31,6 @@ namespace Data.Skills
 				}
 			}
 
-            Debug.Log("Num alive: " + numAlive);
             // If so, stun them
 			if (numAlive >= 4){
 				foreach(var enemy in enemies){
@@ -40,11 +39,17 @@ namespace Data.Skills
 			}
         }
 
+        private int getDamage(){
+            return 1 + Rank;
+        }
 
 
         public override string GetTooltip()
         {
-            return Tooltip;
+            string damageProp = TextUtilities.FontColor(Colors.DamageValue, getDamage().ToString());
+            string durationProp = TextUtilities.FontColor(Colors.DurationValue, "1");
+
+            return string.Format(Tooltip, damageProp, durationProp);
         }
     }
 

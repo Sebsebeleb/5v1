@@ -21,8 +21,8 @@ namespace Data.Effects
 
         private string describe(){
             return string.Format("Recieves {1} each time it acts. \nCurrent boost: {0}",
-                RichTextUtilities.Bold(RichTextUtilities.FontColor("#FF1111", _currentBonus.ToString())),
-                RichTextUtilities.Bold(RichTextUtilities.FontColor("#FF1111", BonusPerTurn.ToString()))
+                TextUtilities.Bold(TextUtilities.FontColor("#FF1111", _currentBonus.ToString())),
+                TextUtilities.Bold(TextUtilities.FontColor("#FF1111", BonusPerTurn.ToString()))
             );
         }
 

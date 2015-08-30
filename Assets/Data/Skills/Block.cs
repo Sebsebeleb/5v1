@@ -8,7 +8,7 @@ namespace Data.Skills
         public Block(int PlayerLevel) : base(PlayerLevel)
         {
             SkillName = "Block";
-            Tooltip = "Block all damage that would be dealt for two turns";
+            Tooltip = "Block all damage that would be dealt for {0} turns";
             BaseCooldown = 18;
         }
         public override void UseOnTargetGrid(int x, int y)
@@ -20,9 +20,15 @@ namespace Data.Skills
             player.GetComponent<EffectHolder>().AddEffect(new Blocking(2));
         }
 
+        private int getDuration(){
+            return 1 + Rank;
+        }
+
 
         public override string GetTooltip(){
-            return Tooltip;
+            string durationProp = TextUtilities.FontColor(Colors.DurationValue, getDuration().ToString());
+
+            return string.Format(Tooltip, durationProp);
         }
     }
 }

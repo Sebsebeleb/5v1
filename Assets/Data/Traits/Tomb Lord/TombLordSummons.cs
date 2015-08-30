@@ -30,7 +30,7 @@ namespace Data.Effects
         }
 
         private string GetDescription(){
-            return "Summons " + RichTextUtilities.Bold(RichTextUtilities.FontColor("#FF2222", numAllies.ToString()) + " random enemies from the current zone to his side");
+            return "Summons " + TextUtilities.Bold(TextUtilities.FontColor("#FF2222", numAllies.ToString()) + " random enemies from the current zone to his side");
         }
 
         private void DoSummon()

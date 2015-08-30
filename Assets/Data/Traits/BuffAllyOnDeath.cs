@@ -26,7 +26,7 @@ namespace Data.Effects
 
         private string describe(){
             return "When this creature dies, it will buff all adjacent enemies' attack by " +
-            RichTextUtilities.Bold(RichTextUtilities.FontColor("#FF2222", "2"));
+            TextUtilities.Bold(TextUtilities.FontColor("#FF2222", "2"));
         }
 
         protected override void Created()

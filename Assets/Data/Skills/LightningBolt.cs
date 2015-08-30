@@ -8,7 +8,7 @@ namespace Data.Skills
         public LightningBolt(int PlayerLevel) : base(PlayerLevel)
         {
             SkillName = "Lightning Bolt";
-            Tooltip = "Deal 4 damage to an enemy and make it electrified. If it was already electrified,remove electrified and deal 1 damage to all other enemies.";
+            Tooltip = "Deal {0} damage to an enemy and apply electrified. If it was already electrified, remove electrified and deal {1} damage to all other enemies.";
             BaseCooldown = 7;
         }
         public override void UseOnTargetGrid(int x, int y)
@@ -17,7 +17,7 @@ namespace Data.Skills
 
 			Actor target = GridManager.TileMap.GetAt(x, y);
 
-			target.damagable.TakeDamage(4);
+			target.damagable.TakeDamage(getMainDamage());
 
             if (target.effects.HasEffect<Data.Effects.Electrified>()){
 				//TODO: Improve this api. This is pretty silly
@@ -26,7 +26,7 @@ namespace Data.Skills
 				target.effects.RemoveEffect(f);
 				foreach(Actor enemy in GridManager.TileMap.GetAll()){
 					if (enemy.tag != "Corpse" && enemy != target){
-						enemy.damagable.TakeDamage(1);
+						enemy.damagable.TakeDamage(getAoeDamage());
 					}
 				}
 			}
@@ -35,9 +35,21 @@ namespace Data.Skills
 			}
         }
 
+        private int getMainDamage(){
+            return 2 + Rank*2;
+        }
+
+        private int getAoeDamage(){
+            return 1 + Rank;
+        }
+
 
         public override string GetTooltip(){
-            return Tooltip;
+            string mainDamageProp = TextUtilities.FontColor(Colors.DamageValue, getMainDamage().ToString());
+            string aoeDamageProp = TextUtilities.FontColor(Colors.DamageValue, getAoeDamage().ToString());
+
+
+            return string.Format(Tooltip, mainDamageProp, aoeDamageProp);
         }
     }
 }
