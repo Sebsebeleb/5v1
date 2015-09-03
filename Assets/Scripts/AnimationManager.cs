@@ -4,7 +4,6 @@ using UnityEngine;
 public static class AnimationManager{
 
 	private static float timeDone;
-	public static float AnimationDuration = 0.05f; //debug, usual: 0.5
 
 
 	public static void RegisterAnimation(float duration){
@@ -15,10 +14,10 @@ public static class AnimationManager{
 	}
 
 	public static void RegisterAnimation(){
-		RegisterAnimation(AnimationDuration);
+		RegisterAnimation(Settings.AnimationTime);
 	}
 
 	public static bool IsAnimating(){
 		return Time.time < timeDone;
 	}
-}
+}	
