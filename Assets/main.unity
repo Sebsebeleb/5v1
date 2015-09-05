@@ -249,19 +249,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 48.5839653
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -49.2506332
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 97.1679306
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 98.5012665
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_AnchorMin.x
@@ -269,7 +269,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_AnchorMax.x
@@ -277,7 +277,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_Pivot.x
@@ -1330,8 +1330,7 @@ MonoBehaviour:
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
-            Culture=neutral, PublicKeyToken=null
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2639,8 +2638,7 @@ MonoBehaviour:
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
-            Culture=neutral, PublicKeyToken=null
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -3073,8 +3071,7 @@ MonoBehaviour:
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
-            Culture=neutral, PublicKeyToken=null
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -3518,6 +3515,7 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
+  m_StereoMirrorMode: 0
 --- !u!4 &950949798
 Transform:
   m_ObjectHideFlags: 0
@@ -3825,7 +3823,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22482622, guid: b6553681f00976b4cae0673bb0a5e8c5, type: 2}
       propertyPath: m_SizeDelta.y
-      value: -39.7468719
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22482622, guid: b6553681f00976b4cae0673bb0a5e8c5, type: 2}
       propertyPath: m_AnchorMin.x
@@ -3837,11 +3835,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22482622, guid: b6553681f00976b4cae0673bb0a5e8c5, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22482622, guid: b6553681f00976b4cae0673bb0a5e8c5, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22482622, guid: b6553681f00976b4cae0673bb0a5e8c5, type: 2}
       propertyPath: m_Pivot.x
@@ -4319,8 +4317,7 @@ MonoBehaviour:
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
-            Culture=neutral, PublicKeyToken=null
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -4800,19 +4797,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 147.751892
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -49.2506332
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 97.1679306
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 98.5012665
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_AnchorMin.x
@@ -4820,7 +4817,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_AnchorMax.x
@@ -4828,7 +4825,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_Pivot.x
@@ -4898,19 +4895,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 246.91983
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -49.2506332
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 97.1679306
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 98.5012665
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_AnchorMin.x
@@ -4918,7 +4915,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_AnchorMax.x
@@ -4926,7 +4923,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_Pivot.x
@@ -5231,19 +5228,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 48.5839653
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -49.2506332
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 97.1679306
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 98.5012665
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_AnchorMin.x
@@ -5251,7 +5248,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_AnchorMax.x
@@ -5259,7 +5256,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_Pivot.x
@@ -5364,8 +5361,7 @@ MonoBehaviour:
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
-            Culture=neutral, PublicKeyToken=null
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -5575,8 +5571,7 @@ MonoBehaviour:
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
-            Culture=neutral, PublicKeyToken=null
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -5853,19 +5848,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 147.751892
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -49.2506332
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 97.1679306
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 98.5012665
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_AnchorMin.x
@@ -5873,7 +5868,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_AnchorMax.x
@@ -5881,7 +5876,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_Pivot.x
@@ -6434,7 +6429,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22482622, guid: b6553681f00976b4cae0673bb0a5e8c5, type: 2}
       propertyPath: m_SizeDelta.y
-      value: -39.7468719
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22482622, guid: b6553681f00976b4cae0673bb0a5e8c5, type: 2}
       propertyPath: m_AnchorMin.x
@@ -6446,11 +6441,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22482622, guid: b6553681f00976b4cae0673bb0a5e8c5, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22482622, guid: b6553681f00976b4cae0673bb0a5e8c5, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22482622, guid: b6553681f00976b4cae0673bb0a5e8c5, type: 2}
       propertyPath: m_Pivot.x
@@ -6636,8 +6631,7 @@ MonoBehaviour:
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
-            Culture=neutral, PublicKeyToken=null
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -6648,8 +6642,7 @@ MonoBehaviour:
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
-            Culture=neutral, PublicKeyToken=null
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -6880,8 +6873,7 @@ MonoBehaviour:
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
-            Culture=neutral, PublicKeyToken=null
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -6996,8 +6988,7 @@ MonoBehaviour:
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
-            Culture=neutral, PublicKeyToken=null
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -7008,8 +6999,7 @@ MonoBehaviour:
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1072468363}
-          m_ObjectArgumentAssemblyTypeName: Actor, Assembly-CSharp, Version=0.0.0.0,
-            Culture=neutral, PublicKeyToken=null
+          m_ObjectArgumentAssemblyTypeName: Actor, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -7751,19 +7741,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 246.91983
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -49.2506332
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 97.1679306
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 98.5012665
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_AnchorMin.x
@@ -7771,7 +7761,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_AnchorMax.x
@@ -7779,7 +7769,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22432644, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
       propertyPath: m_Pivot.x
@@ -8410,7 +8400,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22482622, guid: b6553681f00976b4cae0673bb0a5e8c5, type: 2}
       propertyPath: m_SizeDelta.y
-      value: -39.7468719
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22482622, guid: b6553681f00976b4cae0673bb0a5e8c5, type: 2}
       propertyPath: m_AnchorMin.x
@@ -8422,11 +8412,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22482622, guid: b6553681f00976b4cae0673bb0a5e8c5, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22482622, guid: b6553681f00976b4cae0673bb0a5e8c5, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22482622, guid: b6553681f00976b4cae0673bb0a5e8c5, type: 2}
       propertyPath: m_Pivot.x
@@ -8701,6 +8691,7 @@ MonoBehaviour:
   m_SubmitButton: Submit
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10
+  m_RepeatDelay: .5
   m_AllowActivationOnMobileDevice: 0
 --- !u!114 &2112543022
 MonoBehaviour:
@@ -8781,7 +8772,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22482622, guid: b6553681f00976b4cae0673bb0a5e8c5, type: 2}
       propertyPath: m_SizeDelta.y
-      value: -39.7468719
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22482622, guid: b6553681f00976b4cae0673bb0a5e8c5, type: 2}
       propertyPath: m_AnchorMin.x
@@ -8793,11 +8784,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22482622, guid: b6553681f00976b4cae0673bb0a5e8c5, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22482622, guid: b6553681f00976b4cae0673bb0a5e8c5, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22482622, guid: b6553681f00976b4cae0673bb0a5e8c5, type: 2}
       propertyPath: m_Pivot.x

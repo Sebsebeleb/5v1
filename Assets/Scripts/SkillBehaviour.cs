@@ -38,12 +38,13 @@ public class SkillBehaviour : MonoBehaviour
 	}
 
     // TODO: Cleanup shitty code
+    // If we have the same skill AND rank, we know it
     public bool KnowsSkill(BaseSkill skill){
         for (int i = 0; i < 4; i++){
             if (_knownSkills[i] == null){
                 return false;
             }
-            if (_knownSkills[i].GetType() == skill.GetType()){
+            if (_knownSkills[i].GetType() == skill.GetType() && _knownSkills[i].Rank == skill.Rank){
                 return true;
             }
         }
