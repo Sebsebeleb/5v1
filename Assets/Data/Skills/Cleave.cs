@@ -11,7 +11,7 @@ namespace Data.Skills
         public Cleave(int PlayerLevel) : base(PlayerLevel)
         {
             SkillName = "Cleave";
-            Tooltip = "Deal 8 damage to target and one random adjacent enemy";
+            Tooltip = "Deal {0} damage to target and one random adjacent enemy";
             BaseCooldown = 12;
         }
 
@@ -45,15 +45,21 @@ namespace Data.Skills
 
             foreach (Actor enemy in finalTargets)
             {
-                enemy.damagable.TakeDamage(8);
+                enemy.damagable.TakeDamage(getDamage());
             }
 
+        }
+
+        private int getDamage(){
+           return 2 + Rank*3;
         }
 
 
 
         public override string GetTooltip(){
-            return Tooltip;
+            string damageProp = TextUtilities.FontColor(Colors.DamageValue, getDamage().ToString());
+
+            return string.Format(Tooltip, damageProp);
         }
     }
 

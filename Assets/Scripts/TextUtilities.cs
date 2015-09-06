@@ -14,10 +14,13 @@ public static class TextUtilities
         {"applied", Colors.EffectApplied},
         {"apply", Colors.EffectApplied},
         {"heal", Colors.HealValue},
+        {"you", Colors.You},
 
     };
 
+    // The compiled regex for searching for keywords to prettify
     private static readonly Regex keywordReplacer = new Regex(string.Join("|", keywordMapping.Keys.ToArray()));
+
     /// <summary>
     /// Returns a new string that colors the passed string with the given color
     /// </summary>

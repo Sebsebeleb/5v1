@@ -59,7 +59,7 @@ public class ActorAnimationHandler : MonoBehaviour{
 
 		Animator anim = anims[index];
 
-		anim.speed =  1f / AnimationManager.AnimationDuration;
+		anim.speed =  1f / Settings.AnimationTime;
 		anim.Play("Attack");
 	}
 
@@ -70,7 +70,7 @@ public class ActorAnimationHandler : MonoBehaviour{
 
 		Animator anim = anims[getIndex(who.x, who.y)];
 
-		anim.speed =  1f / AnimationManager.AnimationDuration;
+		anim.speed =  1f / Settings.AnimationTime;
 		anim.Play(action.AnimationName);
 	}
 

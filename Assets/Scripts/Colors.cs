@@ -5,6 +5,7 @@ public static class Colors{
 	public const string DamageWord = "#FFBE4D";
 	public const string DurationValue = "#4DB870";
 	public const string Stunned = "#3385FF";
-	public const string EffectApplied = "#6535A1";
+	public const string EffectApplied = "#A261F2";
 	public const string HealValue = "#F0466A";
+	public const string You = "#9BF261";
 }
