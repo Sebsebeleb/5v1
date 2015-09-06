@@ -32,15 +32,30 @@ public static class TextUtilities
         return String.Format("<color={0}>{1}</color>", color, text);
     }
 
+    /// <summary>
+    /// Boldify a string
+    /// </summary>
+    /// <param name="text">The string to boldify</param>
+    /// <returns>The same text surrounded with <b></b></returns>
     public static string Bold(string text){
         return String.Format("<b>{0}</b>", text);
     }
 
     // Colours common words. For example, turns "Stunned" into "<color=Colors.StunnedColor>Stunned</color>"
+    /// <summary>
+    /// Automatically colours common keywords used in the game with an appropriate colour.
+    /// </summary>
+    /// <param name="text">The text to prettify with colours</param>
+    /// <returns>Prettified text withg colours</returns>
     public static string ImproveText(string text){
         return keywordReplacer.Replace(text, ColorfyKeywords);
     }
 
+    /// <summary>
+    /// Called on each keyword in each string during regex, surrounds the word with the correct colour tags
+    /// </summary>
+    /// <param name="m"></param>
+    /// <returns></returns>
     private static string ColorfyKeywords(Match m){
         string color = keywordMapping[m.Value.ToLower()];
 

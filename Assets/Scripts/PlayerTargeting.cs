@@ -24,6 +24,11 @@ public class PlayerTargeting : MonoBehaviour
         turn = GameObject.FindWithTag("GM").GetComponent<TurnManager>();
     }
 
+    /// <summary>
+    /// Takes the appropriate action when an enemy button is clicked, based on UI state.
+    /// </summary>
+    /// <param name="x">Actor's x position</param>
+    /// <param name="y">Actor's y position</param>
     public void TargetGrid(int x, int y)
     {
         if (AnimationManager.IsAnimating()){

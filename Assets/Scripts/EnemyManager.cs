@@ -9,7 +9,10 @@ public static class EnemyManager
 
     public static EnemySpawnList SpawnList;
 
-
+    /// <summary>
+    /// Kill an enemy, causing a corpse to take its place. 
+    /// </summary>
+    /// <param name="actor">Actor to kill</param>
     public static void KillEnemy(Actor actor)
     {
 
@@ -22,6 +25,13 @@ public static class EnemyManager
 
     }
 
+    /// <summary>
+    /// Spawn a new enemy at specified position.
+    /// </summary>
+    /// <param name="enemy">Prefab of enemy to spawn</param>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
+    /// <param name="InitializeStartEffects">If false, will not do initalization code. Mostly for deserialization</param>
     public static void SpawnEnemy(GameObject enemy, int x, int y, bool InitializeStartEffects = true)
     {
         CheckCurrent(enemy, x, y);
