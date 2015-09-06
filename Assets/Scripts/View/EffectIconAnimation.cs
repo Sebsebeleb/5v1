@@ -9,25 +9,41 @@ public class EffectIconAnimation : MonoBehaviour
 {
 	private Image icon;
 
-	private const float duration = 1.8f;
 	private float _counter;
 
 	private float nextAnimationTime = 0; // The time the next animation should be fired
 	private Queue<string> animationQueue = new Queue<string>();
+
+	private List<Tweener> currentTweens = new List<Tweener>();
 
 	void Awake(){
 		icon = GetComponent<Image>();
 	}
 
 	void Update(){
-		if (animationQueue.Count == 0){
-			return;
+		float totalDuration = 0;
+		totalDuration += animationQueue.Count * Settings.IconAnimationTime;
+
+		// The duration left of the currently playing icon animation
+		float remainingCurrentTween = 0;
+
+		if (currentTweens.Count > 0){
+			remainingCurrentTween = currentTweens[0].Duration(false) - currentTweens[0].Elapsed(false);
+			totalDuration += remainingCurrentTween;
 		}
 
-		if (nextAnimationTime < Time.time){
-			nextAnimationTime = Time.time + duration;
-			_initAnimation(animationQueue.Dequeue());
+		// The duration that each playing and queued animation will have
+		float newDurationPerIcon = totalDuration / (currentTweens.Count + animationQueue.Count);
+
+		float delay = 0f;
+		// Start the new animations
+		while (animationQueue.Count > 0){
+			string icon = animationQueue.Dequeue();
+			Tweener tween = _initAnimation(icon, newDurationPerIcon, delay);
+			delay += newDurationPerIcon;
+			currentTweens.Add(tween);
 		}
+
 	}
 
 	public void StartAnimation(string iconName){
@@ -35,13 +51,20 @@ public class EffectIconAnimation : MonoBehaviour
 	}
 
 	// TODO: stop old animation or use a queue
-	private void _initAnimation(string iconName){
+	private Tweener _initAnimation(string iconName, float duration, float delay){
 		//If already playing, queue the new one.
-		icon.sprite = getSprite (iconName);
-		icon.DOFade (1f, 0.9f).
-			SetEase(Ease.InCirc).
-			OnComplete(
-				() => icon.DOFade(0f,0.9f).SetEase (Ease.InCirc));
+
+		Tweener tween = icon.DOFade (1f, duration/2)
+			.SetEase(Ease.InCirc)
+			.SetDelay(delay)
+			.OnStart(() => icon.sprite = getSprite (iconName));
+
+		tween.OnComplete ( ()=> {
+			icon.DOFade(0f,duration/2).SetEase (Ease.InCirc);
+			currentTweens.Remove(tween);
+		});
+
+		return tween;
 	}
 
 

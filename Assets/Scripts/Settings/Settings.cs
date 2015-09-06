@@ -20,6 +20,19 @@ public static class Settings
         }
     }
 
+    // The duration for icons that appear when an effect is applied
+    public static float IconAnimationTime
+    {
+        get
+        {
+            return loadFloat("IconAnimationTime", 1.25f);
+        }
+        set
+        {
+            setFloat("IconAnimationTime", value);
+        }
+    }
+
 
     private static int loadInt(string identifier, int fallback)
     {
