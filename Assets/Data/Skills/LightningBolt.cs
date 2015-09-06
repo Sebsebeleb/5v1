@@ -8,7 +8,7 @@ namespace Data.Skills
         public LightningBolt(int PlayerLevel) : base(PlayerLevel)
         {
             SkillName = "Lightning Bolt";
-            Tooltip = "Deal 4 damage to an enemy and make it electrified. If it was already electrified,remove electrified and deal 1 damage to all other enemies.";
+            Tooltip = "Deal 4 damage to an enemy and apply electrified. If it was already electrified, remove electrified and deal 1 damage to all other enemies.";
             BaseCooldown = 7;
         }
         public override void UseOnTargetGrid(int x, int y)

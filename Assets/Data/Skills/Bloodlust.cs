@@ -9,7 +9,7 @@ namespace Data.Skills
         public Bloodlust(int PlayerLevel) : base(PlayerLevel)
         {
             SkillName = "Bloodlust";
-            Tooltip = "Deal 200% damage to an enemy. If this attack kills it, gain life equal to twice the enemy's hp (from before the attack)";
+            Tooltip = "Deal 200% damage to an enemy. If this attack kills it, heal life equal to twice the enemy's hp (from before the attack)";
             BaseCooldown = 10;
 
         }

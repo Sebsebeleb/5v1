@@ -47,7 +47,7 @@ public class EnemyDisplay : MonoBehaviour
         //If the enemy is stunned, changed font color
         string countdownText = actor.countdown.CurrentCountdown.ToString();
         if (actor.status.Stunned){
-            countdownText = RichTextUtilities.FontColor("#4040FF", countdownText);
+            countdownText = TextUtilities.FontColor("#4040FF", countdownText);
         }
         Cooldown.text = countdownText;
 
@@ -58,11 +58,11 @@ public class EnemyDisplay : MonoBehaviour
         //If enemy has bonus attack, display it in green. If negative, red
         if (actor.attack.BonusAttack > 0)
         {
-            attackText = RichTextUtilities.FontColor("#20DD20FF", attackText);
+            attackText = TextUtilities.FontColor("#20DD20FF", attackText);
         }
         else if (actor.attack.BonusAttack < 0)
         {
-            attackText = RichTextUtilities.FontColor("#DD2020FF", attackText);
+            attackText = TextUtilities.FontColor("#DD2020FF", attackText);
         }
 
         Attack.text = attackText;

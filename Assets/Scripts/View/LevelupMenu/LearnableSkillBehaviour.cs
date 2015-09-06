@@ -7,6 +7,7 @@ public class LearnableSkillBehaviour : MonoBehaviour, IPointerEnterHandler, IPoi
 	public Image Icon;
 	public Text TooltipTitle;
 	public Text TooltipDescription;
+    public Toggle toggle;
 
 	private TooltipDisplayerBehaviour _tooltip;
 
@@ -38,10 +39,11 @@ public class LearnableSkillBehaviour : MonoBehaviour, IPointerEnterHandler, IPoi
             Icon.sprite = icon;
         }
 
-		TooltipDescription.text = skill.GetTooltip();
+		string prettified = TextUtilities.ImproveText(skill.GetTooltip());
+		TooltipDescription.text = prettified;
 		TooltipTitle.text = string.Format("{0} ({1})", skill.GetName(), skill.Rank);
 
-		GetComponentInChildren<Toggle> ().group = GetComponentInParent<ToggleGroup> ();
+        toggle.group = GetComponentInParent<ToggleGroup> ();
 	}
 
 }

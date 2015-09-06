@@ -27,14 +27,14 @@ public class EnemyAttackAI : MonoBehaviour
         attackAction.Callback = AttackPlayer;
         attackAction.CalcPriority = CalculatePriority;
         attackAction.IsFreeAction = false;
-        
+
         _brain.AddAction(attackAction);
     }
-    
+
     private string GetDescription(){
         int damage = actor.attack.Attack;
-        string damageText = RichTextUtilities.Bold(RichTextUtilities.FontColor("#FF2222", damage.ToString()));
-        return "Attacks you for " + RichTextUtilities.FontColor("#FF2222", damageText) + " damage";
+        string damageText = TextUtilities.Bold(TextUtilities.FontColor("#FF2222", damage.ToString()));
+        return "Attacks you for " + TextUtilities.FontColor("#FF2222", damageText) + " damage";
     }
 
 

@@ -17,8 +17,8 @@ namespace Data.Effects
 
         private string describe(){
             return string.Format("Has {0} bonus attack for each alive enemy. \nCurrently: {1}",
-                RichTextUtilities.Bold(RichTextUtilities.FontColor("#FF1111", BonusPerEnemy.ToString())),
-                RichTextUtilities.Bold(RichTextUtilities.FontColor("#FF1111", _currentBonus.ToString()))
+                TextUtilities.Bold(TextUtilities.FontColor("#FF1111", BonusPerEnemy.ToString())),
+                TextUtilities.Bold(TextUtilities.FontColor("#FF1111", _currentBonus.ToString()))
             );
         }
 

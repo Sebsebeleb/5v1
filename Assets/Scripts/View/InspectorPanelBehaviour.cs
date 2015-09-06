@@ -130,7 +130,9 @@ public class InspectorPanelBehaviour : MonoBehaviour
     {
         // TODO: Refactor pls
         ITooltip data = _entries[entry];
-        DisplayDescriptionOf(data.GetTooltip());
+
+        string prettified = TextUtilities.ImproveText(data.GetTooltip());
+        DisplayDescriptionOf(prettified);
     }
 
     private void DisplayDescriptionOf(string description)
@@ -140,7 +142,7 @@ public class InspectorPanelBehaviour : MonoBehaviour
     }
 
     private void PopulateEffects(Actor who)
-    {
+        {
         /// TODO: Temp solution
         foreach (Transform child in EffectsParent)
         {

@@ -35,7 +35,7 @@ namespace Data.Effects
         }
 
         private string GetDescription(){
-            return "Buffs a random creature, increasing it's attack by " + RichTextUtilities.Bold(RichTextUtilities.FontColor("#FF2222", "2"));
+            return "Buffs a random creature, increasing it's attack by " + TextUtilities.Bold(TextUtilities.FontColor("#FF2222", "2"));
         }
 
         private void DoBuff()
