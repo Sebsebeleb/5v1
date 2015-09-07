@@ -82,7 +82,7 @@ GameObject:
   - 224: {fileID: 22432380}
   - 114: {fileID: 11449082}
   m_Layer: 5
-  m_Name: NEWLearnableSkillEntry
+  m_Name: LearnableSkillEntry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -217,6 +217,7 @@ MonoBehaviour:
   Icon: {fileID: 11458558}
   TooltipTitle: {fileID: 11466564}
   TooltipDescription: {fileID: 11410706}
+  toggle: {fileID: 0}
 --- !u!114 &11451656
 MonoBehaviour:
   m_ObjectHideFlags: 1

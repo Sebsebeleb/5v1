@@ -8,6 +8,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 224: {fileID: 22486816}
+  - 114: {fileID: 11464856}
   m_Layer: 5
   m_Name: HP 1
   m_TagString: Untagged
@@ -90,6 +91,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 224: {fileID: 22475202}
+  - 114: {fileID: 11441306}
   m_Layer: 5
   m_Name: Cooldown 1
   m_TagString: Untagged
@@ -216,6 +218,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 224: {fileID: 22401716}
+  - 114: {fileID: 11472524}
   m_Layer: 5
   m_Name: Attack 1
   m_TagString: Untagged
@@ -420,6 +423,7 @@ GameObject:
   - 224: {fileID: 22498582}
   - 222: {fileID: 22230536}
   - 114: {fileID: 11476774}
+  - 114: {fileID: 11470118}
   m_Layer: 5
   m_Name: Stats
   m_TagString: Untagged
@@ -598,9 +602,9 @@ MonoBehaviour:
     m_FontSize: 12
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 8
-    m_MaxSize: 53
-    m_Alignment: 4
+    m_MinSize: 10
+    m_MaxSize: 36
+    m_Alignment: 3
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
@@ -660,8 +664,8 @@ MonoBehaviour:
     m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 10
-    m_MaxSize: 56
-    m_Alignment: 3
+    m_MaxSize: 36
+    m_Alignment: 4
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
@@ -744,6 +748,24 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11441306
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 116968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1679637790, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: 20
+  m_PreferredHeight: -1
+  m_FlexibleWidth: 2
+  m_FlexibleHeight: -1
 --- !u!114 &11441580
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1016,6 +1038,24 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11464856
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 105062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1679637790, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: 20
+  m_PreferredHeight: -1
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
 --- !u!114 &11469386
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1041,7 +1081,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 5
+  m_Text: '2
+
+'
 --- !u!114 &11469604
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1056,6 +1098,26 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: .5}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
+--- !u!114 &11470118
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 183042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -405508275, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
 --- !u!114 &11471688
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1077,6 +1139,24 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11472524
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 146690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1679637790, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: 20
+  m_PreferredHeight: -1
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
 --- !u!114 &11476774
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1242,14 +1322,14 @@ MonoBehaviour:
     m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 4
-    m_MaxSize: 40
-    m_Alignment: 7
+    m_MinSize: 10
+    m_MaxSize: 36
+    m_Alignment: 5
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 2-4
+  m_Text: 2
 --- !u!114 &11494394
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1305,7 +1385,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_Sprite: {fileID: 21300000, guid: d034b5ebd075b97458d71e882b74c574, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1471,10 +1551,10 @@ RectTransform:
   - {fileID: 22419234}
   m_Father: {fileID: 22498582}
   m_RootOrder: 2
-  m_AnchorMin: {x: .253000021, y: 0}
-  m_AnchorMax: {x: .747000039, y: 1}
-  m_AnchoredPosition: {x: -3.42726707e-06, y: -.100000001}
-  m_SizeDelta: {x: -2.28879999e-05, y: -.200000003}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22406094
 RectTransform:
@@ -1540,7 +1620,7 @@ RectTransform:
   - {fileID: 22494972}
   - {fileID: 22479042}
   m_Father: {fileID: 22432644}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_AnchorMin: {x: .292000026, y: 0}
   m_AnchorMax: {x: .734000027, y: .328000009}
   m_AnchoredPosition: {x: -.99852705, y: 5.04998875}
@@ -1560,8 +1640,8 @@ RectTransform:
   m_RootOrder: 2
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1.5, y: -2.98023224e-08}
-  m_SizeDelta: {x: -3, y: 2}
+  m_AnchoredPosition: {x: 6, y: 0}
+  m_SizeDelta: {x: -12, y: 0}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22410156
 RectTransform:
@@ -1628,8 +1708,8 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -6, y: 0}
+  m_SizeDelta: {x: -12, y: 0}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22423456
 RectTransform:
@@ -1661,7 +1741,7 @@ RectTransform:
   - {fileID: 22448530}
   - {fileID: 22423456}
   m_Father: {fileID: 22432644}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: -19.3999996, y: 20}
@@ -1680,13 +1760,13 @@ RectTransform:
   - {fileID: 22437544}
   - {fileID: 22408476}
   - {fileID: 22470296}
+  - {fileID: 22498582}
   - {fileID: 22494774}
   - {fileID: 22458102}
   - {fileID: 22426764}
   - {fileID: 22409614}
   - {fileID: 22475868}
   - {fileID: 22492522}
-  - {fileID: 22498582}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
@@ -1776,7 +1856,7 @@ RectTransform:
   - {fileID: 22449024}
   - {fileID: 22480148}
   m_Father: {fileID: 22432644}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: .249620497, y: .25}
   m_AnchoredPosition: {x: -6.5, y: -4.9000001}
@@ -1847,10 +1927,10 @@ RectTransform:
   - {fileID: 22465514}
   m_Father: {fileID: 22498582}
   m_RootOrder: 1
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -8.69999981, y: -.0249940008}
-  m_SizeDelta: {x: 17.3999996, y: -.34999001}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22475868
 RectTransform:
@@ -1865,7 +1945,7 @@ RectTransform:
   - {fileID: 22452068}
   - {fileID: 22408194}
   m_Father: {fileID: 22432644}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_AnchorMin: {x: .5, y: 0}
   m_AnchorMax: {x: .5, y: 0}
   m_AnchoredPosition: {x: -18.5, y: 19}
@@ -1921,9 +2001,9 @@ RectTransform:
   m_Father: {fileID: 22498582}
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 9.5, y: .0545225143}
-  m_SizeDelta: {x: 19, y: .108999252}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22492522
 RectTransform:
@@ -1936,7 +2016,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 22432644}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -1954,7 +2034,7 @@ RectTransform:
   m_Children:
   - {fileID: 22464158}
   m_Father: {fileID: 22432644}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_AnchorMin: {x: 0, y: .864666641}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: -1.29999995}
@@ -1991,7 +2071,7 @@ RectTransform:
   - {fileID: 22475202}
   - {fileID: 22401716}
   m_Father: {fileID: 22432644}
-  m_RootOrder: 9
+  m_RootOrder: 3
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: .206000015}
   m_AnchoredPosition: {x: 0, y: .100000381}
