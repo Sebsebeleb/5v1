@@ -4666,6 +4666,8 @@ MonoBehaviour:
   PlayerHealthText: {fileID: 1464339545}
   BossCounterText: {fileID: 989273977}
   PlayerXPText: {fileID: 1202475087}
+  HealthColour: {r: 1, g: 0, b: 0, a: 0}
+  XPColour: {r: 1, g: 1, b: 0, a: 0}
 --- !u!114 &1071772578
 MonoBehaviour:
   m_ObjectHideFlags: 0
