@@ -1215,6 +1215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77a24602fa53d96419328e62f6a166bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FloatTextPrefab: {fileID: 107278, guid: 1d5b6fbc584a13f4f93e5fcf2a60094a, type: 2}
 --- !u!114 &11484772
 MonoBehaviour:
   m_ObjectHideFlags: 1
