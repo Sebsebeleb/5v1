@@ -37,19 +37,13 @@ public class ActorAnimationHandler : MonoBehaviour{
 		GameObject enemy = Enemies[getIndex(args.who.x, args.who.y)]; // Get a reference to UI gameobject
 
 		ChangeAnimation animationInfo = args.effect.GetAnimationInfo();
-
-		// Should we spawn a floating hover text?
-		if (animationInfo.SpawnHoverText){
-			GameObject text = Instantiate(FloatTextPrefab) as GameObject;
-			text.transform.SetParent(GameObject.FindWithTag("MainCanvas").transform);
-			text.GetComponent<FloatTextBehaviour>().SetText(args.effect.GetName());
-			text.GetComponent<FloatTextBehaviour>().SetTarget(enemy.GetComponent<RectTransform>());
-		}
+		animationInfo.target = enemy;
+		animationInfo.TextProp = args.effect.GetName();
 
 		// Should we animate an icon?
 		if (animationInfo.IconName != String.Empty){
 			//Horribly inefficient: TODO: Optimize
-			enemy.GetComponentInChildren<EffectIconAnimation>().StartAnimation(animationInfo.IconName);
+			enemy.GetComponentInChildren<EffectIconAnimation>().StartAnimation(animationInfo, args.effect.GetName());
 		}
 	}
 
