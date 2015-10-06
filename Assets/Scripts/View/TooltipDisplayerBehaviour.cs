@@ -8,7 +8,7 @@ public class TooltipDisplayerBehaviour : MonoBehaviour
 	public Text Title;
 	public Text Tooltip;
 
-	
+
 	public ToggleGroup SkillsGroup;
 
 	private TooltipAreaManager tooltipArea; // We tell this to update itself with the given skill
@@ -32,10 +32,10 @@ public class TooltipDisplayerBehaviour : MonoBehaviour
 		if (skillBehaviour.AssociatedSkill == null){
 			return;
 		}
-		tooltipArea.SetTooltip(skillBehaviour.AssociatedSkill.SkillName, skillBehaviour.AssociatedSkill.GetTooltip());
+		tooltipArea.HoverEnter(skillBehaviour.AssociatedSkill.SkillName, skillBehaviour.AssociatedSkill.GetTooltip());
 	}
 	public void HideMe(){
-		tooltipArea.Clear();
+		tooltipArea.HoverExit();
 	}
 
 	//TODO: Use this/find alternative

@@ -506,6 +506,30 @@ Prefab:
       propertyPath: m_SizeDelta.y
       value: -10.5
       objectReference: {fileID: 0}
+    - target: {fileID: 11441194, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11460920, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 105062, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 116968, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 196012, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 160552, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1a0a8e3e48236914aa85043f72cec834, type: 2}
   m_IsPrefabParent: 0
@@ -9928,7 +9952,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: 
 --- !u!222 &2059906552
 CanvasRenderer:
   m_ObjectHideFlags: 0
