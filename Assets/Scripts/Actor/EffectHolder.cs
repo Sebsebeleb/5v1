@@ -71,7 +71,7 @@ public class EffectHolder : MonoBehaviour, IEnumerable
     {
 
         if (gameObject.tag != "Player"){
-            Event.EventManager.Notify(Event.Events.PreEnemmyEffectApplied, new Event.PreEnemyEffectAppliedArgs(actor, effect));
+            Event.EventManager.Notify(Event.Events.PreEnemyEffectApplied, new Event.PreEnemyEffectAppliedArgs(actor, effect));
         }
         effect.SetOwner(actor);
 

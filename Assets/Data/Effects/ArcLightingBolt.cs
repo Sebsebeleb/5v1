@@ -28,7 +28,7 @@ namespace Data.Effects
             Event.EventManager.UnRegister(Event.Events.OnTurn, (Event.OnTurn) DoJump);
         }
 
-        private void DoJump(Actor who = null)
+        private void DoJump()
         {
             List<Actor> validTargets = new List<Actor>();
 

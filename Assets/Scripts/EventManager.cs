@@ -7,14 +7,14 @@ namespace Event
 
     public enum Events
     {
-        OnTurn,
-        OnCountedDown,
+        OnTurn, // Called whenever a turn passes
+        ActorCountedDown, // Called whenever an actor has it's countdown decreased by a turn manager (so not while stunned)
         OnActorTookDamage,
         ActorDied,
         PlayerLeveledUp,
         ActorActed, // Called when an enemy acts (it performs attacks etc.)
         PreEnemyAction, // Called right before an enemy executes an action, passign the action taken
-        PreEnemmyEffectApplied, //Called right before an effect is applied to an enemy
+        PreEnemyEffectApplied, //Called right before an effect is applied to an enemy
 
         // Some events that aren't related to actual gameplay
         GameDeserialized, // Called after the game has loaded a save, used by EnemyDisplay so it knows to update itself
@@ -110,7 +110,12 @@ namespace Event
             }
             foreach (Delegate listener in _listeners[ev].ToArray())
             {
-                listener.DynamicInvoke(args);
+                if (args == null){
+                    listener.DynamicInvoke();
+                }
+                else{
+                    listener.DynamicInvoke(args);
+                }
             }
         }
 

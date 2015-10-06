@@ -8,6 +8,9 @@ public class TooltipDisplayerBehaviour : MonoBehaviour
 	public Text Title;
 	public Text Tooltip;
 
+	
+	public ToggleGroup SkillsGroup;
+
 	private TooltipAreaManager tooltipArea; // We tell this to update itself with the given skill
 	private SkillUseButton skillBehaviour;
 

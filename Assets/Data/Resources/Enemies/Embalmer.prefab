@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfa48ab3e57b40240b79fae51bb44a0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Image: {fileID: 21300030, guid: e2d4ac83553e88649b6ae92e2bee4a00, type: 3}
+  Image: {fileID: 21300000, guid: 0b43a5e8d94145f499de9a8d256deaa4, type: 3}
 --- !u!114 &11452428
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -144,6 +144,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InitialEffects:
   - EmbalmerTrait
+  Traits: []
 --- !u!114 &11497004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -163,7 +164,12 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: Image
+      value: 
+      objectReference: {fileID: 21300000, guid: 0b43a5e8d94145f499de9a8d256deaa4,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 168242}

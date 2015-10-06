@@ -32,7 +32,7 @@ GameObject:
   - 114: {fileID: 11443750}
   - 114: {fileID: 11472218}
   m_Layer: 5
-  m_Name: Cleave
+  m_Name: SkillUseButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

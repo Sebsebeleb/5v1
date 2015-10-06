@@ -32,7 +32,7 @@ public class LevelupManagerBehaviour : MonoBehaviour
             new Data.Skills.Bloodlust(i),
             new Data.Skills.Cleave(i),
             new Data.Skills.Stun(i),
-            new Data.Skills.ArcLighting(i),
+            new Data.Skills.ArcLightning(i),
             new Data.Skills.Blizzard(i),
             new Data.Skills.Switcheroo(i),
             new Data.Skills.LightningBolt(i),
