@@ -19,6 +19,7 @@ namespace Event
         // Some events that aren't related to actual gameplay
         GameDeserialized, // Called after the game has loaded a save, used by EnemyDisplay so it knows to update itself
         PostEnemySpawned, // Called JUST after an enemy is spawned.
+        EnemyAttack, // Called whenever an enemy attacks the player with a standard attack. Passes the damage dealt and who attacked
     }
 
     #region delegates
@@ -39,9 +40,12 @@ namespace Event
 
     public delegate void OnPostEnemySpawned(Actor who);
 
+    public delegate void OnEnemyAttack(EnemyAttackArgs args);
+
     // Events that are not related to actual gameplay
 
     public delegate void OnGameDeserialized();
+
 
     #endregion
 
@@ -82,6 +86,12 @@ namespace Event
             who = _who;
             effect = _effect;
         }
+    }
+
+    public struct EnemyAttackArgs
+    {
+        public Actor who;
+        public int rawDamage;
     }
 
 

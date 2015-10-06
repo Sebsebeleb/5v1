@@ -1,5 +1,8 @@
 using UnityEngine;
 
+using Data.Effects;
+
+
 namespace Data.Skills
 {
     [System.Serializable]

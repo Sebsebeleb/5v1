@@ -1,17 +1,16 @@
 using UnityEngine;
-
 using Data.Effects;
 
 namespace Data.Skills
 {
     [System.Serializable]
-    public class Blizzard : BaseSkill
+    public class Inferno : BaseSkill
     {
 
-        public Blizzard(int PlayerLevel) : base(PlayerLevel)
+        public Inferno(int PlayerLevel) : base(PlayerLevel)
         {
-            SkillName = "Blizzard";
-            Tooltip = "Deal {0} damage to all enemies. Then, if at least 4 enemies survive, stun them for {1} turn";
+            SkillName = "Inferno";
+            Tooltip = "Deal {0} damage to all enemies and apply burning for {1} turns";
             BaseCooldown = 12;
         }
 
@@ -26,30 +25,26 @@ namespace Data.Skills
 
             // Check if 4+ alive
 			var enemies = GridManager.TileMap.GetAll();
-			int numAlive = 0;
 			foreach(var enemy in enemies){
 				if (enemy.tag != "Corpse" && enemy.damagable.CurrentHealth > 0){
-					numAlive++;
-				}
-			}
-
-            // If so, stun them
-			if (numAlive >= 4){
-				foreach(var enemy in enemies){
-					enemy.effects.AddEffect(new Stunned(2));
+                    enemy.effects.AddEffect(new Burning(getDuration()));
 				}
 			}
         }
 
         private int getDamage(){
-            return 1 + Rank;
+            return 2 + Rank;
         }
+
+		private int getDuration(){
+			return 3;
+		}
 
 
         public override string GetTooltip()
         {
-            string damageProp = TextUtilities.FontColor(Colors.DamageValue, getDamage().ToString());
-            string durationProp = TextUtilities.FontColor(Colors.DurationValue, "1");
+            string damageProp = TextUtilities.FontColor(Colors.DamageValue, getDamage());
+            string durationProp = TextUtilities.FontColor(Colors.DurationValue, getDuration());
 
             return string.Format(Tooltip, damageProp, durationProp);
         }

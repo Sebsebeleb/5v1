@@ -15,6 +15,9 @@ public static class TextUtilities
         {"apply", Colors.EffectApplied},
         {"heal", Colors.HealValue},
         {"you", Colors.You},
+        {"wet", Colors.Wet},
+        {"burning", Colors.Burning},
+        {"electrified", Colors.Electrified},
 
     };
 
@@ -30,6 +33,9 @@ public static class TextUtilities
     public static string FontColor(string color, string text)
     {
         return String.Format("<color={0}>{1}</color>", color, text);
+    }
+    public static string FontColor(string color, IFormattable text){
+        return FontColor(color, text.ToString());
     }
 
     /// <summary>

@@ -67,6 +67,15 @@ public class EffectHolder : MonoBehaviour, IEnumerable
         _effects.Remove(effect);
     }
 
+    // Performs deconstructor-ish actions like making sure all effects are properly destroyed
+    public void Cleanup(){
+        //.ToArray() to create a copy
+        foreach(Effect eff in _effects.ToArray()){
+
+            RemoveEffect(eff);
+        }
+    }
+
     public void AddEffect(Effect effect)
     {
 

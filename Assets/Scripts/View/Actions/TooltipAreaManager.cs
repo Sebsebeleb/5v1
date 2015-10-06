@@ -47,7 +47,6 @@ public class TooltipAreaManager : MonoBehaviour
         // If the title is the same, we assume it's the same skill. and dont redraw
         if (title == currentlyDisplaying)
         {
-            Debug.Log("Bye");
             return;
         }
 
