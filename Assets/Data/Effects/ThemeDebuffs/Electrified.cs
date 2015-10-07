@@ -6,6 +6,9 @@ namespace Data.Effects
     {
         public Electrified()
         {
+            IsDebuff = true;
+            IsThemeDebuff = true;
+
             Description = new EffectDescription("Electrified", () => "This enemy is electrified, it has -1 attack and arc lighting will not jump to it");
         }
 

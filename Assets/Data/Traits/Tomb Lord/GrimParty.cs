@@ -9,6 +9,8 @@ namespace Data.Effects
         private int _currentBonus = 0;
 
         public GrimParty() : base(){
+            IsTrait = true;
+            
             Description = new EffectDescription(
                 "Dead Party",
                 describe

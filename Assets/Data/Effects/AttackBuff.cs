@@ -16,6 +16,7 @@ namespace Data.Effects
 
         // An empty constructor has to be provided for serialization
         public AttackBuff(){
+            IsBuff = true;
             bonus = 0;
 
             Description = new EffectDescription("Priestly buff", () => "Attack increased by " + bonus);
@@ -24,6 +25,7 @@ namespace Data.Effects
 
         public AttackBuff(int attackBonus) : base()
         {
+            IsBuff = true;  
             bonus = attackBonus;
 
             Description = new EffectDescription("Priestly buff", () => "Attack increased by " + bonus);

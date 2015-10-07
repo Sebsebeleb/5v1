@@ -12,6 +12,8 @@ namespace Data.Effects
 
         public Stunned(int duration) : base(duration)
         {
+            IsDebuff = true;
+            
             Description = new EffectDescription("Stunned",
                 describe);
         }

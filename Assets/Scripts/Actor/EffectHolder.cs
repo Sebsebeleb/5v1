@@ -34,7 +34,7 @@ public class EffectHolder : MonoBehaviour, IEnumerable
     {
         List<Effect> deadEffects = new List<Effect>();
 
-        foreach (Effect effect in _effects)
+        foreach (Effect effect in _effects.ToArray())
         {
             effect.OnTurn();
 
@@ -112,6 +112,14 @@ public class EffectHolder : MonoBehaviour, IEnumerable
     public List<Effect> GetEffectsOfType<T>()
     {
         return _effects.FindAll(effect => effect is T);
+    }
+
+    public Effect[] GetTraits(){
+        return _traits.ToArray();
+    }
+
+    public Effect[] GetEffects(){
+        return _effects.ToArray();
     }
 
     public IEnumerator GetEnumerator()

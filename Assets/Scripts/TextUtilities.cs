@@ -22,7 +22,7 @@ public static class TextUtilities
     };
 
     // The compiled regex for searching for keywords to prettify
-    private static readonly Regex keywordReplacer = new Regex(string.Join("|", keywordMapping.Keys.ToArray()));
+    private static readonly Regex keywordReplacer = new Regex(string.Join("|", keywordMapping.Keys.ToArray()), RegexOptions.IgnoreCase);
 
     /// <summary>
     /// Returns a new string that colors the passed string with the given color

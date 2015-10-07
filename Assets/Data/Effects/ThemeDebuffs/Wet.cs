@@ -10,6 +10,9 @@ namespace Data.Effects
 
         public Wet(int duration) : base(duration)
         {
+            IsDebuff = true;
+            IsThemeDebuff = true;
+
             Description = new EffectDescription("Wet", () =>
                 "The next time this enemy is stunned, it will be stunned an additional turn and consume wet"
              );

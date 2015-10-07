@@ -17,6 +17,8 @@ namespace Data.Effects
                 "Gathering Energies",
                 describe
             );
+            
+            IsTrait = true;
         }
 
         private string describe(){

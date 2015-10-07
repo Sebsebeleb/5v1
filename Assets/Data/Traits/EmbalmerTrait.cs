@@ -10,6 +10,8 @@ namespace Data.Effects
         private int _currentBonus = 0;
 
         public EmbalmerTrait() : base(){
+            IsTrait = true;
+
             Description = new EffectDescription(
                 "Grave strength",
                 describe

@@ -12,6 +12,7 @@ internal class FireShieldEffect : Effect
     public FireShieldEffect(int duration, int _damage, int _bonusDamage)
         : base(duration)
     {
+        IsBuff = true;
         Description = new EffectDescription(
             "Fire Shielded",
             describe

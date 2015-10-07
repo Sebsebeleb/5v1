@@ -9,6 +9,9 @@ namespace Data.Effects
 
         public Burning(int duration) : base(duration)
         {
+            IsDebuff = true;
+            IsThemeDebuff = true;
+
             Description = new EffectDescription("Burning", () =>
             string.Format(
                 "This enemy is burning, it takes {0} damage every turn",
@@ -16,18 +19,9 @@ namespace Data.Effects
              ));
         }
 
-        protected override void Created()
-        {
-            base.Created();
 
-            Event.EventManager.Register(Event.Events.OnTurn, (Event.OnTurn) Burn);
-        }
-
-        protected override void Destroyed()
-        {
-            base.Destroyed();
-
-            Event.EventManager.UnRegister(Event.Events.OnTurn, (Event.OnTurn) Burn);
+        public override void OnTurn(){
+            Burn();
         }
 
         private void Burn()

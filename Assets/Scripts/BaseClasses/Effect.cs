@@ -22,11 +22,19 @@ namespace BaseClasses
         // If it is infinite, it will not countdown and disappear on its own
         public bool IsInfinite = false;
 
+        // The generic debuffs like Wet/Burning/Electrified etc.
+        public bool IsThemeDebuff = false;
+        // Is this effect a positive effect?
+        public bool IsBuff = false;
+        // Is this effect a negative effect? Note: effects can be neither buffs or debuffs, like ArcLighting effect
+        public bool IsDebuff = false;
         // If it is purgable, effect cleansing will remove it
         public bool Purgable = false;
         public int Duration;
         // If it is a trait, it is inherit and not temporary, and should be described on the creature description as a trait rather than effect
         public bool IsTrait = false;
+        // If hidden, it will not show up in inspector
+        public bool IsHidden = false;
 
         protected EffectDescription Description = new EffectDescription("OOPS Missing description", () => "Oops");
 
@@ -39,6 +47,7 @@ namespace BaseClasses
 
         public Effect(int duration)
         {
+            IsInfinite = false;
             Duration = duration;
             Created();
         }
