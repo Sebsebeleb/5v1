@@ -1,6 +1,10 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+
+// Asset package
+using UnityEngine.UI.Extensions;
+
 using DG;
 using DG.Tweening;
 using System.Collections.Generic;
@@ -67,11 +71,14 @@ public class EffectIconAnimation : MonoBehaviour
 
         if (animationInfo.SpawnHoverText)
         {
+            var outline = icon.GetComponent<NicerOutline>();
+
             tween = icon.DOFade(1f, duration / 2)
             .SetEase(Ease.InCirc)
             .SetDelay(delay)
             .OnStart(() =>
                 {
+
                     icon.sprite = getSprite(animationInfo.IconName);
                     // Text prop stuff
                     GameObject text = Instantiate(FloatTextPrefab) as GameObject;
@@ -79,7 +86,12 @@ public class EffectIconAnimation : MonoBehaviour
                     text.GetComponent<FloatTextBehaviour>().SetText(animationInfo.TextProp);
                     text.GetComponent<FloatTextBehaviour>().SetTarget(animationInfo.target.GetComponent<RectTransform>());
                 });
-
+            // Tween the outline as well, otherwise it looks pretty dark and weird in the start
+            tween.OnUpdate(() => {
+                Color old = outline.effectColor;
+                old.a = icon.color.a * 0.6f;
+                outline.effectColor = old;
+            });
             tween.OnComplete(() =>
                 {
                     icon.DOFade(0f, duration / 2).SetEase(Ease.InCirc);

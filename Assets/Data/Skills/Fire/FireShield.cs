@@ -17,7 +17,7 @@ namespace Data.Skills
 
             GameObject player = GameObject.FindWithTag("Player");
 
-            player.GetComponent<EffectHolder>().AddEffect(new FireShieldEffect(2, getDamage(), getBonusDamage()));
+            player.GetComponent<EffectHolder>().AddEffect(new FireShieldEffect(getDuration(), getDamage(), getBonusDamage()));
         }
 
         private int getDuration(){

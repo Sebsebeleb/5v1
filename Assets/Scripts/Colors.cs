@@ -6,11 +6,13 @@ public static class Colors{
 	public const string HealValue = "#F0466A";
 
 	// Specific words mostly used by the prettifier
+	public const string AttackWord = "#f65a52"; // TODO: Too redundant? confusing because of the difference between the verb and the noun?
 	public const string DamageWord = "#FFBE4D";
 	public const string Stunned = "#3385FF";
 	public const string EffectApplied = "#A261F2"; // "Applied"
 	public const string You = "#9BF261";
 	public const string Fire = "#F49132";
+	// Effects
 	public const string Burning = "#F49132";
 	public const string Wet = "#237ec6";
 	public const string Electrified = "#eae532";

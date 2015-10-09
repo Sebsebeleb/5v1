@@ -18,6 +18,7 @@ public static class TextUtilities
         {"wet", Colors.Wet},
         {"burning", Colors.Burning},
         {"electrified", Colors.Electrified},
+        {"attack", Colors.AttackWord},
 
     };
 
