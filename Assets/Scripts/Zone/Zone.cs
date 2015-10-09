@@ -27,7 +27,7 @@ namespace Zone
         public int ZoneLength; // The bosscounter will start at this number
         public string Denizens;
 
-        // Modifies the diffuculty of enemies spawned. 
+        // Modifies the diffuculty of enemies spawned.
         public float EnemyDifficultyMod = 1.0f;
 
         // Common modifications to the zone
@@ -61,6 +61,11 @@ namespace Zone
         // Called when the zone is chosen to be the next active one. Also should be called when deserialized to setup events etc.
         private void Initalize()
         {
+            // Make sure there are no old enemeis alive (like due to the debug menu generating a new zone before finish)
+            foreach (Actor enemy in GridManager.TileMap.GetAll())
+            {
+                EnemyManager.KillEnemy(enemy);
+            }
 
             Event.OnPostEnemySpawned callback = HandleEnemySpawned;
             // Initialize a generic callback for modifying creatures as they spawn based on common zone stats
@@ -69,10 +74,16 @@ namespace Zone
             {
                 mod.ApplyCallbacks();
             }
+
+            // Kinda temp, spawn some enemies at the beginning of a new zone so it isnt completely barren
+            EnemyManager.SpawnRandomEnemy(0, 0);
+            EnemyManager.SpawnRandomEnemy(1, 0);
+            EnemyManager.SpawnRandomEnemy(2, 0);
         }
 
         // Apply modifications to enemies when they spawned based on zone effects
-        private void HandleEnemySpawned(Actor who){
+        private void HandleEnemySpawned(Actor who)
+        {
             who.damagable.BonusMaxHealth = EnemyHealthModifier - 1.0f;
         }
     }
