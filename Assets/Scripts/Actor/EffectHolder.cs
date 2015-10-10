@@ -1,8 +1,11 @@
-﻿using BaseClasses;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
-using System;
+using UnityEngine.Assertions;
+
+using BaseClasses;
+
 
 public class EffectHolder : MonoBehaviour, IEnumerable
 {
@@ -78,6 +81,8 @@ public class EffectHolder : MonoBehaviour, IEnumerable
 
     public void AddEffect(Effect effect)
     {
+        // Check that effects arre properly hidden
+        Assert.IsFalse(effect.GetName() == "OOPS Missing description" && !effect.IsHidden, "WARNING: Effect should be hidden or given a proper description: " + effect.GetType().ToString());
 
         if (gameObject.tag != "Player"){
             Event.EventManager.Notify(Event.Events.PreEnemyEffectApplied, new Event.PreEnemyEffectAppliedArgs(actor, effect));

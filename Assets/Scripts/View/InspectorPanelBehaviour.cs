@@ -143,20 +143,23 @@ public class InspectorPanelBehaviour : MonoBehaviour
 
     // Holder is the transform it should be the child of
     // If duration != -1, it will append that number to the title (so for example "burning" becomes "burning (3)"
+    // TODO: Should probably not display duration and duration icon on actions/traits
     private void CreateEntry(ITooltip entryData, Transform holder, Color color, int duration=-1)
     {
 
         GameObject item = Instantiate(ActionItemPrefab) as GameObject;
+        ActionEntryBehaviour behaviour = item.GetComponent<ActionEntryBehaviour>();
 
         item.transform.SetParent(holder);
         item.GetComponent<Image>().color = color;
 
-        // TODO: Hmm, not sure if I like having the title Improved or not..
+        // TODO: Hmm, not sure if I like having the title Improved() or not..
         string title = TextUtilities.ImproveText(entryData.GetName());
-        if (duration != -1){
-            title = String.Format("{0} ({1})", title, TextUtilities.FontColor(Colors.DurationValue, duration));
-        }
-        item.GetComponentInChildren<Text>().text = title;
+
+        // TODO: The infinity symbol in the current font is kinda weird and misplaced. So solution would be to use an icon in that case
+        behaviour.DurationText.text = duration == -1 ? "∞" : duration.ToString();
+
+        behaviour.TitleText.text = title;
 
         // Store a reference so we can retrieve it later if we want to get the description
         _entries.Add(item.transform, entryData);
@@ -203,7 +206,7 @@ public class InspectorPanelBehaviour : MonoBehaviour
         // Sort it by: Is it a buff? is it a debuff? its duration, then finally by name
         var effects = effectHolder.GetEffects();
 
-        IEnumerable<Effect> sorted = effects.OrderBy(eff => !eff.IsInfinite).
+        IEnumerable<Effect> sorted = effects.OrderBy(eff => eff.IsInfinite).
             ThenBy(eff => eff.Duration).
             ThenBy(eff => !eff.IsDebuff).
             ThenBy(eff => !eff.IsBuff).
@@ -211,7 +214,7 @@ public class InspectorPanelBehaviour : MonoBehaviour
             .Reverse());
 
 
-        foreach (Effect eff in effectHolder)
+        foreach (Effect eff in sorted)
         {
             if (eff.IsHidden){
                 continue;
