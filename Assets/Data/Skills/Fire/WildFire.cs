@@ -1,4 +1,7 @@
-using UnityEngine;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
 using Data.Effects;
 
 namespace Data.Skills
@@ -20,37 +23,70 @@ namespace Data.Skills
             BaseCooldown = 12;
         }
 
+        // Can only be used if there actually is a burning enemy
+        public override bool CanUse(int x, int y){
+            if (!base.CanUse(x, y)){
+                return false;
+            }
+
+            foreach(Actor enemy in GridManager.TileMap.GetAll()){
+                if (enemy.effects.HasEffect<Burning>()){
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         public override void UseOnTargetGrid(int x, int y)
         {
             base.UseOnTargetGrid(x, y);
 
-            // Deal damage
-			foreach(var enemy in GridManager.TileMap.GetAll()){
-				enemy.damagable.TakeDamage(getDamage());
-			}
+            // we create a list that contains the targets and how much damage they will take
+            Dictionary<Actor, int> validTargets = new Dictionary<Actor, int>();
 
-            // Check if 4+ alive
-			var enemies = GridManager.TileMap.GetAll();
-			foreach(var enemy in enemies){
-				if (enemy.tag != "Corpse" && enemy.damagable.CurrentHealth > 0){
-                    enemy.effects.AddEffect(new Burning(getDuration()));
-				}
-			}
+            foreach(Actor enemy in GridManager.TileMap.GetAll()){
+                if (enemy.effects.HasEffect<Burning>()){
+                    validTargets.Add(enemy, 0);
+                }
+            }
+
+            // Find the number of burning enemies
+            int totalBurningEnemies =
+                (from enemy in GridManager.TileMap.GetAll()
+                where enemy.effects.HasEffect<Burning>()
+                select enemy)
+                .Count();
+
+            int totalDamage = getDamage() + getBonusDamage();
+
+            validTargets.ElementAt(0);
+
+            //Now assign it randomly
+            for (int i = totalDamage; i > 0; i--){
+                var target = validTargets.RandomElement().Key;
+                validTargets[target]++;
+            }
+
+            // And then deal it
+            foreach (var pair in validTargets){
+                pair.Key.damagable.TakeDamage(pair.Value);
+            }
         }
 
         private int getDamage(){
             return 2 + Rank;
         }
 
-		private int getDuration(){
-			return 3;
+		private int getBonusDamage(){
+			return 1 + (int) Rank/2;
 		}
 
 
         public override string GetTooltip()
         {
             string damageProp = TextUtilities.FontColor(Colors.DamageValue, getDamage());
-            string durationProp = TextUtilities.FontColor(Colors.DurationValue, getDuration());
+            string durationProp = TextUtilities.FontColor(Colors.DurationValue, getBonusDamage());
 
             return string.Format(Tooltip, damageProp, durationProp);
         }
