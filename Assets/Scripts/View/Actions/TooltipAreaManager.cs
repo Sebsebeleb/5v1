@@ -63,7 +63,7 @@ public class TooltipAreaManager : MonoBehaviour
         // Could be cool, but unfortunately doesn't work well with the colored text
         //Tooltip.DOFade(0f, 0.1f).OnComplete(() => Tooltip.DOFade(1f, 0.1f));
 
-        UpdateFontSize();
+        //UpdateFontSize();
         Tooltip.transform.localScale = new Vector3(1, 0, 1);
         seq.Append(Tooltip.transform.DOScale(new Vector3(1, 1, 1), 0.15f));
     }
