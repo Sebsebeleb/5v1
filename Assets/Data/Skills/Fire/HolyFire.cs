@@ -5,7 +5,7 @@ using System.Text;
 
 using Data.Effects;
 
-namespace Assets.Data.Skills
+namespace Data.Skills
 {
     class HolyFire : BaseSkill
     {
@@ -31,7 +31,7 @@ namespace Assets.Data.Skills
             foreach(Actor enemy in targets)
             {
                 enemy.damagable.TakeDamage(damage);
-                //enemy.effects.AddEffect(new burning(duration)))
+                enemy.effects.AddEffect(new Burning(duration));
             }
         }
 

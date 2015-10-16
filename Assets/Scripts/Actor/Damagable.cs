@@ -14,6 +14,8 @@ public class Damagable : MonoBehaviour
 
     private HealthData data;
 
+    private bool isDead;
+
     public int MaxHealth
     {
         get { return data.MaxHealth; }
@@ -84,7 +86,7 @@ public class Damagable : MonoBehaviour
 
         CurrentHealth -= finalDamage;
 
-        if (CurrentHealth <= 0)
+        if (CurrentHealth <= 0 && !isDead) // cannot die multiple times yo
         {
             if (gameObject.tag == "Player")
             {
@@ -124,6 +126,11 @@ public class Damagable : MonoBehaviour
 
     public void Die(bool givexp = true)
     {
+        isDead = true;
+
+        // Allow effects that trigger on death
+        EventManager.Notify(Events.ActorPreDied, actor);
+
         // If we started the boss, enemies dont grant xp anymore (besides defeating the whole boss wave (NYI))
         if (givexp && TurnManager.BossCounter > 0)
         {

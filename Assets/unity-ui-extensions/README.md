@@ -3,7 +3,7 @@
 This is an extension project for the new Unity UI system which can be found at:
 [Unity UI Source](https://bitbucket.org/Unity-Technologies/ui)
 
-#Updated for 5.2 - new asset package#
+#Updated for 5.2.1P+/5.3 - new asset package#
 
 ##Intro##
 For more info, here's a little introduction video for the project:
@@ -18,13 +18,21 @@ You can either download / fork the project to access the scripts, or you can dow
 ### [Unity UI Extensions Unity 4.x Asset](https://bitbucket.org/ddreaper/unity-ui-extensions/downloads/UnityUIExtensions-4.x.unitypackage)###
 ### [Unity UI Extensions Unity 5.1 Asset](https://bitbucket.org/ddreaper/unity-ui-extensions/downloads/UnityUIExtensions-5.1.unitypackage)###
 ### [Unity UI Extensions Unity 5.2 Asset](https://bitbucket.org/ddreaper/unity-ui-extensions/downloads/UnityUIExtensions-5.2.unitypackage)###
+### [Unity UI Extensions Unity 5.3 (5.2.1P+) Asset](https://bitbucket.org/ddreaper/unity-ui-extensions/downloads/UnityUIExtensions-5.3.unitypackage) <- use this for 5.2.1P+ releases###
+
 
 ##Getting Started##
 To get started with the project, here's a little guide:
 
 [![View Getting Started Video](http://img.youtube.com/vi/sVLeYmsNQAI/0.jpg)](http://www.youtube.com/watch?v=sVLeYmsNQAI "Unity UI getting started video")
 ---
+## Updates: ##
+Update 1.0.4
+[![View Getting Started Video](http://img.youtube.com/vi/oF48Qpaq3ls/0.jpg)](http://www.youtube.com/watch?v=oF48Qpaq3ls "Update 1.0.0.4 for the Unity UI Extensions Project")
 
+Update 1.0.5
+Few minor fixes and a couple of additional scripts.  Predominatly created the new 5.3 branch to maintain the UI API changes from the 5.2.1 Patch releases.  5.3 package is 100% compatible with 5.2.1 Patch releases.
+---
 ## Controls and extensions listed in this project are: ##
 
 ## Controls ##
@@ -53,8 +61,9 @@ Control | Description | Menu Command | Component Command | Notes | Credits
 --------- | -------------- | ---------------------- | ---------------------------- | ------- | ----------
 **LineRenderer** | Graphic control for drawing lines in the UI System | UI / Extensions / Primitives / UI Line Renderer | UI / Extensions / Primitives / UI Line Renderer |[tutorial video](https://www.youtube.com/watch?v=OElcWAZGHi0)| jack.sydorenko
 **UILineTextureRenderer** | Graphic control for drawing lines in the UI System | UI / Extensions / Primitives / UI Line Texture Renderer | UI / Extensions / Primitives / UI Line Texture Renderer |[tutorial video](https://www.youtube.com/watch?v=OElcWAZGHi0)| jack.sydorenko, jonbro5556
-**UICircle** | Graphic control for drawing circles in the UI System | UI / Extensions / Primitives / UI Circle | UI / Extensions / Primitives / UI Circle || zge
-
+**UICircle** | Graphic control for drawing circles in the UI System | UI / Extensions / Primitives / UI Circle | UI / Extensions / Primitives / UI Circle |[tutorial video](https://www.youtube.com/watch?v=2KOnEKAVua0)| zge
+**DiamondGraph** | Graphic control for drawing a diamond in the UI System | UI / Extensions / Primitives / DiamondGraph | UI / Extensions / Primitives / DiamondGraph |5.2+ only [tutorial video](https://www.youtube.com/watch?v=2KOnEKAVua0)| koohddang
+**UICornerCut** | Graphic control for drawing a diamond in the UI System | UI/Extensions/Primitives/Cut Corners | UI/Extensions/Primitives/Cut Corners || Freezy
 
 
 ## Layouts ##
@@ -65,9 +74,12 @@ Layout | Description | Menu Command | Component Command | Notes | Credits
 **HorizontalScrollSnap** | A pages scroll rect that can work in steps / pages, includes button support | UI / Extensions / Horizontal Scroll Snap | Layout / Extensions / Horizontal Scroll Snap |[tutorial video](https://www.youtube.com/watch?v=KJlIlWHlfMo)| BinaryX
 **VerticalScrollSnap** | A pages scroll rect that can work in steps / pages, includes button support | UI / Extensions / Vertical Scroll Snap | Layout / Extensions / Vertical Scroll Snap |[tutorial video](https://www.youtube.com/watch?v=KJlIlWHlfMo)| BinaryX, Simon Darkside Jackson
 **FlowLayoutGroup** | A more rugged grid style layout group  || Layout / Extensions / Flow Layout Group | [Example Video](https://www.youtube.com/watch?v=tMe_3tJTZvc) | Simie
-**RadialLayout** | A radial layout system || Layout / Extensions / Radial Layout || Danny Goodayle
-**TileSizeFitter** | A fitter layout that will shink / expand content by tiles || Layout / Extensions / TileSizeFitter || Ges
-
+**RadialLayout** | A radial layout system || Layout / Extensions / Radial Layout |[tutorial video](https://www.youtube.com/watch?v=iUlk0d2RDMs)| Danny Goodayle
+**TileSizeFitter** | A fitter layout that will shink / expand content by tiles || Layout / Extensions / TileSizeFitter |[tutorial video](https://www.youtube.com/watch?v=AkQNWl8mnxg)| Ges
+**ScrollSnap** | An alternate scroll snap control supporting both Horizontal and Vertial layous in one control | UI / Extensions / Fixed Item Scroll / Snap Horizontal Single Item||| xesenix
+|| UI / Extensions / Fixed Item Scroll / Snap Horizontal Multiple Item||| xesenix
+|| UI / Extensions / Fixed Item Scroll / Snap Vertical Single Item||| xesenix
+|| UI / Extensions / Fixed Item Scroll / Snap Vertical Multiple Item||| xesenix
 
 
 ## Effect components ##
@@ -83,6 +95,7 @@ Effect   | Description | Component Command | Notes  | Credits
 **RaycastMask** | An example of an enhanced mask component able to work with the image data. Enables picking on image parts and not just the Rect Transform | UI / Effects / Extensions / Raycast Mask | | senritsu
 **UIFlippable** | Image component effect to flip the graphic | UI / Effects / Extensions / UI Flippable | | ChoMPHi
 
+
 ## VR Components##
 =======================
 
@@ -91,6 +104,14 @@ Component | Description | Component Command | Notes | Credits
 **VRCursor** | Cursor script for VR use (requires VRInputModule) | UI / Extensions / VR Cursoe | | Ralph Barbagallo
 **VRInputModule** | Input module to support the VR Cursor | Event / Vr Input Module | | Ralph Barbagallo
 
+
+## Input Modules ##
+=======================
+
+Component | Description | Component Command | Notes | Credits
+--------- | -------------- | ---------------------------- | ------- | ------
+**AimerInputModule** | Replacement Input module to allow for a reciclue to interace with WorldSpace canvas UI  | Event / Extensions / Aimer Input Module |  | Chris Trueman
+**GamePadInputModule** | Stripped down SIM Input module for just gamepad/keybord input   | Event / Extensions / GamePad Input Module |  | Simon (darkside) Jackson
 
 ## Additional Components##
 =======================
@@ -106,7 +127,6 @@ Component | Description | Component Command | Notes | Credits
 **InputFocus** | Enhanced InputField control for forms, enables Enter to submit and other features  | UI / Extensions / InputFocus |  | Zelek
 **ImageExtended** | Improved Image control with rotation support and use of filled type without an Image (useful for masks)  | UI / Extensions / Image Extended |  | Ges
 **UIScrollToSelection** | Enables a ScrollRect to scroll based on the selected child automatically  | UI / Extensions / UIScrollToSelection |  | zero3growlithe
-**AimerInputModule** | Replacement Input module to allow for a reciclue to interace with WorldSpace canvas UI  | UI / Extensions / Aimer Input Module |  | Chris Trueman
 **UISelectableExtension** | Refactor of original UI Button control, can now add Press/Release and Hold events to any Selectable control  | UI / Extensions / UI Selectable Extension | | AriathTheWise / Simon Jackson
 **switchToRectTransform** | RectTransform extension method to move one Rect to another  | N/A | | Izitmee
 

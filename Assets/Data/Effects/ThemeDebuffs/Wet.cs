@@ -27,7 +27,7 @@ namespace Data.Effects
         {
             ChangeAnimation a = new ChangeAnimation();
             a.SpawnHoverText = true;
-            a.IconName = "Burning";
+            a.IconName = "Wet";
 
             return a;
         }

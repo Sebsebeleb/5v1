@@ -10,7 +10,8 @@ namespace Event
         OnTurn, // Called whenever a turn passes
         ActorCountedDown, // Called whenever an actor has it's countdown decreased by a turn manager (so not while stunned)
         OnActorTookDamage,
-        ActorDied,
+        ActorPreDied, // Called just before an enemy is killed, right before effects are cleaned up
+        ActorDied, // Called after an enemy is killed and effects have been cleaned up
         PlayerLeveledUp,
         ActorActed, // Called when an enemy acts (it performs attacks etc.)
         PreEnemyAction, // Called right before an enemy executes an action, passign the action taken
@@ -27,6 +28,7 @@ namespace Event
     public delegate void OnTurn();
 
     public delegate void OnActorTookDamage(TookDamageArgs args);
+    public delegate void PreActorDied(Actor who);
 
     public delegate void ActorDied(Actor who);
 

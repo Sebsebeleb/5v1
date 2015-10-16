@@ -42,6 +42,7 @@ public class LevelupManagerBehaviour : MonoBehaviour
             new Inferno(i),
             new ConsumingFire(i),
             new FrostFire(i),
+            new HolyFire(i),
 
         };
 

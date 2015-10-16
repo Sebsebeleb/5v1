@@ -10,7 +10,7 @@ namespace Data.Skills
         public ConsumingFire(int PlayerLevel) : base(PlayerLevel)
         {
             SkillName = "Consuming Fire";
-            Tooltip = "Apply burning(4) to an enemy and heal for {0} for every burning enemy. When the targeted enemy dies, if it dies from DoT damage, it will explode dealing {1} damage to all adjacent enemies and apply burning(3) to them";
+            Tooltip = "Apply burning (4) to an enemy and heal for {0} for every burning enemy. If the enemy dies within 4 turns, it will explode dealing {1} damage to all adjacent enemies and apply burning (3) to them";
             BaseCooldown = 7;
         }
         public override void UseOnTargetGrid(int x, int y)
@@ -32,7 +32,10 @@ namespace Data.Skills
             GameObject player = GameObject.FindWithTag("Player");
             player.GetComponent<Damagable>().Heal(numBurning * getHeal());
 
-            //TODO: Add the aoe effect thing.
+
+            int aoeDamage = getAoeDamage();
+
+            target.effects.AddEffect(new FieryInstability(4, aoeDamage));
         }
 
         private int getHeal(){
