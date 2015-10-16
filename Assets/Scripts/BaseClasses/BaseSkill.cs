@@ -27,7 +27,7 @@ public abstract class BaseSkill : ITooltip, IRankCalculatable
         Rank = GetRank(PlayerLevel);
     }
 
-    public bool CanTargetGrid(int x, int y)
+    public virtual bool CanTargetGrid(int x, int y)
     {
         return true;
     }
@@ -43,7 +43,7 @@ public abstract class BaseSkill : ITooltip, IRankCalculatable
 
     }
 
-    public bool CanUse(int x, int y)
+    public virtual bool CanUse(int x, int y)
     {
         return CurrentCooldown <= 0;
     }
@@ -72,7 +72,7 @@ public abstract class BaseSkill : ITooltip, IRankCalculatable
         }
 
         int result = PossibleRanks.RandomElement();
-        
+
         return result;
     }
 

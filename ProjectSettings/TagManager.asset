@@ -9,6 +9,7 @@ TagManager:
   - InspectorPanel
   - TooltipDisplayer
   - MainCanvas
+  - TooltipArea
   layers:
   - Default
   - TransparentFX

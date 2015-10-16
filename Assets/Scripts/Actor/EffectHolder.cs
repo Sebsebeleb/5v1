@@ -1,8 +1,11 @@
-﻿using BaseClasses;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
-using System;
+using UnityEngine.Assertions;
+
+using BaseClasses;
+
 
 public class EffectHolder : MonoBehaviour, IEnumerable
 {
@@ -34,7 +37,7 @@ public class EffectHolder : MonoBehaviour, IEnumerable
     {
         List<Effect> deadEffects = new List<Effect>();
 
-        foreach (Effect effect in _effects)
+        foreach (Effect effect in _effects.ToArray())
         {
             effect.OnTurn();
 
@@ -67,11 +70,22 @@ public class EffectHolder : MonoBehaviour, IEnumerable
         _effects.Remove(effect);
     }
 
+    // Performs deconstructor-ish actions like making sure all effects are properly destroyed
+    public void Cleanup(){
+        //.ToArray() to create a copy
+        foreach(Effect eff in _effects.ToArray()){
+
+            RemoveEffect(eff);
+        }
+    }
+
     public void AddEffect(Effect effect)
     {
+        // Check that effects arre properly hidden
+        Assert.IsFalse(effect.GetName() == "OOPS Missing description" && !effect.IsHidden, "WARNING: Effect should be hidden or given a proper description: " + effect.GetType().ToString());
 
         if (gameObject.tag != "Player"){
-            Event.EventManager.Notify(Event.Events.PreEnemmyEffectApplied, new Event.PreEnemyEffectAppliedArgs(actor, effect));
+            Event.EventManager.Notify(Event.Events.PreEnemyEffectApplied, new Event.PreEnemyEffectAppliedArgs(actor, effect));
         }
         effect.SetOwner(actor);
 
@@ -103,6 +117,14 @@ public class EffectHolder : MonoBehaviour, IEnumerable
     public List<Effect> GetEffectsOfType<T>()
     {
         return _effects.FindAll(effect => effect is T);
+    }
+
+    public Effect[] GetTraits(){
+        return _traits.ToArray();
+    }
+
+    public Effect[] GetEffects(){
+        return _effects.ToArray();
     }
 
     public IEnumerator GetEnumerator()

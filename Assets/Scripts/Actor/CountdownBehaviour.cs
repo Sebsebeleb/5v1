@@ -55,6 +55,8 @@ public class CountdownBehaviour : MonoBehaviour
             return;
         }
 
+        Event.EventManager.Notify(Event.Events.ActorCountedDown, _actor);
+
 
         CurrentCountdown--;
         if (CurrentCountdown <= 0)

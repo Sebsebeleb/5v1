@@ -30,7 +30,7 @@ namespace Zone
             Zone nextZone = EntryGroup.ActiveToggles().ToList()[0].GetComponent<ZoneEntryBehaviour>().zone;
 
                         // Disable the screen
-            SelectionScreenRoot.SetActive(false);
+            gameObject.SetActive(false);
 
             TurnManager.BossCounter = nextZone.ZoneLength;
 

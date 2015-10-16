@@ -130,6 +130,8 @@ public class Damagable : MonoBehaviour
             GameObject.FindWithTag("Player").GetComponent<PlayerExperience>().GiveXp(3);
         }
 
+        actor.effects.Cleanup();
+
         //TODO: Consider; Should this object have this responsibility?
         EventManager.Notify(Events.ActorDied, actor);
         EnemyManager.KillEnemy(actor);

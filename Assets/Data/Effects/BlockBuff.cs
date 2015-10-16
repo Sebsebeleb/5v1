@@ -6,6 +6,7 @@ internal class Blocking : Effect
     public Blocking(int duration)
         : base(duration)
     {
+        IsBuff = true;
         Description = new EffectDescription(
             "Blocking",
             describe

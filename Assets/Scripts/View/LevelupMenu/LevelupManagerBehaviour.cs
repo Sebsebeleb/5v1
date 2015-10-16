@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+using Data.Skills;
 public class LevelupManagerBehaviour : MonoBehaviour
 {
     public Transform SkillsParent;
@@ -28,14 +29,20 @@ public class LevelupManagerBehaviour : MonoBehaviour
     private void OnPlayerLevel(int i)
     {
         List<BaseSkill> skills = new List<BaseSkill>(){
-            new Data.Skills.Block(i),
-            new Data.Skills.Bloodlust(i),
-            new Data.Skills.Cleave(i),
-            new Data.Skills.Stun(i),
-            new Data.Skills.ArcLighting(i),
-            new Data.Skills.Blizzard(i),
-            new Data.Skills.Switcheroo(i),
-            new Data.Skills.LightningBolt(i),
+            new Block(i),
+            new Bloodlust(i),
+            new Cleave(i),
+            new Stun(i),
+            new ArcLightning(i),
+            new Blizzard(i),
+            new Switcheroo(i),
+            new LightningBolt(i),
+            new FireShield(i),
+            new WildFire(i),
+            new Inferno(i),
+            new ConsumingFire(i),
+            new FrostFire(i),
+
         };
 
         BaseSkill blockSkill = new Data.Skills.Block(i);

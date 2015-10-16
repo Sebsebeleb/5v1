@@ -11,6 +11,7 @@ namespace Data.Effects
 
         public TombLordSummons(){
             IsTrait = true;
+            IsHidden = true;
         }
 
         private const int numAllies = 2;

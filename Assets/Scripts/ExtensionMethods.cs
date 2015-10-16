@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 public static class ExtensionMethods
@@ -22,5 +23,12 @@ public static class ExtensionMethods
         int i = rng.Next(0, list.Count);
 
         return list[i];
+    }
+
+    public static KeyValuePair<TKey, TValue> RandomElement<TKey, TValue>(this IDictionary<TKey, TValue> list){
+        var rng = new Random();
+        int i = rng.Next(0, list.Count);
+
+        return list.ElementAt(i);
     }
 }

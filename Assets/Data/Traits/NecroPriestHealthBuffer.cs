@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿    using System.Collections.Generic;
 using BaseClasses;
 using UnityEngine;
 
@@ -10,6 +10,7 @@ namespace Data.Effects
         private int _attackBonus = 2;
 
         public NecroPriestHealthBuffer() : base() {
+            IsHidden = true;
             IsTrait = true;
         }
 

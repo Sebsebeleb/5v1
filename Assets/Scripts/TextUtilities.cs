@@ -15,11 +15,15 @@ public static class TextUtilities
         {"apply", Colors.EffectApplied},
         {"heal", Colors.HealValue},
         {"you", Colors.You},
+        {"wet", Colors.Wet},
+        {"burning", Colors.Burning},
+        {"electrified", Colors.Electrified},
+        {"attack", Colors.AttackWord},
 
     };
 
     // The compiled regex for searching for keywords to prettify
-    private static readonly Regex keywordReplacer = new Regex(string.Join("|", keywordMapping.Keys.ToArray()));
+    private static readonly Regex keywordReplacer = new Regex(string.Join("|", keywordMapping.Keys.ToArray()), RegexOptions.IgnoreCase);
 
     /// <summary>
     /// Returns a new string that colors the passed string with the given color
@@ -30,6 +34,9 @@ public static class TextUtilities
     public static string FontColor(string color, string text)
     {
         return String.Format("<color={0}>{1}</color>", color, text);
+    }
+    public static string FontColor(string color, IFormattable text){
+        return FontColor(color, text.ToString());
     }
 
     /// <summary>

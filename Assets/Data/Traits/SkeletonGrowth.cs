@@ -17,11 +17,12 @@ namespace Data.Effects
                 "Gathering Energies",
                 describe
             );
+
+            IsTrait = true;
         }
 
         private string describe(){
-            return string.Format("Recieves {1} each time it acts. \nCurrent boost: {0}",
-                TextUtilities.Bold(TextUtilities.FontColor("#FF1111", _currentBonus.ToString())),
+            return string.Format("Recieves {0} attack each time it acts.",
                 TextUtilities.Bold(TextUtilities.FontColor("#FF1111", BonusPerTurn.ToString()))
             );
         }
@@ -47,8 +48,7 @@ namespace Data.Effects
                 return;
             }
 
-            _currentBonus++;
-            owner.attack.BonusAttack++;
+            owner.effects.AddEffect(new Boosted(1));
 
         }
 

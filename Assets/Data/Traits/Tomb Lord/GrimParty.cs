@@ -9,6 +9,8 @@ namespace Data.Effects
         private int _currentBonus = 0;
 
         public GrimParty() : base(){
+            IsTrait = true;
+            
             Description = new EffectDescription(
                 "Dead Party",
                 describe
@@ -29,7 +31,7 @@ namespace Data.Effects
 
             ActorDied callback = UpdateBonus;
             EventManager.Register(Events.ActorDied, callback);
-            EventManager.Register(Events.OnTurn, callback);
+            EventManager.Register(Events.OnTurn, (OnTurn) (() => {UpdateBonus();}));
         }
 
         public override void OnRemoved()

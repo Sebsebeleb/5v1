@@ -45,6 +45,15 @@ public class EnemyAttackAI : MonoBehaviour
 
     private void AttackPlayer()
     {
+        // Argument for the event
+        Event.EnemyAttackArgs args;
+        args.who = actor;
+        args.rawDamage = actor.attack.Attack;
+
+        // Deal damage
         playerDamage.TakeDamage(actor.attack.Attack);
+
+        // Fire off the event
+        Event.EventManager.Notify(Event.Events.EnemyAttack, args);
     }
 }

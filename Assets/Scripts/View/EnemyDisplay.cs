@@ -70,7 +70,7 @@ public class EnemyDisplay : MonoBehaviour
     }
 
     // This is called after loadign a save, correts its image and name display
-    private void GameWasLoaded(object notactuallyused=null){
+    private void GameWasLoaded(){
         actor = GridManager.TileMap.GetAt(gridbutton.x, gridbutton.y);
 
         GameObject prefab = GameResources.GetEnemyByID(actor.enemyTypeID);
