@@ -1,16 +1,30 @@
 using System;
 using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Assertions;
 
 using Data.Skills;
 public class LevelupManagerBehaviour : MonoBehaviour
 {
-    public Transform SkillsParent;
     public GameObject SkillEntryPrefab;
-    public ToggleGroup Toggles;
     public SkillBehaviour PlayerSkills;
     public GameObject RealHolder; // Hacky way to enable/disable a menu on start
+
+    [Header("New Skills references")]
+    // Transform and groups for new skills we can learn
+    public Transform SkillsParent;
+    public ToggleGroup LearnableSkillsToggles;
+    public Text TitleLearnableSkill; // The title for the description of the learnable skill you have selected
+    public Text DescriptionLearnableSkill;
+
+    [Header("Old Skills references")]
+    // The transform and groups for the skills the player already knows. Used for updating description and checking what skill to replace
+    public Transform KnownSkillsParent;
+    public ToggleGroup KnownSkillsToggles;
+    public Text TitleKnownSkill;
+    public Text DescriptionKnownSkill;
 
     void Awake()
     {
@@ -77,6 +91,12 @@ public class LevelupManagerBehaviour : MonoBehaviour
             Destroy(child.gameObject);
         }
 
+        foreach(Transform child in KnownSkillsParent.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        // Initalize learnable skills
         foreach (BaseSkill skill in skills)
         {
             GameObject entry = Instantiate(SkillEntryPrefab) as GameObject;
@@ -84,33 +104,101 @@ public class LevelupManagerBehaviour : MonoBehaviour
 
             LearnableSkillBehaviour behaviour = entry.GetComponent<LearnableSkillBehaviour>();
             behaviour.SetSkill(skill);
+
+            behaviour.GetComponentInChildren<Toggle>().group = LearnableSkillsToggles.GetComponent<ToggleGroup>();
+        }
+
+        // Initalize old known skills
+        foreach(BaseSkill skill in PlayerSkills.GetKnownSkills())
+        {
+            GameObject entry = Instantiate(SkillEntryPrefab) as GameObject;
+            entry.transform.SetParent(KnownSkillsParent);
+
+            LearnableSkillBehaviour behaviour = entry.GetComponent<LearnableSkillBehaviour>();
+            behaviour.IsOldSkill = true;
+            if (skill != null)
+            {
+               behaviour.SetSkill(skill);
+            }
+
+            behaviour.GetComponentInChildren<Toggle>().group = KnownSkillsToggles.GetComponentInParent<ToggleGroup> ();
         }
     }
 
     public void ConfirmLevelup()
     {
-        // Check if the player has made a skil choice
-        bool success = false;
+
+        // Check if the player has selected a skill slot
+        if (!KnownSkillsToggles.AnyTogglesOn()) return;
+
+        if (!LearnableSkillsToggles.AnyTogglesOn()) return;
+
+        // Check what skill the player selected
+        BaseSkill skill = null;
+
         Toggle[] toggles = SkillsParent.GetComponentsInChildren<Toggle>();
         foreach (Toggle toggle in toggles)
         {
             if (toggle.isOn)
             {
-                learnSkill(toggle.GetComponentInParent<LearnableSkillBehaviour>());
-                success = true;
+                skill = toggle.GetComponentInParent<LearnableSkillBehaviour>().skill;
                 break;
             }
         }
 
-        // When there are no more skills to learn, let the player just exit regardless
-        if (success || toggles.Length == 0)
+        // Find the index of the slot that we want to override
+        int slotIndex = 0;
+        Toggle[] slots = KnownSkillsToggles.GetComponentsInChildren<Toggle>();
+        foreach (Toggle toggle in slots)
         {
-            RealHolder.SetActive(false);
+            if (toggle.isOn)
+            {
+                break;
+            }
+
+            slotIndex++;
         }
+
+        Assert.IsNotNull<BaseSkill>(skill, "For some reason, a toggle with a skill is active but no skill was found");
+
+        PlayerSkills.LearnSkillInSlot(skill, slotIndex);
+
+        // When there are no more skills to learn, let the player just exit regardless
+        RealHolder.SetActive(false);
     }
 
-    private void learnSkill(LearnableSkillBehaviour skillButton)
+
+
+    /// <summary>
+    /// Called when the player selects or deselects a learnable skill
+    /// </summary>
+    public void SetSelectedNewSkill(BaseSkill skill)
     {
-        PlayerSkills.LearnSkill(skillButton.skill);
+        string title = string.Format("{0} ({1})", skill.GetName(), skill.Rank);
+        string desc = TextUtilities.ImproveText(skill.GetTooltip());
+
+        TitleLearnableSkill.text = title;
+        DescriptionLearnableSkill.text = desc;
+    }
+
+    /// <summary>
+    /// Called when the player selects or deselects an already known skill
+    /// </summary>
+    public void SetSelectedOldSkill(BaseSkill skill)
+    {
+        string title = string.Format("{0} ({1})", skill.GetName(), skill.Rank);
+        string desc = TextUtilities.ImproveText(skill.GetTooltip());
+
+        TitleKnownSkill.text = title;
+        DescriptionKnownSkill.text = desc;
+    }
+    
+    /// <summary>
+    /// No parameters meaning no skill in that slot
+    /// </summary>
+    public void SetSelectedOldSkill()
+    {
+        TitleKnownSkill.text = "...";
+        DescriptionKnownSkill.text = "";
     }
 }

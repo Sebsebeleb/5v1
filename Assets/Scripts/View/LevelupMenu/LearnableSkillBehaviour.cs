@@ -5,14 +5,14 @@ public class LearnableSkillBehaviour : MonoBehaviour, IPointerEnterHandler, IPoi
 {
 	public BaseSkill skill;
 	public Image Icon;
-	public Text TooltipTitle;
-	public Text TooltipDescription;
     public Toggle toggle;
 
-	private TooltipDisplayerBehaviour _tooltip;
+    public bool IsOldSkill;
+
+    private LevelupManagerBehaviour _manager;
 
 	public void Awake(){
-		_tooltip = GameObject.FindWithTag("TooltipDisplayer").GetComponent<TooltipDisplayerBehaviour>();
+        _manager = GameObject.FindWithTag("LevelupManager").GetComponent<LevelupManagerBehaviour>();
 	}
 
 	public void OnPointerEnter(PointerEventData data){
@@ -40,10 +40,33 @@ public class LearnableSkillBehaviour : MonoBehaviour, IPointerEnterHandler, IPoi
         }
 
 		string prettified = TextUtilities.ImproveText(skill.GetTooltip());
-		TooltipDescription.text = prettified;
-		TooltipTitle.text = string.Format("{0} ({1})", skill.GetName(), skill.Rank);
+		//TooltipDescription.text = prettified;
+		//TooltipTitle.text = string.Format("{0} ({1})", skill.GetName(), skill.Rank);
 
-        toggle.group = GetComponentInParent<ToggleGroup> ();
 	}
 
+    /// <summary>
+    /// Called by the ui system when the toggle for this button has changed. Propagates this information to the levelup manager
+    /// </summary>
+    /// <param name="v">if toggled on or off</param>
+    public void ToggleChanged(bool v)
+    {
+        if (!v) return;
+
+        if (IsOldSkill)
+        {
+            if (skill == null)
+            {
+                _manager.SetSelectedOldSkill();
+            }
+            else
+            {
+                _manager.SetSelectedOldSkill(skill);
+            }
+        }
+        else
+        {
+            _manager.SetSelectedNewSkill(skill);
+        }
+    }
 }

@@ -33,6 +33,16 @@ public class SkillBehaviour : MonoBehaviour
         }
 	}
 
+    /// <summary>
+    /// Teaches a new skill in a specific slot, overriding the old skill in that slot
+    /// </summary>
+    /// <param name="skill">Skill to learn</param>
+    /// <param name="slot">Slot place/replace it in</param>
+    public void LearnSkillInSlot(BaseSkill skill, int slot)
+    {
+        _knownSkills[slot] = skill;
+    }
+
 	public BaseSkill[] GetKnownSkills(){
 		return _knownSkills;
 	}

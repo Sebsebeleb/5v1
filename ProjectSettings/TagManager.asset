@@ -10,6 +10,7 @@ TagManager:
   - TooltipDisplayer
   - MainCanvas
   - TooltipArea
+  - LevelupManager
   layers:
   - Default
   - TransparentFX
