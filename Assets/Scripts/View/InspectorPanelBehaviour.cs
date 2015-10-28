@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using UnityEngine.Assertions;
 
 using BaseClasses;
+using DG.Tweening;
 
 public class InspectorPanelBehaviour : MonoBehaviour
 {
@@ -59,7 +60,16 @@ public class InspectorPanelBehaviour : MonoBehaviour
         bool isPlayer = who.tag == "Player";
 
         ActorName.text = who.name;
-        ActorDescription.text = "Not yet implemented";
+
+        // Update description
+        if (isPlayer)
+        {
+        }
+        else
+        {
+            ActorDescription.text = who.GetComponent<DisplayData>().Description;
+        }
+
         ActorHPText.text = string.Format("{0}/{1}", who.damagable.CurrentHealth, who.damagable.MaxHealth);
         ActorAttackText.text = who.attack.Attack.ToString();
 
