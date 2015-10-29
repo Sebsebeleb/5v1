@@ -12,14 +12,15 @@ namespace Data.Skills
             SkillName = "Frost Fire";
             Tooltip = "Deal {0} damage to an enemy. if the enemy was wet, apply stun {1}, remove wet, and then apply burning. If enemy was burning, consume burning, deal 150% of remaining burning damage and apply wet.";
             BaseCooldown = 10;
+            ManaCost = 15;
         }
         public override void UseOnTargetGrid(int x, int y)
         {
             base.UseOnTargetGrid(x, y);
 
-			Actor target = GridManager.TileMap.GetAt(x, y);
+            Actor target = GridManager.TileMap.GetAt(x, y);
 
-			target.damagable.TakeDamage(getMainDamage());
+            target.damagable.TakeDamage(getMainDamage());
 
             bool wasWet = target.effects.HasEffect<Wet>();
             bool wasHot = target.effects.HasEffect<Burning>();

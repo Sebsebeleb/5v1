@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+
+using UnityEngine;
 
 public class CountdownBehaviour : MonoBehaviour
 {
@@ -27,12 +29,12 @@ public class CountdownBehaviour : MonoBehaviour
     private CountdownData data;
 
     // References
-    private Actor _actor;
+    private Actor actor;
     private AI _brain;
 
     void Awake()
     {
-        _actor = GetComponent<Actor>();
+        this.actor = GetComponent<Actor>();
         _brain = GetComponent<AI>();
 
     }
@@ -47,7 +49,7 @@ public class CountdownBehaviour : MonoBehaviour
         BroadcastMessage("OnTurn");
 
         // If we are stunned, we do not cooldown
-        if (_actor.status.Stunned){
+        if (this.actor.status.Stunned){
             return;
         }
         // If we are a corpse, and the boss wave has started, do not countdown
@@ -55,7 +57,7 @@ public class CountdownBehaviour : MonoBehaviour
             return;
         }
 
-        Event.EventManager.Notify(Event.Events.ActorCountedDown, _actor);
+        Event.EventManager.Notify(Event.Events.ActorCountedDown, this.actor);
 
 
         CurrentCountdown--;
@@ -64,7 +66,7 @@ public class CountdownBehaviour : MonoBehaviour
             CurrentCountdown = MaxCountdown;
             DoAction();
             BroadcastMessage("OnAct", SendMessageOptions.DontRequireReceiver);
-            Event.EventManager.Notify(Event.Events.ActorActed, _actor);
+            Event.EventManager.Notify(Event.Events.ActorActed, this.actor);
         }
     }
 

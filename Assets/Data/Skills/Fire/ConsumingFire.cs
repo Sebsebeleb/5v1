@@ -12,14 +12,15 @@ namespace Data.Skills
             SkillName = "Consuming Fire";
             Tooltip = "Apply burning (4) to an enemy and heal for {0} for every burning enemy. If the enemy dies within 4 turns, it will explode dealing {1} damage to all adjacent enemies and apply burning (3) to them";
             BaseCooldown = 7;
+            ManaCost = 20;
         }
         public override void UseOnTargetGrid(int x, int y)
         {
             base.UseOnTargetGrid(x, y);
 
-			Actor target = GridManager.TileMap.GetAt(x, y);
+            Actor target = GridManager.TileMap.GetAt(x, y);
 
-			target.effects.AddEffect(new Burning(4));
+            target.effects.AddEffect(new Burning(4));
 
             int numBurning = 0;
 

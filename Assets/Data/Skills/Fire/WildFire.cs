@@ -10,17 +10,18 @@ namespace Data.Skills
     public class WildFire : BaseSkill
     {
 
-		// Sort of like arcane missiles in HS. But the animation should NOT take as long so ideas:
-		// Have each missile deal more damage as the damage is higher
-		// Have the number of missiles not scale very high, but the damage by each scale
-		// OR:
-		// Just have one missile per enemy hit, but have each missile deal the randomly allocated damage
+        // Sort of like arcane missiles in HS. But the animation should NOT take as long so ideas:
+        // Have each missile deal more damage as the damage is higher
+        // Have the number of missiles not scale very high, but the damage by each scale
+        // OR:
+        // Just have one missile per enemy hit, but have each missile deal the randomly allocated damage
         public WildFire(int PlayerLevel) : base(PlayerLevel)
         {
             SkillName = "Wildfire";
             Tooltip = "Deal {0} damage randomly split among all burning enemies. Damage is increased by {1} per burning enemy.";
             // Alternatively: Deal {0} damage randomly split among all enemies. Burning enemies take x more damage. All enemies that were hit start burning
             BaseCooldown = 12;
+            ManaCost = 10;
         }
 
         // Can only be used if there actually is a burning enemy
@@ -78,9 +79,9 @@ namespace Data.Skills
             return 2 + Rank;
         }
 
-		private int getBonusDamage(){
-			return 1 + (int) Rank/2;
-		}
+        private int getBonusDamage(){
+            return 1 + (int) Rank/2;
+        }
 
 
         public override string GetTooltip()

@@ -45,6 +45,16 @@ public class Actor : MonoBehaviour
 
     #endregion
 
+    #region Stats
+
+    private int currentMana = 40;
+
+    public readonly ActorAttribute MaxMana = new ActorAttribute("Max Mana", 40);
+
+    public readonly ActorAttribute ManaRegen = new ActorAttribute("Mana Regen", 5);
+
+    #endregion
+
     [HideInInspector]
     public int x;
     [HideInInspector]
@@ -57,18 +67,41 @@ public class Actor : MonoBehaviour
     [SerializeField]
     public int enemyTypeID;
 
-    void Awake()
+    private static Actor player;
+
+    public static Actor Player
     {
-        _damagable = GetComponent<Damagable>();
-        _countdown = GetComponent<CountdownBehaviour>();
-        _effects = GetComponent<EffectHolder>();
-        _attack = GetComponent<AttackBehaviour>();
-        _ai = GetComponent<AI>();
+        get
+        {
+            return player ?? (player = GameObject.FindGameObjectWithTag("Player").GetComponent<Actor>());
+        }
+    }
+
+    public int CurrentMana
+    {
+        get
+        {
+            return currentMana;
+        }
+
+        set
+        {
+            currentMana = value;
+        }
+    }
+
+    private void Awake()
+    {
+        this._damagable = GetComponent<Damagable>();
+        this._countdown = GetComponent<CountdownBehaviour>();
+        this._effects = GetComponent<EffectHolder>();
+        this._attack = GetComponent<AttackBehaviour>();
+        this._ai = GetComponent<AI>();
         _status = GetComponent<Status>();
     }
 
-    void Update()
+    private void Update()
     {
-
+        
     }
 }

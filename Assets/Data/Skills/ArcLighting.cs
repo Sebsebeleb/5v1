@@ -9,6 +9,7 @@ namespace Data.Skills
             SkillName = "Arc Lightning";
             Tooltip = "Target an enemy an deal {0} damage to them and make them electrified. The bolt will then move to another random adjacent non-electrified enemy and deal {0} damage until there are no targets to jump to.";
             BaseCooldown = 20;
+            ManaCost = 35;
         }
 
         public override void UseOnTargetGrid(int x, int y)

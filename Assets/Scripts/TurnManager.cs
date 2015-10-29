@@ -71,8 +71,22 @@ public class TurnManager : MonoBehaviour
         _playerSkills.CountDown();
         _playerEffects.OnTurn();
 
+        //Update player's resources
+        RegenResources();
+
 
     }
+
+
+    /// <summary>
+    /// Regenerates the characters resources based on regeneration rates
+    /// </summary>
+    private void RegenResources()
+    {
+        Actor.Player.CurrentMana += Actor.Player.ManaRegen.Value;
+        Actor.Player.CurrentMana = Math.Min(Actor.Player.CurrentMana, Actor.Player.MaxMana.Value);
+    }
+
 
     private void InitBoss()
     {

@@ -14,6 +14,7 @@ namespace Data.Skills
             SkillName = "Holy Fire";
             Tooltip = "Deal {0} damage to an enemy and all adjacent enemies and apply burning ({1}) to them";
             BaseCooldown = 10;
+            ManaCost = 15;
         }
 
         public override void UseOnTargetGrid(int x, int y)

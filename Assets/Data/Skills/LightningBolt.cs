@@ -10,29 +10,30 @@ namespace Data.Skills
             SkillName = "Lightning Bolt";
             Tooltip = "Deal {0} damage to an enemy and apply electrified. If it was already electrified, remove electrified and deal {1} damage to all other enemies.";
             BaseCooldown = 7;
+            ManaCost = 15;
         }
         public override void UseOnTargetGrid(int x, int y)
         {
             base.UseOnTargetGrid(x, y);
 
-			Actor target = GridManager.TileMap.GetAt(x, y);
+            Actor target = GridManager.TileMap.GetAt(x, y);
 
-			target.damagable.TakeDamage(getMainDamage());
+            target.damagable.TakeDamage(getMainDamage());
 
             if (target.effects.HasEffect<Data.Effects.Electrified>()){
-				//TODO: Improve this api. This is pretty silly
-				var f = target.effects.GetEffectsOfType<Data.Effects.Electrified>()[0];
+                //TODO: Improve this api. This is pretty silly
+                var f = target.effects.GetEffectsOfType<Data.Effects.Electrified>()[0];
 
-				target.effects.RemoveEffect(f);
-				foreach(Actor enemy in GridManager.TileMap.GetAll()){
-					if (enemy.tag != "Corpse" && enemy != target){
-						enemy.damagable.TakeDamage(getAoeDamage());
-					}
-				}
-			}
-			else{
-				target.effects.AddEffect(new Data.Effects.Electrified());
-			}
+                target.effects.RemoveEffect(f);
+                foreach(Actor enemy in GridManager.TileMap.GetAll()){
+                    if (enemy.tag != "Corpse" && enemy != target){
+                        enemy.damagable.TakeDamage(getAoeDamage());
+                    }
+                }
+            }
+            else{
+                target.effects.AddEffect(new Data.Effects.Electrified());
+            }
         }
 
         private int getMainDamage(){

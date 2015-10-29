@@ -13,12 +13,13 @@ namespace Data.Skills
             SkillName = "Stun";
             Tooltip = "Stun an enemy for {0} turns";
             BaseCooldown = 11;
+            ManaCost = 5;
         }
         public override void UseOnTargetGrid(int x, int y)
         {
             base.UseOnTargetGrid(x, y);
 
-			Actor enemy = GridManager.TileMap.GetAt(x, y);
+            Actor enemy = GridManager.TileMap.GetAt(x, y);
 
             enemy.GetComponent<EffectHolder>().AddEffect(new Stunned(getDuration()));
         }

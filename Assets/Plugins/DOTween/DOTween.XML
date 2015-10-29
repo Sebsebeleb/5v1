@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <doc>
     <assembly>
         <name>DOTween</name>
@@ -149,7 +149,7 @@
         </member>
         <member name="M:DG.Tweening.TweenParams.SetRelative(System.Boolean)">
             <summary>If isRelative is TRUE sets the tween as relative
-            (the endValue will be calculated as <code>startValue + endValue</code> instead than being used directly).
+            (the endValue will be calculated as <code>baseValue + endValue</code> instead than being used directly).
             <para>Has no effect on Sequences or if the tween has already started</para></summary>
         </member>
         <member name="M:DG.Tweening.TweenParams.SetSpeedBased(System.Boolean)">
@@ -514,12 +514,12 @@
         </member>
         <member name="M:DG.Tweening.TweenSettingsExtensions.SetRelative``1(``0)">
             <summary>Sets the tween as relative
-            (the endValue will be calculated as <code>startValue + endValue</code> instead than being used directly).
+            (the endValue will be calculated as <code>baseValue + endValue</code> instead than being used directly).
             <para>Has no effect on Sequences or if the tween has already started</para></summary>
         </member>
         <member name="M:DG.Tweening.TweenSettingsExtensions.SetRelative``1(``0,System.Boolean)">
             <summary>If isRelative is TRUE sets the tween as relative
-            (the endValue will be calculated as <code>startValue + endValue</code> instead than being used directly).
+            (the endValue will be calculated as <code>baseValue + endValue</code> instead than being used directly).
             <para>Has no effect on Sequences or if the tween has already started</para></summary>
         </member>
         <member name="M:DG.Tweening.TweenSettingsExtensions.SetSpeedBased``1(``0)">
@@ -971,7 +971,7 @@
             Also stores the LineRenderer as the tween's target so it can be used for filtered operations.
             <para>Note that this method requires to also insert the start colors for the tween, 
             since LineRenderers have no way to get them.</para></summary>
-            <param name="startValue">The start value to tween from</param>
+            <param name="baseValue">The start value to tween from</param>
             <param name="endValue">The end value to reach</param><param name="duration">The duration of the tween</param>
         </member>
         <member name="M:DG.Tweening.ShortcutExtensions.DOColor(UnityEngine.Material,UnityEngine.Color,System.Single)">
@@ -1761,7 +1761,7 @@
             <code>To(MyMethod, 0, 12, 0.5f);</code>
             <para>Where MyMethod is a function that accepts a float parameter (which will be the result of the virtual tween)</para></summary>
             <param name="setter">The action to perform with the tweened value</param>
-            <param name="startValue">The value to start from</param>
+            <param name="baseValue">The value to start from</param>
             <param name="endValue">The end value to reach</param>
             <param name="duration">The duration of the virtual tween
             </param>

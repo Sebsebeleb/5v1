@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class SkillBehaviour : MonoBehaviour
 {
-	private BaseSkill[] _knownSkills = new BaseSkill[4];
+    private BaseSkill[] _knownSkills = new BaseSkill[4];
 
     void Start()
     {
@@ -24,14 +24,14 @@ public class SkillBehaviour : MonoBehaviour
     }
 
 
-	public void LearnSkill(BaseSkill skill){
+    public void LearnSkill(BaseSkill skill){
         for (int i = 0; i<4; i++){
             if (_knownSkills[i] == null){
                 _knownSkills[i] = skill;
                 return;
             }
         }
-	}
+    }
 
     /// <summary>
     /// Teaches a new skill in a specific slot, overriding the old skill in that slot
@@ -43,9 +43,9 @@ public class SkillBehaviour : MonoBehaviour
         _knownSkills[slot] = skill;
     }
 
-	public BaseSkill[] GetKnownSkills(){
-		return _knownSkills;
-	}
+    public BaseSkill[] GetKnownSkills(){
+        return _knownSkills;
+    }
 
     // TODO: Cleanup shitty code
     // If we have the same skill AND rank, we know it
