@@ -32,7 +32,7 @@ public class TooltipDisplayerBehaviour : MonoBehaviour
 		if (skillBehaviour.AssociatedSkill == null){
 			return;
 		}
-		tooltipArea.HoverEnter(skillBehaviour.AssociatedSkill.SkillName, skillBehaviour.AssociatedSkill.GetTooltip());
+		tooltipArea.HoverEnter(skillBehaviour.AssociatedSkill);
 	}
 	public void HideMe(){
 		tooltipArea.HoverExit();

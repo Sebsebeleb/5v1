@@ -19,6 +19,9 @@ public class TooltipAreaManager : MonoBehaviour
     public Text Title;
     public Text Tooltip;
 
+    public Text ManaText;
+    public Text CooldownText;
+
     // The skill that is currently being described
     private string currentlyDisplaying = "";
     private bool currentlyHovering = false;
@@ -42,8 +45,10 @@ public class TooltipAreaManager : MonoBehaviour
         }
     }
 
-    public void SetTooltip(string title, string tooltip)
+    public void SetTooltip(BaseSkill skill)
     {
+        string title = skill.GetName();
+        string tooltip = skill.GetTooltip();
         // If the title is the same, we assume it's the same skill. and dont redraw
         if (title == currentlyDisplaying)
         {
@@ -58,6 +63,9 @@ public class TooltipAreaManager : MonoBehaviour
 
         Tooltip.text = TextUtilities.ImproveText(tooltip);
 
+        ManaText.text = skill.ManaCost.ToString();
+        CooldownText.text = skill.BaseCooldown.ToString();
+
         //Tooltip.DOText(TextUtilities.ImproveText(tooltip), 0.17f).OnUpdate(() => { UpdateFontSize(); });
 
         // Could be cool, but unfortunately doesn't work well with the colored text
@@ -66,12 +74,15 @@ public class TooltipAreaManager : MonoBehaviour
         //UpdateFontSize();
         Tooltip.transform.localScale = new Vector3(1, 0, 1);
         seq.Append(Tooltip.transform.DOScale(new Vector3(1, 1, 1), 0.15f));
+        seq.Append(ManaText.transform.parent.DOScale(new Vector3(1, 1, 1), 0.15f));
+        seq.Append(CooldownText.transform.parent.DOScale(new Vector3(1, 1, 1), 0.15f));
     }
 
-    public void HoverEnter(string title, string tooltip){
+    public void HoverEnter(BaseSkill skill){
+
         currentlyHovering = true;
 
-        SetTooltip(title, tooltip);
+        SetTooltip(skill);
     }
 
     public void HoverExit(){
@@ -92,7 +103,7 @@ public class TooltipAreaManager : MonoBehaviour
 
             if (skill != null)
             {
-                SetTooltip(skill.GetName(), skill.GetTooltip());
+                SetTooltip(skill);
             }
         }
 
@@ -101,6 +112,8 @@ public class TooltipAreaManager : MonoBehaviour
         Title.DOText("", 0.17f);
         //Tooltip.transform.localScale = new Vector3(1, 1, 1);
         seq.Append(Tooltip.transform.DOScale(new Vector3(1, 0, 1), 0.125f));
+        seq.Append(ManaText.transform.parent.DOScale(new Vector3(0, 0.5f, 1), 0.125f));
+        seq.Append(CooldownText.transform.parent.DOScale(new Vector3(0, 0.5f, 1), 0.125f));
         //Tooltip.DOText("", 0.17f);
     }
 
