@@ -19,8 +19,11 @@ public class ExpandableElement : MonoBehaviour, IPointerClickHandler
     private LayoutElement _element;
     public ILayoutElement SizeController; // The component to use for getting the real wanted size when expanded
 
+    // If this is true, the box will be collapsed by default when it is enabled from being deactivated
     public bool CollapsedByDefault;
-        // If this is true, the box will be collapsed by default when it is enabled from being deactivated
+
+    //Will clicking the gameobject this is on toggle it?
+    public bool ToggleOnClick;
 
 
     private void Awake()
@@ -39,6 +42,9 @@ public class ExpandableElement : MonoBehaviour, IPointerClickHandler
         _needsUpdate = true;
     }
 
+    /// <summary>
+    /// Instantaneously updates to correct size based on state.
+    /// </summary>
     private void UpdateSizes()
     {
         if (IsCollapsed)
@@ -71,7 +77,14 @@ public class ExpandableElement : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        IsCollapsed = !IsCollapsed;
+        if (ToggleOnClick)
+        {
+            this.ToggleExpanded();
+        }
+    }
+
+    private void UpdateState()
+    {
 
         if (IsCollapsed)
         {
@@ -87,5 +100,28 @@ public class ExpandableElement : MonoBehaviour, IPointerClickHandler
             _element.preferredHeight = oldSize;
             _element.DOPreferredSize(new Vector2(-1, fullSize), 0.3f);
         }
+        
+    }
+
+    /// <summary>
+    /// Expands if collapsed, or collapses if expanded
+    /// </summary>
+    public void ToggleExpanded()
+    {
+        IsCollapsed = !IsCollapsed;
+
+        this.UpdateState();
+    }
+
+    public void ToggleExpanded(bool expand)
+    {
+        if (expand != IsCollapsed)
+        {
+            return;
+        }
+
+        IsCollapsed = !expand;
+
+        this.UpdateState();
     }
 }
