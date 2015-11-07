@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<basicmodifiers>
+  <item type="equipment" legendary="true" common="true">
+    <name>cooldown_reduction_on_death</name>
+    <effect>
+      <path>CooldownReductionOnDeath</path>
+      <common>
+        <parameters>
+          <cooldown_reduction>1</cooldown_reduction>
+        </parameters>
+      </common>
+      <legendary>
+        <parameters>
+          <cooldown_reduction>2</cooldown_reduction>
+        </parameters>
+      </legendary>
+    </effect>
+  </item>
+  <item type="equipment" rare="true" uncommon="true">
+    <name>apply_burning_on_hit</name>
+    <effect>
+      <path>ApplyBurningOnHit</path>
+      <rare>
+        <parameters/>
+      </rare>
+      <uncommon>
+        <parameters/>
+      </uncommon>
+    </effect>
+  </item>
+</basicmodifiers>

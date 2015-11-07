@@ -647,7 +647,7 @@ namespace UnityEditor.UI
             var itemTemplateLayoutElement = itemTemplate.AddComponent<LayoutElement>();
             itemTemplateLayoutElement.minHeight = cbbRT.rect.height;
             itemTemplate.SetActive(false);
-            //Item Template Image
+            //BaseItem Template Image
             var itemTemplateImageRT = itemTemplateImage.GetComponent<RectTransform>();
             itemTemplateImageRT.anchorMin = Vector2.zero;
             itemTemplateImageRT.anchorMax = new Vector2(0f, 1f);
@@ -666,7 +666,7 @@ namespace UnityEditor.UI
             Events.UnityEventTools.AddBoolPersistentListener(mainButton.GetComponent<Button>().onClick, new UnityEngine.Events.UnityAction<bool>(dropDownList.ToggleDropdownPanel), true);
             var mainButtonText = mainButton.GetComponentInChildren<Text>();
             mainButtonText.alignment = TextAnchor.MiddleLeft;
-            mainButtonText.text = "Select Item...";
+            mainButtonText.text = "Select BaseItem...";
             var mainButtonTextRT = mainButtonText.GetComponent<RectTransform>();
             mainButtonTextRT.anchorMin = Vector2.zero;
             mainButtonTextRT.anchorMin = Vector2.zero;
@@ -1132,7 +1132,7 @@ namespace UnityEditor.UI
 
 			
 
-			//Setup Item list container
+			//Setup BaseItem list container
 
 			if (direction == ScrollSnap.ScrollDirection.Horizontal)
 
@@ -1256,7 +1256,7 @@ namespace UnityEditor.UI
 
 		
 
-		[MenuItem("GameObject/UI/Extensions/Fixed Item Scroll/Snap Horizontal Single Item", false)]
+		[MenuItem("GameObject/UI/Extensions/Fixed BaseItem Scroll/Snap Horizontal Single BaseItem", false)]
 
 		static public void AddFixedItemScrollSnapHorizontalSingle(MenuCommand menuCommand)
 
@@ -1268,7 +1268,7 @@ namespace UnityEditor.UI
 
 		
 
-		[MenuItem("GameObject/UI/Extensions/Fixed Item Scroll/Snap Horizontal Multiple Items", false)]
+		[MenuItem("GameObject/UI/Extensions/Fixed BaseItem Scroll/Snap Horizontal Multiple Items", false)]
 
 		static public void AddFixedItemScrollSnapHorizontalMultiple(MenuCommand menuCommand)
 
@@ -1280,7 +1280,7 @@ namespace UnityEditor.UI
 
 		
 
-		[MenuItem("GameObject/UI/Extensions/Fixed Item Scroll/Snap Vertical Single Item", false)]
+		[MenuItem("GameObject/UI/Extensions/Fixed BaseItem Scroll/Snap Vertical Single BaseItem", false)]
 
 		static public void AddFixedItemScrollSnapVerticalSingle(MenuCommand menuCommand)
 
@@ -1292,7 +1292,7 @@ namespace UnityEditor.UI
 
 		
 
-		[MenuItem("GameObject/UI/Extensions/Fixed Item Scroll/Snap Vertical Multiple Items", false)]
+		[MenuItem("GameObject/UI/Extensions/Fixed BaseItem Scroll/Snap Vertical Multiple Items", false)]
 
 		static public void AddFixedItemScrollSnapVerticalMultiple(MenuCommand menuCommand)
 

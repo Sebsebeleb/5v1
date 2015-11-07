@@ -173,7 +173,7 @@ namespace UnityEngine.UI.Extensions
             while (itemObjs.Count < AvailableOptions.Count)
             {
                 GameObject newItem = Instantiate(itemTemplate) as GameObject;
-                newItem.name = "Item " + indx;
+                newItem.name = "BaseItem " + indx;
                 newItem.transform.SetParent(_itemsPanelRT, false);
                 itemObjs.Add(newItem);
                 indx++;
@@ -184,7 +184,7 @@ namespace UnityEngine.UI.Extensions
                 itemObjs[i].SetActive(i <= AvailableOptions.Count);
                 if (i < AvailableOptions.Count)
                 {
-                    itemObjs[i].name = "Item " + i + " " + _panelItems[i];
+                    itemObjs[i].name = "BaseItem " + i + " " + _panelItems[i];
                     itemObjs[i].transform.FindChild("Text").GetComponent<Text>().text = _panelItems[i]; //set the text value
 
                     Button itemBtn = itemObjs[i].GetComponent<Button>();

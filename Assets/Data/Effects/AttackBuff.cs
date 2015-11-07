@@ -19,7 +19,7 @@ namespace Data.Effects
             IsBuff = true;
             bonus = 0;
 
-            Description = new EffectDescription("Priestly buff", () => "Attack increased by " + bonus);
+            Description = new EffectDescription("Attack buff", () => "Attack increased by " + bonus);
 
         }
 
@@ -28,7 +28,7 @@ namespace Data.Effects
             IsBuff = true;  
             bonus = attackBonus;
 
-            Description = new EffectDescription("Priestly buff", () => "Attack increased by " + bonus);
+            Description = new EffectDescription("Attack buff", () => "Attack increased by " + bonus);
         }
 
 

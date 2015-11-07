@@ -4,12 +4,12 @@
         <name>DOTweenEditor</name>
     </assembly>
     <members>
-        <member name="T:DG.DOTweenEditor.DOTweenSetupMenuItem">
+        <member name="T:DG.DOTweenEditor.DOTweenSetupMenuBaseItem">
             <summary>
             Not used as menu item anymore, but as a utiity function
             </summary>
         </member>
-        <member name="M:DG.DOTweenEditor.DOTweenSetupMenuItem.Setup(System.Boolean)">
+        <member name="M:DG.DOTweenEditor.DOTweenSetupMenuBaseItem.Setup(System.Boolean)">
             <summary>
             Setups DOTween
             </summary>

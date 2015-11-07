@@ -84,7 +84,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Image: {fileID: 21300000, guid: 69a02a31fb1affa42924c223953389f3, type: 3}
-  Description: Seeing this means you are not being overwhelmed. Good job!
+  Description: Seeing this means you are not in deep shit. Good on ya!
 --- !u!114 &11444694
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -153,7 +153,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: Description
-      value: Seeing this means you are not being overwhelmed. Good job!
+      value: Seeing this means you are not in deep shit. Good on ya!
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

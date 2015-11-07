@@ -25,7 +25,7 @@ public class EnemySpawnListEditor : Editor
         while (true)
         {
             //EditorGUILayout.Separator();
-            //GUILayoutUtility.BeginGroup("Item");
+            //GUILayoutUtility.BeginGroup("BaseItem");
             var showChildren = EditorGUILayout.PropertyField(myIterator, true);
             if (!myIterator.NextVisible(showChildren))
             {
@@ -33,7 +33,7 @@ public class EnemySpawnListEditor : Editor
             }
 
             //EditorGUILayout.IntField("Test", 2);
-            //GUILayoutUtility.EndGroup("Item");
+            //GUILayoutUtility.EndGroup("BaseItem");
         }
 
         serializedObject.ApplyModifiedProperties();

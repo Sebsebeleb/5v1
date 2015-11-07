@@ -3,7 +3,7 @@
 
 namespace UnityEngine.UI.Extensions
 {
-    [AddComponentMenu("UI/Extensions/Bound Tooltip/Tooltip Item")]
+    [AddComponentMenu("UI/Extensions/Bound Tooltip/Tooltip BaseItem")]
     public class BoundTooltipItem : MonoBehaviour
     {
         public bool IsActive

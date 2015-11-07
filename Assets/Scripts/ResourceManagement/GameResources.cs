@@ -8,6 +8,8 @@ public static class GameResources
     // The folder where all the enemy types are stored
     private const string SearchPath = "Enemies";
 
+    private const string ItemModifiersPath = "ItemModifiers";
+
 
     // Cache for GetEnemyByID. Possible TODO: Have this filled out at build-time by the editor
     private static Dictionary<int, GameObject> _enemyByIDCache = new Dictionary<int, GameObject>();
@@ -32,6 +34,15 @@ public static class GameResources
         return enemy;
     }
 
+    /// <summary>
+    /// Temp function for getting the item modifications
+    /// </summary>
+    /// <returns></returns>
+    public static TextAsset[] GetItemModifiers()
+    {
+        return Resources.LoadAll<TextAsset>(ItemModifiersPath);
+    }
+
     // Looks through all gameobjects untill it finds one that has the Actor component and the correct ID
     private static GameObject _findEnemy(int id)
     {
@@ -53,4 +64,5 @@ public static class GameResources
 
         return null;
     }
+
 }

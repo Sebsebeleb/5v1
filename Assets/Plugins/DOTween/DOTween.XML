@@ -4,18 +4,18 @@
         <name>DOTween</name>
     </assembly>
     <members>
-        <member name="T:DG.Tweening.UpdateType">
+        <member name="T:DG.Tweening.Updatetype">
             <summary>
             Update type
             </summary>
         </member>
-        <member name="F:DG.Tweening.UpdateType.Normal">
+        <member name="F:DG.Tweening.Updatetype.Normal">
             <summary>Updates every frame during Update calls</summary>
         </member>
-        <member name="F:DG.Tweening.UpdateType.Late">
+        <member name="F:DG.Tweening.Updatetype.Late">
             <summary>Updates every frame during LateUpdate calls</summary>
         </member>
-        <member name="F:DG.Tweening.UpdateType.Fixed">
+        <member name="F:DG.Tweening.Updatetype.Fixed">
             <summary>Updates using FixedUpdate calls</summary>
         </member>
         <member name="T:DG.Tweening.PathMode">
@@ -35,7 +35,7 @@
         <member name="F:DG.Tweening.PathMode.Sidescroller2D">
             <summary>2D side-scroller path</summary>
         </member>
-        <member name="T:DG.Tweening.TweenType">
+        <member name="T:DG.Tweening.Tweentype">
             <summary>
             Used internally
             </summary>
@@ -74,17 +74,17 @@
             so using this method will overwrite it and prevent shortcut-operations like myTarget.DOPause from working correctly.</summary>
             <param name="target">The target to assign to this tween. Can be an int, a string, an object or anything else.</param>
         </member>
-        <member name="M:DG.Tweening.TweenParams.SetLoops(System.Int32,System.Nullable{DG.Tweening.LoopType})">
+        <member name="M:DG.Tweening.TweenParams.SetLoops(System.Int32,System.Nullable{DG.Tweening.Looptype})">
             <summary>Sets the looping options for the tween. 
             Has no effect if the tween has already started</summary>
             <param name="loops">Number of cycles to play (-1 for infinite - will be converted to 1 in case the tween is nested in a Sequence)</param>
-            <param name="loopType">Loop behaviour type (default: LoopType.Restart)</param>
+            <param name="looptype">Loop behaviour type (default: Looptype.Restart)</param>
         </member>
         <member name="M:DG.Tweening.TweenParams.SetEase(DG.Tweening.Ease,System.Nullable{System.Single},System.Nullable{System.Single})">
             <summary>Sets the ease of the tween.
             <para>If applied to Sequences eases the whole sequence animation</para></summary>
-            <param name="overshootOrAmplitude">Eventual overshoot or amplitude to use with Back or Elastic easeType (default is 1.70158)</param>
-            <param name="period">Eventual period to use with Elastic easeType (default is 0)</param>
+            <param name="overshootOrAmplitude">Eventual overshoot or amplitude to use with Back or Elastic easetype (default is 1.70158)</param>
+            <param name="period">Eventual period to use with Elastic easetype (default is 0)</param>
         </member>
         <member name="M:DG.Tweening.TweenParams.SetEase(UnityEngine.AnimationCurve)">
             <summary>Sets the ease of the tween using an AnimationCurve.
@@ -99,13 +99,13 @@
             <param name="recyclable">If TRUE the tween will be recycled after being killed, otherwise it will be destroyed.</param>
         </member>
         <member name="M:DG.Tweening.TweenParams.SetUpdate(System.Boolean)">
-            <summary>Sets the update type to the one defined in DOTween.defaultUpdateType (UpdateType.Normal unless changed)
+            <summary>Sets the update type to the one defined in DOTween.defaultUpdatetype (Updatetype.Normal unless changed)
             and lets you choose if it should be independent from Unity's Time.timeScale</summary>
             <param name="isIndependentUpdate">If TRUE the tween will ignore Unity's Time.timeScale</param>
         </member>
-        <member name="M:DG.Tweening.TweenParams.SetUpdate(DG.Tweening.UpdateType,System.Boolean)">
+        <member name="M:DG.Tweening.TweenParams.SetUpdate(DG.Tweening.Updatetype,System.Boolean)">
             <summary>Sets the type of update (default or independent) for the tween</summary>
-            <param name="updateType">The type of update (default: UpdateType.Normal)</param>
+            <param name="updatetype">The type of update (default: Updatetype.Normal)</param>
             <param name="isIndependentUpdate">If TRUE the tween will ignore Unity's Time.timeScale</param>
         </member>
         <member name="M:DG.Tweening.TweenParams.OnStart(DG.Tweening.TweenCallback)">
@@ -308,7 +308,7 @@
         </member>
         <member name="T:DG.Tweening.LogBehaviour">
             <summary>
-            Types of log behaviours
+            types of log behaviours
             </summary>
         </member>
         <member name="F:DG.Tweening.LogBehaviour.Default">
@@ -350,11 +350,11 @@
             Has no effect if the tween has already started</summary>
             <param name="loops">Number of cycles to play (-1 for infinite - will be converted to 1 in case the tween is nested in a Sequence)</param>
         </member>
-        <member name="M:DG.Tweening.TweenSettingsExtensions.SetLoops``1(``0,System.Int32,DG.Tweening.LoopType)">
+        <member name="M:DG.Tweening.TweenSettingsExtensions.SetLoops``1(``0,System.Int32,DG.Tweening.Looptype)">
             <summary>Sets the looping options for the tween. 
             Has no effect if the tween has already started</summary>
             <param name="loops">Number of cycles to play (-1 for infinite - will be converted to 1 in case the tween is nested in a Sequence)</param>
-            <param name="loopType">Loop behaviour type (default: LoopType.Restart)</param>
+            <param name="looptype">Loop behaviour type (default: Looptype.Restart)</param>
         </member>
         <member name="M:DG.Tweening.TweenSettingsExtensions.SetEase``1(``0,DG.Tweening.Ease)">
             <summary>Sets the ease of the tween.
@@ -368,8 +368,8 @@
         <member name="M:DG.Tweening.TweenSettingsExtensions.SetEase``1(``0,DG.Tweening.Ease,System.Single,System.Single)">
             <summary>Sets the ease of the tween.
             <para>If applied to Sequences eases the whole sequence animation</para></summary>
-            <param name="amplitude">Eventual amplitude to use with Elastic easeType (default is 1.70158)</param>
-            <param name="period">Eventual period to use with Elastic easeType (default is 0)</param>
+            <param name="amplitude">Eventual amplitude to use with Elastic easetype (default is 1.70158)</param>
+            <param name="period">Eventual period to use with Elastic easetype (default is 0)</param>
         </member>
         <member name="M:DG.Tweening.TweenSettingsExtensions.SetEase``1(``0,UnityEngine.AnimationCurve)">
             <summary>Sets the ease of the tween using an AnimationCurve.
@@ -387,16 +387,16 @@
             <param name="recyclable">If TRUE the tween will be recycled after being killed, otherwise it will be destroyed.</param>
         </member>
         <member name="M:DG.Tweening.TweenSettingsExtensions.SetUpdate``1(``0,System.Boolean)">
-            <summary>Sets the update type to UpdateType.Normal and lets you choose if it should be independent from Unity's Time.timeScale</summary>
+            <summary>Sets the update type to Updatetype.Normal and lets you choose if it should be independent from Unity's Time.timeScale</summary>
             <param name="isIndependentUpdate">If TRUE the tween will ignore Unity's Time.timeScale</param>
         </member>
-        <member name="M:DG.Tweening.TweenSettingsExtensions.SetUpdate``1(``0,DG.Tweening.UpdateType)">
+        <member name="M:DG.Tweening.TweenSettingsExtensions.SetUpdate``1(``0,DG.Tweening.Updatetype)">
             <summary>Sets the type of update for the tween</summary>
-            <param name="updateType">The type of update (defalt: UpdateType.Normal)</param>
+            <param name="updatetype">The type of update (defalt: Updatetype.Normal)</param>
         </member>
-        <member name="M:DG.Tweening.TweenSettingsExtensions.SetUpdate``1(``0,DG.Tweening.UpdateType,System.Boolean)">
+        <member name="M:DG.Tweening.TweenSettingsExtensions.SetUpdate``1(``0,DG.Tweening.Updatetype,System.Boolean)">
             <summary>Sets the type of update for the tween and lets you choose if it should be independent from Unity's Time.timeScale</summary>
-            <param name="updateType">The type of update</param>
+            <param name="updatetype">The type of update</param>
             <param name="isIndependentUpdate">If TRUE the tween will ignore Unity's Time.timeScale</param>
         </member>
         <member name="M:DG.Tweening.TweenSettingsExtensions.OnStart``1(``0,DG.Tweening.TweenCallback)">
@@ -682,7 +682,7 @@
         <member name="M:DG.Tweening.TweenExtensions.SmoothRewind(DG.Tweening.Tween)">
             <summary>Smoothly rewinds the tween (delays excluded).
             A "smooth rewind" animates the tween to its start position,
-            skipping all elapsed loops (except in case of LoopType.Incremental) while keeping the animation fluent.
+            skipping all elapsed loops (except in case of Looptype.Incremental) while keeping the animation fluent.
             If called on a tween who is still waiting for its delay to happen, it will simply set the delay to 0 and pause the tween.
             <para>Note that a tween that was smoothly rewinded will have its play direction flipped</para></summary>
         </member>
@@ -845,7 +845,7 @@
         </member>
         <member name="T:DG.Tweening.AutoPlay">
             <summary>
-            Types of autoPlay behaviours
+            types of autoPlay behaviours
             </summary>
         </member>
         <member name="F:DG.Tweening.AutoPlay.None">
@@ -1291,23 +1291,23 @@
             <param name="duration">The duration of the tween</param>
             <param name="snapping">If TRUE the tween will smoothly snap all values to integers</param>
         </member>
-        <member name="M:DG.Tweening.ShortcutExtensions.DOPath(UnityEngine.Transform,UnityEngine.Vector3[],System.Single,DG.Tweening.PathType,DG.Tweening.PathMode,System.Int32,System.Nullable{UnityEngine.Color})">
+        <member name="M:DG.Tweening.ShortcutExtensions.DOPath(UnityEngine.Transform,UnityEngine.Vector3[],System.Single,DG.Tweening.Pathtype,DG.Tweening.PathMode,System.Int32,System.Nullable{UnityEngine.Color})">
             <summary>Tweens a Transform's position through the given path waypoints, using the chosen path algorithm.
             Also stores the transform as the tween's target so it can be used for filtered operations</summary>
             <param name="path">The waypoints to go through</param>
             <param name="duration">The duration of the tween</param>
-            <param name="pathType">The type of path: Linear (straight path) or CatmullRom (curved CatmullRom path)</param>
+            <param name="pathtype">The type of path: Linear (straight path) or CatmullRom (curved CatmullRom path)</param>
             <param name="pathMode">The path mode: 3D, side-scroller 2D, top-down 2D</param>
             <param name="resolution">The resolution of the path (useless in case of Linear paths): higher resolutions make for more detailed curved paths but are more expensive.
             Defaults to 10, but a value of 5 is usually enough if you don't have dramatic long curves between waypoints</param>
             <param name="gizmoColor">The color of the path (shown when gizmos are active in the Play panel and the tween is running)</param>
         </member>
-        <member name="M:DG.Tweening.ShortcutExtensions.DOLocalPath(UnityEngine.Transform,UnityEngine.Vector3[],System.Single,DG.Tweening.PathType,DG.Tweening.PathMode,System.Int32,System.Nullable{UnityEngine.Color})">
+        <member name="M:DG.Tweening.ShortcutExtensions.DOLocalPath(UnityEngine.Transform,UnityEngine.Vector3[],System.Single,DG.Tweening.Pathtype,DG.Tweening.PathMode,System.Int32,System.Nullable{UnityEngine.Color})">
             <summary>Tweens a Transform's localPosition through the given path waypoints, using the chosen path algorithm.
             Also stores the transform as the tween's target so it can be used for filtered operations</summary>
             <param name="path">The waypoint to go through</param>
             <param name="duration">The duration of the tween</param>
-            <param name="pathType">The type of path: Linear (straight path) or CatmullRom (curved CatmullRom path)</param>
+            <param name="pathtype">The type of path: Linear (straight path) or CatmullRom (curved CatmullRom path)</param>
             <param name="pathMode">The path mode: 3D, side-scroller 2D, top-down 2D</param>
             <param name="resolution">The resolution of the path: higher resolutions make for more detailed curved paths but are more expensive.
             Defaults to 10, but a value of 5 is usually enough if you don't have dramatic long curves between waypoints</param>
@@ -1480,15 +1480,15 @@
             Lets the plugin know that we restarted or rewinded
             </summary>
         </member>
-        <member name="T:DG.Tweening.PathType">
+        <member name="T:DG.Tweening.Pathtype">
             <summary>
-            Type of path to use with DOPath tweens
+            type of path to use with DOPath tweens
             </summary>
         </member>
-        <member name="F:DG.Tweening.PathType.Linear">
+        <member name="F:DG.Tweening.Pathtype.Linear">
             <summary>Linear, composed of straight segments between each waypoint</summary>
         </member>
-        <member name="F:DG.Tweening.PathType.CatmullRom">
+        <member name="F:DG.Tweening.Pathtype.CatmullRom">
             <summary>Curved path (which uses Catmull-Rom curves)</summary>
         </member>
         <member name="T:DG.Tweening.DOTween">
@@ -1515,7 +1515,7 @@
             <para>Default: 1</para></summary>
         </member>
         <member name="F:DG.Tweening.DOTween.useSmoothDeltaTime">
-            <summary>If TRUE, DOTween will use Time.smoothDeltaTime instead of Time.deltaTime for UpdateType.Normal and UpdateType.Late tweens
+            <summary>If TRUE, DOTween will use Time.smoothDeltaTime instead of Time.deltaTime for Updatetype.Normal and Updatetype.Late tweens
             (unless they're set as timeScaleIndependent, in which case this setting will be ignored).
             Setting this to TRUE will lead to smoother animations.
             <para>Default: FALSE</para></summary>
@@ -1524,9 +1524,9 @@
             <summary>If TRUE draws path gizmos in Unity Editor (if the gizmos button is active).
             Deactivate this if you want to avoid gizmos overhead while in Unity Editor</summary>
         </member>
-        <member name="F:DG.Tweening.DOTween.defaultUpdateType">
-            <summary>Default updateType for new tweens.
-            <para>Default: UpdateType.Normal</para></summary>
+        <member name="F:DG.Tweening.DOTween.defaultUpdatetype">
+            <summary>Default updatetype for new tweens.
+            <para>Default: Updatetype.Normal</para></summary>
         </member>
         <member name="F:DG.Tweening.DOTween.defaultTimeScaleIndependent">
             <summary>Sets whether Unity's timeScale should be taken into account by default or not.
@@ -1540,15 +1540,15 @@
             <summary>Default autoKillOnComplete behaviour for new tweens.
             <para>Default: TRUE</para></summary>
         </member>
-        <member name="F:DG.Tweening.DOTween.defaultLoopType">
-            <summary>Default loopType applied to all new tweens.
-            <para>Default: LoopType.Restart</para></summary>
+        <member name="F:DG.Tweening.DOTween.defaultLooptype">
+            <summary>Default looptype applied to all new tweens.
+            <para>Default: Looptype.Restart</para></summary>
         </member>
         <member name="F:DG.Tweening.DOTween.defaultRecyclable">
             <summary>If TRUE all newly created tweens are set as recyclable, otherwise not.
             <para>Default: FALSE</para></summary>
         </member>
-        <member name="F:DG.Tweening.DOTween.defaultEaseType">
+        <member name="F:DG.Tweening.DOTween.defaultEasetype">
             <summary>Default ease applied to all new Tweeners (not to Sequences which always have Ease.Linear as default).
             <para>Default: Ease.InOutQuad</para></summary>
         </member>
@@ -1583,7 +1583,7 @@
             (like targets becoming null while a tween is playing).
             You can change this setting at any time by changing the static <see cref="F:DG.Tweening.DOTween.useSafeMode"/> property.
             <para>Default: FALSE</para></param>
-            <param name="logBehaviour">Type of logging to use.
+            <param name="logBehaviour">type of logging to use.
             You can change this setting at any time by changing the static <see cref="P:DG.Tweening.DOTween.logBehaviour"/> property.
             <para>Default: ErrorsOnly</para></param>
         </member>
@@ -1910,14 +1910,14 @@
             <summary>Smoothly rewinds all tweens (delays excluded), then returns the number of actual tweens rewinding/rewinded
             (meaning tweens that were not already rewinded).
             A "smooth rewind" animates the tween to its start position,
-            skipping all elapsed loops (except in case of LoopType.Incremental) while keeping the animation fluent.
+            skipping all elapsed loops (except in case of Looptype.Incremental) while keeping the animation fluent.
             <para>Note that a tween that was smoothly rewinded will have its play direction flipped</para></summary>
         </member>
         <member name="M:DG.Tweening.DOTween.SmoothRewind(System.Object)">
             <summary>Smoothly rewinds all tweens (delays excluded) with the given ID or target, then returns the number of actual tweens rewinding/rewinded
             (meaning the tweens that were not already rewinded).
             A "smooth rewind" animates the tween to its start position,
-            skipping all elapsed loops (except in case of LoopType.Incremental) while keeping the animation fluent.
+            skipping all elapsed loops (except in case of Looptype.Incremental) while keeping the animation fluent.
             <para>Note that a tween that was smoothly rewinded will have its play direction flipped</para></summary>
         </member>
         <member name="M:DG.Tweening.DOTween.TogglePauseAll">
@@ -2008,18 +2008,18 @@
             <param name="motionFps">FPS at which the tween should be played</param>
             <param name="customEase">Custom ease function to use</param>
         </member>
-        <member name="T:DG.Tweening.LoopType">
+        <member name="T:DG.Tweening.Looptype">
             <summary>
-            Types of loop
+            types of loop
             </summary>
         </member>
-        <member name="F:DG.Tweening.LoopType.Restart">
+        <member name="F:DG.Tweening.Looptype.Restart">
             <summary>Each loop cycle restarts from the beginning</summary>
         </member>
-        <member name="F:DG.Tweening.LoopType.Yoyo">
+        <member name="F:DG.Tweening.Looptype.Yoyo">
             <summary>The tween moves forward and backwards at alternate cycles</summary>
         </member>
-        <member name="F:DG.Tweening.LoopType.Incremental">
+        <member name="F:DG.Tweening.Looptype.Incremental">
             <summary>Continuously increments the tween at the end of each loop cycle (A to B, B to B+(A-B), and so on), thus always moving "onward".
             <para>In case of String tweens works only if the tween is set as relative</para></summary>
         </member>
@@ -2076,14 +2076,14 @@
             <param name="from">The value to start from when lifetimePercentage is 0</param>
             <param name="to">The value to reach when lifetimePercentage is 1</param>
             <param name="lifetimePercentage">The time percentage (0 to 1) at which the value should be taken</param>
-            <param name="easeType">The type of ease</param>
+            <param name="easetype">The type of ease</param>
         </member>
         <member name="M:DG.Tweening.DOVirtual.EasedValue(System.Single,System.Single,System.Single,DG.Tweening.Ease,System.Single)">
             <summary>Returns a value based on the given ease and lifetime percentage (0 to 1)</summary>
             <param name="from">The value to start from when lifetimePercentage is 0</param>
             <param name="to">The value to reach when lifetimePercentage is 1</param>
             <param name="lifetimePercentage">The time percentage (0 to 1) at which the value should be taken</param>
-            <param name="easeType">The type of ease</param>
+            <param name="easetype">The type of ease</param>
             <param name="overshoot">Eventual overshoot to use with Back ease</param>
         </member>
         <member name="M:DG.Tweening.DOVirtual.EasedValue(System.Single,System.Single,System.Single,DG.Tweening.Ease,System.Single,System.Single)">
@@ -2091,9 +2091,9 @@
             <param name="from">The value to start from when lifetimePercentage is 0</param>
             <param name="to">The value to reach when lifetimePercentage is 1</param>
             <param name="lifetimePercentage">The time percentage (0 to 1) at which the value should be taken</param>
-            <param name="easeType">The type of ease</param>
-            <param name="amplitude">Eventual amplitude to use with Elastic easeType</param>
-            <param name="period">Eventual period to use with Elastic easeType</param>
+            <param name="easetype">The type of ease</param>
+            <param name="amplitude">Eventual amplitude to use with Elastic easetype</param>
+            <param name="period">Eventual period to use with Elastic easetype</param>
         </member>
         <member name="M:DG.Tweening.DOVirtual.EasedValue(System.Single,System.Single,System.Single,UnityEngine.AnimationCurve)">
             <summary>Returns a value based on the given ease and lifetime percentage (0 to 1)</summary>
@@ -2179,7 +2179,7 @@
         </member>
         <member name="T:DG.Tweening.ScrambleMode">
             <summary>
-            Type of scramble to apply to string tweens
+            type of scramble to apply to string tweens
             </summary>
         </member>
         <member name="F:DG.Tweening.ScrambleMode.None">

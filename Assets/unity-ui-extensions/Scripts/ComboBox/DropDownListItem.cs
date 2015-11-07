@@ -11,7 +11,7 @@ namespace UnityEngine.UI.Extensions
         [SerializeField]
         private string _caption;
         /// <summary>
-        /// Caption of the Item
+        /// Caption of the BaseItem
         /// </summary>
         public string Caption
         {
@@ -30,7 +30,7 @@ namespace UnityEngine.UI.Extensions
         [SerializeField]
         private Sprite _image;
         /// <summary>
-        /// Image component of the Item
+        /// Image component of the BaseItem
         /// </summary>
         public Sprite Image
         {
@@ -49,7 +49,7 @@ namespace UnityEngine.UI.Extensions
         [SerializeField]
         private bool _isDisabled;
         /// <summary>
-        /// Is the Item currently enabled?
+        /// Is the BaseItem currently enabled?
         /// </summary>
         public bool IsDisabled
         {

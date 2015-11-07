@@ -108,11 +108,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Image: {fileID: 21300000, guid: 8ad3942baecaf404db082273cde056d9, type: 3}
-  Description: "You do not want to pick a bone with this guy! At least not before
-    you have unkilled him.\n\nSummoned using experimental magic and dubious religious
-    power. In the {age_name} in {city_name}, the skeleton warriors were the main war
-    and labour force for the {cult_name}. This was however unbeknownst to the common
-    folk of {city_name}. \n\nThat was however long ago, and now that"
+  Description: 'You do not want to pick a bone with this guy! At least not while he
+    is still alive. Wait minute...
+
+
+    Summoned using experimental magic and dubious religious power. In the Age of Unnamedness
+    in Unnamedia, the skeleton warriors were the main war and labour force for the
+    Cult of Unnamedness. This was however unbeknownst to the common folk of Unnamedia. '
 --- !u!114 &11452428
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -172,11 +174,14 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: Description
-      value: "You do not want to pick a bone with this guy! At least not before you
-        have unkilled him.\n\nSummoned using experimental magic and dubious religious
-        power. In the {age_name} in {city_name}, the skeleton warriors were the main
-        war and labour force for the {cult_name}. This was however unbeknownst to
-        the common folk of {city_name}. \n\nThat was however long ago, and now that"
+      value: 'You do not want to pick a bone with this guy! At least not while he
+        is still alive. Wait minute...
+
+
+        Summoned using experimental magic and dubious religious power. In the Age
+        of Unnamedness in Unnamedia, the skeleton warriors were the main war and labour
+        force for the Cult of Unnamedness. This was however unbeknownst to the common
+        folk of Unnamedia. '
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

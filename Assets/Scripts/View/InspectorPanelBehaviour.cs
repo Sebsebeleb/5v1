@@ -216,17 +216,18 @@ public class InspectorPanelBehaviour : MonoBehaviour
         // Sort it by: Is it a buff? is it a debuff? its duration, then finally by name
         var effects = effectHolder.GetEffects();
 
-        IEnumerable<Effect> sorted = effects.OrderBy(eff => eff.IsInfinite).
-            ThenBy(eff => eff.Duration).
-            ThenBy(eff => !eff.IsDebuff).
-            ThenBy(eff => !eff.IsBuff).
-            ThenBy(eff => eff.GetName()
-            .Reverse());
-
+        IEnumerable<Effect> sorted =
+            effects.OrderBy(eff => eff.IsInfinite)
+                .ThenBy(eff => eff.Duration)
+                .ThenBy(eff => !eff.IsDebuff)
+                .ThenBy(eff => !eff.IsBuff)
+                .ThenBy(eff => eff.GetName())
+                .Reverse();
 
         foreach (Effect eff in sorted)
         {
-            if (eff.IsHidden){
+            if (eff.IsHidden)
+            {
                 continue;
             }
 
@@ -241,15 +242,14 @@ public class InspectorPanelBehaviour : MonoBehaviour
                 color = DebuffColor;
             }
 
-
-            if (!eff.IsInfinite){
+            if (!eff.IsInfinite)
+            {
                 CreateEntry(eff, EffectsParent, color, eff.Duration);
             }
-            else{
+            else
+            {
                 CreateEntry(eff, EffectsParent, color);
             }
-
-
         }
         // TODO:  If there are no traits, we hide the category
 

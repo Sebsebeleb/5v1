@@ -116,7 +116,7 @@ namespace UnityEngine.UI.Extensions
             }
             catch (UnityException)
             {
-                Debug.LogWarning("Mask texture not readable, set your sprite to Texture Type 'Advanced' and check 'Read/Write Enabled'");
+                Debug.LogWarning("Mask texture not readable, set your sprite to Texture type 'Advanced' and check 'Read/Write Enabled'");
                 Destroy(this);
                 return false;
             }
