@@ -62,7 +62,7 @@ namespace Generation
 
             foreach (ItemModifierLoader.ItemModifierEntry itemModifier in ItemModifierLoader.GetItemModifiers())
             {
-                Debug.Log("Checking: " + itemModifier.Name);
+                Debug.Log("Checking: " + itemModifier.Id);
                 Debug.Log("Looking for rarity: " + generatedItem.Rarity);
                 Debug.Log("Mod contains rarities: ");
                 Debug.Log(itemModifier.Rarities.Length);
@@ -89,6 +89,10 @@ namespace Generation
             }
 
             Debug.Log("Adding modifiers");
+
+            // Set the name. Currently there's no base item sooo just set it to the prefix for now.
+            generatedItem.Name = entry.DisplayName;
+
             foreach (XmlElement itemEffectData in entry.ItemEffects)
             {
                 ItemEffect eff = ItemEffect.LoadFromXML(itemEffectData, generatedItem.Rarity);       

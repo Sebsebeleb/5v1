@@ -1,6 +1,11 @@
 ﻿using System;
 using Event;
+
+using Generation;
+
 using UnityEngine;
+
+using Random = UnityEngine.Random;
 
 public class Damagable : MonoBehaviour
 {
@@ -126,6 +131,7 @@ public class Damagable : MonoBehaviour
 
     public void Die(bool givexp = true)
     {
+        DropItem();
         isDead = true;
 
         // Allow effects that trigger on death
@@ -143,6 +149,19 @@ public class Damagable : MonoBehaviour
         EventManager.Notify(Events.ActorDied, actor);
         EnemyManager.KillEnemy(actor);
 
+    }
+
+    /// <summary>
+    /// Temporary function, sometiems drops items on death
+    /// </summary>
+    private void DropItem()
+    {
+        if (Random.Range(0, 100) > 40)
+        {
+            var item = ItemGenerator.GenerateItem(GeneratedItemType.Equipment);
+
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>().AddItem(item);
+        }
     }
 
     public HealthData _GetRawData()

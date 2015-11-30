@@ -19,7 +19,9 @@ namespace Assets.Scripts.Items
     {
         public struct ItemModifierEntry
         {
-            public string Name;
+            public string Id; // TODO: Rename "Name" in xml documents to ID
+
+            public string DisplayName; // Currently the prefix.
 
             public BaseItem.ItemRarity[] Rarities; // This modifier can be added to these rarities
 
@@ -58,8 +60,8 @@ namespace Assets.Scripts.Items
 
                 foreach (var mod in loaded)
                 {
-                    Debug.Log("Found mod: " + mod.Name);
-                    modifiers[mod.Name] = mod;
+                    Debug.Log("Found mod: " + mod.Id);
+                    modifiers[mod.Id] = mod;
                 }
             }
         }
@@ -105,7 +107,15 @@ namespace Assets.Scripts.Items
 
                 ItemModifierEntry entry = new ItemModifierEntry();
 
-                entry.Name = element.FirstChild.InnerText;
+                var child = element.FirstChild;
+
+                //First child should be name
+                entry.Id = child.InnerText;
+
+                //Next node is prefix (currently)
+                child = child.NextSibling;
+                entry.DisplayName = child.InnerText;
+
                 entry.Rarities = rarities.ToArray();
                 entry.ItemEffects = element.GetElementsByTagName("effect");
 
