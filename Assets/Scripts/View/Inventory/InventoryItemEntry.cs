@@ -3,24 +3,40 @@
     using UnityEngine;
     using UnityEngine.UI;
 
-    public class InventoryItemEntry : MonoBehaviour
+    public abstract class InventoryItemEntry : MonoBehaviour
     {
 
+        [Header("References")]
         [SerializeField]
-        private Image ItemTypeIcon;
+        protected Image ItemTypeIcon;
 
         [SerializeField]
-        private Text ItemName;
+        protected Text ItemName;
 
         [SerializeField]
-        private Text ItemDescription;
+        protected Text ItemDescription;
 
         // For changing the background colour based on item type
         [SerializeField]
-        private Image background;
+        protected Image background;
+
+        // Is this button part of the backpack display or the equipped items
+        [SerializeField]
+        protected bool IsInventoryButton;
+        
+        [Header("Stuff that matters")]
+        // The item in the slot
+        public BaseItem Item;
+
+        // 0 = weapon, 1-3 = misc equipment etc.
+        [Tooltip("The inventory slot this entry referes to")]
+        public int ItemSlot;
+
+
 
         public void SetItem(BaseItem item)
         {
+            this.Item = item;
             Debug.Log(item.Type);
 
             // Setup item type specific stuff
@@ -55,5 +71,7 @@
 
             ItemDescription.text = item.GetDescription(true);
         }
+
+        public abstract void OnClicked();
     }
 }

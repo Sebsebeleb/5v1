@@ -1,4 +1,7 @@
 ﻿using System.Linq;
+
+using Event;
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -59,6 +62,7 @@ public class PlayerTargeting : MonoBehaviour
             {
                 usedAction = true;
                 _playerAttack.DoAttack(target);
+                EventManager.Notify(Events.PlayerAttackCommand, target);
             }
         }
 

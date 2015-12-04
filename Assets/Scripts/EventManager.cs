@@ -5,6 +5,20 @@ using UnityEngine;
 namespace Event
 {
 
+    /* Event descriptions
+
+        Identifier ( Arguments )
+        OnTurn ( )
+            Called when a turn passes
+
+
+        PlayerAttackCommand ( Enemy actor )
+            Actor - What enemy was attacked
+            Called when the player issues an attack command (standard click), meaning it won't trigger on skills that use standard attacks
+            Triggers after the attack
+
+    */
+
     public enum Events
     {
         OnTurn, // Called whenever a turn passes
@@ -21,9 +35,12 @@ namespace Event
         GameDeserialized, // Called after the game has loaded a save, used by EnemyDisplay so it knows to update itself
         PostEnemySpawned, // Called JUST after an enemy is spawned.
         EnemyAttack, // Called whenever an enemy attacks the player with a standard attack. Passes the damage dealt and who attacked
+        PlayerAttackCommand, // Called when the player issues an attack command (so does not trigger on skills that use regular attack)
     }
 
     #region delegates
+
+    public delegate void ActorParameters(Actor who);
 
     public delegate void OnTurn();
 
@@ -47,6 +64,9 @@ namespace Event
     // Events that are not related to actual gameplay
 
     public delegate void OnGameDeserialized();
+
+    // Who we attacked
+    public delegate void OnPlayerAttackDommand(Actor who);
 
 
     #endregion

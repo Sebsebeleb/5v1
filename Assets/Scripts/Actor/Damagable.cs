@@ -160,7 +160,7 @@ public class Damagable : MonoBehaviour
         {
             var item = ItemGenerator.GenerateItem(GeneratedItemType.Equipment);
 
-            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>().AddItem(item);
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerEquipment>().AddItem(item);
         }
     }
 

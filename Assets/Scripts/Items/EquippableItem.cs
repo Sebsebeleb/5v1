@@ -1,4 +1,5 @@
-﻿
+﻿using UnityEngine;
+
 [System.Serializable]
 public class EquippableItem : BaseItem
 {
@@ -25,6 +26,23 @@ public class EquippableItem : BaseItem
         set
         {
             this.typeOfEquipment = value;
+        }
+    }
+
+    public void Equip()
+    {
+        Debug.Log("Hello, I was equipped" + this);
+        foreach (var itemEffect in effects)
+        {
+            itemEffect.Equipped(this);
+        }
+    }
+
+    public void UnEquip()
+    {
+        foreach (var itemEffect in effects)
+        {
+            itemEffect.UnEquipped(this);
         }
     }
 }

@@ -8,12 +8,13 @@ using UnityEngine;
 [System.Serializable]
 public abstract class BaseItem
 {
+    protected string name;
 
-    private string name;
-    private ItemType type;
-    private ItemRarity rarity;
+    protected ItemType type;
 
-    private List<ItemEffect> effects = new List<ItemEffect>();
+    protected ItemRarity rarity;
+
+    protected List<ItemEffect> effects = new List<ItemEffect>();
 
     public enum ItemType
     {
@@ -69,6 +70,7 @@ public abstract class BaseItem
         }
     }
 
+    // TODO: This is generation related, not really related to the item itself. Refactor?
     public void AddEffect(ItemEffect eff)
     {
         effects.Add(eff);
