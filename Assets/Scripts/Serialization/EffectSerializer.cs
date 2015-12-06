@@ -76,11 +76,11 @@ namespace IntermediateSerializers
         private static Dictionary<string, object> SaveFields(Effect eff)
         {
 
-			Dictionary<string, object> fields = new Dictionary<string, object>();
+            Dictionary<string, object> fields = new Dictionary<string, object>();
             Type typ = eff.GetType();
             var f = typ.GetMembers(flags);
 
-			// Store all fields as {fieldname : value} in the dict
+            // Store all fields as {fieldname : value} in the dict
             foreach (MemberInfo info in f)
             {
                 if (info.MemberType != MemberTypes.Field){
@@ -98,7 +98,7 @@ namespace IntermediateSerializers
 
             }
 
-			return fields;
+            return fields;
 
         }
     }

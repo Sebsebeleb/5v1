@@ -1,10 +1,7 @@
-﻿using System;
-using Event;
-
+﻿using Event;
 using Generation;
-
+using System;
 using UnityEngine;
-
 using Random = UnityEngine.Random;
 
 public class Damagable : MonoBehaviour
@@ -23,8 +20,8 @@ public class Damagable : MonoBehaviour
 
     public int MaxHealth
     {
-        get { return data.MaxHealth; }
-        set { data.MaxHealth = value; }
+        get { return data.MaxHealth + data.BonusMaxHealth; }
+        private set { data.MaxHealth = value; }
     }
     public int CurrentHealth
     {
@@ -32,10 +29,22 @@ public class Damagable : MonoBehaviour
         set { data.CurrentHealth = value; }
     }
 
-    public float BonusMaxHealth
+    public int BonusMaxHealth
     {
         get { return data.BonusMaxHealth; }
         set { data.BonusMaxHealth = value; }
+    }
+
+    public float BonusMaxHealthPercent
+    {
+        get
+        {
+            return this.data.BonusMaxHealthPercent;
+        }
+        set
+        {
+            this.data.BonusMaxHealthPercent = value;
+        }
     }
 
 
@@ -63,10 +72,11 @@ public class Damagable : MonoBehaviour
     public void OnSpawn()
     {
         MaxHealth = BaseHealth;
-        int bonusHealth = 0;
+        int bonusHealth = this.BonusMaxHealth;
+        
         if (gameObject.tag != "Player")
         {
-            bonusHealth = (int)Math.Round(MaxHealth * BonusMaxHealth);
+            bonusHealth += (int)Math.Round(MaxHealth * BonusMaxHealthPercent);
         }
         CurrentHealth = MaxHealth + bonusHealth;
     }

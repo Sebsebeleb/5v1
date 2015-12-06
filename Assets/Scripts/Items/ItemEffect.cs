@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Runtime.InteropServices.ComTypes;
-using System.Text;
 using System.Xml;
 
 using UnityEngine;
@@ -69,7 +66,7 @@ public abstract class ItemEffect
     }
 
     /// <summary>
-    /// Tries to convert the string parameters from the xml into the type that is required by the constructor.
+    /// Tries to convert the string parameters from the xml into the UseType that is required by the constructor.
     /// TODO: Currently only converts int values. Do we actually need more? Quite possibly bool?
     /// </summary>
     /// <param name="ctor">The constructor info</param>
@@ -120,14 +117,14 @@ public abstract class ItemEffect
     /// <summary>
     /// Called when an item is equipped to the player
     /// </summary>
-    public virtual void Equipped(BaseItem item)
+    public virtual void Equipped(BaseItem item, Actor wearer)
     {
     }
 
     /// <summary>
     /// Called when the item is removed from the player
     /// </summary>
-    public virtual void UnEquipped(BaseItem item)
+    public virtual void UnEquipped(BaseItem item, Actor wearer)
     {
     }
 

@@ -52,7 +52,7 @@
             Otherwise, either returns NULL or automatically creates it before loading and returning it
             (depending on the given parameters).
             </summary>
-            <typeparam name="T">Asset type</typeparam>
+            <UseTypeparam name="T">Asset UseType</UseTypeparam>
             <param name="adbFilePath">File path (relative to Unity's project folder)</param>
             <param name="createIfMissing">If TRUE and the requested asset doesn't exist, forces its creation</param>
         </member>

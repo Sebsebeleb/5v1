@@ -37,10 +37,10 @@
         public void SetItem(BaseItem item)
         {
             this.Item = item;
-            Debug.Log(item.Type);
+            Debug.Log(item.UseType);
 
             // Setup item type specific stuff
-            if (item.Type == BaseItem.ItemType.Equipment)
+            if (item.UseType == BaseItem.ItemUseType.Equipment)
             {
                 EquippableItem equipItem = item as EquippableItem;
 

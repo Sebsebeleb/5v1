@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 
-using UnityEngine;
-
 namespace Zone
 {
     // A zone is a collection of data, including spawn list for enemies, zone modifiers, and other zone specific stuff.
@@ -84,7 +82,7 @@ namespace Zone
         // Apply modifications to enemies when they spawned based on zone effects
         private void HandleEnemySpawned(Actor who)
         {
-            who.damagable.BonusMaxHealth = EnemyHealthModifier - 1.0f;
+            who.damagable.BonusMaxHealthPercent = EnemyHealthModifier - 1.0f;
         }
     }
 }

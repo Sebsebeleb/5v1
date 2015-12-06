@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="basicmodifiers">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="ItemType" type="xs:string" />
+        <xs:element maxOccurs="unbounded" name="item">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="id" type="xs:string" />
+              <xs:element name="prefix" type="xs:string" />
+              <xs:element name="effect">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="path" type="xs:string" />
+                    <xs:element minOccurs="0" name="rare">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="parameters" />
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="uncommon">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="parameters" />
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="common">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="parameters">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="cooldown_reduction" type="xs:unsignedByte" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element minOccurs="0" name="legendary">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="parameters">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="cooldown_reduction" type="xs:unsignedByte" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

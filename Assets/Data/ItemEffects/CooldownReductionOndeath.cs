@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Assets.Data.ItemEffects
+﻿namespace Assets.Data.ItemEffects
 {
     using Event;
 
@@ -21,12 +16,12 @@ namespace Assets.Data.ItemEffects
             this.reductionOnDeath = reduction;
         }
 
-        public override void Equipped(BaseItem item)
+        public override void Equipped(BaseItem item, Actor wearer)
         {
             EventManager.Register(Events.ActorDied, (ActorDied)this.DoReduction);
         }
 
-        public override void UnEquipped(BaseItem item)
+        public override void UnEquipped(BaseItem item, Actor wearer)
         {
             EventManager.UnRegister(Events.ActorDied, (ActorDied)this.DoReduction);
         }

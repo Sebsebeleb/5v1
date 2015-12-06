@@ -50,7 +50,7 @@ public static class GameResources
         {
             Actor act = go.GetComponent<Actor>();
 
-            // If it doesn't have an actor component, it isnt an enemy type
+            // If it doesn't have an actor component, it isnt an enemy UseType
             if (act == null)
             {
                 continue;

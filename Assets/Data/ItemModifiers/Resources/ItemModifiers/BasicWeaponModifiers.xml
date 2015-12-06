@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <basicmodifiers>
-  <item type="equipment" legendary="true" common="true">
-    <name>cooldown_reduction_on_death</name>
+  <ItemType>Weapon</ItemType>
+  <item common="true" legendary="true">
+    <id>cooldown_reduction_on_death</id>
     <prefix>Ghastly</prefix>
     <effect>
       <path>CooldownReductionOnDeath</path>
@@ -17,8 +18,8 @@
       </legendary>
     </effect>
   </item>
-  <item type="equipment" rare="true" uncommon="true">
-    <name>apply_burning_on_hit</name>
+  <item rare="true" uncommon="true">
+    <id>apply_burning_on_hit</id>
     <prefix>Burning</prefix>
     <effect>
       <path>ApplyBurningOnHit</path>

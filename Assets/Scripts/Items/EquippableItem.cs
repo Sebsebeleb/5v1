@@ -5,7 +5,7 @@ public class EquippableItem : BaseItem
 {
     public EquippableItem()
     {
-        this.Type = ItemType.Equipment;
+        this.UseType = ItemUseType.Equipment;
         
     }
 
@@ -29,20 +29,20 @@ public class EquippableItem : BaseItem
         }
     }
 
-    public void Equip()
+    public void Equip(Actor wearer)
     {
         Debug.Log("Hello, I was equipped" + this);
         foreach (var itemEffect in effects)
         {
-            itemEffect.Equipped(this);
+            itemEffect.Equipped(this, wearer);
         }
     }
 
-    public void UnEquip()
+    public void UnEquip(Actor wearer)
     {
         foreach (var itemEffect in effects)
         {
-            itemEffect.UnEquipped(this);
+            itemEffect.UnEquipped(this, wearer);
         }
     }
 }

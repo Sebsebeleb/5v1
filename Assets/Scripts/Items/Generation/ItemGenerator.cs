@@ -1,18 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using UnityEngine.Assertions;
+﻿using System.Linq;
 
 namespace Generation
 {
+    using Assets.Scripts.Items;
     using System;
     using System.Xml;
-
-    using Assets.Scripts.Items;
-
     using UnityEngine;
-
     using Random = System.Random;
 
     public enum GeneratedItemType
@@ -30,7 +23,7 @@ namespace Generation
         /// <summary>
         /// Generates a new completely random item
         /// </summary>
-        /// <param name="type">The type of item to generate</param>
+        /// <param name="type">The UseType of item to generate</param>
         /// <returns>The new finalized item</returns>
         public static BaseItem GenerateItem(GeneratedItemType type)
         {
@@ -51,7 +44,7 @@ namespace Generation
         }
 
         /// <summary>
-        /// Adds one random modifier to the item, based on the item type and rarity
+        /// Adds one random modifier to the item, based on the item UseType and rarity
         /// TODO: Add ways to affect what is selected like based on tags or whatever
         /// </summary>
         /// <param name="generatedItem">The item to generate modifiers for</param>
@@ -60,7 +53,27 @@ namespace Generation
             ItemModifierLoader.ItemModifierEntry entry = new ItemModifierLoader.ItemModifierEntry();
             bool found = false;
 
-            foreach (ItemModifierLoader.ItemModifierEntry itemModifier in ItemModifierLoader.GetItemModifiers())
+            BaseItem.ItemType typ;
+            if (generatedItem.UseType == BaseItem.ItemUseType.Consumable)
+            {
+                typ = BaseItem.ItemType.Consumable;
+            }
+            else
+            {
+                EquippableItem equipItem = generatedItem as EquippableItem;
+                if (equipItem.TypeOfEquipment == EquippableItem.EquipmentType.Weapon)
+                {
+                    Debug.Log("Creating a weapon");
+                    typ = BaseItem.ItemType.Weapon;
+                }
+                else
+                {
+                    Debug.Log("Creating a misc item");
+                    typ = BaseItem.ItemType.Misc;
+                }
+            }
+
+            foreach (ItemModifierLoader.ItemModifierEntry itemModifier in ItemModifierLoader.GetItemModifiers(typ))
             {
                 Debug.Log("Checking: " + itemModifier.Id);
                 Debug.Log("Looking for rarity: " + generatedItem.Rarity);
@@ -135,7 +148,7 @@ namespace Generation
             switch (type)
             {
                 case GeneratedItemType.Both:
-                    if (random.Next(1) > 0.5f)
+                    if (random.Next(0, 2) > 0.5f)
                     {
                         generatedItem = new ConsumableItem();
                     }
@@ -152,8 +165,22 @@ namespace Generation
                     break;
                 default:
                     generatedItem = new EquippableItem();
-                    Debug.LogException(new Exception("Missing item type?"));
+                    Debug.LogException(new Exception("Missing item UseType?"));
                     break;
+            }
+
+            // If equipment, check if it should be weapon or misc
+            if (generatedItem.UseType == BaseItem.ItemUseType.Equipment)
+            {
+                EquippableItem equipmentItem = generatedItem as EquippableItem;
+                if (random.Next(0, 2) > 0.5f)
+                {
+                    equipmentItem.TypeOfEquipment = EquippableItem.EquipmentType.Misc;
+                }
+                else
+                {
+                    equipmentItem.TypeOfEquipment = EquippableItem.EquipmentType.Weapon;
+                }
             }
             return generatedItem;
         }

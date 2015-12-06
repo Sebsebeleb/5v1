@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Zone
 {
-    enum ModifierType{ // Modifiers with the same modifier type are exclusive
+    enum ModifierType{ // Modifiers with the same modifier UseType are exclusive
         ZONE_LENGTH,
         ENEMY_DAMAGE,
         ENEMY_HEALTH,

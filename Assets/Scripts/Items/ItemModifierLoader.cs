@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Assets.Scripts.Items
 {
     using System.Xml;
-
-    using JetBrains.Annotations;
 
     using UnityEngine;
 
@@ -17,6 +14,7 @@ namespace Assets.Scripts.Items
     /// </summary>
     public static class ItemModifierLoader
     {
+
         public struct ItemModifierEntry
         {
             public string Id; // TODO: Rename "Name" in xml documents to ID
@@ -28,15 +26,20 @@ namespace Assets.Scripts.Items
             public XmlNodeList ItemEffects; // The actual effects that should be applied
         }
 
-        private static Dictionary<string, ItemModifierEntry> modifiers = new Dictionary<string, ItemModifierEntry>();
+        /// Modifiers for the different equipment types
+        private static Dictionary<string, ItemModifierEntry> weaponModifiers = new Dictionary<string, ItemModifierEntry>();
+
+        private static Dictionary<string, ItemModifierEntry> miscModifiers = new Dictionary<string, ItemModifierEntry>();
+
+        private static Dictionary<string, ItemModifierEntry> consumableModifiers = new Dictionary<string, ItemModifierEntry>();
 
         private static bool loaded = false;
 
         /// <summary>
-        /// Returns entries for all the loaded item modifiers
+        /// Returns entries for all the loaded item modifiers for the selected item type
         /// </summary>
         /// <returns>A list of all the item modifiers that have been loaded</returns>
-        public static ItemModifierEntry[] GetItemModifiers()
+        public static ItemModifierEntry[] GetItemModifiers(BaseItem.ItemType modifierType)
         {
             if (!loaded)
             {
@@ -44,8 +47,17 @@ namespace Assets.Scripts.Items
                 loaded = true;
             }
 
-            return modifiers.Values.ToArray();
-
+            switch (modifierType)
+            {
+                    case BaseItem.ItemType.Weapon:
+                        return weaponModifiers.Values.ToArray();
+                    case BaseItem.ItemType.Misc:
+                        return miscModifiers.Values.ToArray();
+                    case BaseItem.ItemType.Consumable:
+                        return consumableModifiers.Values.ToArray();
+                default:
+                    throw new NotImplementedException("Item modifiers not implemented for the given modifiertype");
+            }
         }
 
         private static void LoadAllModifiers()
@@ -56,12 +68,56 @@ namespace Assets.Scripts.Items
 
             foreach (TextAsset asset in assets)
             {
-                ItemModifierEntry[] loaded = loadItemModifierEntries(asset.text);
+                // Open the document
+                XmlDocument doc = new XmlDocument();
+                doc.LoadXml(asset.text);
+
+                // Figure out what item type it is for
+                BaseItem.ItemType type;
+
+                switch ((doc.LastChild.FirstChild.InnerText))
+                {
+                    case "Weapon":
+                        type = BaseItem.ItemType.Weapon;
+                        break;
+
+                    case "Misc":
+                        type = BaseItem.ItemType.Misc;
+                        break;
+
+                    case "Consumable":
+                        type = BaseItem.ItemType.Consumable;
+                        break;
+
+                    default:
+                        throw new Exception("Error, non-existing item type in data: " + doc.FirstChild.NextSibling.InnerText + " (" + asset +")");
+                }
+
+                // Store the loaded modifiers in appropriate list
+                ItemModifierEntry[] loaded = loadItemModifierEntries(doc);
+
+                Dictionary<string, ItemModifierEntry> storage;
+
+                switch (type)
+                {
+                    case BaseItem.ItemType.Weapon:
+                        storage = weaponModifiers;
+                        break;
+                    case BaseItem.ItemType.Misc:
+                        storage = miscModifiers;
+                        break;
+                    case BaseItem.ItemType.Consumable:
+                        storage = consumableModifiers;
+                        break;
+                    default:
+                        throw new Exception("wtf");
+                }
+
 
                 foreach (var mod in loaded)
                 {
                     Debug.Log("Found mod: " + mod.Id);
-                    modifiers[mod.Id] = mod;
+                    storage[mod.Id] = mod;
                 }
             }
         }
@@ -71,11 +127,9 @@ namespace Assets.Scripts.Items
         /// </summary>
         /// <param name="text">The XML to load from</param>
         /// <returns>A list of ItemModifierEntry of all the item modifiers found</returns>
-        private static ItemModifierEntry[] loadItemModifierEntries(string text)
+        private static ItemModifierEntry[] loadItemModifierEntries(XmlDocument doc)
         {
             Debug.Log("- Looking for mods in an asset -");
-            XmlDocument doc = new XmlDocument();
-            doc.LoadXml(text);
 
             var elements = doc.GetElementsByTagName("item");
 

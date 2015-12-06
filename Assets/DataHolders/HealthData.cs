@@ -2,5 +2,6 @@
 public struct HealthData{
 	public int MaxHealth;
 	public int CurrentHealth;
-	public float BonusMaxHealth; // 0.0f = 0% increase
+	public int BonusMaxHealth; // 0.0f = 0% increase
+	public float BonusMaxHealthPercent; // 0.0f = 0% increase
 }

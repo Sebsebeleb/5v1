@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<basicmodifiers>
+  <ItemType>Misc</ItemType>
+  <item common="true" legendary="true">
+    <id>bonus_hp</id>
+    <prefix>Healthy</prefix>
+    <effect>
+      <path>BonusHealth</path>
+      <common>
+        <parameters>
+          <bonus_health>5</bonus_health>
+        </parameters>
+      </common>
+      <legendary>
+        <parameters>
+          <bonus_health>10</bonus_health>
+        </parameters>
+      </legendary>
+    </effect>
+  </item>
+  <item rare="true" uncommon="true">
+    <id>thorny</id>
+    <prefix>Thorny</prefix>
+    <effect>
+      <path>Thorny</path>
+      <rare>
+        <parameters>
+          <damage>3</damage>
+        </parameters>
+      </rare>
+      <uncommon>
+        <parameters>
+          <damage>2</damage>
+        </parameters>
+      </uncommon>
+    </effect>
+  </item>
+</basicmodifiers>

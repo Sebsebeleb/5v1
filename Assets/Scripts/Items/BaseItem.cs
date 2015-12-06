@@ -10,15 +10,22 @@ public abstract class BaseItem
 {
     protected string name;
 
-    protected ItemType type;
+    protected ItemUseType useType;
 
     protected ItemRarity rarity;
 
     protected List<ItemEffect> effects = new List<ItemEffect>();
 
-    public enum ItemType
+    public enum ItemUseType
     {
         Equipment,
+        Consumable
+    }
+
+    public enum ItemType
+    {
+        Weapon,
+        Misc,
         Consumable
     }
 
@@ -45,16 +52,16 @@ public abstract class BaseItem
     /// <summary>
     /// Is the item consumable or equipment?
     /// </summary>
-    public virtual ItemType Type
+    public virtual ItemUseType UseType
     {
         get
         {
-            return this.type;
+            return this.useType;
         }
 
         protected set
         {
-            this.type = value;
+            this.useType = value;
         }
     }
 

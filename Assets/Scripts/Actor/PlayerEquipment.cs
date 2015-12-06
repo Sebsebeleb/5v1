@@ -66,16 +66,16 @@ internal class PlayerEquipment : MonoBehaviour, IEnumerable<BaseItem>
         // Weapon
         if (slot == 0)
         {
-            Assert.IsTrue(item.Type == BaseItem.ItemType.Equipment, "Illegal attempt to equip non-equippable item to an equipment slot");
+            Assert.IsTrue(item.UseType == BaseItem.ItemUseType.Equipment, "Illegal attempt to equip non-equippable item to an equipment slot");
 
             // Put old weapon into backpack
             if (this.equippedWeapon != null)
             {
-                this.equippedWeapon.UnEquip();
+                this.equippedWeapon.UnEquip(Actor.Player);
                 this.AddItem(this.equippedWeapon);
             }
             this.equippedWeapon = item as EquippableItem;
-            this.equippedWeapon.Equip();
+            this.equippedWeapon.Equip(Actor.Player);
         }
 
         else
@@ -83,13 +83,13 @@ internal class PlayerEquipment : MonoBehaviour, IEnumerable<BaseItem>
             if (this.equippedMisc[slot - 1] != null)
             {
                 var realOldItem = this.equippedMisc[slot - 1] as EquippableItem; //Temp
-                realOldItem.UnEquip();
+                realOldItem.UnEquip(Actor.Player);
                 this.AddItem(this.equippedMisc[slot - 1]);
             }
 
             var realItem = item as EquippableItem;
             this.equippedMisc[slot - 1] = realItem;
-            realItem.Equip();
+            realItem.Equip(Actor.Player);
         }
     }
 
@@ -104,7 +104,7 @@ internal class PlayerEquipment : MonoBehaviour, IEnumerable<BaseItem>
         if (slot == 0)
         {
             // Check if equipment
-            if (item.Type != BaseItem.ItemType.Equipment)
+            if (item.UseType != BaseItem.ItemUseType.Equipment)
             {
                 return false;
             }
@@ -115,7 +115,7 @@ internal class PlayerEquipment : MonoBehaviour, IEnumerable<BaseItem>
         if (slot > 0 && slot <=3)
         {
             // Check if equipment
-            if (item.Type != BaseItem.ItemType.Equipment)
+            if (item.UseType != BaseItem.ItemUseType.Equipment)
             {
                 return false;
             }
@@ -125,7 +125,7 @@ internal class PlayerEquipment : MonoBehaviour, IEnumerable<BaseItem>
         }
 
         // Check if consumable
-        return item.Type == BaseItem.ItemType.Consumable;
+        return item.UseType == BaseItem.ItemUseType.Consumable;
     }
 
     private void Start()
