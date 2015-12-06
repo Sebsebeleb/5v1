@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System;
-using System.Runtime.Serialization;
 
 // Main access point for accessing the enemy
 public class Actor : MonoBehaviour

@@ -50,6 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InitialEffects:
   - BuffAllyOnDeath
+  Traits: []
 --- !u!114 &11411678
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -110,6 +111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Image: {fileID: 21300000, guid: 294ba1cd97d7bcd498e86c06cbf05533, type: 3}
+  Description: 
 --- !u!114 &11454970
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -155,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a891ef91937f9174481ad6bf04508495, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BaseHealth: 5
+  BaseHealth: 6
   IsInvulnerable: 0
 --- !u!1001 &100100000
 Prefab:
@@ -163,7 +165,15 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: BaseHealth
+      value: -95
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: StartMaxCountdown
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 168242}

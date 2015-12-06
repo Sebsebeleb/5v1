@@ -13,7 +13,6 @@ public class Damagable : MonoBehaviour
     private int BaseHealth;
 
     #endregion
-
     private HealthData data;
 
     private bool isDead;
