@@ -100,11 +100,7 @@ public class EffectIconAnimation : MonoBehaviour
                     text.GetComponent<FloatTextBehaviour>().SetTarget(animationInfo.target.GetComponent<RectTransform>());
                     if (animationInfo.FontSize != 0)
                     {
-                        Debug.Log(text);
-                        Debug.Log(text.GetComponent<Text>());
-                        Debug.Log("START");
                         text.GetComponent<Text>().fontSize = animationInfo.FontSize;
-                        Debug.Log("BYE");
                     }
                 });
             // Tween the outline as well, otherwise it looks pretty dark and weird in the start
