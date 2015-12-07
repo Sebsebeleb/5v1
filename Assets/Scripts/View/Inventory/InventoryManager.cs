@@ -26,15 +26,6 @@ public class InventoryManager : MonoBehaviour
         this.equipment = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerEquipment>();
     }
 
-    public void Update()
-    {
-        // Check if user wants to exit this screen
-        if (Input.GetButton("Cancel"))
-        {
-            gameObject.SetActive(false);
-        }
-    }
-
     public void OnEnable()
     {
         this.Clear();

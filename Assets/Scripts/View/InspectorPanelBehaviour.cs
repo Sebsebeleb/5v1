@@ -1,13 +1,8 @@
-using System;
-using System.Linq;
+using BaseClasses;
 using System.Collections.Generic;
-
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Assertions;
-
-using BaseClasses;
-using DG.Tweening;
 
 public class InspectorPanelBehaviour : MonoBehaviour
 {
@@ -39,15 +34,6 @@ public class InspectorPanelBehaviour : MonoBehaviour
     // TODO: Refactor please. This should only need one interface, not two seperate lists
     private Dictionary<Transform, Effect> _effectEntries = new Dictionary<Transform, Effect>();
     private Dictionary<Transform, ITooltip> _entries = new Dictionary<Transform, ITooltip>();
-
-    public void Update()
-    {
-        // Check if user wants to exit this screen
-        if (Input.GetButton("Cancel"))
-        {
-            gameObject.SetActive(false);
-        }
-    }
 
     public void InspectActor(Actor who)
     {
