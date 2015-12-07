@@ -23,8 +23,8 @@ public class Actor : MonoBehaviour
         get { return _effects; }
     }
 
-    private AttackBehaviour _attack;
-    public AttackBehaviour attack
+    private ActorAttack _attack;
+    public ActorAttack attack
     {
         get { return _attack; }
     }
@@ -44,6 +44,9 @@ public class Actor : MonoBehaviour
     #endregion
 
     #region Stats
+    
+    // Rank of the actor, higher ranks mean more difficult enemy
+    public int Rank = 0;
 
     private int currentMana = 40;
 
@@ -93,7 +96,7 @@ public class Actor : MonoBehaviour
         this._damagable = GetComponent<Damagable>();
         this._countdown = GetComponent<CountdownBehaviour>();
         this._effects = GetComponent<EffectHolder>();
-        this._attack = GetComponent<AttackBehaviour>();
+        this._attack = GetComponent<ActorAttack>();
         this._ai = GetComponent<AI>();
         _status = GetComponent<Status>();
     }

@@ -1,7 +1,5 @@
-﻿using System.Linq;
-
-using Event;
-
+﻿using Event;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,7 +10,7 @@ public class PlayerTargeting : MonoBehaviour
 
 
     private GameObject _player;
-    private AttackBehaviour _playerAttack;
+    private ActorAttack _playerAttack;
     private Actor _playerActor;
 
     private TurnManager turn;
@@ -21,7 +19,7 @@ public class PlayerTargeting : MonoBehaviour
     {
 
         _player = GameObject.FindWithTag("Player");
-        _playerAttack = _player.GetComponent<AttackBehaviour>();
+        _playerAttack = _player.GetComponent<ActorAttack>();
         _playerActor = _player.GetComponent<Actor>();
 
         turn = GameObject.FindWithTag("GM").GetComponent<TurnManager>();

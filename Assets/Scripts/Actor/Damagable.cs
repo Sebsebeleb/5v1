@@ -12,6 +12,9 @@ public class Damagable : MonoBehaviour
     [SerializeField]
     private int BaseHealth;
 
+    [SerializeField]
+    private int healthPerRank; // Bonus health per rank
+
     #endregion
     private HealthData data;
 
@@ -70,7 +73,7 @@ public class Damagable : MonoBehaviour
 
     public void OnSpawn()
     {
-        MaxHealth = BaseHealth;
+        MaxHealth = BaseHealth + this.healthPerRank * this.actor.Rank;
         int bonusHealth = this.BonusMaxHealth;
         
         if (gameObject.tag != "Player")

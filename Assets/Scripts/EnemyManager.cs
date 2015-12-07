@@ -31,13 +31,18 @@ public static class EnemyManager
     /// <param name="enemy">Prefab of enemy to spawn</param>
     /// <param name="x"></param>
     /// <param name="y"></param>
+    /// <param name="rank"></param>
     /// <param name="InitializeStartEffects">If false, will not do initalization code. Mostly for deserialization</param>
-    public static void SpawnEnemy(GameObject enemy, int x, int y, bool InitializeStartEffects = true)
+    public static void SpawnEnemy(GameObject enemy, int x, int y, int rank, bool InitializeStartEffects = true)
     {
         CheckCurrent(enemy, x, y);
 
         GameObject newEnemy = GameObject.Instantiate(enemy);
         Actor actorBehaviour = newEnemy.GetComponent<Actor>();
+        if (newEnemy.tag != "Corpse")
+        {
+            actorBehaviour.Rank = rank;
+        }
         if (InitializeStartEffects)
         {
             Event.EventManager.Notify(Event.Events.PostEnemySpawned, actorBehaviour);
@@ -55,6 +60,16 @@ public static class EnemyManager
 
         actorBehaviour.x = x;
         actorBehaviour.y = y;
+    }
+
+    public static void SpawnEnemy(GameObject enemy, int x, int y, bool InitializeStartEffects = true)
+    {
+        // TODO: Slow start
+        int rank = (CalculateDifficultAdd() / 5) + 1;
+        
+        Debug.Log("Rank: " + rank.ToString());
+
+        SpawnEnemy(enemy, x, y, rank, InitializeStartEffects);
     }
 
     public static void SpawnBoss()
@@ -99,6 +114,7 @@ public static class EnemyManager
     // Returns a higher and higher number as the bosscounter reaches 0
     private static int CalculateDifficultAdd()
     {
+        Debug.Log(Zone.Zone.current.ZoneLength);
         return (int)(((Zone.Zone.current.ZoneLength - TurnManager.BossCounter) * 0.20) * Zone.Zone.current.EnemyDifficultyMod);
     }
 

@@ -62,6 +62,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed5f9ce13ade50a4dadc0a327d6e2242, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Rank: 0
   x: 0
   y: 0
   enemyTypeID: 5
@@ -134,7 +135,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 282150c180c8eea47b6939bdb088934d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartingBaseAttack: 4
+  StartingBaseAttack: 3
+  attackPerRank: 2
 --- !u!114 &11483440
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -158,6 +160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BaseHealth: 6
+  healthPerRank: 1
   IsInvulnerable: 0
 --- !u!1001 &100100000
 Prefab:
@@ -173,6 +176,18 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: StartMaxCountdown
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: healthPerRank
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: attackPerRank
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: StartingBaseAttack
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

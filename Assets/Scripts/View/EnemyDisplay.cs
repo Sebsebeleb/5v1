@@ -10,6 +10,8 @@ public class EnemyDisplay : MonoBehaviour
     public Text Attack;
     public Text Defense;
 
+    public Text Rank;
+
     public Image EnemyImage;
 
     private GridButtonBehaviour gridbutton;
@@ -34,6 +36,8 @@ public class EnemyDisplay : MonoBehaviour
     void Update()
     {
         actor = GridManager.TileMap.GetAt(gridbutton.x, gridbutton.y);
+
+        this.Rank.text = this.actor.Rank.ToString();
 
         string actualName = actor.name;
         // Strip "(Clone)"

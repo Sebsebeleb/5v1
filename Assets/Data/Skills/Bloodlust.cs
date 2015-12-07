@@ -25,7 +25,7 @@ namespace Data.Skills
 
             //TODO: This currently assumes the player is casting it. Bad?
             GameObject player = GameObject.FindWithTag("Player");
-            AttackBehaviour playerAttack = player.GetComponent<AttackBehaviour>();
+            ActorAttack playerAttack = player.GetComponent<ActorAttack>();
             Actor playerActor = player.GetComponent<Actor>();
 
 

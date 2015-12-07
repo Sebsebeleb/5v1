@@ -1,8 +1,5 @@
-using System;
-using System.Collections.Generic;
-using UnityEngine;
-
 using BaseClasses;
+using System.Collections.Generic;
 
 namespace Data.Effects
 {
@@ -15,7 +12,7 @@ namespace Data.Effects
         {
             IsInfinite = true;
             Description = new EffectDescription("Charged",
-				(() => "This creature is charged by arc lighting. The lightning will strike a random adjacent target that does not have the Charged effect at end of turn, or, if no target is found, dissipate."));
+                (() => "This creature is charged by arc lighting. The lightning will strike a random adjacent target that does not have the Charged effect at end of turn, or, if no target is found, dissipate."));
             damage = damagePerJump;
         }
 
