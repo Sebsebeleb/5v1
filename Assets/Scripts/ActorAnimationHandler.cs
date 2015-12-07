@@ -1,9 +1,8 @@
+using DG.Tweening;
+using Event;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
-using Event;
-
-using DG.Tweening;
 
 
 ///
@@ -18,8 +17,22 @@ public class ActorAnimationHandler : MonoBehaviour
     public GameObject[] Enemies; // THe 6 enemies in order from upper left to lower right
     private Sequence[] aboutToAttackSequences = new Sequence[6];
 
+    [HideInInspector]
+    public static ActorAnimationHandler Instance;
+
     void Awake()
     {
+        // Singleton
+        if (Instance != null)
+        {
+            DestroyImmediate(this);
+            return;
+        }
+        else
+        {
+            Instance = this;
+        }
+
         anims = new Animator[6];
 
         for (int i = 0; i < 6; i++)
@@ -43,21 +56,53 @@ public class ActorAnimationHandler : MonoBehaviour
 
         // Whenever enemies have 1 countdown and will act next turn, we update them to play a little animation to indicate this.
         EventManager.Register(Events.OnTurn, (OnTurn)CheckAboutToActAnimations);
+
+        // When enemies deal damage, show floating texts
+        EventManager.Register(Events.EnemyAttack, (OnEnemyAttack)this.EnemyAttackedDisplay);
     }
 
-	private void Update(){
-		//Check if the aboutToAttackSequences should be stopped (i.e. the enemies' countdown is no longer 1
-		foreach (Actor actor in GridManager.TileMap.GetAll()){
-			int index = getIndex(actor.x, actor.y);
-			if (actor.countdown.CurrentCountdown != 1 && aboutToAttackSequences[index] != null){
-				aboutToAttackSequences[index].Rewind();
-			}
-		}
-	}
+    public FloatTextBehaviour SpawnFloatingText(GameObject enemy, string richText)
+    {
+        ChangeAnimation animationInfo = new ChangeAnimation();
+        animationInfo.SpawnHoverText = true;
+        animationInfo.TextProp = richText;
+        animationInfo.FontSize = 80;
+        animationInfo.target = enemy;
+
+        enemy.GetComponentInChildren<EffectIconAnimation>().StartAnimation(animationInfo, richText);
+
+        return enemy.GetComponentInChildren<FloatTextBehaviour>();
+    }
+
+    /// <summary>
+    /// Displays a floating text when enemies attack
+    /// </summary>
+    /// <param name="args"></param>
+    private void EnemyAttackedDisplay(EnemyAttackArgs args)
+    {
+        // Find a reference to the UI Enemy
+        int index = getIndex(args.who.x, args.who.y);
+        GameObject enemy = this.Enemies[index];
+
+        string s = TextUtilities.FontColor(Colors.DamageValue, args.rawDamage);
+
+        var floater = SpawnFloatingText(enemy, s);
+    }
+
+    private void Update(){
+        //Check if the aboutToAttackSequences should be stopped (i.e. the enemies' countdown is no longer 1
+        foreach (Actor actor in GridManager.TileMap.GetAll()){
+            int index = getIndex(actor.x, actor.y);
+            if (actor.countdown.CurrentCountdown != 1 && aboutToAttackSequences[index] != null){
+                aboutToAttackSequences[index].Rewind();
+            }
+        }
+    }
+
 
     ///
-	/// When enemies have 1 countdown, we start a little animation to show it
-	///
+    /// When enemies have 1 countdown, we start a little animation to show it
+    ///
     private void CheckAboutToActAnimations()
     {
         foreach (Actor actor in GridManager.TileMap.GetAll())
@@ -67,7 +112,7 @@ public class ActorAnimationHandler : MonoBehaviour
                 // A reference to the button we want to animate
                 int index = getIndex(actor.x, actor.y);
 
-				// If the tween hasn't been created for this enemy yet, make it
+                // If the tween hasn't been created for this enemy yet, make it
                 if (aboutToAttackSequences[index] == null)
                 {
                     GameObject enemyButton = Enemies[index];
@@ -81,12 +126,12 @@ public class ActorAnimationHandler : MonoBehaviour
 
                     seq.SetLoops(-1);
 
-					aboutToAttackSequences[index] = seq;
+                    aboutToAttackSequences[index] = seq;
                 }
-				//Otherwise we just restart the existing one.
-				else{
-					aboutToAttackSequences[index].Restart();
-				}
+                //Otherwise we just restart the existing one.
+                else{
+                    aboutToAttackSequences[index].Restart();
+                }
             }
         }
     }
@@ -106,6 +151,7 @@ public class ActorAnimationHandler : MonoBehaviour
 
         // Should we animate an icon?
         if (animationInfo.IconName != String.Empty)
+
         {
             //Horribly inefficient: TODO: Optimize
             enemy.GetComponentInChildren<EffectIconAnimation>().StartAnimation(animationInfo, args.effect.GetName());
@@ -146,5 +192,4 @@ public class ActorAnimationHandler : MonoBehaviour
 
         return result;
     }
-
 }

@@ -1,13 +1,9 @@
-using System;
-using UnityEngine;
-using UnityEngine.UI;
-
-// Asset package
-using UnityEngine.UI.Extensions;
-
-using DG;
 using DG.Tweening;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+// Asset package
+using UnityEngine.UI.Extensions;
 
 public class EffectIconAnimation : MonoBehaviour
 {
@@ -58,7 +54,6 @@ public class EffectIconAnimation : MonoBehaviour
 
     public void StartAnimation(ChangeAnimation animationInfo, string floatingText)
     {
-
         animationQueue.Enqueue(animationInfo);
     }
 
@@ -73,18 +68,44 @@ public class EffectIconAnimation : MonoBehaviour
         {
             var outline = icon.GetComponent<NicerOutline>();
 
-            tween = icon.DOFade(1f, duration / 2)
+            float fade;
+
+            Debug.Log("Creating tween");
+            if (string.IsNullOrEmpty(animationInfo.IconName))
+            {
+                fade = 0f;
+            }
+            else
+            {
+                fade = 1f;
+            }
+            tween = icon.DOFade(fade, duration / 2)
             .SetEase(Ease.InCirc)
             .SetDelay(delay)
             .OnStart(() =>
                 {
 
-                    icon.sprite = getSprite(animationInfo.IconName);
+                    if (!string.IsNullOrEmpty(animationInfo.IconName))
+                    {
+                        icon.sprite = getSprite(animationInfo.IconName);
+                    }
+                    else
+                    {
+                        this.icon.sprite = null;
+                    }
                     // Text prop stuff
                     GameObject text = Instantiate(FloatTextPrefab) as GameObject;
                     text.transform.SetParent(GameObject.FindWithTag("MainCanvas").transform);
                     text.GetComponent<FloatTextBehaviour>().SetText(animationInfo.TextProp);
                     text.GetComponent<FloatTextBehaviour>().SetTarget(animationInfo.target.GetComponent<RectTransform>());
+                    if (animationInfo.FontSize != 0)
+                    {
+                        Debug.Log(text);
+                        Debug.Log(text.GetComponent<Text>());
+                        Debug.Log("START");
+                        text.GetComponent<Text>().fontSize = animationInfo.FontSize;
+                        Debug.Log("BYE");
+                    }
                 });
             // Tween the outline as well, otherwise it looks pretty dark and weird in the start
             tween.OnUpdate(() => {
@@ -98,6 +119,8 @@ public class EffectIconAnimation : MonoBehaviour
 
                     currentTweens.Remove(tween);
                 });
+
+            Debug.Log("End tween");
         }
         else
         {
