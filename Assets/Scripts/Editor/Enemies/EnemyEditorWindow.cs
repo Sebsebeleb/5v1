@@ -71,7 +71,7 @@
             // References to components on the enemy
             Actor act = prefab.GetComponent<Actor>();
             Damagable damage = prefab.GetComponent<Damagable>();
-            AttackBehaviour attack = prefab.GetComponent<AttackBehaviour>();
+            ActorAttack attack = prefab.GetComponent<ActorAttack>();
             CountdownBehaviour countdown = prefab.GetComponent<CountdownBehaviour>();
 
             currentDisplayData = prefab.GetComponent<DisplayData>();
@@ -95,16 +95,34 @@
             SerializedObject sDamage = new SerializedObject(damage);
             SerializedObject sAttack = new SerializedObject(attack);
             SerializedObject sCountdown = new SerializedObject(countdown);
+            SerializedObject sDisplayData = new SerializedObject(currentDisplayData);
 
             SerializedProperty oldHealth = sDamage.FindProperty("BaseHealth");
+            SerializedProperty healthPerRankProp = sDamage.FindProperty("healthPerRank");
             SerializedProperty attackProp = sAttack.FindProperty("StartingBaseAttack");
+            SerializedProperty attackPerRankProp = sAttack.FindProperty("attackPerRank");
             SerializedProperty countdownProp = sCountdown.FindProperty("StartMaxCountdown");
+            SerializedProperty description = sDisplayData.FindProperty("Description");
 
+            description.stringValue = EditorGUILayout.TextField(
+                "Description",
+                description.stringValue, GUILayout.Height(100));
+
+
+            EditorGUILayout.Separator();
             EditorGUILayout.LabelField("Stats", EditorStyles.boldLabel);
 
-            oldHealth.intValue = EditorGUILayout.IntField("Base Health", oldHealth.intValue, EditorStyles.numberField);
-            attackProp.intValue = EditorGUILayout.IntField("Base Attack", attackProp.intValue);
-            countdownProp.intValue = EditorGUILayout.IntField("Countdown", countdownProp.intValue);
+            EditorGUILayout.BeginHorizontal();
+            oldHealth.intValue = EditorGUILayout.IntField("Base Health", oldHealth.intValue, EditorStyles.numberField, GUILayout.ExpandWidth(false));
+            healthPerRankProp.intValue = EditorGUILayout.IntField("Per Rank", healthPerRankProp.intValue, EditorStyles.numberField, GUILayout.ExpandWidth(false));
+            EditorGUILayout.EndHorizontal();
+
+            EditorGUILayout.BeginHorizontal();
+            attackProp.intValue = EditorGUILayout.IntField("Base Attack", attackProp.intValue, GUILayout.ExpandWidth(false));
+            attackPerRankProp.intValue = EditorGUILayout.IntField("Per Rank", attackPerRankProp.intValue, GUILayout.ExpandWidth(false));
+            EditorGUILayout.EndHorizontal();
+
+            countdownProp.intValue = EditorGUILayout.IntField("Countdown", countdownProp.intValue, GUILayout.ExpandWidth(false));
 
             sDamage.ApplyModifiedProperties();
             sAttack.ApplyModifiedProperties();
