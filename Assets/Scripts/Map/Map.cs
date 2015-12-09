@@ -71,6 +71,16 @@ namespace Map
             return (Actor)_tiles[x + y * _width];
         }
 
+        /// <summary>
+        /// Return Actor contained at the grid position
+        /// </summary>
+        /// <param name="pos"></param>
+        /// <returns></returns>
+        public Actor GetAt(GridPosition pos)
+        {
+            return this.GetAt(pos.x, pos.y);
+        }
+
         public Actor GetFromIndex(int i){
             return _tiles[i];
         }

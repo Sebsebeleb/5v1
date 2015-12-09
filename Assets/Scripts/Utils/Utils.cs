@@ -28,13 +28,12 @@ public static class Utils
         }
         return act.y * 3 + act.x + 1;
     }
-
     public static Actor IDToActor(int i)
     {
         if (i == 0)
         {
             return Player;
         }
-		return GridManager.TileMap.GetFromIndex(i-1);
+        return GridManager.TileMap.GetFromIndex(i-1);
     }
 }

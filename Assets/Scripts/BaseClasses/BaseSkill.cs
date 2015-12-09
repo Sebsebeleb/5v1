@@ -1,7 +1,6 @@
-﻿using System;
+﻿using Map;
+using System;
 using System.Collections.Generic;
-
-using UnityEngine;
 
 public abstract class BaseSkill : ITooltip, IRankCalculatable
 {
@@ -28,9 +27,27 @@ public abstract class BaseSkill : ITooltip, IRankCalculatable
         Rank = GetRank(PlayerLevel);
     }
 
+    
+    /// <summary>
+    /// Can we target this position?
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
+    /// <returns></returns>
     public virtual bool CanTargetGrid(int x, int y)
     {
-        return true;
+        GridPosition pos = new GridPosition(x, y);
+        
+        return this.GetValidTargets().Contains(pos);
+    }
+
+    /// <summary>
+    /// Returns all grid positions this skill can be used on
+    /// </summary>
+    /// <returns>List of valid targets</returns>
+    public virtual List<GridPosition> GetValidTargets()
+    {
+        return Targeting.Targets.NotCorpses();
     }
 
     public virtual void UseOnTargetGrid(int x, int y)
