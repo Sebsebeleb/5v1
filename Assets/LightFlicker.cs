@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class LightFlicker : MonoBehaviour
 {
-
-    
     private Light light;
 
     private float rangeTarget;
