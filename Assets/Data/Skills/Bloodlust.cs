@@ -8,6 +8,8 @@ namespace Data.Skills
 
         public Bloodlust(int PlayerLevel) : base(PlayerLevel)
         {
+            Category = SkillCategory.Warrior;
+
             SkillName = "Bloodlust";
             Tooltip = "Deal {0} damage to an enemy. If this attack kills it, heal life equal to twice the enemy's hp (from before the attack)";
             BaseCooldown = 10;

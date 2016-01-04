@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace Data.Skills
 {
     [System.Serializable]
@@ -7,6 +5,8 @@ namespace Data.Skills
     {
         public LightningBolt(int PlayerLevel) : base(PlayerLevel)
         {
+            Category = SkillCategory.Lightning;
+
             SkillName = "Lightning Bolt";
             Tooltip = "Deal {0} damage to an enemy and apply electrified. If it was already electrified, remove electrified and deal {1} damage to all other enemies.";
             BaseCooldown = 7;

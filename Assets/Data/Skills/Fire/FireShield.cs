@@ -7,6 +7,8 @@ namespace Data.Skills
     {
         public FireShield(int PlayerLevel) : base(PlayerLevel)
         {
+            Category = SkillCategory.Fire;
+
             SkillName = "Fire Shield";
             Tooltip = "For the next {0} turns, you will deal {1} damage to all attackers and apply burning to them. Enemies that are already burning take an extra {2} damage";
             BaseCooldown = 18;

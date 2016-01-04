@@ -1,4 +1,3 @@
-using UnityEngine;
 
 using Data.Effects;
 
@@ -10,6 +9,8 @@ namespace Data.Skills
 
         public Blizzard(int PlayerLevel) : base(PlayerLevel)
         {
+            Category = SkillCategory.Water;
+
             SkillName = "Blizzard";
             Tooltip = "Deal {0} damage to all enemies. Then, if at least 4 enemies survive, stun them for {1} turn";
             BaseCooldown = 12;

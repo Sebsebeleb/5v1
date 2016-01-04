@@ -1,4 +1,3 @@
-using UnityEngine;
 
 using Data.Effects;
 
@@ -10,6 +9,8 @@ namespace Data.Skills
     {
         public Stun(int PlayerLevel) : base(PlayerLevel)
         {
+            Category = SkillCategory.Warrior;
+
             SkillName = "Stun";
             Tooltip = "Stun an enemy for {0} turns";
             BaseCooldown = 11;

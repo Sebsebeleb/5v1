@@ -7,6 +7,8 @@ namespace Data.Skills
     {
         public Block(int PlayerLevel) : base(PlayerLevel)
         {
+            Category = SkillCategory.Warrior;
+            
             SkillName = "Block";
             Tooltip = "Block all damage that would be dealt for {0} turns";
             BaseCooldown = 18;

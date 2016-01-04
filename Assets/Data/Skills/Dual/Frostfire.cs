@@ -1,4 +1,3 @@
-using UnityEngine;
 
 using Data.Effects;
 
@@ -9,6 +8,8 @@ namespace Data.Skills
     {
         public FrostFire(int PlayerLevel) : base(PlayerLevel)
         {
+            Category = SkillCategory.Fire | SkillCategory.Water;
+
             SkillName = "Frost Fire";
             Tooltip = "Deal {0} damage to an enemy. if the enemy was wet, apply stun {1}, remove wet, and then apply burning. If enemy was burning, consume burning, deal 150% of remaining burning damage and apply wet.";
             BaseCooldown = 10;

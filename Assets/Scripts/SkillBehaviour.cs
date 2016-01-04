@@ -1,12 +1,13 @@
-﻿using System;
-using BaseClasses;
-using System.Collections.Generic;
+﻿using BaseClasses;
 using Data.Skills;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SkillBehaviour : MonoBehaviour
 {
     private BaseSkill[] _knownSkills = new BaseSkill[4];
+    private List<Specialization> specializations = new List<Specialization>();
+    
 
     void Start()
     {
@@ -33,6 +34,12 @@ public class SkillBehaviour : MonoBehaviour
         }
     }
 
+    public void LearnSpecialization(Specialization specialization)
+    {
+        this.specializations.Add(specialization);
+        specialization.OnLearned();
+    }
+
     /// <summary>
     /// Teaches a new skill in a specific slot, overriding the old skill in that slot
     /// </summary>
@@ -45,6 +52,11 @@ public class SkillBehaviour : MonoBehaviour
 
     public BaseSkill[] GetKnownSkills(){
         return _knownSkills;
+    }
+
+    public Specialization[] GetKnownSpecializations()
+    {
+        return this.specializations.ToArray();
     }
 
     // TODO: Cleanup shitty code

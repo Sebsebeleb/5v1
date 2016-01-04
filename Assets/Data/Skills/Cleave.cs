@@ -10,6 +10,8 @@ namespace Data.Skills
 
         public Cleave(int PlayerLevel) : base(PlayerLevel)
         {
+            Category =SkillCategory.Warrior;
+
             SkillName = "Cleave";
             Tooltip = "Deal {0} damage to target and one random adjacent enemy";
             BaseCooldown = 12;

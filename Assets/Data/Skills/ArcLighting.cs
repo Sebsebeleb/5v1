@@ -6,6 +6,8 @@ namespace Data.Skills
 
         public ArcLightning(int PlayerLevel) : base(PlayerLevel)
         {
+            Category =  SkillCategory.Lightning;
+
             SkillName = "Arc Lightning";
             Tooltip = "Target an enemy an deal {0} damage to them and make them electrified. The bolt will then move to another random adjacent non-electrified enemy and deal {0} damage until there are no targets to jump to.";
             BaseCooldown = 20;

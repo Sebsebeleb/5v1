@@ -9,6 +9,11 @@
 
         public GameObject InventoryScreen;
 
+        public GameObject DebugScreen;
+
+        [SerializeField]
+        private InspectorPanelBehaviour inspector;
+
         private void Awake()
         {
             this.playerTargeting = GameObject.FindWithTag("Player").GetComponent<PlayerTargeting>();
@@ -16,9 +21,20 @@
 
         public void Update()
         {
+            // Show inventory
             if (Input.GetKeyDown(KeyCode.I))
             {
-                InventoryScreen.SetActive(true);
+                // Put the window on top of other windows
+                this.InventoryScreen.transform.SetSiblingIndex(this.InventoryScreen.transform.parent.childCount-1);
+                InventoryScreen.SetActive(!this.InventoryScreen.activeInHierarchy);
+            }
+
+            // Show player info
+            else if (Input.GetKeyDown(KeyCode.C))
+            {
+                this.inspector.gameObject.SetActive(!this.inspector.gameObject.activeInHierarchy);
+                this.inspector.transform.SetSiblingIndex(this.inspector.transform.parent.childCount-1);
+                this.inspector.InspectActor(Actor.Player);
             }
 
             else if (Input.GetKeyDown(KeyCode.Q))
@@ -56,6 +72,13 @@
                 
                 this.playerTargeting.TargetGrid(2, 1);
             }
+
+#if DEBUG
+            else if (Input.GetKeyDown(KeyCode.O))
+            {
+                this.DebugScreen.SetActive(!this.DebugScreen.activeInHierarchy);
+            }
+#endif
         }
     }
 }

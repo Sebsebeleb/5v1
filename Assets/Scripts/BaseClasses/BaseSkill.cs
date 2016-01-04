@@ -4,6 +4,15 @@ using System.Collections.Generic;
 
 public abstract class BaseSkill : ITooltip, IRankCalculatable
 {
+    [Flags]
+    public enum SkillCategory
+    {
+        Fire,
+        Water,
+        Lightning,
+        Warrior,
+        Warlockery,
+    }
     // Indices = rank level, value = min level/max level to get it. (example, if RankLevelMin = [1, 4, 6] and RankLevelMax = [2, 6, 8] the player can only get rank 1 from level 1-2, rank 2 from 4-6 and rank 3 from 6-8
     public static readonly int[] RankLevelMin = new int[5]{0, 3, 5, 7, 9};
     public static readonly int[] RankLevelMax = new int[5]{4, 6, 8, 11, int.MaxValue};
@@ -19,6 +28,21 @@ public abstract class BaseSkill : ITooltip, IRankCalculatable
 
     // The rank of the skill, higher ranks require higher player level
     public int Rank;
+
+    private SkillCategory category;
+
+    public SkillCategory Category
+    {
+        get
+        {
+            return category;
+        }
+
+        protected set
+        {
+            category = value;
+        }
+    }
 
     //Player level is the level used to determine rank given to this skill.
     public BaseSkill(int PlayerLevel)

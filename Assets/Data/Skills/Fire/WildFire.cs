@@ -1,8 +1,6 @@
-using System;
+using Data.Effects;
 using System.Collections.Generic;
 using System.Linq;
-
-using Data.Effects;
 
 namespace Data.Skills
 {
@@ -17,6 +15,8 @@ namespace Data.Skills
         // Just have one missile per enemy hit, but have each missile deal the randomly allocated damage
         public WildFire(int PlayerLevel) : base(PlayerLevel)
         {
+            Category = SkillCategory.Fire;
+
             SkillName = "Wildfire";
             Tooltip = "Deal {0} damage randomly split among all burning enemies. Damage is increased by {1} per burning enemy.";
             // Alternatively: Deal {0} damage randomly split among all enemies. Burning enemies take x more damage. All enemies that were hit start burning

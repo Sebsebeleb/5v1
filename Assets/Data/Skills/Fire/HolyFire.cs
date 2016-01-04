@@ -1,9 +1,5 @@
-﻿using System;
+﻿using Data.Effects;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Data.Effects;
 
 namespace Data.Skills
 {
@@ -11,6 +7,8 @@ namespace Data.Skills
     {
         public HolyFire(int playerLevel) : base(playerLevel)
         {
+            Category = SkillCategory.Fire;
+
             SkillName = "Holy Fire";
             Tooltip = "Deal {0} damage to an enemy and all adjacent enemies and apply burning ({1}) to them";
             BaseCooldown = 10;

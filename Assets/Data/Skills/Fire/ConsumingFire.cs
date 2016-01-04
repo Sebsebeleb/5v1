@@ -1,6 +1,5 @@
-using UnityEngine;
-
 using Data.Effects;
+using UnityEngine;
 
 namespace Data.Skills
 {
@@ -9,6 +8,8 @@ namespace Data.Skills
     {
         public ConsumingFire(int PlayerLevel) : base(PlayerLevel)
         {
+            Category = SkillCategory.Fire;
+
             SkillName = "Consuming Fire";
             Tooltip = "Apply burning (4) to an enemy and heal for {0} for every burning enemy. If the enemy dies within 4 turns, it will explode dealing {1} damage to all adjacent enemies and apply burning (3) to them";
             BaseCooldown = 7;

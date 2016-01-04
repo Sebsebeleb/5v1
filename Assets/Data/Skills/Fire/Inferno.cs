@@ -1,4 +1,3 @@
-using UnityEngine;
 using Data.Effects;
 
 namespace Data.Skills
@@ -9,6 +8,8 @@ namespace Data.Skills
 
         public Inferno(int PlayerLevel) : base(PlayerLevel)
         {
+            Category = SkillCategory.Fire;
+
             SkillName = "Inferno";
             Tooltip = "Deal {0} damage to all enemies and apply burning for {1} turns";
             BaseCooldown = 12;

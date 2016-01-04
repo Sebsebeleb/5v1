@@ -1,11 +1,14 @@
+using BaseClasses;
+using Data.Skills;
+using Scripts.View.LevelupMenu;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Assertions;
+using UnityEngine.UI;
 
-using Data.Skills;
 public class LevelupManagerBehaviour : MonoBehaviour
 {
     public GameObject SkillEntryPrefab;
@@ -26,6 +29,49 @@ public class LevelupManagerBehaviour : MonoBehaviour
     public Text TitleKnownSkill;
     public Text DescriptionKnownSkill;
 
+
+    // The levels that the player will be able to learn a new specialization
+    private static readonly int[] SpecializationLevels = new[] { 2, 4, 6, 9 };
+
+    // List specializations that exist. Kinda temp solution
+    private Specialization[] Specializations =
+                                           {
+                                            new Specialization("Warlockery", 
+@"Gain focus on <color=""purple"">Warlockery</color> skills
+Whenever an enemy dies, heal for 0.5% max health for each debuff it had.", 
+                                                "Warlockery",
+                                                new Color(0.56f, 0.031f, 0.367f),
+                                                BaseSkill.SkillCategory.Warlockery), 
+                                            /*new Specialization("Elementalist",
+@"Gain focus on <color=""red"">Fire</color>, <color=""blue"">Water</color> and <color=""yellow"">Lightning</color> skills.
+Skills are 25% potent per elemental debuff on the target.", 
+                                                "Elementalist",
+                                                new Color(0.568f, 0.211f, 0.513f)), */
+                                            new Specialization("Pyromancer",
+@"Gain focus on <color=""red""> Fire</color> skills.
+Gain +1 mana regen for each burning enemy",
+                                                "Pyromancer",
+                                                new Color(1, 0.43f, 0.227f),
+                                                BaseSkill.SkillCategory.Fire),
+                                            new Specialization("Toiletery",
+                                                @"Gain focus on <color=""blue"">Water</color> and <color=""brown"">Stool</color> skills
+The ""Wet"" debuff will make enemies 20% more vulnerable to spells. +100% efficiency on flush",
+                                                "Toiletery",
+                                                new Color(0.501f, 0.701f, 0.866f),
+                                                BaseSkill.SkillCategory.Water), 
+                                           };
+    [Header("Specialization references")]
+    [SerializeField]
+    private GameObject SpecializationView;
+
+    [SerializeField]
+    private GameObject SpecializationEntryPrefab;
+
+    [SerializeField]
+    private Transform SpecializationEntries;
+
+    private int playerLevel;
+
     void Awake()
     {
         //delegateeventCallback = OnPlayerLevel;
@@ -39,50 +85,54 @@ public class LevelupManagerBehaviour : MonoBehaviour
         RealHolder.SetActive(false);
     }
 
-    // notused parameter is a lazy as fuck way of dealing with the event manager.
     private void OnPlayerLevel(int i)
     {
-        List<BaseSkill> skills = new List<BaseSkill>(){
-            new Block(i),
-            new Bloodlust(i),
-            new Cleave(i),
-            new Stun(i),
-            new ArcLightning(i),
-            new Blizzard(i),
-            new Switcheroo(i),
-            new LightningBolt(i),
-            new FireShield(i),
-            new WildFire(i),
-            new Inferno(i),
-            new ConsumingFire(i),
-            new FrostFire(i),
-            new HolyFire(i),
 
-        };
+        this.playerLevel = i;
 
-        BaseSkill blockSkill = new Data.Skills.Block(i);
-
-        // Generate a choice of 4 skills for the player to levelup
-        List<BaseSkill> finalChoices = new List<BaseSkill>(skills);
-
-        foreach (BaseSkill skill in skills)
+        //Check if the player should be able to learn a specialization
+        if (SpecializationLevels.Contains(i))
         {
-            if (skill.Rank < 0 ||
-                PlayerSkills.KnowsSkill(skill)
-                )
-            {
-                finalChoices.Remove(skill);
-            }
+            InitSpecialization();
         }
-        finalChoices.Shuffle();
-
-        int max = Math.Min(4, finalChoices.Count);
-
-        Init(finalChoices.GetRange(0, max).ToArray());
+        else
+        {
+            Init(i);
+        }
     }
 
-    public void Init(BaseSkill[] skills)
+    /// <summary>
+    /// Sets up the specialization window
+    /// </summary>
+    private void InitSpecialization()
     {
+        this.SpecializationView.SetActive(true);
+
+        // Cleanup old
+        foreach (Transform child in this.SpecializationEntries.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        // Initialize specializations
+        foreach (Specialization s in this.Specializations)
+        {
+            GameObject entry = Instantiate(SpecializationEntryPrefab);
+            entry.transform.SetParent(this.SpecializationEntries);
+
+            SpecializationEntryBehaviour behaviour = entry.GetComponent<SpecializationEntryBehaviour>();
+
+            behaviour.SetSpecialization(s);
+            entry.GetComponent<Toggle>().group = this.SpecializationEntries.GetComponent<ToggleGroup>();
+
+        }
+
+    }
+
+    private void Init(int i)
+    {
+        BaseSkill[] skills = this.GenerateChoices(i);
+
         RealHolder.SetActive(true);
 
         // Cleanup old
@@ -125,6 +175,89 @@ public class LevelupManagerBehaviour : MonoBehaviour
         }
     }
 
+    private BaseSkill[] GenerateChoices(int i)
+    {
+
+        List<BaseSkill> skills = new List<BaseSkill>(){
+            new Block(i),
+            new Bloodlust(i),
+            new Cleave(i),
+            new Stun(i),
+            new ArcLightning(i),
+            new Blizzard(i),
+            new Switcheroo(i),
+            new LightningBolt(i),
+            new FireShield(i),
+            new WildFire(i),
+            new Inferno(i),
+            new ConsumingFire(i),
+            new FrostFire(i),
+            new HolyFire(i),
+
+        };
+
+        // Generate a choice of 4 skills for the player to levelup
+        List<BaseSkill> finalChoices = new List<BaseSkill>(skills);
+
+        foreach (BaseSkill skill in skills)
+        {
+            if (skill.Rank < 0 ||
+                PlayerSkills.KnowsSkill(skill)
+                )
+            {
+                finalChoices.Remove(skill);
+            }
+        }
+        finalChoices.Shuffle();
+
+        // Find a focused skill
+
+        BaseSkill focus = RollFocusSkill(finalChoices.ToArray());
+
+
+        if (focus != null)
+        {
+            finalChoices.Remove(focus);
+            finalChoices.Insert(0, focus);
+        }
+
+
+        int choices = 4;
+
+        int max = Math.Min(choices, finalChoices.Count);
+
+        return finalChoices.GetRange(0, max).ToArray();
+
+    }
+
+    private BaseSkill RollFocusSkill(BaseSkill[] choices)
+    {
+        // Find a focused skill
+        if (this.PlayerSkills.GetKnownSpecializations().Length != 0)
+        {
+
+            List <BaseSkill.SkillCategory> knownCategories = new List<BaseSkill.SkillCategory>();
+
+
+            foreach (Specialization spec in this.PlayerSkills.GetKnownSpecializations())
+            {
+                knownCategories.Add(spec.Focus);
+            }
+
+            // Check if it has any of the categories the player knows
+            foreach (BaseSkill skill in choices)
+            {
+                // TODO: Convert to bitwise check (Or maybe not? seems like Contains might do it for us?)
+                if (knownCategories.Contains(skill.Category))
+                {
+                    return skill;
+                }
+            }
+        }
+
+        return null;
+    }
+
     public void ConfirmLevelup()
     {
 
@@ -165,6 +298,30 @@ public class LevelupManagerBehaviour : MonoBehaviour
 
         // When there are no more skills to learn, let the player just exit regardless
         RealHolder.SetActive(false);
+    }
+
+    public void ConfirmSpecialization()
+    {
+
+        ToggleGroup v = this.SpecializationEntries.GetComponent<ToggleGroup>();
+
+        // No choice selected
+        if (!v.AnyTogglesOn())
+        {
+            return;
+        }
+
+        Toggle choice = v.ActiveToggles().ToList()[0];
+
+        SpecializationEntryBehaviour behaviour = choice.GetComponent<SpecializationEntryBehaviour>();
+
+        Specialization a = behaviour.GetSpecialization();
+
+        this.PlayerSkills.LearnSpecialization(a);
+
+        this.SpecializationView.SetActive(false);
+
+        this.Init(this.playerLevel);
     }
 
 
