@@ -110,6 +110,17 @@ namespace Map
             return new List<Actor>(_tiles);
         }
 
+        public IEnumerable<GridPosition> GetAllPositions()
+        {
+            for (int x = 0; x < this._width; x++)
+            {
+                for (int y = 0; y < this._height; y++)
+                {
+                    yield return new GridPosition(x, y);
+                }
+            }
+        } 
+
         public void EnemySetAt(int i, Actor who)
         {
             int y = (int)Math.Floor((double)i / _width);

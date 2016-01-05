@@ -13,8 +13,15 @@
             this.y = y;
         }
 
+
+        public override int GetHashCode()
+        {
+            return this.x.GetHashCode() ^ this.y.GetHashCode();
+        }
+
         public bool Equals(GridPosition other)
         {
+
             return this.x == other.x && this.y == other.y;
         }
 

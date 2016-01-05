@@ -4,6 +4,8 @@ using System.Linq;
 
 namespace Data.Skills
 {
+    using Map;
+
     [System.Serializable]
     public class WildFire : BaseSkill
     {
@@ -37,6 +39,11 @@ namespace Data.Skills
             }
 
             return false;
+        }
+
+        public override List<GridPosition> GetAffectedTargets(GridPosition target)
+        {
+            return Targeting.Targets.NotCorpses();
         }
 
         public override void UseOnTargetGrid(int x, int y)

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 namespace Data.Skills
 {
+    using System.Linq;
+
     [System.Serializable]
     public class Cleave : BaseSkill
     {
@@ -51,6 +53,11 @@ namespace Data.Skills
                 enemy.damagable.TakeDamage(getDamage());
             }
 
+        }
+
+        public override List<GridPosition> GetAffectedTargets(GridPosition target)
+        {
+            return Targeting.Targets.AffectedSingleTarget(target).Concat( Targeting.Targets.Adjacent(target)).ToList();
         }
 
         private int getDamage(){

@@ -3,6 +3,10 @@ using System.Collections.Generic;
 
 namespace Data.Skills
 {
+
+    using Map;
+    using System.Linq;
+
     class HolyFire : BaseSkill
     {
         public HolyFire(int playerLevel) : base(playerLevel)
@@ -32,6 +36,11 @@ namespace Data.Skills
                 enemy.damagable.TakeDamage(damage);
                 enemy.effects.AddEffect(new Burning(duration));
             }
+        }
+
+        public override List<GridPosition> GetAffectedTargets(GridPosition target)
+        {
+            return Targeting.Targets.AffectedSingleTarget(target).Concat( Targeting.Targets.Adjacent(target)).ToList();
         }
 
         private int getDamage()

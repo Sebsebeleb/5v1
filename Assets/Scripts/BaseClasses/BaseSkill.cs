@@ -74,6 +74,21 @@ public abstract class BaseSkill : ITooltip, IRankCalculatable
         return Targeting.Targets.NotCorpses();
     }
 
+    /// <summary>
+    /// Should return what enemies will be affected if the skill is used on target postion
+    /// </summary>
+    /// <param name="target">The position one would use it on</param>
+    /// <returns></returns>
+    public virtual List<GridPosition> GetAffectedTargets(GridPosition target)
+    {
+        return Targeting.Targets.AffectedSingleTarget(target);
+    } 
+
+    /// <summary>
+    /// Is called when the player actually tries to use his skill on the targeted enemy.
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
     public virtual void UseOnTargetGrid(int x, int y)
     {
         Actor.Player.CurrentMana -= this.ManaCost;

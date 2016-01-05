@@ -1,9 +1,15 @@
-﻿using UnityEngine;
+﻿using Map;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 using View;
 
 public class EnemyDisplay : MonoBehaviour
 {
+                
+    // Public access to all the buttons
+    public static Dictionary<GridPosition, EnemyDisplay> Displays = new Dictionary<GridPosition, EnemyDisplay>();
+
     public Text Name;
     public Text Health;
     public Text Cooldown;
@@ -13,6 +19,13 @@ public class EnemyDisplay : MonoBehaviour
     public Text Rank;
 
     public Image EnemyImage;
+
+    /// <summary>
+    /// The image used for targeting related stuff
+    /// </summary>
+    public Image Targeting;
+
+    public Image TargetingAffected;
 
     private GridButtonBehaviour gridbutton;
 
@@ -26,6 +39,8 @@ public class EnemyDisplay : MonoBehaviour
         // Register a callback to be called after a game was loaded, to correctly update display
         Event.OnGameDeserialized callback = GameWasLoaded;
         Event.EventManager.Register(Event.Events.GameDeserialized, callback);
+
+        Displays[new GridPosition(this.gridbutton.x, this.gridbutton.y)] = this;
     }
 
     void Start()
