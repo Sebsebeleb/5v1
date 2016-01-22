@@ -66,7 +66,7 @@ namespace Data.Skills
                 select enemy)
                 .Count();
 
-            int totalDamage = getDamage() + getBonusDamage();
+            int totalDamage = getDamage() + getBonusDamage() * totalBurningEnemies;
 
             validTargets.ElementAt(0);
 

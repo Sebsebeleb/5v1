@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 
 // Main access point for accessing the enemy
 public class Actor : MonoBehaviour
@@ -39,6 +40,16 @@ public class Actor : MonoBehaviour
     private Status _status;
     public Status status{
         get { return _status; }
+    }
+
+    private PlayerEquipment _equipment;
+
+    public PlayerEquipment equipment
+    {
+        get
+        {
+            return this._equipment;
+        }
     }
 
     #endregion
@@ -98,11 +109,30 @@ public class Actor : MonoBehaviour
         this._effects = GetComponent<EffectHolder>();
         this._attack = GetComponent<ActorAttack>();
         this._ai = GetComponent<AI>();
+        this._equipment = GetComponent<PlayerEquipment>();
         _status = GetComponent<Status>();
     }
 
-    private void Update()
+    #region StatCalculations
+    // Calculations based on stats etc.
+
+    /// <summary>
+    /// Calculates an attack that is based on weapon damage
+    /// </summary>
+    /// <returns></returns>
+    public int GetWeaponDamage(float weaponMultiplier, int bonusDamage)
     {
-        
+
+        int baseDamage = (int) (attack.CalculateAttack() * weaponMultiplier);
+
+        return baseDamage + bonusDamage;
     }
+
+    // Bonus damage to spells could be calculated like this: final bonus = bonus / number of max target hits (or a coefficient)
+    /*public int GetSpellDamage(int numberOfTargets, )
+    {
+        return 
+    }*/
+
+    #endregion
 }

@@ -12,6 +12,7 @@ public class EnemySpawnListEditor : Editor
         AssetDatabase.CreateAsset(obj, "Assets/NewSpawnList.asset");
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
+
     }
 
     // TODO: FIXME: This should not be commited.

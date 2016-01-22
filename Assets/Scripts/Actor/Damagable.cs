@@ -18,8 +18,6 @@ public class Damagable : MonoBehaviour
     #endregion
     private HealthData data;
 
-    private bool isDead;
-
     public int MaxHealth
     {
         get { return data.MaxHealth + data.BonusMaxHealth; }
@@ -52,6 +50,8 @@ public class Damagable : MonoBehaviour
 
 
     public float DamageReductionPercent { get; set; }
+
+    public bool Dead { get; private set; }
 
     public int IsInvulnerable = 0; // If this is higher than 0, you can evaluate it as true, otherwise false.
 
@@ -103,7 +103,7 @@ public class Damagable : MonoBehaviour
 
         CurrentHealth -= finalDamage;
 
-        if (CurrentHealth <= 0 && !isDead) // cannot die multiple times yo
+        if (CurrentHealth <= 0 && !this.Dead) // cannot die multiple times yo
         {
             if (gameObject.tag == "Player")
             {
@@ -144,7 +144,7 @@ public class Damagable : MonoBehaviour
     public void Die(bool givexp = true)
     {
         DropItem();
-        isDead = true;
+        this.Dead = true;
 
         // Allow effects that trigger on death
         EventManager.Notify(Events.ActorPreDied, actor);

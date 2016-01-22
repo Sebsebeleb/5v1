@@ -1,10 +1,10 @@
 using BaseClasses;
 using Data.Skills;
+using Data.Skills.Warrior;
 using Scripts.View.LevelupMenu;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.UI;
@@ -53,9 +53,9 @@ Gain +1 mana regen for each burning enemy",
                                                 "Pyromancer",
                                                 new Color(1, 0.43f, 0.227f),
                                                 BaseSkill.SkillCategory.Fire),
-                                            new Specialization("Toiletery",
-                                                @"Gain focus on <color=""blue"">Water</color> and <color=""brown"">Stool</color> skills
-The ""Wet"" debuff will make enemies 20% more vulnerable to spells. +100% efficiency on flush",
+                                            new Specialization("Hydromancer",
+                                                @"Gain focus on <color=""blue"">Water</color> skills
+The ""Wet"" debuff will now also make enemies 20% more vulnerable to spells.",
                                                 "Toiletery",
                                                 new Color(0.501f, 0.701f, 0.866f),
                                                 BaseSkill.SkillCategory.Water), 
@@ -193,6 +193,7 @@ The ""Wet"" debuff will make enemies 20% more vulnerable to spells. +100% effici
             new ConsumingFire(i),
             new FrostFire(i),
             new HolyFire(i),
+            new HungeringStrike(i),
 
         };
 

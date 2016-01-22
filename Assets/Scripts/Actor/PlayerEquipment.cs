@@ -1,15 +1,13 @@
-﻿using System.Collections;
+﻿using Generation;
+using System.Collections;
 using System.Collections.Generic;
-
-using Generation;
-
 using UnityEngine;
 using UnityEngine.Assertions;
 
 /// <summary>
 /// The player inventory.
 /// </summary>
-internal class PlayerEquipment : MonoBehaviour, IEnumerable<BaseItem>
+public class PlayerEquipment : MonoBehaviour, IEnumerable<BaseItem>
 {
     private List<BaseItem> backpack = new List<BaseItem>();
 
@@ -133,6 +131,11 @@ internal class PlayerEquipment : MonoBehaviour, IEnumerable<BaseItem>
         BaseItem item = ItemGenerator.GenerateItem(GeneratedItemType.Equipment);
         Debug.Log(item);
         Debug.Log(item.GetDescription(false));
+    }
+
+    public EquippableItem GetWeapon()
+    {
+        return this.equippedWeapon;
     }
 
 

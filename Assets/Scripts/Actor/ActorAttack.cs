@@ -71,6 +71,10 @@ public class ActorAttack : MonoBehaviour
         return true;
     }
 
+    /// <summary>
+    /// Returns final standard attack
+    /// </summary>
+    /// <returns></returns>
     public int CalculateAttack()
     {
         return data.BaseAttack + data.BonusAttack;
