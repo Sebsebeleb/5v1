@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Xml;
-
-using UnityEngine;
 using UnityEngine.Assertions;
 
 /// <summary>
@@ -19,7 +17,7 @@ public abstract class ItemEffect
 
         List<object> parameters = new List<object>();
 
-        Debug.Log("Looking for rarity: " + rarity.ToString());
+        ////Debug.Log("Looking for rarity: " + rarity.ToString());
         XmlNode para = node.SelectSingleNode(rarity.ToString().ToLower()).SelectSingleNode("parameters");
 
         foreach (XmlElement parameterValue in para)
@@ -27,11 +25,11 @@ public abstract class ItemEffect
             parameters.Add(parameterValue.InnerText);
         }
 
-        Debug.Log("Trying to load effect: " + node.FirstChild.Value);
-        Debug.Log(node.FirstChild.Name);
-        Debug.Log(node.FirstChild.InnerText);
+        //Debug.Log("Trying to load effect: " + node.FirstChild.Value);
+        //Debug.Log(node.FirstChild.Name);
+        //Debug.Log(node.FirstChild.InnerText);
         
-        Debug.Log("with these parameters: " + parameters);
+        //Debug.Log("with these parameters: " + parameters);
 
         ItemEffect eff = BindEffect(node.FirstChild.InnerText, parameters.ToArray());
 
@@ -46,9 +44,9 @@ public abstract class ItemEffect
     /// <returns></returns>
     private static ItemEffect BindEffect(string pathName, object[] parameters)
     {
-        Debug.Log("Trying to load: Assets.Data.ItemEffects." + pathName);
+        //Debug.Log("Trying to load: Assets.Data.ItemEffects." + pathName);
         var v = asm.GetType("Assets.Data.ItemEffects." + pathName);
-        Debug.Log(v);
+        //Debug.Log(v);
 
         Assert.IsNotNull(v, "Error trying to load ItemEffect: " + pathName + ", tried to load it from: " + "Assets.Data.ItemEffects." + pathName);
 
@@ -74,7 +72,7 @@ public abstract class ItemEffect
     /// <returns>The converted parameters</returns>
     private static object[] ConvertParameters(ConstructorInfo ctor, object[] parameters)
     {
-        Debug.Log("Trying to convert parameters");
+        //Debug.Log("Trying to convert parameters");
         object[] converted = new object[parameters.Length];
         var needed = ctor.GetParameters();
 
@@ -82,23 +80,23 @@ public abstract class ItemEffect
         {
             Type neededType = needed[i].ParameterType;
 
-            Debug.Log(neededType);
+            //Debug.Log(neededType);
             if (neededType == typeof(int))
             {
-                Debug.Log(parameters[i].ToString());
+                //Debug.Log(parameters[i].ToString());
                 int result;
                 bool success = int.TryParse(parameters[i].ToString(), out result);
                 Assert.IsTrue(
                     success,
                     "ItemEffect Parameter Conversion failed, the given parameter could not be convert to int");
 
-                Debug.Log("Converted parameter to: " + result);
+                //Debug.Log("Converted parameter to: " + result);
 
                 converted[i] = result;
             }
             else
             {
-                Debug.LogError("Parameter was not converted");
+                //Debug.LogError("Parameter was not converted");
             }
 
         }

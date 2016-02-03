@@ -1,5 +1,6 @@
 ﻿using Event;
 using Generation;
+using Scripts.Audio;
 using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -86,6 +87,10 @@ public class Damagable : MonoBehaviour
     public void TakeDamage(int damage)
     {
 
+        if (gameObject.tag != "Player")
+        {
+            AudioManager.Trigger("Enemy_TakeHit");
+        }
         int finalDamage = damage;
 
         //If invulnerable, negate all damage
@@ -143,6 +148,7 @@ public class Damagable : MonoBehaviour
 
     public void Die(bool givexp = true)
     {
+        AudioManager.Trigger("Enemy_Death");
         DropItem();
         this.Dead = true;
 
