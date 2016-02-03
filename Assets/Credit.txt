@@ -7,3 +7,6 @@ http://dycha.net : http://opengameart.org/content/fantasy-ui-elements-by-ravenmo
 
 	Music:
 	Steeps of Destiny: Alexandr Zhelanov, https://soundcloud.com/alexandr-zhelanov
+
+	SFX:
+	joelaudio__sfx-attack-sword-001.wav: http://freesound.org/people/JoelAudio/sounds/77611/

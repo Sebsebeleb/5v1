@@ -1,6 +1,8 @@
 ﻿using Event;
 using System.Linq;
 
+using Scripts.Audio;
+
 using Tutorial;
 
 using UnityEngine;
@@ -35,6 +37,7 @@ public class PlayerTargeting : MonoBehaviour
     /// <param name="y">Actor's y position</param>
     public void TargetGrid(int x, int y)
     {
+        AudioManager.Trigger("Input_ButtonClickGeneric");
         // Check if nothing is hindering us from inputing stuff
         if (AnimationManager.IsAnimating()){
             return;
@@ -71,6 +74,8 @@ public class PlayerTargeting : MonoBehaviour
                 usedAction = true;
                 _playerAttack.DoAttack(target);
                 EventManager.Notify(Events.PlayerAttackCommand, target);
+
+                AudioManager.Trigger("Player_AttackHit");
             }
         }
 
