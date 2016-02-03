@@ -70,7 +70,6 @@ public class EffectIconAnimation : MonoBehaviour
 
             float fade;
 
-            Debug.Log("Creating tween");
             if (string.IsNullOrEmpty(animationInfo.IconName))
             {
                 fade = 0f;
@@ -116,7 +115,6 @@ public class EffectIconAnimation : MonoBehaviour
                     currentTweens.Remove(tween);
                 });
 
-            Debug.Log("End tween");
         }
         else
         {

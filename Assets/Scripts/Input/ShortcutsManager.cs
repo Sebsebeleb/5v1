@@ -73,6 +73,11 @@
                 this.playerTargeting.TargetGrid(2, 1);
             }
 
+            if (Input.GetKeyDown(KeyCode.F8))
+            {
+                PlayerPrefs.DeleteAll();
+            }
+
 #if DEBUG
             else if (Input.GetKeyDown(KeyCode.O))
             {

@@ -1,5 +1,8 @@
 ﻿using Event;
 using System.Linq;
+
+using Tutorial;
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -32,9 +35,16 @@ public class PlayerTargeting : MonoBehaviour
     /// <param name="y">Actor's y position</param>
     public void TargetGrid(int x, int y)
     {
+        // Check if nothing is hindering us from inputing stuff
         if (AnimationManager.IsAnimating()){
             return;
         }
+
+        if (TutorialManager.IsInputPaused())
+        {
+            return;
+        }
+
         Actor target = GridManager.TileMap.GetAt(x, y);
 
         // Did we actually do soemthing that should take a turn?

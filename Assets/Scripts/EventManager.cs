@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Event
 {
@@ -142,7 +141,7 @@ namespace Event
             }
             foreach (Delegate listener in _listeners[ev].ToArray())
             {
-                if (args == null){
+                if (args == null || listener.Method.GetParameters().Length == 0){
                     listener.DynamicInvoke();
                 }
                 else{

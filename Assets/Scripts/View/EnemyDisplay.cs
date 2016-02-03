@@ -61,31 +61,52 @@ public class EnemyDisplay : MonoBehaviour
             actualName = actualName.Substring(0, actualName.Length - 7);
         }
         Name.text = actualName;
-        Health.text = actor.damagable.CurrentHealth.ToString();
 
-        //If the enemy is stunned, changed font color
+        //
+        // Countdown text
+        //
         string countdownText = actor.countdown.CurrentCountdown.ToString();
-        if (actor.status.Stunned){
+
+        // If the enemy is stunned, changed font color
+        if (actor.status.Stunned)
+        {
             countdownText = TextUtilities.FontColor("#4040FF", countdownText);
         }
         Cooldown.text = countdownText;
 
+        //
+        // Sprite
+        //
+
         EnemyImage.sprite = actor.GetComponent<DisplayData>().Image;
 
-        // Make attack text TODO: Should only be updated when attack is updated
-        string attackText = actor.attack.CalculateAttack().ToString();
-        //If enemy has bonus attack, display it in green. If negative, red
-        if (actor.attack.BonusAttack > 0)
+
+        // Special display for corpses
+        if (actualName == "Corpse")
         {
-            attackText = TextUtilities.FontColor("#20DD20FF", attackText);
-        }
-        else if (actor.attack.BonusAttack < 0)
-        {
-            attackText = TextUtilities.FontColor("#DD2020FF", attackText);
+            this.Attack.text = "-";
+            this.Health.text = "-";
         }
 
-        Attack.text = attackText;
+        else
+        {
+            Health.text = actor.damagable.CurrentHealth.ToString();
 
+
+            // Make attack text TODO: Should only be updated when attack is updated
+            string attackText = actor.attack.CalculateAttack().ToString();
+            //If enemy has bonus attack, display it in green. If negative, red
+            if (actor.attack.BonusAttack > 0)
+            {
+                attackText = TextUtilities.FontColor("#20DD20FF", attackText);
+            }
+            else if (actor.attack.BonusAttack < 0)
+            {
+                attackText = TextUtilities.FontColor("#DD2020FF", attackText);
+            }
+
+            Attack.text = attackText;
+        }
     }
 
     // This is called after loadign a save, correts its image and name display

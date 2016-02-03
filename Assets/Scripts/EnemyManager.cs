@@ -43,6 +43,12 @@ public static class EnemyManager
         {
             actorBehaviour.Rank = rank;
         }
+
+        GridManager.TileMap.EnemySetAt(x, y, actorBehaviour);
+
+        actorBehaviour.x = x;
+        actorBehaviour.y = y;
+
         if (InitializeStartEffects)
         {
             Event.EventManager.Notify(Event.Events.PostEnemySpawned, actorBehaviour);
@@ -55,20 +61,13 @@ public static class EnemyManager
                 startEffects.AddEffects();
             }*/
         }
-
-        GridManager.TileMap.EnemySetAt(x, y, actorBehaviour);
-
-        actorBehaviour.x = x;
-        actorBehaviour.y = y;
     }
 
     public static void SpawnEnemy(GameObject enemy, int x, int y, bool InitializeStartEffects = true)
     {
         // TODO: Slow start
-        int rank = (CalculateDifficultAdd() / 5) + 1;
+        int rank = (int)Math.Pow((CalculateDifficultAdd() / 5), 0.83f) + 1;
         
-        Debug.Log("Rank: " + rank.ToString());
-
         SpawnEnemy(enemy, x, y, rank, InitializeStartEffects);
     }
 
@@ -114,7 +113,6 @@ public static class EnemyManager
     // Returns a higher and higher number as the bosscounter reaches 0
     private static int CalculateDifficultAdd()
     {
-        Debug.Log(Zone.Zone.current.ZoneLength);
         return (int)(((Zone.Zone.current.ZoneLength - TurnManager.BossCounter) * 0.20) * Zone.Zone.current.EnemyDifficultyMod);
     }
 
