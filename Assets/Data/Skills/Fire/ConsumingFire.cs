@@ -15,6 +15,16 @@ namespace Data.Skills
             BaseCooldown = 7;
             ManaCost = 20;
         }
+
+        public static void test()
+        {
+            Debug.Log(2);
+            
+
+
+
+        }
+
         public override void UseOnTargetGrid(int x, int y)
         {
             base.UseOnTargetGrid(x, y);

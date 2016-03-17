@@ -1,8 +1,6 @@
-using System;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
-using DG;
-using DG.Tweening;
 
 public class FloatTextBehaviour : MonoBehaviour
 {

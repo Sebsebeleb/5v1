@@ -1,4 +1,6 @@
-﻿using Map;
+﻿using DG.Tweening;
+using DG.Tweening.Core;
+using Map;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,22 +12,14 @@ public class EnemyDisplay : MonoBehaviour
     // Public access to all the buttons
     public static Dictionary<GridPosition, EnemyDisplay> Displays = new Dictionary<GridPosition, EnemyDisplay>();
 
-    public Text Name;
-    public Text Health;
-    public Text Cooldown;
-    public Text Attack;
-    public Text Defense;
+    public Text Name, Health, Cooldown, Attack, Defense, Rank;
 
-    public Text Rank;
+    public SegmentedBar CooldownBar;
 
-    public Image EnemyImage;
+    // Used to detect changes
+    private int OldCooldown, OldMaximumCooldown;
 
-    /// <summary>
-    /// The image used for targeting related stuff
-    /// </summary>
-    public Image Targeting;
-
-    public Image TargetingAffected;
+    public Image EnemyImage, Targeting, TargetingAffected;
 
     private GridButtonBehaviour gridbutton;
 
@@ -65,6 +59,26 @@ public class EnemyDisplay : MonoBehaviour
         //
         // Countdown text
         //
+
+        if (this.actor.countdown.CurrentCountdown != this.OldCooldown
+            || this.actor.countdown.MaxCountdown != this.OldMaximumCooldown)
+        {
+            // Make bar fill update
+            float targetFill = (float)this.actor.countdown.CurrentCountdown / this.actor.countdown.MaxCountdown;
+            float duration = 0.2f;
+
+            // Tween the update using DOTween generic tween
+            DOTween.To(new DOGetter<float>(() => { return this.CooldownBar.Fill; }),new DOSetter<float>((value =>
+                {
+                    this.CooldownBar.Fill = value;
+                })), targetFill, duration);
+
+            this.CooldownBar.NumSegments = this.actor.countdown.MaxCountdown;
+            this.CooldownBar.SegmentSpacing = 1 / (this.actor.countdown.MaxCountdown * 0.88f);   
+
+            this.OldCooldown = this.actor.countdown.CurrentCountdown;
+            this.OldMaximumCooldown = this.actor.countdown.MaxCountdown;
+        }
         string countdownText = actor.countdown.CurrentCountdown.ToString();
 
         // If the enemy is stunned, changed font color

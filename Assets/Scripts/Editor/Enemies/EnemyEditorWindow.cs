@@ -16,7 +16,7 @@
         [MenuItem("Editors/Enemy Editor")]
         public static void Init()
         {
-            EnemyEditorWindow window = (EnemyEditorWindow)EditorWindow.GetWindow(typeof(EnemyEditorWindow));
+            EnemyEditorWindow window = (EnemyEditorWindow)EditorWindow.GetWindow<EnemyEditorWindow>(false, "Enemy Editor");
             window.Show();
         }
 

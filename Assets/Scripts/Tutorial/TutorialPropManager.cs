@@ -17,6 +17,9 @@
         public Transform CountdownTutorialTransform;
         public Transform InspectionTutorialTransform;
 
+        [SerializeField]
+        private Transform BossTutorialTransform;
+
         private void Start()
         {
             if (TutorialManager.tutorialDisabled)
@@ -32,6 +35,22 @@
             if (TutorialManager.ShouldDisplayTutorialProp("Inspection", false))
             {
                 EventManager.Register(Events.PostEnemySpawned, (ActorParameters) this.TutorialInspection);
+            }
+
+            if (TutorialManager.ShouldDisplayTutorialProp("boss", false))
+            {
+                EventManager.Register(Events.OnTurn, (OnTurn)this.TutorialBoss);
+            }
+        }
+
+        private void TutorialBoss()
+        {
+            if (TurnManager.BossCounter == 0)
+            {
+                
+                TutorialManager.DisableTutorialProp("boss");
+                this.BossTutorialTransform.gameObject.SetActive(true);
+                
             }
         }
 
