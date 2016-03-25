@@ -13,6 +13,11 @@
 
         private static bool Handled = false; // Have we already processed the input this frame?
 
+        public static int GetStackCount()
+        {
+            return menuStack.Count;
+        }
+
         private void OnEnable()
         {
             menuStack.Push(this.gameObject);

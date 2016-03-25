@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerExperience : MonoBehaviour
 {
@@ -34,7 +33,7 @@ public class PlayerExperience : MonoBehaviour
 
     private int CalculateXpNeeded(){
         float xpNeed;
-        xpNeed = Mathf.Pow(level, 2.6f) * 0.4f + level * 2 + 10;
+        xpNeed = Mathf.Pow(level, 2.1f) * 0.4f + level * 2 + 10;
 
         return Mathf.CeilToInt(xpNeed);
     }

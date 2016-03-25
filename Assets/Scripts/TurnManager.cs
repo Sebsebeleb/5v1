@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Event;
+using System;
 using System.Collections;
-using Event;
 using UnityEngine;
 
 public class TurnManager : MonoBehaviour
@@ -60,13 +60,21 @@ public class TurnManager : MonoBehaviour
 
         // Check if we defeated the zone
         if (ZoneWon()){
+            //TG
+
+
+
+            //Non-TG
+            /* 
             ZoneSelectionMenu.SetActive(true);
             ZoneSelectionMenu.GetComponent<Zone.ZoneSelectionScreen>().PopulateZones();
+            */
         }
     }
 
     private void UpdatePlayer()
     {
+
         // Uugh this is kinda dirty...
         _playerSkills.CountDown();
         _playerEffects.OnTurn();
@@ -85,6 +93,11 @@ public class TurnManager : MonoBehaviour
     {
         Actor.Player.CurrentMana += Actor.Player.ManaRegen.Value;
         Actor.Player.CurrentMana = Math.Min(Actor.Player.CurrentMana, Actor.Player.MaxMana.Value);
+
+        if (Actor.Player.damagable.CurrentHealth <=  0)
+        {
+            
+        }
     }
 
 
@@ -99,6 +112,7 @@ public class TurnManager : MonoBehaviour
 
     // The zone has been won if 1) the boss has been reached and 2) all enemies are dead
     private bool ZoneWon(){
+        
         if (BossCounter > 0){
             return false;
         }

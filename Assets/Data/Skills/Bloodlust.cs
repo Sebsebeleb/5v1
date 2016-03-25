@@ -13,7 +13,7 @@ namespace Data.Skills
             SkillName = "Bloodlust";
             Tooltip = "Deal {0} damage to an enemy. If this attack kills it, heal life equal to twice the enemy's hp (from before the attack)";
             BaseCooldown = 10;
-            ManaCost = 15;
+            ManaCost = 10;
 
         }
 

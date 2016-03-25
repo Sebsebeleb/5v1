@@ -2,6 +2,7 @@
 using Generation;
 using Scripts.Audio;
 using System;
+
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -143,13 +144,19 @@ public class Damagable : MonoBehaviour
     /// </summary>
     private void Lose()
     {
+        GameStateManager.OnDeath();
         Debug.Log("You lost!");
+        GameStateManager.Tg_HasDied = true;
     }
 
     public void Die(bool givexp = true)
     {
+        if (gameObject.tag == "TG_Boss")
+        {
+            GameStateManager.WinCandy();
+        }
         AudioManager.Trigger("Enemy_Death");
-        DropItem();
+        //DropItem();
         this.Dead = true;
 
         // Allow effects that trigger on death
@@ -166,6 +173,7 @@ public class Damagable : MonoBehaviour
         //TODO: Consider; Should this object have this responsibility?
         EventManager.Notify(Events.ActorDied, actor);
         EnemyManager.KillEnemy(actor);
+
 
     }
 

@@ -1,6 +1,5 @@
 using BaseClasses;
 using Data.Skills;
-using Data.Skills.Warrior;
 using Scripts.View.LevelupMenu;
 using System;
 using System.Collections.Generic;
@@ -191,9 +190,9 @@ The ""Wet"" debuff will now also make enemies 20% more vulnerable to spells.",
             new WildFire(i),
             new Inferno(i),
             new ConsumingFire(i),
-            new FrostFire(i),
+            //new FrostFire(i),
             new HolyFire(i),
-            new HungeringStrike(i),
+            //new HungeringStrike(i),
 
         };
 

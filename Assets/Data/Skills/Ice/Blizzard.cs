@@ -3,9 +3,8 @@ using Data.Effects;
 
 namespace Data.Skills
 {
-    using System.Collections.Generic;
-
     using Map;
+    using System.Collections.Generic;
 
     [System.Serializable]
     public class Blizzard : BaseSkill
@@ -18,7 +17,7 @@ namespace Data.Skills
             SkillName = "Blizzard";
             Tooltip = "Deal {0} damage to all enemies. Then, if at least 4 enemies survive, stun them for {1} turn";
             BaseCooldown = 12;
-            ManaCost = 25;
+            ManaCost = 20;
         }
 
         public override List<GridPosition> GetAffectedTargets(GridPosition target)

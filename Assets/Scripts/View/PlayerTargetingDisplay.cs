@@ -84,6 +84,7 @@
             SkillUseButton activeButton = activeToggle.GetComponent<SkillUseButton>();
 
             BaseSkill skill = activeButton.AssociatedSkill;
+
             this.displayForSkill = skill;
 
             List<GridPosition> targets = skill.GetValidTargets();
@@ -98,6 +99,8 @@
             if (this.newPosition != null)
             {
                 var affected = skill.GetAffectedTargets(this.newPosition);
+
+
 
 
                 foreach (GridPosition pos in affected)
@@ -123,7 +126,6 @@
         // Enables or disables the "affected by" targeting display for the given position
         private void SetAffectedAt(GridPosition pos, bool on)
         {
-            
             EnemyDisplay.Displays[pos].TargetingAffected.gameObject.SetActive(on);
         }
     }

@@ -1,5 +1,7 @@
 ﻿namespace Assets.Scripts.Input
 {
+    using Assets.Scripts.View.CommonUI;
+
     using UnityEngine;
 
     // Temp? class for handling some keyboard shortcuts
@@ -12,6 +14,9 @@
         public GameObject DebugScreen;
 
         [SerializeField]
+        private Transform MainMenu;
+
+        [SerializeField]
         private InspectorPanelBehaviour inspector;
 
         private void Awake()
@@ -21,8 +26,8 @@
 
         public void Update()
         {
-            // Show inventory
-            if (Input.GetKeyDown(KeyCode.I))
+            // Show inventory. Disabled for TG Version
+            if (false && Input.GetKeyDown(KeyCode.I))
             {
                 // Put the window on top of other windows
                 this.InventoryScreen.transform.SetSiblingIndex(this.InventoryScreen.transform.parent.childCount-1);
@@ -78,10 +83,16 @@
                 PlayerPrefs.DeleteAll();
             }
 
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                this.MainMenu.gameObject.SetActive(!this.MainMenu.gameObject.activeInHierarchy);
+            }
+
 #if DEBUG
             else if (Input.GetKeyDown(KeyCode.O))
             {
-                this.DebugScreen.SetActive(!this.DebugScreen.activeInHierarchy);
+                if (EscapableUI.GetStackCount() == 0)
+                    this.DebugScreen.SetActive(!this.DebugScreen.activeInHierarchy);
             }
 #endif
         }

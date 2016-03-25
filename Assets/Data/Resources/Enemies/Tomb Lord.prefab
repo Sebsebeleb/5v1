@@ -18,9 +18,9 @@ GameObject:
   - 114: {fileID: 11452428}
   - 114: {fileID: 11433782}
   - 114: {fileID: 11484394}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Tomb Lord
-  m_TagString: Untagged
+  m_TagString: TG_Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32,7 +32,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 168242}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 84.6999969, y: 467.299988, z: 0}
+  m_LocalPosition: {x: 84.7, y: 467.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc0370d1d5e53274489021cfa71b3dbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartMaxCountdown: 6
+  StartMaxCountdown: 8
 --- !u!114 &11445386
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -121,8 +121,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 282150c180c8eea47b6939bdb088934d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartingBaseAttack: 4
-  attackPerRank: 3
+  StartingBaseAttack: 2
+  attackPerRank: 0
 --- !u!114 &11454970
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -160,8 +160,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a891ef91937f9174481ad6bf04508495, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BaseHealth: 30
-  healthPerRank: 6
+  BaseHealth: 19
+  healthPerRank: 3
   IsInvulnerable: 0
 --- !u!1001 &100100000
 Prefab:

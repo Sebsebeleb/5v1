@@ -14,7 +14,7 @@ public class EnemyDisplay : MonoBehaviour
 
     public Text Name, Health, Cooldown, Attack, Defense, Rank;
 
-    public SegmentedBar CooldownBar;
+    public SegmentedBar CooldownBar, HealthBar;
 
     // Used to detect changes
     private int OldCooldown, OldMaximumCooldown;
@@ -27,6 +27,9 @@ public class EnemyDisplay : MonoBehaviour
 
     void Awake()
     {
+        this.HealthBar.NumSegments = 2;
+        this.HealthBar.SegmentSpacing = 1;
+
         gridbutton = GetComponent<GridButtonBehaviour>();
 
 
@@ -100,11 +103,18 @@ public class EnemyDisplay : MonoBehaviour
         {
             this.Attack.text = "-";
             this.Health.text = "-";
+            this.HealthBar.Fill = 0f;
         }
 
         else
         {
             Health.text = actor.damagable.CurrentHealth.ToString();
+            float targetFill =(float) this.actor.damagable.CurrentHealth / this.actor.damagable.MaxHealth;
+            float duration = 0.4f;
+            DOTween.To(new DOGetter<float>(() => { return this.HealthBar.Fill; }),new DOSetter<float>((value =>
+                {
+                    this.HealthBar.Fill = value;
+                })), targetFill, duration).SetEase(Ease.OutQuad);
 
 
             // Make attack text TODO: Should only be updated when attack is updated
