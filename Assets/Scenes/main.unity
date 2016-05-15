@@ -4838,7 +4838,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22495780, guid: 42c696baf1e28a14fa7890af943dbc64, type: 2}
       propertyPath: m_SizeDelta.x
-      value: -178.06999
+      value: -191.32822
       objectReference: {fileID: 0}
     - target: {fileID: 189258, guid: 42c696baf1e28a14fa7890af943dbc64, type: 2}
       propertyPath: m_Name
@@ -7785,7 +7785,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22495780, guid: 42c696baf1e28a14fa7890af943dbc64, type: 2}
       propertyPath: m_SizeDelta.x
-      value: -178.06999
+      value: -191.32822
       objectReference: {fileID: 0}
     - target: {fileID: 189258, guid: 42c696baf1e28a14fa7890af943dbc64, type: 2}
       propertyPath: m_Name
@@ -8701,7 +8701,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22495780, guid: 42c696baf1e28a14fa7890af943dbc64, type: 2}
       propertyPath: m_SizeDelta.x
-      value: -178.06999
+      value: -191.32822
       objectReference: {fileID: 0}
     - target: {fileID: 189258, guid: 42c696baf1e28a14fa7890af943dbc64, type: 2}
       propertyPath: m_Name
@@ -9678,6 +9678,7 @@ Canvas:
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -14561,7 +14562,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22482622, guid: b6553681f00976b4cae0673bb0a5e8c5, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: -0.41667175
       objectReference: {fileID: 0}
     - target: {fileID: 22482622, guid: b6553681f00976b4cae0673bb0a5e8c5, type: 2}
       propertyPath: m_AnchorMin.x
@@ -19000,7 +19001,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22495780, guid: 42c696baf1e28a14fa7890af943dbc64, type: 2}
       propertyPath: m_SizeDelta.x
-      value: -178.06999
+      value: -191.32822
       objectReference: {fileID: 0}
     - target: {fileID: 189258, guid: 42c696baf1e28a14fa7890af943dbc64, type: 2}
       propertyPath: m_Name
@@ -21716,7 +21717,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22482622, guid: b6553681f00976b4cae0673bb0a5e8c5, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: -0.41667175
       objectReference: {fileID: 0}
     - target: {fileID: 22482622, guid: b6553681f00976b4cae0673bb0a5e8c5, type: 2}
       propertyPath: m_AnchorMin.x
@@ -22104,7 +22105,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22495780, guid: 42c696baf1e28a14fa7890af943dbc64, type: 2}
       propertyPath: m_SizeDelta.x
-      value: -178.06999
+      value: -191.32822
       objectReference: {fileID: 0}
     - target: {fileID: 189258, guid: 42c696baf1e28a14fa7890af943dbc64, type: 2}
       propertyPath: m_Name
@@ -22645,7 +22646,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22495780, guid: 42c696baf1e28a14fa7890af943dbc64, type: 2}
       propertyPath: m_SizeDelta.x
-      value: -178.06999
+      value: -191.32822
       objectReference: {fileID: 0}
     - target: {fileID: 189258, guid: 42c696baf1e28a14fa7890af943dbc64, type: 2}
       propertyPath: m_Name
@@ -27960,6 +27961,7 @@ Canvas:
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
   m_SortingLayerID: 0
   m_SortingOrder: 1
   m_TargetDisplay: 0
@@ -30537,7 +30539,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22482622, guid: b6553681f00976b4cae0673bb0a5e8c5, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: -0.41667175
       objectReference: {fileID: 0}
     - target: {fileID: 22482622, guid: b6553681f00976b4cae0673bb0a5e8c5, type: 2}
       propertyPath: m_AnchorMin.x
@@ -32628,7 +32630,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22482622, guid: b6553681f00976b4cae0673bb0a5e8c5, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: -0.41667175
       objectReference: {fileID: 0}
     - target: {fileID: 22482622, guid: b6553681f00976b4cae0673bb0a5e8c5, type: 2}
       propertyPath: m_AnchorMin.x

@@ -27,10 +27,8 @@ namespace Generation
         /// <returns>The new finalized item</returns>
         public static BaseItem GenerateItem(GeneratedItemType type)
         {
-            BaseItem generatedItem;
-
             Debug.Log("---- Generating base item ----");
-            generatedItem = MakeBaseItem(type);
+            var generatedItem = MakeBaseItem(type);
 
             Debug.Log("-- Rolling Rarity --");
             generatedItem.Rarity = RollRarity();
