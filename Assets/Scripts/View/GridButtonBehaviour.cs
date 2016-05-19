@@ -1,7 +1,6 @@
-﻿using UnityEngine;
-
-namespace View
+﻿namespace BBG.View
 {
+    using UnityEngine;
 
     public class GridButtonBehaviour : MonoBehaviour
     {
@@ -15,8 +14,8 @@ namespace View
 
         void Awake()
         {
-            _player = GameObject.FindWithTag("Player");
-            _playerTargeting = _player.GetComponent<PlayerTargeting>();
+            this._player = GameObject.FindWithTag("Player");
+            this._playerTargeting = this._player.GetComponent<PlayerTargeting>();
         }
 
         void Start()
@@ -31,7 +30,7 @@ namespace View
 
         public void Clicked()
         {
-            _playerTargeting.TargetGrid(x, y);
+            this._playerTargeting.TargetGrid(this.x, this.y);
         }
     }
 

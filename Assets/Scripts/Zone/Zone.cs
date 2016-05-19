@@ -1,8 +1,11 @@
-using System;
-using System.Collections.Generic;
-
-namespace Zone
+namespace BBG.Zone
 {
+    using System;
+    using System.Collections.Generic;
+
+    using BBG.Actor;
+    using BBG.Data;
+
     // A zone is a collection of data, including spawn list for enemies, zone modifiers, and other zone specific stuff.
     // At any point of the game during the main screen, a single zone is active. After finishing a zone, a player has to
     // choose a new zone to enter.
@@ -33,16 +36,16 @@ namespace Zone
         private float _enemyDamageModifier = 1.0f;
         public float EnemyDamageModifier
         {
-            get { return _enemyDamageModifier; }
-            set { _enemyDamageModifier = value; }
+            get { return this._enemyDamageModifier; }
+            set { this._enemyDamageModifier = value; }
         }
 
         private float _enemyHealthModifier = 1.0f;
 
         public float EnemyHealthModifier
         {
-            get { return _enemyHealthModifier; }
-            set { _enemyHealthModifier = value; }
+            get { return this._enemyHealthModifier; }
+            set { this._enemyHealthModifier = value; }
         }
 
         #endregion
@@ -65,10 +68,10 @@ namespace Zone
                 EnemyManager.KillEnemy(enemy);
             }
 
-            Event.OnPostEnemySpawned callback = HandleEnemySpawned;
+            OnPostEnemySpawned callback = this.HandleEnemySpawned;
             // Initialize a generic callback for modifying creatures as they spawn based on common zone stats
-            Event.EventManager.Register(Event.Events.PostEnemySpawned, callback);
-            foreach (ZoneModifier mod in modifiers)
+            EventManager.Register(Events.PostEnemySpawned, callback);
+            foreach (ZoneModifier mod in this.modifiers)
             {
                 mod.ApplyCallbacks();
             }
@@ -82,7 +85,7 @@ namespace Zone
         // Apply modifications to enemies when they spawned based on zone effects
         private void HandleEnemySpawned(Actor who)
         {
-            who.damagable.BonusMaxHealthPercent = EnemyHealthModifier - 1.0f;
+            who.damagable.BonusMaxHealthPercent = this.EnemyHealthModifier - 1.0f;
         }
     }
 }

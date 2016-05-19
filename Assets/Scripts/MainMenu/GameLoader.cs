@@ -1,4 +1,4 @@
-﻿namespace Scripts.MainMenu
+﻿namespace BBG.MainMenu
 {
     using UnityEngine;
     using UnityEngine.SceneManagement;

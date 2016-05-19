@@ -1,9 +1,9 @@
-using BaseClasses;
-
-namespace Data.Effects
+namespace BBG.Data.Effects.Enemies
 {
+    using BBG.BaseClasses;
+    using BBG.View;
 
-	// Boosted by a skelton's SkeletonGrowth. Basically attack bonus
+    // Boosted by a skelton's SkeletonGrowth. Basically attack bonus
     [System.Serializable]
     public class Boosted : Effect
     {
@@ -15,19 +15,19 @@ namespace Data.Effects
 
         // An empty constructor has to be provided for serialization
         public Boosted(){
-            IsBuff = true;
-            bonus = 0;
+            this.IsBuff = true;
+            this.bonus = 0;
 
-            Description = new EffectDescription("Boosted", () => "Attack increased by " + bonus);
+            this.Description = new EffectDescription("Boosted", () => "Attack increased by " + this.bonus);
 
         }
 
         public Boosted(int attackBonus) : base()
         {
-            IsBuff = true;
-            bonus = attackBonus;
+            this.IsBuff = true;
+            this.bonus = attackBonus;
 
-            Description = new EffectDescription("Boosted", () => "Attack increased by " + bonus);
+            this.Description = new EffectDescription("Boosted", () => "Attack increased by " + this.bonus);
         }
 
 
@@ -36,14 +36,14 @@ namespace Data.Effects
         {
             base.OnAdded();
 
-            owner.attack.BonusAttack += bonus;
+            this.owner.attack.BonusAttack += this.bonus;
         }
 
         public override void OnRemoved()
         {
             base.OnRemoved();
 
-            owner.attack.BonusAttack -= bonus;
+            this.owner.attack.BonusAttack -= this.bonus;
         }
 
         public override bool ShouldAnimate()

@@ -1,5 +1,8 @@
-﻿namespace Assets.Data.ItemEffects
+﻿namespace BBG.Data.ItemEffects
 {
+    using BBG.Actor;
+    using BBG.Items;
+
     class BonusHealth : ItemEffect
     {
 

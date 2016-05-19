@@ -1,8 +1,12 @@
-using BaseClasses;
-using System.Collections.Generic;
-
-namespace Data.Effects
+namespace BBG.Data.Effects
 {
+    using System.Collections.Generic;
+
+    using BBG.Actor;
+    using BBG.BaseClasses;
+    using BBG.Data.Effects.ThemeDebuffs;
+    using BBG.View;
+
     [System.Serializable]
     public class ArcLightingBolt : Effect
     {
@@ -10,19 +14,19 @@ namespace Data.Effects
 
         public ArcLightingBolt(int damagePerJump)
         {
-            IsInfinite = true;
-            Description = new EffectDescription("Charged",
+            this.IsInfinite = true;
+            this.Description = new EffectDescription("Charged",
                 (() => "This creature is charged by arc lighting. The lightning will strike a random adjacent target that does not have the Charged effect at end of turn, or, if no target is found, dissipate."));
-            damage = damagePerJump;
+            this.damage = damagePerJump;
         }
 
         protected override void Created()
         {
-            Event.EventManager.Register(Event.Events.OnTurn, (Event.OnTurn) DoJump);
+            EventManager.Register(Events.OnTurn, (OnTurn) this.DoJump);
         }
 
         protected override void Destroyed(){
-            Event.EventManager.UnRegister(Event.Events.OnTurn, (Event.OnTurn) DoJump);
+            EventManager.UnRegister(Events.OnTurn, (OnTurn) this.DoJump);
         }
 
         private void DoJump()
@@ -30,7 +34,7 @@ namespace Data.Effects
             List<Actor> validTargets = new List<Actor>();
 
             //Find a target
-            foreach (Actor actr in GridManager.TileMap.GetAdjacent(owner.x, owner.y))
+            foreach (Actor actr in GridManager.TileMap.GetAdjacent(this.owner.x, this.owner.y))
             {
                 if (actr.gameObject.tag != "Corpse" && !actr.effects.HasEffect<Electrified>())
                 {
@@ -43,14 +47,14 @@ namespace Data.Effects
                 validTargets.Shuffle();
 
                 Actor target = validTargets[0];
-                target.damagable.TakeDamage(damage);
-                ForceRemoveMe(true);
+                target.damagable.TakeDamage(this.damage);
+                this.ForceRemoveMe(true);
                 target.effects.AddEffect(this);
                 target.effects.AddEffect(new Electrified());
 
             }
             else{
-                ForceRemoveMe(false);
+                this.ForceRemoveMe(false);
             }
         }
 

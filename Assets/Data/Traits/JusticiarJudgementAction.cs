@@ -1,17 +1,16 @@
-using BaseClasses;
-using Event;
-
-namespace Data.Effects
+namespace BBG.Data.Traits
 {
+    using BBG.BaseClasses;
+
     [System.Serializable]
     public class JusticiarJudgementAction : Effect
     {
         private const int duration = 2;
 
         public JusticiarJudgementAction() : base(){
-            Description = new EffectDescription(
+            this.Description = new EffectDescription(
                 "Judgement",
-                describe
+                this.describe
             );
         }
 

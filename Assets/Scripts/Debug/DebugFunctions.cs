@@ -1,8 +1,10 @@
-﻿namespace Scripts.Debug
+﻿namespace BBG.Debug
 {
-    using Generation;
+    using BBG.Actor;
+    using BBG.Items.Generation;
 
     using UnityEngine;
+
     public class DebugFunctions : MonoBehaviour
     {
 

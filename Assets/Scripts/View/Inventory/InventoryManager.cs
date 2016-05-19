@@ -1,105 +1,110 @@
-using System;
-
-using Assets.Scripts.View.Inventory;
-
 using UnityEngine;
-using UnityEngine.UI;
 
-public class InventoryManager : MonoBehaviour
+namespace BBG.View.Inventory
 {
-    // Display Entires for items in the backpack are added here
-    [SerializeField]
-    private Transform backpackObject;
+    using BBG.Actor;
+    using BBG.Items;
 
-    [SerializeField]
-    private Transform equippedObject;
+    using UnityEngine.UI;
 
-    private PlayerEquipment equipment;
+    using Debug = UnityEngine.Debug;
 
-    [SerializeField]
-    private GameObject itemDisplayEntryPrefab;
-
-    private BackpackItemEntry selectedBackpackItem;
-
-    public void Awake()
+    public class InventoryManager : MonoBehaviour
     {
-        this.equipment = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerEquipment>();
-    }
+        // Display Entires for items in the backpack are added here
+        [SerializeField]
+        private Transform backpackObject;
 
-    public void OnEnable()
-    {
-        this.Clear();
-        this.PopulateChildren();
-    }
+        [SerializeField]
+        private Transform equippedObject;
 
-    private void PopulateChildren()
-    {
-        foreach (var item in this.equipment)
+        private PlayerEquipment equipment;
+
+        [SerializeField]
+        private GameObject itemDisplayEntryPrefab;
+
+        private BackpackItemEntry selectedBackpackItem;
+
+        public void Awake()
         {
-            CreateItem(item, backpackObject);
-        }
-    }
-
-    private void CreateItem(BaseItem item, Transform parent)
-    {
-        GameObject entry = Instantiate(itemDisplayEntryPrefab) as GameObject;
-
-        InventoryItemEntry entryBehaviour = entry.GetComponentInChildren<InventoryItemEntry>();
-        entryBehaviour.SetItem(item);
-        entry.transform.SetParent(parent);
-        Toggle b = entry.GetComponentInChildren<Toggle>();
-        b.onValueChanged.AddListener((isOn => this.SelectBackpackItem(entryBehaviour as BackpackItemEntry)));
-    }
-
-    private void Clear()
-    {
-        foreach (Transform child in backpackObject)
-        {
-            Destroy(child.gameObject);
-        }
-    }
-
-    public void ClickEquipmentButton(int slot)
-    {
-        // Check that we actually have a selected item
-        // TODO: Maybe change to actually use the toggle groups?
-        if (this.selectedBackpackItem == null)
-        {
-            return;
+            this.equipment = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerEquipment>();
         }
 
-        BaseItem realItem = this.selectedBackpackItem.Item;
-
-        // Check that the item is allowed in the specified slot
-        // TODO: Convert hard-coded slots into flags on the UI entries
-        if (!this.equipment.CanEquip(realItem, slot))
+        public void OnEnable()
         {
-            // TODO: Give feedback that this is an illegal choice
-            return;
+            this.Clear();
+            this.PopulateChildren();
         }
 
-        // Apply equipment modifications
-        this.equipment.EquipItem(realItem as EquippableItem, slot);
+        private void PopulateChildren()
+        {
+            foreach (var item in this.equipment)
+            {
+                this.CreateItem(item, this.backpackObject);
+            }
+        }
 
-        // Update display TODO: Super slow and silly method probably
-        InventoryItemEntry entry = this.equippedObject
-            .GetChild(slot)
-            .GetComponentInChildren<InventorySlotItemEntry>();
+        private void CreateItem(BaseItem item, Transform parent)
+        {
+            GameObject entry = Instantiate(this.itemDisplayEntryPrefab) as GameObject;
 
-        Debug.Log(this.equippedObject.GetChild(slot));
-        Debug.Log(this.equippedObject.GetChild(slot).GetComponentInChildren<InventoryItemEntry>());
-        entry.SetItem(this.selectedBackpackItem.Item);
+            InventoryItemEntry entryBehaviour = entry.GetComponentInChildren<InventoryItemEntry>();
+            entryBehaviour.SetItem(item);
+            entry.transform.SetParent(parent);
+            Toggle b = entry.GetComponentInChildren<Toggle>();
+            b.onValueChanged.AddListener((isOn => this.SelectBackpackItem(entryBehaviour as BackpackItemEntry)));
+        }
+
+        private void Clear()
+        {
+            foreach (Transform child in this.backpackObject)
+            {
+                Destroy(child.gameObject);
+            }
+        }
+
+        public void ClickEquipmentButton(int slot)
+        {
+            // Check that we actually have a selected item
+            // TODO: Maybe change to actually use the toggle groups?
+            if (this.selectedBackpackItem == null)
+            {
+                return;
+            }
+
+            BaseItem realItem = this.selectedBackpackItem.Item;
+
+            // Check that the item is allowed in the specified slot
+            // TODO: Convert hard-coded slots into flags on the UI entries
+            if (!this.equipment.CanEquip(realItem, slot))
+            {
+                // TODO: Give feedback that this is an illegal choice
+                return;
+            }
+
+            // Apply equipment modifications
+            this.equipment.EquipItem(realItem as EquippableItem, slot);
+
+            // Update display TODO: Super slow and silly method probably
+            InventoryItemEntry entry = this.equippedObject
+                .GetChild(slot)
+                .GetComponentInChildren<InventorySlotItemEntry>();
+
+            Debug.Log(this.equippedObject.GetChild(slot));
+            Debug.Log(this.equippedObject.GetChild(slot).GetComponentInChildren<InventoryItemEntry>());
+            entry.SetItem(this.selectedBackpackItem.Item);
 
 
-        //equipment.RemoveItem(this.selectedBackpackItem.Item);
+            //equipment.RemoveItem(this.selectedBackpackItem.Item);
 
-        Destroy(this.selectedBackpackItem.transform.parent.gameObject);
+            Destroy(this.selectedBackpackItem.transform.parent.gameObject);
 
-        this.selectedBackpackItem = null;
-    }
+            this.selectedBackpackItem = null;
+        }
 
-    public void SelectBackpackItem(BackpackItemEntry entry)
-    {
-        this.selectedBackpackItem = entry;
+        public void SelectBackpackItem(BackpackItemEntry entry)
+        {
+            this.selectedBackpackItem = entry;
+        }
     }
 }

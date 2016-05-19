@@ -1,8 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Event
+﻿namespace BBG
 {
+    using System;
+    using System.Collections.Generic;
+
+    using BBG.Actor;
 
     /* Event descriptions
 
@@ -39,24 +40,24 @@ namespace Event
 
     #region delegates
 
-    public delegate void ActorParameters(Actor who);
+    public delegate void ActorParameters(Actor.Actor who);
 
     public delegate void OnTurn();
 
     public delegate void OnActorTookDamage(TookDamageArgs args);
-    public delegate void PreActorDied(Actor who);
+    public delegate void PreActorDied(Actor.Actor who);
 
-    public delegate void ActorDied(Actor who);
+    public delegate void ActorDied(Actor.Actor who);
 
     public delegate void PlayerLeveledUp(int level);
 
-    public delegate void OnActorActed(Actor who);
+    public delegate void OnActorActed(Actor.Actor who);
 
     public delegate void OnPreEnemyAction(OnPreEnemyActionArgs args);
 
     public delegate void OnPreEnemyEffectApplied(PreEnemyEffectAppliedArgs args);
 
-    public delegate void OnPostEnemySpawned(Actor who);
+    public delegate void OnPostEnemySpawned(Actor.Actor who);
 
     public delegate void OnEnemyAttack(EnemyAttackArgs args);
 
@@ -65,7 +66,7 @@ namespace Event
     public delegate void OnGameDeserialized();
 
     // Who we attacked
-    public delegate void OnPlayerAttackDommand(Actor who);
+    public delegate void OnPlayerAttackDommand(Actor.Actor who);
 
 
     #endregion
@@ -75,43 +76,43 @@ namespace Event
 
     public struct TookDamageArgs
     {
-        public Actor Actor;
+        public Actor.Actor Actor;
         public int Damage;
 
-        public TookDamageArgs(Actor _actor, int _damage)
+        public TookDamageArgs(Actor.Actor _actor, int _damage)
         {
-            Actor = _actor;
-            Damage = _damage;
+            this.Actor = _actor;
+            this.Damage = _damage;
         }
     }
 
     public struct OnPreEnemyActionArgs
     {
-        public Actor who;
+        public Actor.Actor who;
         public AI.AiAction action;
 
-        public OnPreEnemyActionArgs(Actor _who, AI.AiAction _action)
+        public OnPreEnemyActionArgs(Actor.Actor _who, AI.AiAction _action)
         {
-            who = _who;
-            action = _action;
+            this.who = _who;
+            this.action = _action;
         }
     }
 
     public struct PreEnemyEffectAppliedArgs
     {
-        public Actor who;
+        public Actor.Actor who;
         public BaseClasses.Effect effect;
 
-        public PreEnemyEffectAppliedArgs(Actor _who, BaseClasses.Effect _effect)
+        public PreEnemyEffectAppliedArgs(Actor.Actor _who, BaseClasses.Effect _effect)
         {
-            who = _who;
-            effect = _effect;
+            this.who = _who;
+            this.effect = _effect;
         }
     }
 
     public struct EnemyAttackArgs
     {
-        public Actor who;
+        public Actor.Actor who;
         public int rawDamage;
     }
 

@@ -1,10 +1,12 @@
 
 // A simple generic attack buff
-using BaseClasses;
 
-namespace Data.Effects
+namespace BBG.Data.Effects
 {
-[
+    using BBG.BaseClasses;
+    using BBG.Data.Effects.ThemeDebuffs;
+
+    [
     System.Serializable]
     class Stunned : Effect
     {
@@ -12,10 +14,10 @@ namespace Data.Effects
 
         public Stunned(int duration) : base(duration)
         {
-            IsDebuff = true;
+            this.IsDebuff = true;
             
-            Description = new EffectDescription("Stunned",
-                describe);
+            this.Description = new EffectDescription("Stunned",
+                this.describe);
         }
 
         private string describe()
@@ -28,19 +30,19 @@ namespace Data.Effects
             base.OnAdded();
 
             // If wet, stun duration is increased by one
-            if (owner.effects.HasEffect<Wet>()){
-                Duration++;
-                owner.effects.RemoveEffect(owner.effects.GetEffectsOfType<Wet>()[0]);
+            if (this.owner.effects.HasEffect<Wet>()){
+                this.Duration++;
+                this.owner.effects.RemoveEffect(this.owner.effects.GetEffectsOfType<Wet>()[0]);
             }
 
-            owner.status.SetStunned(true);
+            this.owner.status.SetStunned(true);
         }
 
         public override void OnRemoved()
         {
             base.OnRemoved();
 
-            owner.status.SetStunned(false);
+            this.owner.status.SetStunned(false);
         }
     }
 }

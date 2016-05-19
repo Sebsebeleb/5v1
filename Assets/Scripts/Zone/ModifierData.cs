@@ -1,6 +1,6 @@
-using System;
-namespace Zone
+namespace BBG.Zone
 {
+    using System;
 
     //
     // Zone modifications
@@ -10,10 +10,10 @@ namespace Zone
     {
         public ZoneLengthReduction()
         {
-            Typ = ModifierType.ZONE_LENGTH;
+            this.Typ = ModifierType.ZONE_LENGTH;
 
-            Description = "-25% Zone length";
-            Difficulty = -15;
+            this.Description = "-25% Zone length";
+            this.Difficulty = -15;
         }
 
         public override void ApplyStatModifications(Zone zone)
@@ -26,10 +26,10 @@ namespace Zone
     {
         public ZoneLengthIncrease()
         {
-            Typ = ModifierType.ZONE_LENGTH;
+            this.Typ = ModifierType.ZONE_LENGTH;
 
-            Description = "+25% Zone length";
-            Difficulty = 15;
+            this.Description = "+25% Zone length";
+            this.Difficulty = 15;
         }
 
         public override void ApplyStatModifications(Zone zone)
@@ -46,10 +46,10 @@ namespace Zone
     {
         public EnemyHPBonus()
         {
-            Typ = ModifierType.ENEMY_HEALTH;
+            this.Typ = ModifierType.ENEMY_HEALTH;
 
-            Description = "+20% Enemy health";
-            Difficulty = 10;
+            this.Description = "+20% Enemy health";
+            this.Difficulty = 10;
         }
 
         public override void ApplyStatModifications(Zone zone){
@@ -62,10 +62,10 @@ namespace Zone
     {
         public ZoneEnemyAttackBonus()
         {
-            Typ = ModifierType.ENEMY_DAMAGE;
+            this.Typ = ModifierType.ENEMY_DAMAGE;
 
-            Description = "+20% Enemy damage";
-            Difficulty = 15;
+            this.Description = "+20% Enemy damage";
+            this.Difficulty = 15;
         }
 
         public override void ApplyStatModifications(Zone zone){
@@ -77,10 +77,10 @@ namespace Zone
     {
         public ZoneEnemyDifficultyIncrease()
         {
-            Typ = ModifierType.ENEMY_DIFFICULTY;
+            this.Typ = ModifierType.ENEMY_DIFFICULTY;
 
-            Description = "+20% Enemy difficulty";
-            Difficulty = 10;
+            this.Description = "+20% Enemy difficulty";
+            this.Difficulty = 10;
         }
 
         public override void ApplyStatModifications(Zone zone){
@@ -96,10 +96,10 @@ namespace Zone
     {
         public ZoneLootIncrease()
         {
-            Typ = ModifierType.LOOT_AMOUNT;
+            this.Typ = ModifierType.LOOT_AMOUNT;
 
-            Description = "+30% Loot";
-            Difficulty = -15;
+            this.Description = "+30% Loot";
+            this.Difficulty = -15;
         }
     }
 
@@ -107,10 +107,10 @@ namespace Zone
     {
         public ZoneLootDecrease()
         {
-            Typ = ModifierType.LOOT_AMOUNT;
+            this.Typ = ModifierType.LOOT_AMOUNT;
 
-            Description = "-20% Loot";
-            Difficulty = 10;
+            this.Description = "-20% Loot";
+            this.Difficulty = 10;
         }
     }
 }

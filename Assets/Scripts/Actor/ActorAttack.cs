@@ -1,93 +1,99 @@
 ﻿using System;
+
 using UnityEngine;
 
-public class ActorAttack : MonoBehaviour
+namespace BBG.Actor
 {
+    using BBG.DataHolders;
 
-    // The actual stats relating to attacking. This can be saved/loaded etc.
-    private AttackData data = new AttackData(); 
-
-    // For inspector
-    public int StartingBaseAttack;
-
-    [SerializeField]
-    private int attackPerRank;
-
-    private Actor actor;
-
-
-    // The regions are for public read/write of data
-    #region properties
-    public int BonusAttack
+    public class ActorAttack : MonoBehaviour
     {
-        get { return data.BonusAttack; }
-        set { data.BonusAttack = value; }
-    }
 
-    #endregion
+        // The actual stats relating to attacking. This can be saved/loaded etc.
+        private AttackData data = new AttackData(); 
 
-    public int Attack
-    {
-        get { return CalculateAttack(); }
-    }
+        // For inspector
+        public int StartingBaseAttack;
+
+        [SerializeField]
+        private int attackPerRank;
+
+        private Actor actor;
 
 
-    private void Awake()
-    {
-        this.actor = GetComponent<Actor>();
-    }
-
-    void Start()
-    {
-        if (tag == "Player")
+        // The regions are for public read/write of data
+        #region properties
+        public int BonusAttack
         {
-            OnSpawn();
-        }
-    }
-
-    void OnSpawn()
-    {
-        data.BaseAttack = StartingBaseAttack + this.attackPerRank * this.actor.Rank;
-
-        if (gameObject.tag != "Player")
-        {
-            // Add zone bonus
-            int bonus = (int)Math.Round(StartingBaseAttack * (1.0f - Zone.Zone.current.EnemyDamageModifier));
+            get { return this.data.BonusAttack; }
+            set { this.data.BonusAttack = value; }
         }
 
-    }
+        #endregion
 
-    public void DoAttack(Actor target)
-    {
-        int damage = Attack;
+        public int Attack
+        {
+            get { return this.CalculateAttack(); }
+        }
 
-        target.damagable.TakeDamage(damage);
 
-        //if target.tag != player: EventManager.Broadcast("EnemyTookDamage")
-    }
+        private void Awake()
+        {
+            this.actor = this.GetComponent<Actor>();
+        }
 
-    public bool CanAttack(int x, int y)
-    {
-        return true;
-    }
+        void Start()
+        {
+            if (this.tag == "Player")
+            {
+                this.OnSpawn();
+            }
+        }
 
-    /// <summary>
-    /// Returns final standard attack
-    /// </summary>
-    /// <returns></returns>
-    public int CalculateAttack()
-    {
-        return data.BaseAttack + data.BonusAttack;
-    }
+        void OnSpawn()
+        {
+            this.data.BaseAttack = this.StartingBaseAttack + this.attackPerRank * this.actor.Rank;
 
-    // Return the data object used. Should only be used by serialization classes
-    public AttackData _GetRawData()
-    {
-        return data;
-    }
+            if (this.gameObject.tag != "Player")
+            {
+                // Add zone bonus
+                int bonus = (int)Math.Round(this.StartingBaseAttack * (1.0f - Zone.Zone.current.EnemyDamageModifier));
+            }
 
-    public void _SetRawData(AttackData _data)
-    {
-        data = _data;
+        }
+
+        public void DoAttack(Actor target)
+        {
+            int damage = this.Attack;
+
+            target.damagable.TakeDamage(damage);
+
+            //if target.tag != player: EventManager.Broadcast("EnemyTookDamage")
+        }
+
+        public bool CanAttack(int x, int y)
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// Returns final standard attack
+        /// </summary>
+        /// <returns></returns>
+        public int CalculateAttack()
+        {
+            return this.data.BaseAttack + this.data.BonusAttack;
+        }
+
+        // Return the data object used. Should only be used by serialization classes
+        public AttackData _GetRawData()
+        {
+            return this.data;
+        }
+
+        public void _SetRawData(AttackData _data)
+        {
+            this.data = _data;
+        }
     }
 }

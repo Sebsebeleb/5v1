@@ -1,9 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Reflection;
-
-namespace Zone
+namespace BBG.Zone
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Reflection;
+
     enum ModifierType{ // Modifiers with the same modifier UseType are exclusive
         ZONE_LENGTH,
         ENEMY_DAMAGE,

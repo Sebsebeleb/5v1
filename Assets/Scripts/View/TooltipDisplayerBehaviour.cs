@@ -1,45 +1,51 @@
 using UnityEngine;
-using UnityEngine.UI;
 
-public class TooltipDisplayerBehaviour : MonoBehaviour
+namespace BBG.View
 {
+    using BBG.View.Actions;
 
-	public Transform Child;
-	public Text Title;
-	public Text Tooltip;
+    using UnityEngine.UI;
+
+    public class TooltipDisplayerBehaviour : MonoBehaviour
+    {
+
+        public Transform Child;
+        public Text Title;
+        public Text Tooltip;
 
 
-	public ToggleGroup SkillsGroup;
+        public ToggleGroup SkillsGroup;
 
-	private TooltipAreaManager tooltipArea; // We tell this to update itself with the given skill
-	private SkillUseButton skillBehaviour;
+        private TooltipAreaManager tooltipArea; // We tell this to update itself with the given skill
+        private SkillUseButton skillBehaviour;
 
 
-	void Awake(){
-		skillBehaviour = GetComponent<SkillUseButton>();
-		tooltipArea = GameObject.FindGameObjectWithTag("TooltipArea").GetComponent<TooltipAreaManager>();
-	}
+        void Awake(){
+            this.skillBehaviour = this.GetComponent<SkillUseButton>();
+            this.tooltipArea = GameObject.FindGameObjectWithTag("TooltipArea").GetComponent<TooltipAreaManager>();
+        }
 
-	public void SetTooltip(Vector2 position, string title, string tooltip){
-		GetComponent<RectTransform>().anchoredPosition = new Vector2(position.x, position.y + 30);
-		Child.gameObject.SetActive(true);
-		Title.text = title;
-		Tooltip.text = tooltip;
+        public void SetTooltip(Vector2 position, string title, string tooltip){
+            this.GetComponent<RectTransform>().anchoredPosition = new Vector2(position.x, position.y + 30);
+            this.Child.gameObject.SetActive(true);
+            this.Title.text = title;
+            this.Tooltip.text = tooltip;
 
-	}
+        }
 
-	public void DisplayMe(){
-		if (skillBehaviour.AssociatedSkill == null){
-			return;
-		}
-		tooltipArea.HoverEnter(skillBehaviour.AssociatedSkill);
-	}
-	public void HideMe(){
-		tooltipArea.HoverExit();
-	}
+        public void DisplayMe(){
+            if (this.skillBehaviour.AssociatedSkill == null){
+                return;
+            }
+            this.tooltipArea.HoverEnter(this.skillBehaviour.AssociatedSkill);
+        }
+        public void HideMe(){
+            this.tooltipArea.HoverExit();
+        }
 
-	//TODO: Use this/find alternative
-	private void UpdateFontSize(){
-		Title.fontSize = Tooltip.fontSize + 6;
-	}
+        //TODO: Use this/find alternative
+        private void UpdateFontSize(){
+            this.Title.fontSize = this.Tooltip.fontSize + 6;
+        }
+    }
 }

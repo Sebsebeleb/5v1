@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEngine;
-
-namespace Assets.Scripts.View
+﻿namespace BBG.View
 {
+    using UnityEngine;
+
     public class ForceScale : MonoBehaviour
     {
         public void Update()
         {
-            Vector3 newVec = transform.localScale;
+            Vector3 newVec = this.transform.localScale;
             newVec.x = 1.0f;
 
-            transform.localScale = newVec;
+            this.transform.localScale = newVec;
         }
     }
 }

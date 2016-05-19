@@ -1,59 +1,62 @@
 ﻿using UnityEngine;
 
-public class EnemyAttackAI : MonoBehaviour
+namespace BBG.Actor
 {
-
-    private AI _brain;
-    private Actor actor;
-
-    private GameObject player;
-    private Damagable playerDamage;
-
-    void Awake()
+    public class EnemyAttackAI : MonoBehaviour
     {
-        player = GameObject.FindWithTag("Player");
-        playerDamage = player.GetComponent<Damagable>();
 
-        _brain = GetComponent<AI>();
-        actor = GetComponent<Actor>();
-    }
+        private AI _brain;
+        private Actor actor;
 
-    void Start()
-    {
-        AI.AiAction attackAction = new AI.AiAction();
-        attackAction.Name = "Attack";
-        attackAction.AnimationName = "Attack";
-        attackAction.Description = GetDescription;
-        attackAction.Callback = AttackPlayer;
-        attackAction.CalcPriority = CalculatePriority;
-        attackAction.IsFreeAction = false;
+        private GameObject player;
+        private Damagable playerDamage;
 
-        _brain.AddAction(attackAction);
-    }
+        void Awake()
+        {
+            this.player = GameObject.FindWithTag("Player");
+            this.playerDamage = this.player.GetComponent<Damagable>();
 
-    private string GetDescription(){
-        int damage = actor.attack.Attack;
-        string damageText = TextUtilities.Bold(TextUtilities.FontColor("#FF2222", damage.ToString()));
-        return "Attacks you for " + TextUtilities.FontColor("#FF2222", damageText) + " damage";
-    }
+            this._brain = this.GetComponent<AI>();
+            this.actor = this.GetComponent<Actor>();
+        }
+
+        void Start()
+        {
+            AI.AiAction attackAction = new AI.AiAction();
+            attackAction.Name = "Attack";
+            attackAction.AnimationName = "Attack";
+            attackAction.Description = this.GetDescription;
+            attackAction.Callback = this.AttackPlayer;
+            attackAction.CalcPriority = this.CalculatePriority;
+            attackAction.IsFreeAction = false;
+
+            this._brain.AddAction(attackAction);
+        }
+
+        private string GetDescription(){
+            int damage = this.actor.attack.Attack;
+            string damageText = TextUtilities.Bold(TextUtilities.FontColor("#FF2222", damage.ToString()));
+            return "Attacks you for " + TextUtilities.FontColor("#FF2222", damageText) + " damage";
+        }
 
 
-    private int CalculatePriority()
-    {
-        return 50;
-    }
+        private int CalculatePriority()
+        {
+            return 50;
+        }
 
-    private void AttackPlayer()
-    {
-        // Argument for the event
-        Event.EnemyAttackArgs args;
-        args.who = actor;
-        args.rawDamage = actor.attack.Attack;
+        private void AttackPlayer()
+        {
+            // Argument for the event
+            EnemyAttackArgs args;
+            args.who = this.actor;
+            args.rawDamage = this.actor.attack.Attack;
 
-        // Deal damage
-        playerDamage.TakeDamage(actor.attack.Attack);
+            // Deal damage
+            this.playerDamage.TakeDamage(this.actor.attack.Attack);
 
-        // Fire off the event
-        Event.EventManager.Notify(Event.Events.EnemyAttack, args);
+            // Fire off the event
+            EventManager.Notify(Events.EnemyAttack, args);
+        }
     }
 }

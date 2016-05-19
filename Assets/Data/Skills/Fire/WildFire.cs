@@ -1,10 +1,12 @@
-using Data.Effects;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Data.Skills
+namespace BBG.Data.Skills.Fire
 {
-    using Map;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using BBG.Actor;
+    using BBG.BaseClasses;
+    using BBG.Data.Effects.ThemeDebuffs;
+    using BBG.Map;
 
     [System.Serializable]
     public class WildFire : BaseSkill
@@ -17,13 +19,13 @@ namespace Data.Skills
         // Just have one missile per enemy hit, but have each missile deal the randomly allocated damage
         public WildFire(int PlayerLevel) : base(PlayerLevel)
         {
-            Category = SkillCategory.Fire;
+            this.Category = SkillCategory.Fire;
 
-            SkillName = "Wildfire";
-            Tooltip = "Deal {0} damage randomly split among all burning enemies. Damage is increased by {1} per burning enemy.";
+            this.SkillName = "Wildfire";
+            this.Tooltip = "Deal {0} damage randomly split among all burning enemies. Damage is increased by {1} per burning enemy.";
             // Alternatively: Deal {0} damage randomly split among all enemies. Burning enemies take x more damage. All enemies that were hit start burning
-            BaseCooldown = 12;
-            ManaCost = 10;
+            this.BaseCooldown = 12;
+            this.ManaCost = 10;
         }
 
         // Can only be used if there actually is a burning enemy
@@ -66,7 +68,7 @@ namespace Data.Skills
                 select enemy)
                 .Count();
 
-            int totalDamage = getDamage() + getBonusDamage() * totalBurningEnemies;
+            int totalDamage = this.getDamage() + this.getBonusDamage() * totalBurningEnemies;
 
             validTargets.ElementAt(0);
 
@@ -83,20 +85,20 @@ namespace Data.Skills
         }
 
         private int getDamage(){
-            return 2 + Rank;
+            return 2 + this.Rank;
         }
 
         private int getBonusDamage(){
-            return 1 + (int) Rank/2;
+            return 1 + (int) this.Rank/2;
         }
 
 
         public override string GetTooltip()
         {
-            string damageProp = TextUtilities.FontColor(Colors.DamageValue, getDamage());
-            string durationProp = TextUtilities.FontColor(Colors.DurationValue, getBonusDamage());
+            string damageProp = TextUtilities.FontColor(Colors.DamageValue, this.getDamage());
+            string durationProp = TextUtilities.FontColor(Colors.DurationValue, this.getBonusDamage());
 
-            return string.Format(Tooltip, damageProp, durationProp);
+            return string.Format(this.Tooltip, damageProp, durationProp);
         }
     }
 

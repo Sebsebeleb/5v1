@@ -1,8 +1,9 @@
-﻿namespace Assets.Scripts.View.CommonUI
+﻿namespace BBG.View.CommonUI
 {
     using System.Collections.Generic;
 
     using UnityEngine;
+
     /// <summary>
     /// Any gameobject that has this can be closed by pressing escape, and the last opened one will always be the one to be closed
     /// Possible TODO: Have a public bool that if true, will remove the whole stack and then push itself when opened (for example for inventory screen pushing out inspector by pressing I)

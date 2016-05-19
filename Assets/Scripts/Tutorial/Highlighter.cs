@@ -1,4 +1,4 @@
-﻿namespace Tutorial
+﻿namespace BBG.Tutorial
 {
     using UnityEngine;
 
@@ -16,7 +16,7 @@
         {
             if (this.target != null)
             {
-                Highlight(this.target);
+                this.Highlight(this.target);
             }
         }
 
@@ -34,9 +34,9 @@
         /// <param name="tgt"></param>
         public void Highlight(RectTransform tgt)
         {
-            objRef = Instantiate(this.highlightFrame);
+            this.objRef = Instantiate(this.highlightFrame);
 
-            objRef.transform.SetParent(tgt, false);
+            this.objRef.transform.SetParent(tgt, false);
         }
     }
 }

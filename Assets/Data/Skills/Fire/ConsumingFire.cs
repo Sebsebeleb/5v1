@@ -1,19 +1,23 @@
-using Data.Effects;
-using UnityEngine;
-
-namespace Data.Skills
+namespace BBG.Data.Skills.Fire
 {
+    using BBG.Actor;
+    using BBG.BaseClasses;
+    using BBG.Data.Effects;
+    using BBG.Data.Effects.ThemeDebuffs;
+
+    using UnityEngine;
+
     [System.Serializable]
     class ConsumingFire : BaseSkill
     {
         public ConsumingFire(int PlayerLevel) : base(PlayerLevel)
         {
-            Category = SkillCategory.Fire;
+            this.Category = SkillCategory.Fire;
 
-            SkillName = "Consuming Fire";
-            Tooltip = "Apply burning (4) to an enemy and heal for {0} for every burning enemy. If the enemy dies within 4 turns, it will explode dealing {1} damage to all adjacent enemies and apply burning (3) to them";
-            BaseCooldown = 7;
-            ManaCost = 20;
+            this.SkillName = "Consuming Fire";
+            this.Tooltip = "Apply burning (4) to an enemy and heal for {0} for every burning enemy. If the enemy dies within 4 turns, it will explode dealing {1} damage to all adjacent enemies and apply burning (3) to them";
+            this.BaseCooldown = 7;
+            this.ManaCost = 20;
         }
 
         public static void test()
@@ -42,29 +46,29 @@ namespace Data.Skills
             }
 
             GameObject player = GameObject.FindWithTag("Player");
-            player.GetComponent<Damagable>().Heal(numBurning * getHeal());
+            player.GetComponent<Damagable>().Heal(numBurning * this.getHeal());
 
 
-            int aoeDamage = getAoeDamage();
+            int aoeDamage = this.getAoeDamage();
 
             target.effects.AddEffect(new FieryInstability(4, aoeDamage));
         }
 
         private int getHeal(){
-            return 2 + (int) Rank/2;
+            return 2 + (int) this.Rank/2;
         }
 
         private int getAoeDamage(){
-            return 1 + Rank;
+            return 1 + this.Rank;
         }
 
 
         public override string GetTooltip(){
-            string mainDamageProp = TextUtilities.FontColor(Colors.DamageValue, getHeal().ToString());
-            string aoeDamageProp = TextUtilities.FontColor(Colors.DamageValue, getAoeDamage().ToString());
+            string mainDamageProp = TextUtilities.FontColor(Colors.DamageValue, this.getHeal().ToString());
+            string aoeDamageProp = TextUtilities.FontColor(Colors.DamageValue, this.getAoeDamage().ToString());
 
 
-            return string.Format(Tooltip, mainDamageProp, aoeDamageProp);
+            return string.Format(this.Tooltip, mainDamageProp, aoeDamageProp);
         }
     }
 }

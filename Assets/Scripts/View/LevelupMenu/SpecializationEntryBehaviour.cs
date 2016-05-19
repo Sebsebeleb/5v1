@@ -1,6 +1,7 @@
-﻿namespace Scripts.View.LevelupMenu
+﻿namespace BBG.View.LevelupMenu
 {
-    using BaseClasses;
+    using BBG.BaseClasses;
+    using BBG.ResourceManagement;
 
     using UnityEngine;
     using UnityEngine.UI;

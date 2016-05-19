@@ -1,12 +1,12 @@
-using UnityEngine;
-using UnityEngine.UI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using RTT = TextUtilities;
+using RTT = BBG.TextUtilities;
 
-namespace Zone
+namespace BBG.Zone.View
 {
+    using System;
+    using System.Linq;
+
+    using UnityEngine;
+    using UnityEngine.UI;
 
     public class ZoneEntryBehaviour : MonoBehaviour
     {
@@ -21,10 +21,10 @@ namespace Zone
         public void SetZone(Zone _zone)
         {
             // Doesn't really belong here, but it has to be set after the parent is set.
-            GetComponent<Toggle>().group = GetComponentInParent<ToggleGroup>();
+            this.GetComponent<Toggle>().group = this.GetComponentInParent<ToggleGroup>();
 
-            zone = _zone;
-            InitDescription(); // creates the string for the description and updates the Text component
+            this.zone = _zone;
+            this.InitDescription(); // creates the string for the description and updates the Text component
         }
 
         // Builds the final string to use on the text component and applies it
@@ -36,15 +36,15 @@ namespace Zone
 				Length: {1}
 
 				",
-				RTT.Bold(RTT.FontColor("#FFFF00", zone.Denizens)),
-                RTT.FontColor("#FF00FF", zone.ZoneLength.ToString())
+				RTT.Bold(RTT.FontColor("#FFFF00", this.zone.Denizens)),
+                RTT.FontColor("#FF00FF", this.zone.ZoneLength.ToString())
 				);
 
             // Add modifier descriptions
 
             // TO maybe DO: Sort it by 0 to last, then decending order (to get neutral zones after positive/negative ones
             // Current: sort it decending order
-            var sortedModifiers = zone.modifiers.OrderBy((mod) => mod.Difficulty);
+            var sortedModifiers = this.zone.modifiers.OrderBy((mod) => mod.Difficulty);
 
             foreach (ZoneModifier mod in sortedModifiers)
             {
@@ -66,7 +66,7 @@ namespace Zone
                 finalString = String.Format("{0} {1}\n", finalString, TextUtilities.FontColor(color, mod.Description));
             }
 
-            Description.text = finalString;
+            this.Description.text = finalString;
         }
     }
 }

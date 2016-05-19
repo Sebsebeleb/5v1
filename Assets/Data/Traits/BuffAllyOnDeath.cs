@@ -1,9 +1,8 @@
-﻿using BaseClasses;
-using Event;
-
-namespace Data.Effects
+﻿namespace BBG.Data.Traits
 {
-
+    using BBG.Actor;
+    using BBG.BaseClasses;
+    using BBG.Data.Effects;
 
     /// <summary>
     /// Buffs all adjacent enemies when killed
@@ -16,11 +15,11 @@ namespace Data.Effects
         // ----------------------------
 
         public BuffAllyOnDeath() : base(){
-            IsTrait = true;
+            this.IsTrait = true;
 
-            Description = new EffectDescription(
+            this.Description = new EffectDescription(
                 "Unstable Energies",
-                describe
+                this.describe
             );
         }
 
@@ -33,7 +32,7 @@ namespace Data.Effects
         {
             base.Created();
 
-            ActorDied callback = OnActorDied;
+            ActorDied callback = this.OnActorDied;
             EventManager.Register(Events.ActorDied, callback);
         }
 
@@ -41,7 +40,7 @@ namespace Data.Effects
         {
             base.Destroyed();
 
-            ActorDied callback = OnActorDied;
+            ActorDied callback = this.OnActorDied;
             EventManager.UnRegister(Events.ActorDied, callback);
         }
 
@@ -51,16 +50,16 @@ namespace Data.Effects
 
         void OnActorDied(Actor who)
         {
-            if (who == owner)
+            if (who == this.owner)
             {
-                TriggerEffect();
-                ForceRemoveMe();
+                this.TriggerEffect();
+                this.ForceRemoveMe();
             }
         }
 
         private void TriggerEffect()
         {
-            foreach (Actor actor in GridManager.TileMap.GetAdjacent(owner.x, owner.y))
+            foreach (Actor actor in GridManager.TileMap.GetAdjacent(this.owner.x, this.owner.y))
             {
                 actor.effects.AddEffect(new AttackBuff(2));
             }

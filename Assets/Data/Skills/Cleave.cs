@@ -1,9 +1,11 @@
-﻿using Map;
-using System.Collections.Generic;
-
-namespace Data.Skills
+﻿namespace BBG.Data.Skills
 {
+    using System.Collections.Generic;
     using System.Linq;
+
+    using BBG.Actor;
+    using BBG.BaseClasses;
+    using BBG.Map;
 
     [System.Serializable]
     public class Cleave : BaseSkill
@@ -12,12 +14,12 @@ namespace Data.Skills
 
         public Cleave(int PlayerLevel) : base(PlayerLevel)
         {
-            Category =SkillCategory.Warrior;
+            this.Category =SkillCategory.Warrior;
 
-            SkillName = "Cleave";
-            Tooltip = "Deal {0} damage to target and one random adjacent enemy";
-            BaseCooldown = 12;
-            ManaCost = 20;
+            this.SkillName = "Cleave";
+            this.Tooltip = "Deal {0} damage to target and one random adjacent enemy";
+            this.BaseCooldown = 12;
+            this.ManaCost = 20;
         }
 
         public override void UseOnTargetGrid(int x, int y)
@@ -50,7 +52,7 @@ namespace Data.Skills
 
             foreach (Actor enemy in finalTargets)
             {
-                enemy.damagable.TakeDamage(getDamage());
+                enemy.damagable.TakeDamage(this.getDamage());
             }
 
         }
@@ -61,15 +63,15 @@ namespace Data.Skills
         }
 
         private int getDamage(){
-           return 2 + Rank*3;
+           return 2 + this.Rank*3;
         }
 
 
 
         public override string GetTooltip(){
-            string damageProp = TextUtilities.FontColor(Colors.DamageValue, getDamage().ToString());
+            string damageProp = TextUtilities.FontColor(Colors.DamageValue, this.getDamage().ToString());
 
-            return string.Format(Tooltip, damageProp);
+            return string.Format(this.Tooltip, damageProp);
         }
     }
 

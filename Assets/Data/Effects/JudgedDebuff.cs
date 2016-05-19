@@ -1,32 +1,35 @@
-using BaseClasses;
-
-[System.Serializable]
-internal class Judged : Effect
+namespace BBG.Data.Effects
 {
-    public Judged(int duration)
-        : base(duration)
+    using BBG.BaseClasses;
+
+    [System.Serializable]
+    internal class Judged : Effect
     {
-        Description = new EffectDescription(
-            "Judged",
-            describe
-        );
-    }
+        public Judged(int duration)
+            : base(duration)
+        {
+            this.Description = new EffectDescription(
+                "Judged",
+                this.describe
+                );
+        }
 
-    private string describe(){
-        return "You cannot use skills!";
-    }
+        private string describe(){
+            return "You cannot use skills!";
+        }
 
-    public override void OnAdded()
-    {
-        base.OnAdded();
+        public override void OnAdded()
+        {
+            base.OnAdded();
 
-        owner.status.SetSilenced(true);
-    }
+            this.owner.status.SetSilenced(true);
+        }
 
-    public override void OnRemoved()
-    {
-        base.OnRemoved();
+        public override void OnRemoved()
+        {
+            base.OnRemoved();
 
-        owner.status.SetSilenced(false);
+            this.owner.status.SetSilenced(false);
+        }
     }
 }

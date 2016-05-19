@@ -1,13 +1,10 @@
-using BaseClasses;
-using System.Reflection;
-using System.Collections.Generic;
-using System;
-using UnityEngine;
-
-
-
-namespace IntermediateSerializers
+namespace BBG.Serialization
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Reflection;
+
+    using BBG.BaseClasses;
 
     /// Intermediate class for serializing effects
     public static class EffectSerializer

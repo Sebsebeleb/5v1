@@ -1,39 +1,42 @@
 using UnityEngine;
 
-public static class Utils
+namespace BBG
 {
-    private static Actor _player = null;
-    private static Actor Player
+    public static class Utils
     {
-        get
+        private static Actor.Actor _player = null;
+        private static Actor.Actor Player
         {
-            if (_player == null)
+            get
             {
-                _player = GameObject.FindWithTag("Player").GetComponent<Actor>();
+                if (_player == null)
+                {
+                    _player = GameObject.FindWithTag("Player").GetComponent<Actor.Actor>();
+                }
+                return _player;
             }
-            return _player;
         }
-    }
 
-    // These are used to get a reference to map position/player of enemies. The mapping is as following for enemies (0 is player) on the map
-    // _______
-    // |1|2|3|
-    // |4|5|6|
-    //
-    public static int ActorToID(Actor act)
-    {
-        if (act.gameObject.tag == "Player")
+        // These are used to get a reference to map position/player of enemies. The mapping is as following for enemies (0 is player) on the map
+        // _______
+        // |1|2|3|
+        // |4|5|6|
+        //
+        public static int ActorToID(Actor.Actor act)
         {
-            return 0;
+            if (act.gameObject.tag == "Player")
+            {
+                return 0;
+            }
+            return act.y * 3 + act.x + 1;
         }
-        return act.y * 3 + act.x + 1;
-    }
-    public static Actor IDToActor(int i)
-    {
-        if (i == 0)
+        public static Actor.Actor IDToActor(int i)
         {
-            return Player;
+            if (i == 0)
+            {
+                return Player;
+            }
+            return GridManager.TileMap.GetFromIndex(i-1);
         }
-        return GridManager.TileMap.GetFromIndex(i-1);
     }
 }

@@ -1,10 +1,11 @@
 
-using Data.Effects;
-
-namespace Data.Skills
+namespace BBG.Data.Skills.Ice
 {
-    using Map;
     using System.Collections.Generic;
+
+    using BBG.BaseClasses;
+    using BBG.Data.Effects;
+    using BBG.Map;
 
     [System.Serializable]
     public class Blizzard : BaseSkill
@@ -12,12 +13,12 @@ namespace Data.Skills
 
         public Blizzard(int PlayerLevel) : base(PlayerLevel)
         {
-            Category = SkillCategory.Water;
+            this.Category = SkillCategory.Water;
 
-            SkillName = "Blizzard";
-            Tooltip = "Deal {0} damage to all enemies. Then, if at least 4 enemies survive, stun them for {1} turn";
-            BaseCooldown = 12;
-            ManaCost = 20;
+            this.SkillName = "Blizzard";
+            this.Tooltip = "Deal {0} damage to all enemies. Then, if at least 4 enemies survive, stun them for {1} turn";
+            this.BaseCooldown = 12;
+            this.ManaCost = 20;
         }
 
         public override List<GridPosition> GetAffectedTargets(GridPosition target)
@@ -31,7 +32,7 @@ namespace Data.Skills
 
             // Deal damage
             foreach(var enemy in GridManager.TileMap.GetAll()){
-                enemy.damagable.TakeDamage(getDamage());
+                enemy.damagable.TakeDamage(this.getDamage());
             }
 
             // Check if 4+ alive
@@ -52,16 +53,16 @@ namespace Data.Skills
         }
 
         private int getDamage(){
-            return 1 + Rank;
+            return 1 + this.Rank;
         }
 
 
         public override string GetTooltip()
         {
-            string damageProp = TextUtilities.FontColor(Colors.DamageValue, getDamage().ToString());
+            string damageProp = TextUtilities.FontColor(Colors.DamageValue, this.getDamage().ToString());
             string durationProp = TextUtilities.FontColor(Colors.DurationValue, "1");
 
-            return string.Format(Tooltip, damageProp, durationProp);
+            return string.Format(this.Tooltip, damageProp, durationProp);
         }
     }
 

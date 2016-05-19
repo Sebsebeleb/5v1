@@ -1,18 +1,22 @@
-﻿using UnityEngine;
-
-namespace Data.Skills
+﻿namespace BBG.Data.Skills
 {
+    using BBG.Actor;
+    using BBG.BaseClasses;
+    using BBG.Data.Effects;
+
+    using UnityEngine;
+
     [System.Serializable]
     class Block : BaseSkill
     {
         public Block(int PlayerLevel) : base(PlayerLevel)
         {
-            Category = SkillCategory.Warrior;
+            this.Category = SkillCategory.Warrior;
             
-            SkillName = "Block";
-            Tooltip = "Block all damage that would be dealt for {0} turns";
-            BaseCooldown = 18;
-            ManaCost = 15;
+            this.SkillName = "Block";
+            this.Tooltip = "Block all damage that would be dealt for {0} turns";
+            this.BaseCooldown = 18;
+            this.ManaCost = 15;
         }
         public override void UseOnTargetGrid(int x, int y)
         {
@@ -24,14 +28,14 @@ namespace Data.Skills
         }
 
         private int getDuration(){
-            return 1 + Rank;
+            return 1 + this.Rank;
         }
 
 
         public override string GetTooltip(){
-            string durationProp = TextUtilities.FontColor(Colors.DurationValue, getDuration().ToString());
+            string durationProp = TextUtilities.FontColor(Colors.DurationValue, this.getDuration().ToString());
 
-            return string.Format(Tooltip, durationProp);
+            return string.Format(this.Tooltip, durationProp);
         }
     }
 }

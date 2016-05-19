@@ -1,8 +1,9 @@
-﻿namespace Targeting
+﻿namespace BBG.Targeting
 {
-    using Map;
     using System.Collections.Generic;
     using System.Linq;
+
+    using BBG.Map;
 
     public static class Targets
     {

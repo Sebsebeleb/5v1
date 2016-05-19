@@ -1,23 +1,28 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
-using System.Collections;
 
-public class ActionEntryBehaviour : MonoBehaviour {
+namespace BBG
+{
+    using BBG.View;
 
-	public Text DurationText;
-	public Text TitleText;
-	public Image Icon;
+    using UnityEngine.UI;
 
-	// Use this for initialization
-	void Start () {
+    public class ActionEntryBehaviour : MonoBehaviour {
 
-	}
+        public Text DurationText;
+        public Text TitleText;
+        public Image Icon;
 
-	// Update is called once per frame
-	void Update () {
+        // Use this for initialization
+        void Start () {
 
-	}
-	public void ShowDescription(){
-		GameObject.FindWithTag("InspectorPanel").GetComponent<InspectorPanelBehaviour>().DisplayDescriptionForEntry(transform);
-	}
+        }
+
+        // Update is called once per frame
+        void Update () {
+
+        }
+        public void ShowDescription(){
+            GameObject.FindWithTag("InspectorPanel").GetComponent<InspectorPanelBehaviour>().DisplayDescriptionForEntry(this.transform);
+        }
+    }
 }

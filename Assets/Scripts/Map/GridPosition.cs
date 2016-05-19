@@ -1,6 +1,7 @@
-﻿namespace Map
+﻿namespace BBG.Map
 {
     using System;
+
     public class GridPosition : IEquatable<GridPosition>
     {
         public int x;

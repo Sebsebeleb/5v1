@@ -1,5 +1,6 @@
-﻿namespace Assets.Scripts.View.CommonUI
+﻿namespace BBG.View.CommonUI
 {
+
     using UnityEngine;
     using UnityEngine.UI.Extensions;
 
@@ -19,21 +20,21 @@
         {
             if (this.target != null)
             {
-                Move(this.target, this.offset);
+                this.Move(this.target, this.offset);
             }
         }
 
         public void Move(RectTransform to, Vector2 offset)
         {
-                if (offset == null)
-                {
-                    offset = Vector2.zero;
-                }
+            if (offset == null)
+            {
+                offset = Vector2.zero;
+            }
 
             RectTransform trans = this.GetComponent<RectTransform>();
-            
+
             trans.anchoredPosition = to.switchToRectTransform(trans) + offset;
         }
-     
+
     }
 }

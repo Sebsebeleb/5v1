@@ -1,19 +1,20 @@
-using Data.Effects;
-
-namespace Data.Skills
+namespace BBG.Data.Skills.Fire
 {
+    using BBG.BaseClasses;
+    using BBG.Data.Effects.ThemeDebuffs;
+
     [System.Serializable]
     public class Inferno : BaseSkill
     {
 
         public Inferno(int PlayerLevel) : base(PlayerLevel)
         {
-            Category = SkillCategory.Fire;
+            this.Category = SkillCategory.Fire;
 
-            SkillName = "Inferno";
-            Tooltip = "Deal {0} damage to all enemies and apply burning for {1} turns";
-            BaseCooldown = 12;
-            ManaCost = 25;
+            this.SkillName = "Inferno";
+            this.Tooltip = "Deal {0} damage to all enemies and apply burning for {1} turns";
+            this.BaseCooldown = 12;
+            this.ManaCost = 25;
         }
 
         public override void UseOnTargetGrid(int x, int y)
@@ -22,20 +23,20 @@ namespace Data.Skills
 
             // Deal damage
             foreach(var enemy in GridManager.TileMap.GetAll()){
-                enemy.damagable.TakeDamage(getDamage());
+                enemy.damagable.TakeDamage(this.getDamage());
             }
 
             // Check if 4+ alive
             var enemies = GridManager.TileMap.GetAll();
             foreach(var enemy in enemies){
                 if (enemy.tag != "Corpse" && enemy.damagable.CurrentHealth > 0){
-                    enemy.effects.AddEffect(new Burning(getDuration()));
+                    enemy.effects.AddEffect(new Burning(this.getDuration()));
                 }
             }
         }
 
         private int getDamage(){
-            return 2 + Rank;
+            return 2 + this.Rank;
         }
 
         private int getDuration(){
@@ -45,10 +46,10 @@ namespace Data.Skills
 
         public override string GetTooltip()
         {
-            string damageProp = TextUtilities.FontColor(Colors.DamageValue, getDamage());
-            string durationProp = TextUtilities.FontColor(Colors.DurationValue, getDuration());
+            string damageProp = TextUtilities.FontColor(Colors.DamageValue, this.getDamage());
+            string durationProp = TextUtilities.FontColor(Colors.DurationValue, this.getDuration());
 
-            return string.Format(Tooltip, damageProp, durationProp);
+            return string.Format(this.Tooltip, damageProp, durationProp);
         }
     }
 

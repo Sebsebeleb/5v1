@@ -1,191 +1,200 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+
 using UnityEngine;
 
-public class SaveLoad : MonoBehaviour {
+namespace BBG
+{
+    using BBG.Actor;
+    using BBG.DataHolders;
+    using BBG.ResourceManagement;
+    using BBG.Serialization;
 
-	// A class for saving all the game data
-    [System.Serializable]
-	public struct SaveState{
-        public int BossCounter;
+    public class SaveLoad : MonoBehaviour {
 
-        public ActorState[] Enemies;
+        // A class for saving all the game data
+        [System.Serializable]
+        public struct SaveState{
+            public int BossCounter;
 
-        public ActorState Player;
-        public int PlayerLevel;
-        public int PlayerExp;
-	}
+            public ActorState[] Enemies;
 
-    [System.Serializable]
-    // All save data related to a single enemy
-    public struct ActorState{
-        public int EnemyTypeID;
-        public int GridX;
-        public int GridY;
-        public AttackData Attack;
-        public HealthData Health;
-        public CountdownData Countdown;
-        public List<Dictionary<string, object>> EffectHolderEffects;
-    }
+            public ActorState Player;
+            public int PlayerLevel;
+            public int PlayerExp;
+        }
 
-    private GameObject managerObject;
-    private GameObject Player;
+        [System.Serializable]
+        // All save data related to a single enemy
+        public struct ActorState{
+            public int EnemyTypeID;
+            public int GridX;
+            public int GridY;
+            public AttackData Attack;
+            public HealthData Health;
+            public CountdownData Countdown;
+            public List<Dictionary<string, object>> EffectHolderEffects;
+        }
 
-    private SaveState data; // The one currently being saved to/loaded from
+        private GameObject managerObject;
+        private GameObject Player;
 
-    void Awake(){
-         managerObject = GameObject.FindWithTag("GM");
-         Player = GameObject.FindWithTag("Player");
-    }
+        private SaveState data; // The one currently being saved to/loaded from
+
+        void Awake(){
+            this.managerObject = GameObject.FindWithTag("GM");
+            this.Player = GameObject.FindWithTag("Player");
+        }
 
 
-    ///
-    /// Entry points to save/load functionality.
-    ///
+        ///
+        /// Entry points to save/load functionality.
+        ///
 
-    // Saves the game under /savedGames.sav on persistentDataPath under a binary format
-    public void Save() {
-        MakeSaveGameData();
-        SaveToFile();
-    }
+        // Saves the game under /savedGames.sav on persistentDataPath under a binary format
+        public void Save() {
+            this.MakeSaveGameData();
+            this.SaveToFile();
+        }
 
-    // Loads the game from /savedGames.sav on persistantDataPath from a binary format
-    public void Load() {
-        if(File.Exists(Application.persistentDataPath + "/savedGames.sav")) {
-            // First open file and get the binary data;
+        // Loads the game from /savedGames.sav on persistantDataPath from a binary format
+        public void Load() {
+            if(File.Exists(Application.persistentDataPath + "/savedGames.sav")) {
+                // First open file and get the binary data;
+                BinaryFormatter bf = new BinaryFormatter();
+                FileStream file = File.Open(Application.persistentDataPath + "/savedGames.sav", FileMode.Open);
+                this.data = (SaveState)bf.Deserialize(file);
+                file.Close();
+
+                // Now use this data to initalize the new game state
+                this.InitializeSave();
+            }
+        }
+
+        // Saves the currently constructed data to a file in persistent data path
+        private void SaveToFile(){
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(Application.persistentDataPath + "/savedGames.sav", FileMode.Open);
-            data = (SaveState)bf.Deserialize(file);
+
+            FileStream file = File.Create (Application.persistentDataPath + "/savedGames.sav");
+            bf.Serialize(file, this.data);
             file.Close();
-
-            // Now use this data to initalize the new game state
-            InitializeSave();
         }
-    }
 
-    // Saves the currently constructed data to a file in persistent data path
-    private void SaveToFile(){
-        BinaryFormatter bf = new BinaryFormatter();
+        /// Constructs the data to be saved
+        private SaveState MakeSaveGameData(){
+            this.data = new SaveState();
 
-        FileStream file = File.Create (Application.persistentDataPath + "/savedGames.sav");
-        bf.Serialize(file, data);
-        file.Close();
-    }
+            this.SavePlayer();
+            this.SaveEnemies();
 
-    /// Constructs the data to be saved
-    private SaveState MakeSaveGameData(){
-        data = new SaveState();
+            this.data.BossCounter = TurnManager.BossCounter;
 
-        SavePlayer();
-        SaveEnemies();
-
-        data.BossCounter = TurnManager.BossCounter;
-
-        return data;
-    }
-
-    // Initializes all the data loaded from the save
-    private void InitializeSave(){
-
-        LoadPlayer();
-        LoadEnemies();
-
-        TurnManager.BossCounter = data.BossCounter;
-
-        Event.EventManager.Notify(Event.Events.GameDeserialized, null);
-    }
-
-    ///
-    /// Various functions for saving/loading different parts of the game
-    ///
-
-    private void SavePlayer(){
-        Actor act = Player.GetComponent<Actor>();
-
-        data.Player.Attack = act.attack._GetRawData();
-        data.Player.Health = act.damagable._GetRawData();
-        data.Player.EffectHolderEffects = IntermediateSerializers.EffectSerializer.Serialize(act.effects._GetRawData());
-
-        PlayerExperience pe = act.GetComponent<PlayerExperience>();
-
-        data.PlayerExp = pe.GetCurrentXP();
-        data.PlayerLevel = pe.level;
-
-    }
-    private void LoadPlayer(){
-        Actor act = Player.GetComponent<Actor>();
-
-        act.attack._SetRawData(data.Player.Attack);
-        act.damagable._SetRawData(data.Player.Health);
-        act.effects._SetRawData(IntermediateSerializers.EffectSerializer.Deserialize(data.Player.EffectHolderEffects));
-
-        PlayerExperience pe = act.GetComponent<PlayerExperience>();
-
-        pe._SetRawExp(data.PlayerExp);
-        pe.level = data.PlayerLevel;
-    }
-
-    private void SaveEnemies(){
-        data.Enemies = new ActorState[6];
-
-        int i = 0;
-        foreach(Actor enemy in GridManager.TileMap.GetAll()){
-            ActorState actData = SaveEnemy(enemy.gameObject);
-
-            data.Enemies[i] = actData;
-
-            i++;
+            return this.data;
         }
-    }
 
-    // Convert an enemy to an ActorState for serialization.
-    private ActorState SaveEnemy(GameObject enemy){
-        ActorState actData = new ActorState();
+        // Initializes all the data loaded from the save
+        private void InitializeSave(){
 
-        Actor act = enemy.GetComponent<Actor>();
+            this.LoadPlayer();
+            this.LoadEnemies();
 
-        actData.EnemyTypeID = act.enemyTypeID;
+            TurnManager.BossCounter = this.data.BossCounter;
 
-        actData.GridX = act.x;
-        actData.GridY = act.y;
-
-        actData.Attack = act.attack._GetRawData();
-        actData.Health = act.damagable._GetRawData();
-        actData.Countdown = act.countdown._GetRawData();
-        actData.EffectHolderEffects =IntermediateSerializers.EffectSerializer.Serialize(act.effects._GetRawData());
-
-        return actData;
-    }
-
-    private void LoadEnemies(){
-        foreach(ActorState enemyData in data.Enemies){
-            LoadEnemy(enemyData);
+            EventManager.Notify(Events.GameDeserialized, null);
         }
-    }
 
-    // Initalizes enemies using data loaded as ActorState from a saved game
-    private void LoadEnemy(ActorState enemyData){
-        int x = enemyData.GridX;
-        int y = enemyData.GridY;
+        ///
+        /// Various functions for saving/loading different parts of the game
+        ///
 
-        // First we destroy the old one
-        Actor oldActor = GridManager.TileMap.GetAt(x, y);
-        EnemyManager.KillEnemy(oldActor);
+        private void SavePlayer(){
+            Actor.Actor act = this.Player.GetComponent<Actor.Actor>();
 
-        // Now we create a new one from the template
-        GameObject enemyPrefab = GameResources.GetEnemyByID(enemyData.EnemyTypeID);
-        EnemyManager.SpawnEnemy(enemyPrefab, x, y, false);
+            this.data.Player.Attack = act.attack._GetRawData();
+            this.data.Player.Health = act.damagable._GetRawData();
+            this.data.Player.EffectHolderEffects = EffectSerializer.Serialize(act.effects._GetRawData());
 
-        Actor enemyActor = GridManager.TileMap.GetAt(x, y);
+            PlayerExperience pe = act.GetComponent<PlayerExperience>();
 
-        // Then populate it's data
-        enemyActor.enemyTypeID = enemyData.EnemyTypeID;
+            this.data.PlayerExp = pe.GetCurrentXP();
+            this.data.PlayerLevel = pe.level;
 
-        enemyActor.damagable._SetRawData(enemyData.Health);
-        enemyActor.attack._SetRawData(enemyData.Attack);
-        enemyActor.countdown._SetRawData(enemyData.Countdown);
+        }
+        private void LoadPlayer(){
+            Actor.Actor act = this.Player.GetComponent<Actor.Actor>();
 
-        enemyActor.effects._SetRawData(IntermediateSerializers.EffectSerializer.Deserialize(enemyData.EffectHolderEffects));
+            act.attack._SetRawData(this.data.Player.Attack);
+            act.damagable._SetRawData(this.data.Player.Health);
+            act.effects._SetRawData(EffectSerializer.Deserialize(this.data.Player.EffectHolderEffects));
+
+            PlayerExperience pe = act.GetComponent<PlayerExperience>();
+
+            pe._SetRawExp(this.data.PlayerExp);
+            pe.level = this.data.PlayerLevel;
+        }
+
+        private void SaveEnemies(){
+            this.data.Enemies = new ActorState[6];
+
+            int i = 0;
+            foreach(Actor.Actor enemy in GridManager.TileMap.GetAll()){
+                ActorState actData = this.SaveEnemy(enemy.gameObject);
+
+                this.data.Enemies[i] = actData;
+
+                i++;
+            }
+        }
+
+        // Convert an enemy to an ActorState for serialization.
+        private ActorState SaveEnemy(GameObject enemy){
+            ActorState actData = new ActorState();
+
+            Actor.Actor act = enemy.GetComponent<Actor.Actor>();
+
+            actData.EnemyTypeID = act.enemyTypeID;
+
+            actData.GridX = act.x;
+            actData.GridY = act.y;
+
+            actData.Attack = act.attack._GetRawData();
+            actData.Health = act.damagable._GetRawData();
+            actData.Countdown = act.countdown._GetRawData();
+            actData.EffectHolderEffects =EffectSerializer.Serialize(act.effects._GetRawData());
+
+            return actData;
+        }
+
+        private void LoadEnemies(){
+            foreach(ActorState enemyData in this.data.Enemies){
+                this.LoadEnemy(enemyData);
+            }
+        }
+
+        // Initalizes enemies using data loaded as ActorState from a saved game
+        private void LoadEnemy(ActorState enemyData){
+            int x = enemyData.GridX;
+            int y = enemyData.GridY;
+
+            // First we destroy the old one
+            Actor.Actor oldActor = GridManager.TileMap.GetAt(x, y);
+            EnemyManager.KillEnemy(oldActor);
+
+            // Now we create a new one from the template
+            GameObject enemyPrefab = GameResources.GetEnemyByID(enemyData.EnemyTypeID);
+            EnemyManager.SpawnEnemy(enemyPrefab, x, y, false);
+
+            Actor.Actor enemyActor = GridManager.TileMap.GetAt(x, y);
+
+            // Then populate it's data
+            enemyActor.enemyTypeID = enemyData.EnemyTypeID;
+
+            enemyActor.damagable._SetRawData(enemyData.Health);
+            enemyActor.attack._SetRawData(enemyData.Attack);
+            enemyActor.countdown._SetRawData(enemyData.Countdown);
+
+            enemyActor.effects._SetRawData(EffectSerializer.Deserialize(enemyData.EffectHolderEffects));
+        }
     }
 }

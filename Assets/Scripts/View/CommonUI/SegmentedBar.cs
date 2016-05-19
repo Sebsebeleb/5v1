@@ -1,88 +1,92 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
-public class SegmentedBar : MonoBehaviour, IMaterialModifier
+namespace BBG.View.CommonUI
 {
+    using UnityEngine.UI;
 
-    private float fill = 1f;
-
-
-    private float segmentSpacing = 1;
-
-    private int numSegments = 1;
-
-    private Material mat;
-
-    public float Fill
+    public class SegmentedBar : MonoBehaviour, IMaterialModifier
     {
-        set
+
+        private float fill = 1f;
+
+
+        private float segmentSpacing = 1;
+
+        private int numSegments = 1;
+
+        private Material mat;
+
+        public float Fill
         {
-            this.fill = value;
-            if (this.mat == null)
+            set
             {
-                return;
+                this.fill = value;
+                if (this.mat == null)
+                {
+                    return;
+                }
+                this.mat.SetFloat("_Fill", value);
             }
-            this.mat.SetFloat("_Fill", value);
-        }
 
-        get
-        {
-            return fill;
-        }
-    }
-
-    public int NumSegments
-    {
-        set
-        {
-            this.numSegments = value;
-            if (this.mat == null)
+            get
             {
-                return;
+                return this.fill;
             }
-            this.mat.SetFloat("_NumSegments", value);
         }
 
-        get
+        public int NumSegments
         {
-            return this.numSegments;
-        }
-    }
-
-    public float SegmentSpacing
-    {
-        set
-        {
-            this.segmentSpacing = value;
-            if (this.mat == null)
+            set
             {
-                return;
+                this.numSegments = value;
+                if (this.mat == null)
+                {
+                    return;
+                }
+                this.mat.SetFloat("_NumSegments", value);
             }
-            this.mat.SetFloat("_SegmentSpacing", value);
+
+            get
+            {
+                return this.numSegments;
+            }
         }
 
-        get
+        public float SegmentSpacing
         {
-            return this.segmentSpacing;
-        }
-    }
+            set
+            {
+                this.segmentSpacing = value;
+                if (this.mat == null)
+                {
+                    return;
+                }
+                this.mat.SetFloat("_SegmentSpacing", value);
+            }
 
-    public void Awake()
-    {
+            get
+            {
+                return this.segmentSpacing;
+            }
+        }
+
+        public void Awake()
+        {
         
 
-    }
+        }
 
 
-    public Material GetModifiedMaterial(Material baseMaterial)
-    {
-        this.mat = new Material(baseMaterial);
+        public Material GetModifiedMaterial(Material baseMaterial)
+        {
+            this.mat = new Material(baseMaterial);
 
 
-        mat.SetFloat("_Fill", this.fill);
-        mat.SetFloat("_NumSegments", this.numSegments);
-        mat.SetFloat("_SegmentSpacing", this.segmentSpacing);
+            this.mat.SetFloat("_Fill", this.fill);
+            this.mat.SetFloat("_NumSegments", this.numSegments);
+            this.mat.SetFloat("_SegmentSpacing", this.segmentSpacing);
 
-        return this.mat;
+            return this.mat;
+        }
     }
 }

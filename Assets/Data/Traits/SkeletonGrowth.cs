@@ -1,11 +1,11 @@
-using BaseClasses;
-using Event;
-using System.Runtime.Serialization;
-using System;
-using UnityEngine;
-
-namespace Data.Effects
+namespace BBG.Data.Traits
 {
+    using System.Runtime.Serialization;
+
+    using BBG.Actor;
+    using BBG.BaseClasses;
+    using BBG.Data.Effects.Enemies;
+
     [System.Serializable]
     public class SkeletonGrowth : Effect
     {
@@ -13,12 +13,12 @@ namespace Data.Effects
         private int _currentBonus = 0;
 
         public SkeletonGrowth() : base(){
-            Description = new EffectDescription(
+            this.Description = new EffectDescription(
                 "Gathering Energies",
-                describe
+                this.describe
             );
 
-            IsTrait = true;
+            this.IsTrait = true;
         }
 
         private string describe(){
@@ -32,7 +32,7 @@ namespace Data.Effects
             base.Created();
 
 
-            OnActorActed callback = IncreaseStrength;
+            OnActorActed callback = this.IncreaseStrength;
             EventManager.Register(Events.ActorActed, callback);
         }
 
@@ -44,22 +44,22 @@ namespace Data.Effects
 
         private void IncreaseStrength(Actor who)
         {
-			if (who != owner){
+			if (who != this.owner){
                 return;
             }
 
-            owner.effects.AddEffect(new Boosted(1));
+            this.owner.effects.AddEffect(new Boosted(1));
 
         }
 
         // Serialization and deserialization
         public override void GetObjectData(SerializationInfo info, StreamingContext context){
             base.GetObjectData(info, context);
-            info.AddValue("_currentBonus", _currentBonus);
+            info.AddValue("_currentBonus", this._currentBonus);
         }
 
         public SkeletonGrowth(SerializationInfo info, StreamingContext context) : base(info, context){
-            _currentBonus = info.GetInt32("_currentBonus");
+            this._currentBonus = info.GetInt32("_currentBonus");
         }
 
     }

@@ -1,33 +1,36 @@
-﻿using BaseClasses;
-
-[System.Serializable]
-internal class Blocking : Effect
+﻿namespace BBG.Data.Effects
 {
-    public Blocking(int duration)
-        : base(duration)
+    using BBG.BaseClasses;
+
+    [System.Serializable]
+    internal class Blocking : Effect
     {
-        IsBuff = true;
-        Description = new EffectDescription(
-            "Blocking",
-            describe
-        );
-    }
+        public Blocking(int duration)
+            : base(duration)
+        {
+            this.IsBuff = true;
+            this.Description = new EffectDescription(
+                "Blocking",
+                this.describe
+                );
+        }
 
-    private string describe(){
-        return "You are invulnerable!";
-    }
+        private string describe(){
+            return "You are invulnerable!";
+        }
 
-    public override void OnAdded()
-    {
-        base.OnAdded();
+        public override void OnAdded()
+        {
+            base.OnAdded();
 
-        owner.damagable.IsInvulnerable += 1;
-    }
+            this.owner.damagable.IsInvulnerable += 1;
+        }
 
-    public override void OnRemoved()
-    {
-        base.OnRemoved();
+        public override void OnRemoved()
+        {
+            base.OnRemoved();
 
-        owner.damagable.IsInvulnerable -= 1;
+            this.owner.damagable.IsInvulnerable -= 1;
+        }
     }
 }

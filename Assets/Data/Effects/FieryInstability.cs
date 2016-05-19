@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using BaseClasses;
-using Data.Effects;
-using Event;
-
-namespace Data.Effects
+﻿namespace BBG.Data.Effects
 {
+    using BBG.Actor;
+    using BBG.BaseClasses;
+    using BBG.Data.Effects.ThemeDebuffs;
+    using BBG.View;
+
     class FieryInstability : Effect
     {
         private readonly int _damage;
@@ -16,17 +12,17 @@ namespace Data.Effects
         public FieryInstability(int duration, int explodeDamage) : base(duration)
         {
 
-            Description = new EffectDescription("Fiery Instability",
-                describe
+            this.Description = new EffectDescription("Fiery Instability",
+                this.describe
              );
 
-            _damage = explodeDamage;
+            this._damage = explodeDamage;
 
         }
 
         private string describe()
         {
-            string damageProp = TextUtilities.FontColor(Colors.DamageValue, _damage);
+            string damageProp = TextUtilities.FontColor(Colors.DamageValue, this._damage);
 
             return string.Format("When this creature dies, it will deal {0} damage to all adjacent enemies and apply burning for 3 turns to them", damageProp);
         }
@@ -35,7 +31,7 @@ namespace Data.Effects
         {
             base.Created();
 
-            var callback = (PreActorDied)Explode;
+            var callback = (PreActorDied)this.Explode;
 
             EventManager.Register(Events.ActorPreDied, callback);
         }
@@ -44,16 +40,16 @@ namespace Data.Effects
         {
             base.Destroyed();
 
-            var callback = (PreActorDied)Explode;
+            var callback = (PreActorDied)this.Explode;
 
             EventManager.UnRegister(Events.ActorPreDied, callback);
         }
 
         private void Explode(Actor who)
         {
-            foreach (Actor enemy in GridManager.TileMap.GetAdjacent(owner.x, owner.y))
+            foreach (Actor enemy in GridManager.TileMap.GetAdjacent(this.owner.x, this.owner.y))
             {
-                enemy.damagable.TakeDamage(_damage);
+                enemy.damagable.TakeDamage(this._damage);
                 enemy.effects.AddEffect(new Burning(3));
             }
         }

@@ -1,38 +1,43 @@
 ﻿using UnityEngine;
 
-public class StartingEnemySpawner : MonoBehaviour
+namespace BBG
 {
+    using BBG.Data;
 
-    public GameObject[] startingEnemies = new GameObject[6];
-
-    // The "enemy" that is spawned when an enemy dies. Pretty much only has countdown
-    public GameObject CorpseEnemy;
-    public EnemySpawnList InitialSpawnList;
-
-    // Use this for initialization
-    void Start()
+    public class StartingEnemySpawner : MonoBehaviour
     {
-        // We said the global corpseenemy like this
-        EnemyManager.CorpseEnemy = CorpseEnemy;
 
-        EnemyManager.SpawnList = InitialSpawnList;
+        public GameObject[] startingEnemies = new GameObject[6];
 
-        for (int i = 0; i <= 5; i++)
+        // The "enemy" that is spawned when an enemy dies. Pretty much only has countdown
+        public GameObject CorpseEnemy;
+        public EnemySpawnList InitialSpawnList;
+
+        // Use this for initialization
+        void Start()
         {
-            if (startingEnemies[i] == null)
-            {
-                continue;
-            }
-            int x = i % 3;
-            int y = i < 3 ? 0 : 1;
+            // We said the global corpseenemy like this
+            EnemyManager.CorpseEnemy = this.CorpseEnemy;
 
-            EnemyManager.SpawnEnemy(startingEnemies[i], x, y);
+            EnemyManager.SpawnList = this.InitialSpawnList;
+
+            for (int i = 0; i <= 5; i++)
+            {
+                if (this.startingEnemies[i] == null)
+                {
+                    continue;
+                }
+                int x = i % 3;
+                int y = i < 3 ? 0 : 1;
+
+                EnemyManager.SpawnEnemy(this.startingEnemies[i], x, y);
+
+            }
+        }
+
+        void Update()
+        {
 
         }
-    }
-
-    void Update()
-    {
-
     }
 }

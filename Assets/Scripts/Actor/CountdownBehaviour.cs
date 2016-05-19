@@ -1,85 +1,88 @@
-﻿using System;
+﻿using UnityEngine;
 
-using UnityEngine;
-
-public class CountdownBehaviour : MonoBehaviour
+namespace BBG.Actor
 {
-    //For the inspector
-    #region Inspector Values
-    [SerializeField]
-    private int StartMaxCountdown;
+    using BBG.DataHolders;
 
-    #endregion
-
-    #region Public properties
-
-    public int MaxCountdown{
-        get {return data.MaxCountdown;}
-        set {data.MaxCountdown = value;}
-    }
-    public int CurrentCountdown{
-        get {return data.CurrentCountdown;}
-        set {data.CurrentCountdown = value;}
-    }
-
-    #endregion
-
-    // Our actual data
-
-    private CountdownData data;
-
-    // References
-    private Actor actor;
-    private AI _brain;
-
-    void Awake()
+    public class CountdownBehaviour : MonoBehaviour
     {
-        this.actor = GetComponent<Actor>();
-        _brain = GetComponent<AI>();
+        //For the inspector
+        #region Inspector Values
+        [SerializeField]
+        private int StartMaxCountdown;
 
-    }
+        #endregion
 
-    void OnSpawn(){
-        data.MaxCountdown = StartMaxCountdown;
-        data.CurrentCountdown = data.MaxCountdown;
-    }
+        #region Public properties
 
-    public void Countdown()
-    {
-        BroadcastMessage("OnTurn");
-
-        // If we are stunned, we do not cooldown
-        if (this.actor.status.Stunned){
-            return;
+        public int MaxCountdown{
+            get {return this.data.MaxCountdown;}
+            set {this.data.MaxCountdown = value;}
         }
-        // If we are a corpse, and the boss wave has started, do not countdown
-        if (TurnManager.BossCounter <= 0 && gameObject.tag == "Corpse"){
-            return;
+        public int CurrentCountdown{
+            get {return this.data.CurrentCountdown;}
+            set {this.data.CurrentCountdown = value;}
         }
 
-        Event.EventManager.Notify(Event.Events.ActorCountedDown, this.actor);
+        #endregion
 
+        // Our actual data
 
-        CurrentCountdown--;
-        if (CurrentCountdown <= 0)
+        private CountdownData data;
+
+        // References
+        private Actor actor;
+        private AI _brain;
+
+        void Awake()
         {
-            CurrentCountdown = MaxCountdown;
-            DoAction();
-            BroadcastMessage("OnAct", SendMessageOptions.DontRequireReceiver);
-            Event.EventManager.Notify(Event.Events.ActorActed, this.actor);
+            this.actor = this.GetComponent<Actor>();
+            this._brain = this.GetComponent<AI>();
+
         }
-    }
 
-    private void DoAction()
-    {
-        StartCoroutine(_brain.Think());
-    }
+        void OnSpawn(){
+            this.data.MaxCountdown = this.StartMaxCountdown;
+            this.data.CurrentCountdown = this.data.MaxCountdown;
+        }
 
-    public CountdownData _GetRawData(){
-        return data;
-    }
+        public void Countdown()
+        {
+            this.BroadcastMessage("OnTurn");
 
-    public void _SetRawData(CountdownData _data){
-        data = _data;
+            // If we are stunned, we do not cooldown
+            if (this.actor.status.Stunned){
+                return;
+            }
+            // If we are a corpse, and the boss wave has started, do not countdown
+            if (TurnManager.BossCounter <= 0 && this.gameObject.tag == "Corpse"){
+                return;
+            }
+
+            EventManager.Notify(Events.ActorCountedDown, this.actor);
+
+
+            this.CurrentCountdown--;
+            if (this.CurrentCountdown <= 0)
+            {
+                this.CurrentCountdown = this.MaxCountdown;
+                this.DoAction();
+                this.BroadcastMessage("OnAct", SendMessageOptions.DontRequireReceiver);
+                EventManager.Notify(Events.ActorActed, this.actor);
+            }
+        }
+
+        private void DoAction()
+        {
+            this.StartCoroutine(this._brain.Think());
+        }
+
+        public CountdownData _GetRawData(){
+            return this.data;
+        }
+
+        public void _SetRawData(CountdownData _data){
+            this.data = _data;
+        }
     }
 }

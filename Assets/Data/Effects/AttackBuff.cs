@@ -1,9 +1,10 @@
 ﻿
 // A simple generic attack buff TODO: Remame into priestly buff due to aniamtins/tooltips
-using BaseClasses;
 
-namespace Data.Effects
+namespace BBG.Data.Effects
 {
+    using BBG.BaseClasses;
+    using BBG.View;
 
     [System.Serializable]
     public class AttackBuff : Effect
@@ -16,19 +17,19 @@ namespace Data.Effects
 
         // An empty constructor has to be provided for serialization
         public AttackBuff(){
-            IsBuff = true;
-            bonus = 0;
+            this.IsBuff = true;
+            this.bonus = 0;
 
-            Description = new EffectDescription("Attack buff", () => "Attack increased by " + bonus);
+            this.Description = new EffectDescription("Attack buff", () => "Attack increased by " + this.bonus);
 
         }
 
         public AttackBuff(int attackBonus) : base()
         {
-            IsBuff = true;  
-            bonus = attackBonus;
+            this.IsBuff = true;  
+            this.bonus = attackBonus;
 
-            Description = new EffectDescription("Attack buff", () => "Attack increased by " + bonus);
+            this.Description = new EffectDescription("Attack buff", () => "Attack increased by " + this.bonus);
         }
 
 
@@ -37,14 +38,14 @@ namespace Data.Effects
         {
             base.OnAdded();
 
-            owner.attack.BonusAttack += bonus;
+            this.owner.attack.BonusAttack += this.bonus;
         }
 
         public override void OnRemoved()
         {
             base.OnRemoved();
 
-            owner.attack.BonusAttack -= bonus;
+            this.owner.attack.BonusAttack -= this.bonus;
         }
 
         public override bool ShouldAnimate()

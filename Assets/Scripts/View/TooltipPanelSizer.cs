@@ -1,32 +1,35 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
-using System.Collections;
 
 // Simple script that updates the layout element's preferred size to a percentage of the screen width
-public class TooltipPanelSizer : MonoBehaviour {
-	
-	public float ScreenFactor;
-	
-	private int _oldWidth;
+namespace BBG.View
+{
+    using UnityEngine.UI;
 
-	private LayoutElement element;
+    public class TooltipPanelSizer : MonoBehaviour {
 	
-	void Awake(){
-		element = GetComponent<LayoutElement>();		
-	}
+        public float ScreenFactor;
+	
+        private int _oldWidth;
 
-	void Start () {
-		UpdateWidth();
-	}
+        private LayoutElement element;
 	
-	void Update () {
-		if (Screen.width != _oldWidth){
-			UpdateWidth();
-		}
-	}
+        void Awake(){
+            this.element = this.GetComponent<LayoutElement>();		
+        }
+
+        void Start () {
+            this.UpdateWidth();
+        }
 	
-	private void UpdateWidth(){
-		element.preferredWidth = Screen.width * ScreenFactor - 5;
-		_oldWidth = Screen.width;
-	}
+        void Update () {
+            if (Screen.width != this._oldWidth){
+                this.UpdateWidth();
+            }
+        }
+	
+        private void UpdateWidth(){
+            this.element.preferredWidth = Screen.width * this.ScreenFactor - 5;
+            this._oldWidth = Screen.width;
+        }
+    }
 }

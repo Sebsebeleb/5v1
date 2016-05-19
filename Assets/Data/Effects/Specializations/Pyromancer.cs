@@ -1,8 +1,8 @@
-﻿namespace Data.Effects
+﻿namespace BBG.Data.Effects.Specializations
 {
-    using BaseClasses;
-
-    using Event;
+    using BBG.Actor;
+    using BBG.BaseClasses;
+    using BBG.Data.Effects.ThemeDebuffs;
 
     public class Pyromancer : Effect
     {

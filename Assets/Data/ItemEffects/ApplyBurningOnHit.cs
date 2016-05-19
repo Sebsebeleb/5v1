@@ -1,8 +1,8 @@
-﻿namespace Assets.Data.ItemEffects
+﻿namespace BBG.Data.ItemEffects
 {
-    using Event;
-
-    using global::Data.Effects;
+    using BBG.Actor;
+    using BBG.Data.Effects.ThemeDebuffs;
+    using BBG.Items;
 
     public class ApplyBurningOnHit : ItemEffect
     {

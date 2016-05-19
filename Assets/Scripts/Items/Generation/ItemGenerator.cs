@@ -1,11 +1,11 @@
-﻿using System.Linq;
-
-namespace Generation
+﻿namespace BBG.Items.Generation
 {
-    using Assets.Scripts.Items;
     using System;
+    using System.Linq;
     using System.Xml;
+
     using UnityEngine;
+
     using Random = System.Random;
 
     public enum GeneratedItemType

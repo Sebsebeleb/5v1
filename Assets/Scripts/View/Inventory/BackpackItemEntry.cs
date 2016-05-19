@@ -1,4 +1,4 @@
-﻿namespace Assets.Scripts.View.Inventory
+﻿namespace BBG.View.Inventory
 {
     public class BackpackItemEntry : InventoryItemEntry
     {

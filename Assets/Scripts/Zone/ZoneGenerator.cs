@@ -1,11 +1,10 @@
-using System;
-using UnityEngine;
-using System.Collections.Generic;
-using Random = UnityEngine.Random;
-using System.Linq;
-
-namespace Zone
+namespace BBG.Zone
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using Random = UnityEngine.Random;
 
     enum ZoneTypes
     {

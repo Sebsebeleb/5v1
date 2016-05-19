@@ -1,19 +1,18 @@
-using UnityEngine;
-
-using BaseClasses;
-
-namespace Data.Effects
+namespace BBG.Data.Effects.ThemeDebuffs
 {
+    using BBG.BaseClasses;
+    using BBG.View;
+
     // Actual effect is done in stun
     public class Wet : Effect
     {
 
         public Wet(int duration) : base(duration)
         {
-            IsDebuff = true;
-            IsThemeDebuff = true;
+            this.IsDebuff = true;
+            this.IsThemeDebuff = true;
 
-            Description = new EffectDescription("Wet", () =>
+            this.Description = new EffectDescription("Wet", () =>
                 "The next time this enemy is stunned, it will be stunned an additional turn and consume wet"
              );
         }

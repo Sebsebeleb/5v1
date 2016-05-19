@@ -1,18 +1,17 @@
-using UnityEngine;
-
-using BaseClasses;
-
-namespace Data.Effects
+namespace BBG.Data.Effects.ThemeDebuffs
 {
+    using BBG.BaseClasses;
+    using BBG.View;
+
     public class Burning : Effect
     {
 
         public Burning(int duration) : base(duration)
         {
-            IsDebuff = true;
-            IsThemeDebuff = true;
+            this.IsDebuff = true;
+            this.IsThemeDebuff = true;
 
-            Description = new EffectDescription("Burning", () =>
+            this.Description = new EffectDescription("Burning", () =>
             string.Format(
                 "This enemy is burning, it takes {0} damage every turn",
                 TextUtilities.FontColor(Colors.DamageValue, "1")
@@ -21,12 +20,12 @@ namespace Data.Effects
 
 
         public override void OnTurn(){
-            Burn();
+            this.Burn();
         }
 
         private void Burn()
         {
-            owner.damagable.TakeDamage(1);
+            this.owner.damagable.TakeDamage(1);
         }
 
         public override bool ShouldAnimate()

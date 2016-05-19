@@ -1,8 +1,13 @@
-﻿namespace Scripts.View
+﻿namespace BBG.View
 {
-    using Map;
     using System.Collections.Generic;
     using System.Linq;
+
+    using BBG.Actor;
+    using BBG.BaseClasses;
+    using BBG.Map;
+    using BBG.View.Actions;
+
     using UnityEngine;
     using UnityEngine.UI;
 
@@ -57,8 +62,8 @@
                 // Clear old info
                 foreach (GridPosition position in GridManager.TileMap.GetAllPositions())
                 {
-                    SetDisplayAt(position, false);
-                    SetAffectedAt(position, false);
+                    this.SetDisplayAt(position, false);
+                    this.SetAffectedAt(position, false);
                 }
 
 
@@ -91,7 +96,7 @@
 
             foreach (GridPosition target in targets)
             {
-                SetDisplayAt(target, true);
+                this.SetDisplayAt(target, true);
             }
 
             // Update "affected" display
@@ -105,14 +110,14 @@
 
                 foreach (GridPosition pos in affected)
                 {
-                    SetAffectedAt(pos, true);
+                    this.SetAffectedAt(pos, true);
                 }
             }
             else
             {
                 foreach (GridPosition pos in GridManager.TileMap.GetAllPositions())
                 {
-                    SetAffectedAt(pos, false);
+                    this.SetAffectedAt(pos, false);
                 }
             }
         }

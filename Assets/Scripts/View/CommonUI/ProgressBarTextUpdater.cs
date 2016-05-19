@@ -1,4 +1,4 @@
-﻿namespace Assets.Scripts.View.CommonUI
+﻿namespace BBG.View.CommonUI
 {
     using UnityEngine;
     using UnityEngine.UI;
@@ -17,7 +17,7 @@
 
         private void Awake()
         {
-            this.slider = GetComponentInParent<Slider>();
+            this.slider = this.GetComponentInParent<Slider>();
         }
 
         private void Update()

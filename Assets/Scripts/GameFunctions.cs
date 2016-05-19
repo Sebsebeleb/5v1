@@ -1,7 +1,7 @@
-﻿namespace DefaultNamespace
+﻿namespace BBG
 {
-
     using UnityEngine;
+
     public class GameFunctions : MonoBehaviour
     {
 
@@ -40,7 +40,7 @@
         public void LoseContinue()
         {
             this.FirstDeathScreen.SetActive(false);
-            Actor.Player.damagable.CurrentHealth = Actor.Player.damagable.MaxHealth;
+            Actor.Actor.Player.damagable.CurrentHealth = Actor.Actor.Player.damagable.MaxHealth;
         }
          
     }

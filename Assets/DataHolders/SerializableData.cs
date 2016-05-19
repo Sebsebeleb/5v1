@@ -3,8 +3,11 @@ public struct ActorData{
 	public
 }*/
 
-[System.Serializable]
-public struct CountdownData{
-	public int MaxCountdown;
-	public int CurrentCountdown;
+namespace BBG.DataHolders
+{
+    [System.Serializable]
+    public struct CountdownData{
+        public int MaxCountdown;
+        public int CurrentCountdown;
+    }
 }

@@ -1,6 +1,8 @@
-﻿namespace Assets.Scripts.Input
+﻿namespace BBG.Input
 {
-    using Assets.Scripts.View.CommonUI;
+    using BBG.Actor;
+    using BBG.View;
+    using BBG.View.CommonUI;
 
     using UnityEngine;
 
@@ -31,7 +33,7 @@
             {
                 // Put the window on top of other windows
                 this.InventoryScreen.transform.SetSiblingIndex(this.InventoryScreen.transform.parent.childCount-1);
-                InventoryScreen.SetActive(!this.InventoryScreen.activeInHierarchy);
+                this.InventoryScreen.SetActive(!this.InventoryScreen.activeInHierarchy);
             }
 
             // Show player info

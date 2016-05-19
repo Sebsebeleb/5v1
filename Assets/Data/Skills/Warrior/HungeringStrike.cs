@@ -1,8 +1,11 @@
-﻿namespace Data.Skills.Warrior
+﻿namespace BBG.Data.Skills.Warrior
 {
-    using Map;
     using System.Collections.Generic;
     using System.Linq;
+
+    using BBG.Actor;
+    using BBG.BaseClasses;
+    using BBG.Map;
 
     /// <summary>
     /// Deals x damage (based on weapon damage) to enemy. If this attack kills the enemy, deal x * 1.25 damage to a random adjacent enemy. Repeat up to 6 times.
@@ -12,14 +15,14 @@
         public HungeringStrike(int PlayerLevel)
             : base(PlayerLevel)
         {
-            Category =SkillCategory.Warrior;
+            this.Category =SkillCategory.Warrior;
 
 
-            SkillName = "Hungering Strike";
-            Tooltip = "blah blah";
+            this.SkillName = "Hungering Strike";
+            this.Tooltip = "blah blah";
 
-            BaseCooldown = 10;
-            ManaCost = 15;
+            this.BaseCooldown = 10;
+            this.ManaCost = 15;
 
         }
 

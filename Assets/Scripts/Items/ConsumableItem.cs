@@ -1,10 +1,13 @@
-﻿[System.Serializable]
-public class ConsumableItem : BaseItem
+﻿namespace BBG.Items
 {
-
-    public ConsumableItem()
+    [System.Serializable]
+    public class ConsumableItem : BaseItem
     {
-        this.UseType = ItemUseType.Consumable;
+
+        public ConsumableItem()
+        {
+            this.UseType = ItemUseType.Consumable;
         
+        }
     }
 }

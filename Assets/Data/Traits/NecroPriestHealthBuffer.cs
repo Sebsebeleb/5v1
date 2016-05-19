@@ -1,17 +1,20 @@
-﻿    using System.Collections.Generic;
-using BaseClasses;
-using UnityEngine;
-
-namespace Data.Effects
+﻿namespace BBG.Data.Traits
 {
+    using System.Collections.Generic;
+
+    using BBG.Actor;
+    using BBG.BaseClasses;
+    using BBG.Data.Effects;
+    using BBG.View;
+
     // The priest will buff a random enemy's attack each turn
     internal class NecroPriestHealthBuffer : Effect
     {
         private int _attackBonus = 2;
 
         public NecroPriestHealthBuffer() : base() {
-            IsHidden = true;
-            IsTrait = true;
+            this.IsHidden = true;
+            this.IsTrait = true;
         }
 
 
@@ -22,8 +25,8 @@ namespace Data.Effects
             AI.AiAction buffAction = new AI.AiAction();
             buffAction.Name = "Priestly Buff";
             buffAction.AnimationName = "Attack";
-            buffAction.Description = GetDescription;
-            buffAction.Callback = DoBuff;
+            buffAction.Description = this.GetDescription;
+            buffAction.Callback = this.DoBuff;
             buffAction.CalcPriority = () => -1;
             buffAction.IsFreeAction = true;
             buffAction.animateThis = true;
@@ -32,7 +35,7 @@ namespace Data.Effects
             buffAction.AnimationInfo = new ChangeAnimation();
             buffAction.AnimationInfo.SpawnHoverText = true;
 
-            owner.ai.AddAction(buffAction);
+            this.owner.ai.AddAction(buffAction);
         }
 
         private string GetDescription(){
@@ -46,7 +49,7 @@ namespace Data.Effects
             var PossibleTargets = new List<Actor>();
 
             foreach (var enemy in enemies) {
-                if (enemy.tag != "Corpse" && enemy != owner) {
+                if (enemy.tag != "Corpse" && enemy != this.owner) {
                 PossibleTargets.Add(enemy);
                 }
             }
@@ -54,7 +57,7 @@ namespace Data.Effects
             if (PossibleTargets.Count > 0)
             {
                 PossibleTargets.Shuffle();
-                PossibleTargets[0].effects.AddEffect(new AttackBuff(_attackBonus));
+                PossibleTargets[0].effects.AddEffect(new AttackBuff(this._attackBonus));
             }
         }
     }

@@ -1,4 +1,4 @@
-﻿namespace DefaultNamespace
+﻿namespace BBG
 {
     using UnityEngine;
     using UnityEngine.SceneManagement;

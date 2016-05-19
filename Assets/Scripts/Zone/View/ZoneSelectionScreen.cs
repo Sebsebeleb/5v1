@@ -1,11 +1,11 @@
-using System.Linq;
-
-using UnityEngine;
-using UnityEngine.UI;
-using System.Collections.Generic;
-
-namespace Zone
+namespace BBG.Zone.View
 {
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using UnityEngine;
+    using UnityEngine.UI;
+
     public class ZoneSelectionScreen : MonoBehaviour
     {
         public const int NumZoneChoices = 4;
@@ -27,10 +27,10 @@ namespace Zone
 
 
             // Setup the game
-            Zone nextZone = EntryGroup.ActiveToggles().ToList()[0].GetComponent<ZoneEntryBehaviour>().zone;
+            Zone nextZone = this.EntryGroup.ActiveToggles().ToList()[0].GetComponent<ZoneEntryBehaviour>().zone;
 
                         // Disable the screen
-            gameObject.SetActive(false);
+            this.gameObject.SetActive(false);
 
             TurnManager.BossCounter = nextZone.ZoneLength;
 
@@ -40,16 +40,16 @@ namespace Zone
 
         public void PopulateZones()
         {
-            foreach(Transform child in ZoneList){
+            foreach(Transform child in this.ZoneList){
                 Destroy(child.gameObject);
             }
 
-            List<Zone> zones = MakeZones();
+            List<Zone> zones = this.MakeZones();
 
             foreach(Zone zone in zones){
-                GameObject child = Instantiate(ZoneEntryPrefab) as GameObject;
+                GameObject child = Instantiate(this.ZoneEntryPrefab) as GameObject;
 
-                child.transform.SetParent(ZoneList);
+                child.transform.SetParent(this.ZoneList);
 
                 ZoneEntryBehaviour entryBehaviour = child.GetComponent<ZoneEntryBehaviour>();
 

@@ -1,4 +1,4 @@
-﻿namespace Tutorial
+﻿namespace BBG.Tutorial
 {
     using UnityEngine;
     using UnityEngine.Events;
@@ -22,7 +22,7 @@
                 {
                     return this._rootTransform;
                 }
-                return gameObject;
+                return this.gameObject;
             }
         }
 

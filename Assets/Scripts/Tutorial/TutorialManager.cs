@@ -1,7 +1,7 @@
-﻿namespace Tutorial
+﻿namespace BBG.Tutorial
 {
-
     using UnityEngine;
+
     public class TutorialManager
     {
         private static bool initalized = false;

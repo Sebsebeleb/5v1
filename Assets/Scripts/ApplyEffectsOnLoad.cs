@@ -1,44 +1,50 @@
 ﻿//Instatiates and adds to EventHolder all specified (by name) of this creature
 
-using BaseClasses;
 using UnityEngine;
 
-public class ApplyEffectsOnLoad : MonoBehaviour
+namespace BBG
 {
-    public string[] InitialEffects;
-    // These are added even if the game is loaded
-    public string[] Traits;
+    using BBG.Actor;
+    using BBG.BaseClasses;
+    using BBG.ResourceManagement;
 
-    private EffectHolder _effects;
-
-    private void Awake()
+    public class ApplyEffectsOnLoad : MonoBehaviour
     {
-        _effects = GetComponent<EffectHolder>();
-    }
+        public string[] InitialEffects;
+        // These are added even if the game is loaded
+        public string[] Traits;
 
-    private void Start()
-    {
-        AddTraits();
-    }
+        private EffectHolder _effects;
 
-    public void OnSpawn(){
-        AddEffects();
-    }
-
-    // Call this to apply the effects.
-    private void AddEffects(){
-        foreach (string effectName in InitialEffects)
+        private void Awake()
         {
-            Effect eff = GameResources.LoadEffect(effectName);
-            _effects.AddEffect(eff);
+            this._effects = this.GetComponent<EffectHolder>();
         }
-    }
 
-    private void AddTraits(){
-        foreach(string effectName in Traits){
-            Effect eff = GameResources.LoadEffect(effectName);
-            _effects.AddEffect(eff);
+        private void Start()
+        {
+            this.AddTraits();
         }
-    }
 
+        public void OnSpawn(){
+            this.AddEffects();
+        }
+
+        // Call this to apply the effects.
+        private void AddEffects(){
+            foreach (string effectName in this.InitialEffects)
+            {
+                Effect eff = GameResources.LoadEffect(effectName);
+                this._effects.AddEffect(eff);
+            }
+        }
+
+        private void AddTraits(){
+            foreach(string effectName in this.Traits){
+                Effect eff = GameResources.LoadEffect(effectName);
+                this._effects.AddEffect(eff);
+            }
+        }
+
+    }
 }

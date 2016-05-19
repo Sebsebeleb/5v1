@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Assets.Scripts.Items
+﻿namespace BBG.Items
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Xml;
 
-    using UnityEngine;
+    using BBG.ResourceManagement;
 
+    using UnityEngine;
 
     /// <summary>
     /// Manages loading and storing all the item modifiers that exist

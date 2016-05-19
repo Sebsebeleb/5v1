@@ -1,10 +1,9 @@
-﻿namespace Tutorial
+﻿namespace BBG.Tutorial
 {
-    using Assets.Scripts.View.CommonUI;
-
-    using Event;
-
-    using Map;
+    using BBG.Actor;
+    using BBG.Map;
+    using BBG.View;
+    using BBG.View.CommonUI;
 
     using UnityEngine;
 

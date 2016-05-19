@@ -1,5 +1,9 @@
-﻿namespace BaseClasses
+﻿namespace BBG.BaseClasses
 {
+    using BBG.Actor;
+    using BBG.Interfaces;
+    using BBG.ResourceManagement;
+
     using UnityEngine;
 
     public class Specialization : ITooltip
@@ -21,12 +25,12 @@
         {
             get
             {
-                return displayColor;
+                return this.displayColor;
             }
 
             set
             {
-                displayColor = value;
+                this.displayColor = value;
             }
         }
 
@@ -34,11 +38,11 @@
         {
             get
             {
-                return focus;
+                return this.focus;
             }
             private set
             {
-                focus = value;
+                this.focus = value;
             }
         }
 

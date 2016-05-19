@@ -1,7 +1,6 @@
-﻿namespace Data.Effects
+﻿namespace BBG.Data.Effects.Specializations
 {
-
-    using BaseClasses;
+    using BBG.BaseClasses;
 
     public class Toiletery : Effect
     {
@@ -9,7 +8,7 @@
             : base()
         {
             this.IsTrait = true;
-            this.Description = new EffectDescription("Toiletery", Describe);
+            this.Description = new EffectDescription("Toiletery", this.Describe);
         }
 
 

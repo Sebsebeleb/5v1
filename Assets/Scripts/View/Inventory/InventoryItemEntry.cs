@@ -1,5 +1,7 @@
-﻿namespace Assets.Scripts.View.Inventory
+﻿namespace BBG.View.Inventory
 {
+    using BBG.Items;
+
     using UnityEngine;
     using UnityEngine.UI;
 
@@ -50,14 +52,14 @@
                     Debug.Log("Setting to weapon");
                     Debug.Log(Colors.InventoryWeaponColor);
                     
-                    background.color = Colors.InventoryWeaponColor;
+                    this.background.color = Colors.InventoryWeaponColor;
                 }
                 else
                 {
                     Debug.Log("Setting to misc");
                     Debug.Log(Colors.InventoryMiscColor);
 
-                    background.color = Colors.InventoryMiscColor;
+                    this.background.color = Colors.InventoryMiscColor;
                 }
             }
             else
@@ -67,9 +69,9 @@
 
             // Setup name and description
 
-            ItemName.text = item.Name;
+            this.ItemName.text = item.Name;
 
-            ItemDescription.text = item.GetDescription(true);
+            this.ItemDescription.text = item.GetDescription(true);
         }
 
         public abstract void OnClicked();

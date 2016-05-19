@@ -1,8 +1,8 @@
-﻿using BaseClasses;
-using Event;
-
-namespace Data.Effects
+﻿namespace BBG.Data.Traits
 {
+    using BBG.Actor;
+    using BBG.BaseClasses;
+
     [System.Serializable]
     public class EmbalmerTrait : Effect
     {
@@ -10,18 +10,18 @@ namespace Data.Effects
         private int _currentBonus = 0;
 
         public EmbalmerTrait() : base(){
-            IsTrait = true;
+            this.IsTrait = true;
 
-            Description = new EffectDescription(
+            this.Description = new EffectDescription(
                 "Grave strength",
-                describe
+                this.describe
             );
         }
 
         private string describe(){
             return string.Format("Has {0} bonus attack for each adjacent corpse. \nCurrently: {1}",
                 TextUtilities.Bold(TextUtilities.FontColor("#FF1111", BonusPerCorpse.ToString())),
-                TextUtilities.Bold(TextUtilities.FontColor("#FF1111", _currentBonus.ToString()))
+                TextUtilities.Bold(TextUtilities.FontColor("#FF1111", this._currentBonus.ToString()))
             );
         }
 
@@ -30,29 +30,29 @@ namespace Data.Effects
             base.Created();
 
 
-            ActorDied callback = UpdateBonus;
+            ActorDied callback = this.UpdateBonus;
             EventManager.Register(Events.ActorDied, callback);
-            EventManager.Register(Events.OnTurn, (OnTurn)(()=>{UpdateBonus();}));
+            EventManager.Register(Events.OnTurn, (OnTurn)(()=>{this.UpdateBonus();}));
         }
 
         public override void OnRemoved()
         {
             base.OnRemoved();
-            owner.attack.BonusAttack -= _currentBonus;
+            this.owner.attack.BonusAttack -= this._currentBonus;
         }
 
         public override void OnAdded()
         {
             base.OnAdded();
 
-            UpdateBonus();
+            this.UpdateBonus();
         }
 
         private void UpdateBonus(Actor who = null)
         {
             int numAdjacentCorpses = 0;
 
-            foreach (Actor actor in GridManager.TileMap.GetAdjacent(owner.x, owner.y))
+            foreach (Actor actor in GridManager.TileMap.GetAdjacent(this.owner.x, this.owner.y))
             {
                 if (actor.tag == "Corpse")
                 {
@@ -61,9 +61,9 @@ namespace Data.Effects
             }
 
             int newBonus = numAdjacentCorpses * BonusPerCorpse;
-            owner.attack.BonusAttack += (newBonus - _currentBonus);
+            this.owner.attack.BonusAttack += (newBonus - this._currentBonus);
 
-            _currentBonus = newBonus;
+            this._currentBonus = newBonus;
         }
 
     }

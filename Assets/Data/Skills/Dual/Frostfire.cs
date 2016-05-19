@@ -1,19 +1,22 @@
 
-using Data.Effects;
-
-namespace Data.Skills
+namespace BBG.Data.Skills.Dual
 {
+    using BBG.Actor;
+    using BBG.BaseClasses;
+    using BBG.Data.Effects;
+    using BBG.Data.Effects.ThemeDebuffs;
+
     [System.Serializable]
     class FrostFire : BaseSkill
     {
         public FrostFire(int PlayerLevel) : base(PlayerLevel)
         {
-            Category = SkillCategory.Fire | SkillCategory.Water;
+            this.Category = SkillCategory.Fire | SkillCategory.Water;
 
-            SkillName = "Frost Fire";
-            Tooltip = "Deal {0} damage to an enemy. if the enemy was wet, apply stun {1}, remove wet, and then apply burning. If enemy was burning, consume burning, deal 150% of remaining burning damage and apply wet.";
-            BaseCooldown = 10;
-            ManaCost = 15;
+            this.SkillName = "Frost Fire";
+            this.Tooltip = "Deal {0} damage to an enemy. if the enemy was wet, apply stun {1}, remove wet, and then apply burning. If enemy was burning, consume burning, deal 150% of remaining burning damage and apply wet.";
+            this.BaseCooldown = 10;
+            this.ManaCost = 15;
         }
         public override void UseOnTargetGrid(int x, int y)
         {
@@ -21,14 +24,14 @@ namespace Data.Skills
 
             Actor target = GridManager.TileMap.GetAt(x, y);
 
-            target.damagable.TakeDamage(getMainDamage());
+            target.damagable.TakeDamage(this.getMainDamage());
 
             bool wasWet = target.effects.HasEffect<Wet>();
             bool wasHot = target.effects.HasEffect<Burning>();
 
             // Wet route ;^)
             if (wasWet){
-                target.effects.AddEffect(new Stunned(getStun()));
+                target.effects.AddEffect(new Stunned(this.getStun()));
                 target.effects.AddEffect(new Burning(5));
             }
 
@@ -49,20 +52,20 @@ namespace Data.Skills
         }
 
         private int getStun(){
-            return 1 + (int) Rank / 3;
+            return 1 + (int) this.Rank / 3;
         }
 
         private int getMainDamage(){
-            return 2 + Rank*2;
+            return 2 + this.Rank*2;
         }
 
         public override string GetTooltip(){
 
-            string mainDamageProp = TextUtilities.FontColor(Colors.DamageValue, getMainDamage().ToString());
-            string stunDurationProp = TextUtilities.FontColor(Colors.DurationValue, getStun().ToString());
+            string mainDamageProp = TextUtilities.FontColor(Colors.DamageValue, this.getMainDamage().ToString());
+            string stunDurationProp = TextUtilities.FontColor(Colors.DurationValue, this.getStun().ToString());
 
 
-            return string.Format(Tooltip, mainDamageProp, stunDurationProp);
+            return string.Format(this.Tooltip, mainDamageProp, stunDurationProp);
         }
     }
 }

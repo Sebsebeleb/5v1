@@ -1,6 +1,7 @@
-﻿namespace Assets.Data.ItemEffects
+﻿namespace BBG.Data.ItemEffects
 {
-    using Event;
+    using BBG.Actor;
+    using BBG.Items;
 
     class Thorny : ItemEffect
     {

@@ -1,4 +1,6 @@
-﻿using UnityEditor;
+﻿using BBG.Data;
+
+using UnityEditor;
 using UnityEngine;
 
 [CustomEditor(typeof(EnemySpawnList))]

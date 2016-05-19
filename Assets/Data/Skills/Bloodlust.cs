@@ -1,19 +1,22 @@
-﻿using UnityEngine;
-
-namespace Data.Skills
+﻿namespace BBG.Data.Skills
 {
+    using BBG.Actor;
+    using BBG.BaseClasses;
+
+    using UnityEngine;
+
     [System.Serializable]
     public class Bloodlust : BaseSkill
     {
 
         public Bloodlust(int PlayerLevel) : base(PlayerLevel)
         {
-            Category = SkillCategory.Warrior;
+            this.Category = SkillCategory.Warrior;
 
-            SkillName = "Bloodlust";
-            Tooltip = "Deal {0} damage to an enemy. If this attack kills it, heal life equal to twice the enemy's hp (from before the attack)";
-            BaseCooldown = 10;
-            ManaCost = 10;
+            this.SkillName = "Bloodlust";
+            this.Tooltip = "Deal {0} damage to an enemy. If this attack kills it, heal life equal to twice the enemy's hp (from before the attack)";
+            this.BaseCooldown = 10;
+            this.ManaCost = 10;
 
         }
 
@@ -31,7 +34,7 @@ namespace Data.Skills
             Actor playerActor = player.GetComponent<Actor>();
 
 
-            int tempBonus = playerAttack.CalculateAttack() * ((int) getDamageMultiplier() - 1);
+            int tempBonus = playerAttack.CalculateAttack() * ((int) this.getDamageMultiplier() - 1);
             playerAttack.BonusAttack += tempBonus;
             playerAttack.DoAttack(targetedEnemy);
             playerAttack.BonusAttack -= tempBonus;
@@ -43,13 +46,13 @@ namespace Data.Skills
         }
 
         private float getDamageMultiplier(){
-            return 1.5f+Rank*0.5f;
+            return 1.5f+this.Rank*0.5f;
         }
 
         public override string GetTooltip(){
-            string damageMultProp = TextUtilities.FontColor(Colors.DamageValue, getDamageMultiplier().ToString() + "x");
+            string damageMultProp = TextUtilities.FontColor(Colors.DamageValue, this.getDamageMultiplier().ToString() + "x");
 
-            return string.Format(Tooltip, damageMultProp);
+            return string.Format(this.Tooltip, damageMultProp);
         }
     }
 }

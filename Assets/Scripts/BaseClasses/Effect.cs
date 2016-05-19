@@ -1,9 +1,12 @@
-﻿using System;
-using System.Runtime.Serialization;
-using UnityEngine;
-
-namespace BaseClasses
+﻿namespace BBG.BaseClasses
 {
+    using System;
+    using System.Runtime.Serialization;
+
+    using BBG.Actor;
+    using BBG.Interfaces;
+    using BBG.View;
+
     [System.Serializable]
     public abstract class Effect : ITooltip, IAnimatableChange
     {
@@ -40,35 +43,35 @@ namespace BaseClasses
 
         public Effect()
         {
-            IsInfinite = true;
-            Duration = -1;
-            Created();
+            this.IsInfinite = true;
+            this.Duration = -1;
+            this.Created();
         }
 
         public Effect(int duration)
         {
-            IsInfinite = false;
-            Duration = duration;
-            Created();
+            this.IsInfinite = false;
+            this.Duration = duration;
+            this.Created();
         }
 
 
         // FIXME: This system is broken.
         ~Effect()
         {
-            Destroyed();
+            this.Destroyed();
         }
 
         // Should be called when the effects wants to remove itself
         // DontDestory: if this is true, the effect itself will not be destroyed. Only the reference to it will be removed from the effectholder
         protected void ForceRemoveMe(bool DontDestroy=false)
         {
-            owner.effects.RemoveEffect(this, DontDestroy);
+            this.owner.effects.RemoveEffect(this, DontDestroy);
         }
 
         // Called by the system to destroy this
         public void Destroy(){
-            Destroyed();
+            this.Destroyed();
         }
 
 
@@ -120,16 +123,16 @@ namespace BaseClasses
         // Called when this is applied to an actor
         public void SetOwner(Actor who)
         {
-            owner = who;
-            OnAdded();
+            this.owner = who;
+            this.OnAdded();
         }
 
         public string GetTooltip(){
-            return Description.GetDescription();
+            return this.Description.GetDescription();
         }
 
         public string GetName(){
-            return Description.Name;
+            return this.Description.Name;
         }
 
         // IAnimatableChange methods
@@ -144,31 +147,31 @@ namespace BaseClasses
         // Serialization
 
         public virtual void GetObjectData(SerializationInfo info, StreamingContext context){
-            info.AddValue("IsInfinite", IsInfinite);
-            info.AddValue("Purgable", Purgable);
-            info.AddValue("Duration", Duration);
-            info.AddValue("IsTrait", IsTrait);
-            info.AddValue("Description", Description);
+            info.AddValue("IsInfinite", this.IsInfinite);
+            info.AddValue("Purgable", this.Purgable);
+            info.AddValue("Duration", this.Duration);
+            info.AddValue("IsTrait", this.IsTrait);
+            info.AddValue("Description", this.Description);
             // We cannot serialize monobehaviours, so instead we save an ID that we can use
-            info.AddValue("_actor", Utils.ActorToID(owner));
+            info.AddValue("_actor", Utils.ActorToID(this.owner));
         }
 
                 // This constructor is called when it is loaded from a saved game
         public Effect(SerializationInfo info, StreamingContext context){
-            IsInfinite = info.GetBoolean("IsInfinite");
-            Purgable = info.GetBoolean("Purgable");
-            Duration = info.GetInt32("Duration");
-            IsTrait = info.GetBoolean("IsTrait");
+            this.IsInfinite = info.GetBoolean("IsInfinite");
+            this.Purgable = info.GetBoolean("Purgable");
+            this.Duration = info.GetInt32("Duration");
+            this.IsTrait = info.GetBoolean("IsTrait");
             // Set the reference based on id
-            owner = Utils.IDToActor(info.GetInt32("_actor"));
+            this.owner = Utils.IDToActor(info.GetInt32("_actor"));
         }
 
         public void _SetRawData(EffectData _data){
-            data = _data;
+            this.data = _data;
         }
 
         public EffectData _GetRawData(){
-            return data;
+            return this.data;
         }
     }
 
@@ -179,8 +182,8 @@ namespace BaseClasses
         public Func<string> GetDescription;
 
         public EffectDescription(string name, Func<string> description){
-            Name = name;
-            GetDescription = description;
+            this.Name = name;
+            this.GetDescription = description;
         }
     }
 

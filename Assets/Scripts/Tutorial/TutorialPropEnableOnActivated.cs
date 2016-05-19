@@ -1,6 +1,7 @@
-﻿namespace Tutorial
+﻿namespace BBG.Tutorial
 {
     using UnityEngine;
+
     public class TutorialPropEnableOnActivated : MonoBehaviour
     {
         [SerializeField]
@@ -15,11 +16,11 @@
         {
             if (!TutorialManager.ShouldDisplayTutorialProp(this.ID))
             {
-                gameObject.SetActive(false);
+                this.gameObject.SetActive(false);
             }
             else
             {
-                transform.GetChild(0).gameObject.SetActive(true);
+                this.transform.GetChild(0).gameObject.SetActive(true);
             }
 
             // Disables some inputs for a little while to prevent clicking past too fast

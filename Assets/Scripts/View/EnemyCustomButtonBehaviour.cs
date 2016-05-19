@@ -1,79 +1,85 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-public class EnemyCustomButtonBehaviour : MonoBehaviour, IPointerClickHandler, IPointerDownHandler, IPointerUpHandler
+namespace BBG.View
 {
-    public GameObject InspectorPanel;
-    private InspectorPanelBehaviour _inspector;
+    using BBG.Actor;
 
-    private View.GridButtonBehaviour _gridButton;
+    using UnityEngine.EventSystems;
 
-    // Used to tell the player we want to target us
-    private PlayerTargeting _playerTargeting;
+    public class EnemyCustomButtonBehaviour : MonoBehaviour, IPointerClickHandler, IPointerDownHandler, IPointerUpHandler
+    {
+        public GameObject InspectorPanel;
+        private InspectorPanelBehaviour _inspector;
 
-    private bool isHeld;
+        private View.GridButtonBehaviour _gridButton;
 
-    private float holdTime;
+        // Used to tell the player we want to target us
+        private PlayerTargeting _playerTargeting;
 
-    void Awake(){
-        _gridButton = GetComponent<View.GridButtonBehaviour>();
-        _inspector = InspectorPanel.GetComponent<InspectorPanelBehaviour>();
-        _playerTargeting = GameObject.FindWithTag("Player").GetComponent<PlayerTargeting>();
-    }
+        private bool isHeld;
 
-    public void OnPointerClick(PointerEventData eventData){
+        private float holdTime;
 
-        // Rightclick -> Inspect
-        if (eventData.button == PointerEventData.InputButton.Right){
-            InspectEnemy();
+        void Awake(){
+            this._gridButton = this.GetComponent<View.GridButtonBehaviour>();
+            this._inspector = this.InspectorPanel.GetComponent<InspectorPanelBehaviour>();
+            this._playerTargeting = GameObject.FindWithTag("Player").GetComponent<PlayerTargeting>();
         }
 
+        public void OnPointerClick(PointerEventData eventData){
 
-        /*if (eventData.clickCount > 1){
+            // Rightclick -> Inspect
+            if (eventData.button == PointerEventData.InputButton.Right){
+                this.InspectEnemy();
+            }
+
+
+            /*if (eventData.clickCount > 1){
             InspectEnemy();
         }*/
 
-        // Otherwise, target it
-        else{
-            TargetEnemy();
+            // Otherwise, target it
+            else{
+                this.TargetEnemy();
+            }
         }
-    }
 
-    void Update()
-    {
-        if (this.isHeld)
+        void Update()
         {
-            this.holdTime += Time.deltaTime;
+            if (this.isHeld)
+            {
+                this.holdTime += Time.deltaTime;
+            }
+            else
+            {
+                this.holdTime = 0f;
+            }
+
+            if (this.holdTime > 0.4f)
+            {
+                this.InspectEnemy();
+            }
+
         }
-        else
+
+        private void InspectEnemy(){
+            Actor enemy = GridManager.TileMap.GetAt(this._gridButton.x, this._gridButton.y);
+            this.InspectorPanel.SetActive (true);
+
+            this._inspector.InspectActor (enemy);
+        }
+        private void TargetEnemy(){
+            this._playerTargeting.TargetGrid(this._gridButton.x, this._gridButton.y);
+        }
+
+        public void OnPointerDown(PointerEventData eventData)
         {
-            this.holdTime = 0f;
+            this.isHeld = true;
         }
 
-        if (this.holdTime > 0.4f)
+        public void OnPointerUp(PointerEventData eventData)
         {
-            this.InspectEnemy();
+            this.isHeld = false;
         }
-
-    }
-
-    private void InspectEnemy(){
-        Actor enemy = GridManager.TileMap.GetAt(_gridButton.x, _gridButton.y);
-        InspectorPanel.SetActive (true);
-
-        _inspector.InspectActor (enemy);
-    }
-    private void TargetEnemy(){
-        _playerTargeting.TargetGrid(_gridButton.x, _gridButton.y);
-    }
-
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        this.isHeld = true;
-    }
-
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        this.isHeld = false;
     }
 }

@@ -1,26 +1,28 @@
-using BaseClasses;
-using Event;
-
-namespace Data.Effects
+namespace BBG.Data.Traits
 {
+    using BBG.Actor;
+    using BBG.BaseClasses;
+
     public class GrimParty : Effect
     {
         private const int BonusPerEnemy = 2;
         private int _currentBonus = 0;
 
-        public GrimParty() : base(){
-            IsTrait = true;
-            
-            Description = new EffectDescription(
+        public GrimParty() : base()
+        {
+            this.IsTrait = true;
+
+            this.Description = new EffectDescription(
                 "Dead Party",
-                describe
+                this.describe
             );
         }
 
-        private string describe(){
+        private string describe()
+        {
             return string.Format("Has {0} bonus attack for each alive enemy. \nCurrently: {1}",
                 TextUtilities.Bold(TextUtilities.FontColor("#FF1111", BonusPerEnemy.ToString())),
-                TextUtilities.Bold(TextUtilities.FontColor("#FF1111", _currentBonus.ToString()))
+                TextUtilities.Bold(TextUtilities.FontColor("#FF1111", this._currentBonus.ToString()))
             );
         }
 
@@ -29,22 +31,22 @@ namespace Data.Effects
             base.Created();
 
 
-            ActorDied callback = UpdateBonus;
+            ActorDied callback = this.UpdateBonus;
             EventManager.Register(Events.ActorDied, callback);
-            EventManager.Register(Events.OnTurn, (OnTurn) (() => {UpdateBonus();}));
+            EventManager.Register(Events.OnTurn, (OnTurn)(() => { this.UpdateBonus(); }));
         }
 
         public override void OnRemoved()
         {
             base.OnRemoved();
-            owner.attack.BonusAttack -= _currentBonus;
+            this.owner.attack.BonusAttack -= this._currentBonus;
         }
 
         public override void OnAdded()
         {
             base.OnAdded();
 
-            UpdateBonus();
+            this.UpdateBonus();
         }
 
         private void UpdateBonus(Actor who = null)
@@ -60,9 +62,9 @@ namespace Data.Effects
             }
 
             int newBonus = numAliveEnemies * BonusPerEnemy;
-            owner.attack.BonusAttack += (newBonus - _currentBonus);
+            this.owner.attack.BonusAttack += (newBonus - this._currentBonus);
 
-            _currentBonus = newBonus;
+            this._currentBonus = newBonus;
         }
 
     }

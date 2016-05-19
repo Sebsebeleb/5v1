@@ -1,11 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
-
-// Namespace should be self-contained
+﻿// Namespace should be self-contained
 // TODO: Should be generic (instead of always using Enemy)
-namespace Map
+namespace BBG.Map
 {
+    using System;
+    using System.Collections.Generic;
+
+    using BBG.Actor;
+    using BBG.HelperClasses;
+
+    using UnityEngine;
 
     public enum AdjacancyType
     {
@@ -22,10 +25,10 @@ namespace Map
 
         public GridMap(int width, int height)
         {
-            _width = width;
-            _height = height;
+            this._width = width;
+            this._height = height;
 
-            _tiles = new Actor[_width * _height];
+            this._tiles = new Actor[this._width * this._height];
         }
 
         /// <summary>
@@ -49,7 +52,7 @@ namespace Map
                         int checkX = (int)(x + delta.x);
                         int checkY = (int)(y + delta.y);
 
-                        if (!IsOutOfBounds(checkX, checkY))
+                        if (!this.IsOutOfBounds(checkX, checkY))
                         {
                             results.Add(this.GetAt(checkX, checkY));
                         }
@@ -68,7 +71,7 @@ namespace Map
         /// <returns>T at position given</returns>
         public Actor GetAt(int x, int y)
         {
-            return (Actor)_tiles[x + y * _width];
+            return (Actor)this._tiles[x + y * this._width];
         }
 
         /// <summary>
@@ -82,7 +85,7 @@ namespace Map
         }
 
         public Actor GetFromIndex(int i){
-            return _tiles[i];
+            return this._tiles[i];
         }
 
         /// <summary>
@@ -93,11 +96,11 @@ namespace Map
         /// <returns></returns>
         public bool IsOutOfBounds(int x, int y)
         {
-            if (x < 0 || x > _width - 1)
+            if (x < 0 || x > this._width - 1)
             {
                 return true;
             }
-            if (y < 0 || y > _height - 1)
+            if (y < 0 || y > this._height - 1)
             {
                 return true;
             }
@@ -107,7 +110,7 @@ namespace Map
 
         public IEnumerable<Actor> GetAll()
         {
-            return new List<Actor>(_tiles);
+            return new List<Actor>(this._tiles);
         }
 
         public IEnumerable<GridPosition> GetAllPositions()
@@ -123,15 +126,15 @@ namespace Map
 
         public void EnemySetAt(int i, Actor who)
         {
-            int y = (int)Math.Floor((double)i / _width);
-            int x = i % _width;
+            int y = (int)Math.Floor((double)i / this._width);
+            int x = i % this._width;
 
-            EnemySetAt(x, y, who);
+            this.EnemySetAt(x, y, who);
         }
 
         public void EnemySetAt(int x, int y, Actor who)
         {
-            _tiles[x + y * _width] = who;
+            this._tiles[x + y * this._width] = who;
             
             who.x = x;
             who.y = y;
@@ -139,9 +142,9 @@ namespace Map
 
         // Swap the position of two actors
         public void SwapActors(int x, int y, int x2, int y2){
-            Actor temp = GetAt(x, y);
-            EnemySetAt(x, y, GetAt(x2, y2));
-            EnemySetAt(x2, y2, temp);
+            Actor temp = this.GetAt(x, y);
+            this.EnemySetAt(x, y, this.GetAt(x2, y2));
+            this.EnemySetAt(x2, y2, temp);
         }
     }
 

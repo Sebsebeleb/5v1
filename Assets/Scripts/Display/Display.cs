@@ -1,6 +1,6 @@
-﻿namespace Display
+﻿namespace BBG.Display
 {
-    using Map;
+    using BBG.Map;
 
     public static class Display
     {

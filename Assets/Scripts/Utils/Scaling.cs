@@ -1,4 +1,4 @@
-﻿namespace Scripts
+﻿namespace BBG
 {
     public static class Scaling
     {

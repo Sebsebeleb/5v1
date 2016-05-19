@@ -1,29 +1,30 @@
-using BaseClasses;
-
-namespace Data.Effects
+namespace BBG.Data.Effects.ThemeDebuffs
 {
+    using BBG.BaseClasses;
+    using BBG.View;
+
     public class Electrified : Effect
     {
         public Electrified()
         {
-            IsDebuff = true;
-            IsThemeDebuff = true;
+            this.IsDebuff = true;
+            this.IsThemeDebuff = true;
 
-            Description = new EffectDescription("Electrified", () => "This enemy is electrified, it has -1 attack and arc lighting will not jump to it");
+            this.Description = new EffectDescription("Electrified", () => "This enemy is electrified, it has -1 attack and arc lighting will not jump to it");
         }
 
         public override void OnAdded()
         {
             base.OnAdded();
 
-            owner.attack.BonusAttack -= 1;
+            this.owner.attack.BonusAttack -= 1;
         }
 
         public override void OnRemoved()
         {
             base.OnRemoved();
 
-            owner.attack.BonusAttack += 1;
+            this.owner.attack.BonusAttack += 1;
         }
 
         public override bool ShouldAnimate()
