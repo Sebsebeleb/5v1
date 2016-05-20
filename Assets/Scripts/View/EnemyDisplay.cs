@@ -1,38 +1,33 @@
-﻿using System.Collections.Generic;
-
-using DG.Tweening;
-using DG.Tweening.Core;
-
-using UnityEngine;
-
-namespace BBG.View
+﻿namespace BBG.View
 {
     using BBG.Actor;
     using BBG.Data;
     using BBG.Map;
     using BBG.ResourceManagement;
     using BBG.View.CommonUI;
-
+    using DG.Tweening;
+    using DG.Tweening.Core;
+    using System.Collections.Generic;
+    using UnityEngine;
     using UnityEngine.UI;
 
     public class EnemyDisplay : MonoBehaviour
     {
-                
         // Public access to all the buttons
         public static Dictionary<GridPosition, EnemyDisplay> Displays = new Dictionary<GridPosition, EnemyDisplay>();
 
-        public Text Name, Health, Cooldown, Attack, Defense, Rank;
+        private Actor actor;
 
         public SegmentedBar CooldownBar, HealthBar;
-
-        // Used to detect changes
-        private int OldCooldown, OldMaximumCooldown;
 
         public Image EnemyImage, Targeting, TargetingAffected;
 
         private GridButtonBehaviour gridbutton;
 
-        private Actor actor;
+        public Text Name, Health, Cooldown, Attack, Defense, Rank;
+
+        // Used to detect changes
+        private int OldCooldown, OldMaximumCooldown;
 
         void Awake()
         {
@@ -40,7 +35,6 @@ namespace BBG.View
             this.HealthBar.SegmentSpacing = 1;
 
             this.gridbutton = this.GetComponent<GridButtonBehaviour>();
-
 
             // Register a callback to be called after a game was loaded, to correctly update display
             OnGameDeserialized callback = this.GameWasLoaded;
@@ -51,7 +45,6 @@ namespace BBG.View
 
         void Start()
         {
-
         }
 
         void Update()
@@ -80,13 +73,14 @@ namespace BBG.View
                 float duration = 0.2f;
 
                 // Tween the update using DOTween generic tween
-                DOTween.To(new DOGetter<float>(() => { return this.CooldownBar.Fill; }),new DOSetter<float>((value =>
-                    {
-                        this.CooldownBar.Fill = value;
-                    })), targetFill, duration);
+                DOTween.To(
+                    new DOGetter<float>(() => { return this.CooldownBar.Fill; }),
+                    new DOSetter<float>((value => { this.CooldownBar.Fill = value; })),
+                    targetFill,
+                    duration);
 
                 this.CooldownBar.NumSegments = this.actor.countdown.MaxCountdown;
-                this.CooldownBar.SegmentSpacing = 1 / (this.actor.countdown.MaxCountdown * 0.88f);   
+                this.CooldownBar.SegmentSpacing = 1 / (this.actor.countdown.MaxCountdown * 0.88f);
 
                 this.OldCooldown = this.actor.countdown.CurrentCountdown;
                 this.OldMaximumCooldown = this.actor.countdown.MaxCountdown;
@@ -106,25 +100,20 @@ namespace BBG.View
 
             this.EnemyImage.sprite = this.actor.GetComponent<DisplayData>().Image;
 
+            float hpFillTarget;
 
             // Special display for corpses
             if (actualName == "Corpse")
             {
                 this.Attack.text = "-";
                 this.Health.text = "-";
-                this.HealthBar.Fill = 0f;
+                hpFillTarget = 0f;
             }
 
             else
             {
                 this.Health.text = this.actor.damagable.CurrentHealth.ToString();
-                float targetFill =(float) this.actor.damagable.CurrentHealth / this.actor.damagable.MaxHealth;
-                float duration = 0.4f;
-                DOTween.To(new DOGetter<float>(() => { return this.HealthBar.Fill; }),new DOSetter<float>((value =>
-                    {
-                        this.HealthBar.Fill = value;
-                    })), targetFill, duration).SetEase(Ease.OutQuad);
-
+                hpFillTarget = (float)this.actor.damagable.CurrentHealth / this.actor.damagable.MaxHealth;
 
                 // Make attack text TODO: Should only be updated when attack is updated
                 string attackText = this.actor.attack.CalculateAttack().ToString();
@@ -140,10 +129,25 @@ namespace BBG.View
 
                 this.Attack.text = attackText;
             }
+
+            // Tween health bar
+            UpdateHealth(hpFillTarget);
+        }
+
+        private void UpdateHealth(float targetFill)
+        {
+            float duration = 0.4f;
+            // Tweens the hpbar 
+            DOTween.To(
+                new DOGetter<float>(() => { return this.HealthBar.Fill; }),
+                new DOSetter<float>((value => { this.HealthBar.Fill = value; })),
+                targetFill,
+                duration).SetEase(Ease.OutQuad);
         }
 
         // This is called after loadign a save, correts its image and name display
-        private void GameWasLoaded(){
+        private void GameWasLoaded()
+        {
             this.actor = GridManager.TileMap.GetAt(this.gridbutton.x, this.gridbutton.y);
 
             GameObject prefab = GameResources.GetEnemyByID(this.actor.enemyTypeID);
@@ -151,7 +155,6 @@ namespace BBG.View
             // A pretty silly way, but it works. Basically, since name and image is usually only set when the enemy is spawned, we force it to change.
             this.actor.GetComponent<DisplayData>().Image = prefab.GetComponent<DisplayData>().Image;
             this.actor.name = prefab.name;
-
         }
     }
 }
