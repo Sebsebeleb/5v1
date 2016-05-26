@@ -17,6 +17,13 @@ namespace BBG
         private SkillBehaviour _playerSkills;
         private EffectHolder _playerEffects;
 
+
+        /// <summary>
+        /// When the boss counter is at 10 turns left, show this popup to remind player
+        /// </summary>
+        [SerializeField]
+        private GameObject bossCounterReminderPrefab;
+
         void Awake()
         {
             this._player = GameObject.FindWithTag("Player");
@@ -30,15 +37,24 @@ namespace BBG
             this.StartCoroutine(this.processTurn());
         }
 
-        private IEnumerator processTurn(){
+        private IEnumerator processTurn()
+        {
             this.UpdatePlayer();
 
-            while(AnimationManager.IsAnimating()){
+            while (AnimationManager.IsAnimating())
+            {
                 yield return 0;
             }
 
+            if (BossCounter == 10 + 1)
+            {
+                var v = Instantiate(this.bossCounterReminderPrefab);
+
+            }
+
             //First we countdown the boss stuff
-            if (BossCounter > 0){
+            if (BossCounter > 0)
+            {
                 BossCounter--;
                 if (BossCounter <= 0)
                 {
@@ -50,7 +66,8 @@ namespace BBG
             // TODO: Sort it properly (unless it already is)
             foreach (Actor.Actor enemy in GridManager.TileMap.GetAll())
             {
-                while(AnimationManager.IsAnimating()){
+                while (AnimationManager.IsAnimating())
+                {
                     yield return 0;
                 }
 
@@ -63,7 +80,8 @@ namespace BBG
             EventManager.Notify(Events.OnTurn, null);
 
             // Check if we defeated the zone
-            if (this.ZoneWon()){
+            if (this.ZoneWon())
+            {
                 //TG
 
 
@@ -98,16 +116,17 @@ namespace BBG
             Actor.Actor.Player.CurrentMana += Actor.Actor.Player.ManaRegen.Value;
             Actor.Actor.Player.CurrentMana = Math.Min(Actor.Actor.Player.CurrentMana, Actor.Actor.Player.MaxMana.Value);
 
-            if (Actor.Actor.Player.damagable.CurrentHealth <=  0)
+            if (Actor.Actor.Player.damagable.CurrentHealth <= 0)
             {
-            
+
             }
         }
 
 
         private void InitBoss()
         {
-            foreach(Actor.Actor enemy in GridManager.TileMap.GetAll()){
+            foreach (Actor.Actor enemy in GridManager.TileMap.GetAll())
+            {
                 EnemyManager.KillEnemy(enemy);
             }
 
@@ -115,14 +134,18 @@ namespace BBG
         }
 
         // The zone has been won if 1) the boss has been reached and 2) all enemies are dead
-        private bool ZoneWon(){
-        
-            if (BossCounter > 0){
+        private bool ZoneWon()
+        {
+
+            if (BossCounter > 0)
+            {
                 return false;
             }
 
-            foreach(var enemy in GridManager.TileMap.GetAll()){
-                if (enemy.tag != "Corpse"){
+            foreach (var enemy in GridManager.TileMap.GetAll())
+            {
+                if (enemy.tag != "Corpse")
+                {
                     return false;
                 }
             }
