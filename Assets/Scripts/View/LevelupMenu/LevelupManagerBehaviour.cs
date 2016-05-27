@@ -42,9 +42,9 @@ namespace BBG.View.LevelupMenu
         // List specializations that exist. Kinda temp solution
         private Specialization[] Specializations =
             {
-                new Specialization("Warlockery", 
+                new Specialization("Warlockery",
                     @"Gain focus on <color=""purple"">Warlockery</color> skills
-Whenever an enemy dies, heal for 0.5% max health for each debuff it had.", 
+Whenever an enemy dies, heal for 0.5% max health for each debuff it had.",
                     "Warlockery",
                     new Color(0.56f, 0.031f, 0.367f),
                     BaseSkill.SkillCategory.Warlockery), 
@@ -64,7 +64,7 @@ Gain +1 mana regen for each burning enemy",
 The ""Wet"" debuff will now also make enemies 20% more vulnerable to spells.",
                     "Toiletery",
                     new Color(0.501f, 0.701f, 0.866f),
-                    BaseSkill.SkillCategory.Water), 
+                    BaseSkill.SkillCategory.Water),
             };
         [Header("Specialization references")]
         [SerializeField]
@@ -124,7 +124,7 @@ The ""Wet"" debuff will now also make enemies 20% more vulnerable to spells.",
             foreach (Specialization s in this.Specializations)
             {
                 GameObject entry = Instantiate(this.SpecializationEntryPrefab);
-                entry.transform.SetParent(this.SpecializationEntries);
+                entry.transform.SetParent(this.SpecializationEntries, false);
 
                 SpecializationEntryBehaviour behaviour = entry.GetComponent<SpecializationEntryBehaviour>();
 
@@ -147,7 +147,7 @@ The ""Wet"" debuff will now also make enemies 20% more vulnerable to spells.",
                 Destroy(child.gameObject);
             }
 
-            foreach(Transform child in this.KnownSkillsParent.transform)
+            foreach (Transform child in this.KnownSkillsParent.transform)
             {
                 Destroy(child.gameObject);
             }
@@ -156,7 +156,7 @@ The ""Wet"" debuff will now also make enemies 20% more vulnerable to spells.",
             foreach (BaseSkill skill in skills)
             {
                 GameObject entry = Instantiate(this.SkillEntryPrefab) as GameObject;
-                entry.transform.SetParent(this.SkillsParent);
+                entry.transform.SetParent(this.SkillsParent, false);
 
                 LearnableSkillBehaviour behaviour = entry.GetComponent<LearnableSkillBehaviour>();
                 behaviour.SetSkill(skill);
@@ -165,10 +165,10 @@ The ""Wet"" debuff will now also make enemies 20% more vulnerable to spells.",
             }
 
             // Initalize old known skills
-            foreach(BaseSkill skill in this.PlayerSkills.GetKnownSkills())
+            foreach (BaseSkill skill in this.PlayerSkills.GetKnownSkills())
             {
                 GameObject entry = Instantiate(this.SkillEntryPrefab) as GameObject;
-                entry.transform.SetParent(this.KnownSkillsParent);
+                entry.transform.SetParent(this.KnownSkillsParent, false);
 
                 LearnableSkillBehaviour behaviour = entry.GetComponent<LearnableSkillBehaviour>();
                 behaviour.IsOldSkill = true;
@@ -177,7 +177,7 @@ The ""Wet"" debuff will now also make enemies 20% more vulnerable to spells.",
                     behaviour.SetSkill(skill);
                 }
 
-                behaviour.GetComponentInChildren<Toggle>().group = this.KnownSkillsToggles.GetComponentInParent<ToggleGroup> ();
+                behaviour.GetComponentInChildren<Toggle>().group = this.KnownSkillsToggles.GetComponentInParent<ToggleGroup>();
             }
         }
 
@@ -243,7 +243,7 @@ The ""Wet"" debuff will now also make enemies 20% more vulnerable to spells.",
             if (this.PlayerSkills.GetKnownSpecializations().Length != 0)
             {
 
-                List <BaseSkill.SkillCategory> knownCategories = new List<BaseSkill.SkillCategory>();
+                List<BaseSkill.SkillCategory> knownCategories = new List<BaseSkill.SkillCategory>();
 
 
                 foreach (Specialization spec in this.PlayerSkills.GetKnownSpecializations())
@@ -356,7 +356,7 @@ The ""Wet"" debuff will now also make enemies 20% more vulnerable to spells.",
             this.TitleKnownSkill.text = title;
             this.DescriptionKnownSkill.text = desc;
         }
-    
+
         /// <summary>
         /// No parameters meaning no skill in that slot
         /// </summary>

@@ -150,13 +150,13 @@ namespace BBG.View
         // Holder is the transform it should be the child of
         // If duration != -1, it will append that number to the title (so for example "burning" becomes "burning (3)"
         // TODO: Should probably not display duration and duration icon on actions/traits
-        private void CreateEntry(ITooltip entryData, Transform holder, Color color, int duration=-1)
+        private void CreateEntry(ITooltip entryData, Transform holder, Color color, int duration = -1)
         {
 
             GameObject item = Instantiate(this.ActionItemPrefab) as GameObject;
             ActionEntryBehaviour behaviour = item.GetComponent<ActionEntryBehaviour>();
 
-            item.transform.SetParent(holder);
+            item.transform.SetParent(holder, false);
             item.GetComponent<Image>().color = color;
 
             // TODO: Hmm, not sure if I like having the title Improved() or not..
@@ -200,7 +200,8 @@ namespace BBG.View
             {
                 Destroy(child.gameObject);
             }
-            foreach (Transform child in this.TraitsParent){
+            foreach (Transform child in this.TraitsParent)
+            {
                 Destroy(child.gameObject);
             }
 
@@ -249,8 +250,10 @@ namespace BBG.View
             }
             // TODO:  If there are no traits, we hide the category
 
-            foreach (Effect eff in effectHolder.GetTraits()){
-                if (eff.IsHidden){
+            foreach (Effect eff in effectHolder.GetTraits())
+            {
+                if (eff.IsHidden)
+                {
                     continue;
                 }
                 this.CreateEntry(eff, this.TraitsParent);

@@ -50,7 +50,7 @@ namespace BBG.View.Inventory
 
             InventoryItemEntry entryBehaviour = entry.GetComponentInChildren<InventoryItemEntry>();
             entryBehaviour.SetItem(item);
-            entry.transform.SetParent(parent);
+            entry.transform.SetParent(parent, false);
             Toggle b = entry.GetComponentInChildren<Toggle>();
             b.onValueChanged.AddListener((isOn => this.SelectBackpackItem(entryBehaviour as BackpackItemEntry)));
         }

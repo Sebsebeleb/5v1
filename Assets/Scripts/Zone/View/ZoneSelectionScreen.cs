@@ -17,7 +17,8 @@ namespace BBG.Zone.View
 
         public GameObject ZoneEntryPrefab;
 
-        public void Awake(){
+        public void Awake()
+        {
 
         }
 
@@ -29,7 +30,7 @@ namespace BBG.Zone.View
             // Setup the game
             Zone nextZone = this.EntryGroup.ActiveToggles().ToList()[0].GetComponent<ZoneEntryBehaviour>().zone;
 
-                        // Disable the screen
+            // Disable the screen
             this.gameObject.SetActive(false);
 
             TurnManager.BossCounter = nextZone.ZoneLength;
@@ -40,16 +41,18 @@ namespace BBG.Zone.View
 
         public void PopulateZones()
         {
-            foreach(Transform child in this.ZoneList){
+            foreach (Transform child in this.ZoneList)
+            {
                 Destroy(child.gameObject);
             }
 
             List<Zone> zones = this.MakeZones();
 
-            foreach(Zone zone in zones){
+            foreach (Zone zone in zones)
+            {
                 GameObject child = Instantiate(this.ZoneEntryPrefab) as GameObject;
 
-                child.transform.SetParent(this.ZoneList);
+                child.transform.SetParent(this.ZoneList, false);
 
                 ZoneEntryBehaviour entryBehaviour = child.GetComponent<ZoneEntryBehaviour>();
 
@@ -63,9 +66,9 @@ namespace BBG.Zone.View
             for (int i = 0; i < NumZoneChoices; i++)
             {
                 result.Add(ZoneGenerator.Generate(20));
-    		}
+            }
 
-			return result;
+            return result;
         }
     }
 }

@@ -69,6 +69,8 @@ namespace BBG.View
 
             Tweener tween;
 
+            Canvas canvas;
+
             if (animationInfo.SpawnHoverText)
             {
                 var outline = this.icon.GetComponent<NicerOutline>();
@@ -99,7 +101,7 @@ namespace BBG.View
                             }
                             // Text prop stuff
                             GameObject text = Instantiate(this.FloatTextPrefab) as GameObject;
-                            text.transform.SetParent(GameObject.FindWithTag("MainCanvas").transform);
+                            text.transform.SetParent(GameObject.FindWithTag("MainCanvas").transform, false);
                             text.GetComponent<FloatTextBehaviour>().SetText(animationInfo.TextProp);
                             text.GetComponent<FloatTextBehaviour>().SetTarget(animationInfo.target.GetComponent<RectTransform>());
                             if (animationInfo.FontSize != 0)
