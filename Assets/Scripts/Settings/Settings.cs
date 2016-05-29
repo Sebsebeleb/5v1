@@ -2,9 +2,14 @@ using UnityEngine;
 
 namespace BBG.Settings
 {
+    using System;
+
     /// Global settings loaded from playerprefab
     public static class Settings
     {
+
+        public static event Action SettingsChanged;
+
         public static float AnimationTime
         {
             get
@@ -53,6 +58,15 @@ namespace BBG.Settings
         private static void setFloat(string identifier, float val)
         {
             PlayerPrefs.SetString(identifier, val.ToString());
+        }
+
+        /// <summary>
+        /// Should be called whenever settings are updated, to update appropriate parts of the game.
+        /// </summary>
+        public static void NotifyChanges()
+        {
+            var handler = SettingsChanged;
+            if (handler != null) handler();
         }
     }
 }

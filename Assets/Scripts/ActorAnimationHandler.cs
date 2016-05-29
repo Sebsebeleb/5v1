@@ -1,7 +1,5 @@
-using System;
-
 using DG.Tweening;
-
+using System;
 using UnityEngine;
 
 namespace BBG
@@ -95,11 +93,14 @@ namespace BBG
             var floater = this.SpawnFloatingText(enemy, s);
         }
 
-        private void Update(){
+        private void Update()
+        {
             //Check if the aboutToAttackSequences should be stopped (i.e. the enemies' countdown is no longer 1
-            foreach (Actor.Actor actor in GridManager.TileMap.GetAll()){
+            foreach (Actor.Actor actor in GridManager.TileMap.GetAll())
+            {
                 int index = getIndex(actor.x, actor.y);
-                if (actor.countdown.CurrentCountdown != 1 && this.aboutToAttackSequences[index] != null){
+                if (actor.countdown.CurrentCountdown != 1 && this.aboutToAttackSequences[index] != null)
+                {
                     this.aboutToAttackSequences[index].Rewind();
                 }
             }
@@ -135,7 +136,8 @@ namespace BBG
                         this.aboutToAttackSequences[index] = seq;
                     }
                     //Otherwise we just restart the existing one.
-                    else{
+                    else
+                    {
                         this.aboutToAttackSequences[index].Restart();
                     }
                 }
@@ -171,8 +173,16 @@ namespace BBG
 
             Animator anim = this.anims[index];
 
-            anim.speed = 1f / Settings.Settings.AnimationTime;
-            anim.Play("Attack");
+            float f = Settings.Settings.AnimationTime;
+            if (Mathf.Approximately(f, 0))
+            {
+                return;
+            }
+            else
+            {
+                anim.speed = 1f / f;
+                anim.Play("Attack");
+            }
         }
 
         // Called on each action an enemy performs. Some actions (like attacking) has an associated animator animation
@@ -183,8 +193,17 @@ namespace BBG
 
             Animator anim = this.anims[getIndex(who.x, who.y)];
 
-            anim.speed = 1f / Settings.Settings.AnimationTime;
-            anim.Play(action.AnimationName);
+            float f = Settings.Settings.AnimationTime;
+
+            if (Mathf.Approximately(f, 0))
+            {
+                return;
+            }
+            else
+            {
+                anim.speed = 1f / f;
+                anim.Play(action.AnimationName);
+            }
         }
 
         private static int getIndex(int x, int y)
