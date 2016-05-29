@@ -21,6 +21,7 @@ namespace BBG.Settings
             {
                 setFloat("AnimationTime", value);
             }
+
         }
 
         // The duration for icons that appear when an effect is applied
@@ -35,6 +36,44 @@ namespace BBG.Settings
                 setFloat("IconAnimationTime", value);
             }
         }
+
+        #region Audio
+        public static float MasterVolume
+        {
+            get
+            {
+                return loadFloat("Audio_MasterVolume", 0.75f);
+            }
+            set
+            {
+                setFloat("Audio_MasterVolume", value);
+            }
+        }
+
+        public static float MusicVolume
+        {
+            get
+            {
+                return loadFloat("Audio_MusicVolume", 1f);
+            }
+            set
+            {
+                setFloat("Audio_MusicVolume", value);
+            }
+        }
+
+        public static float SfxVolume
+        {
+            get
+            {
+                return loadFloat("Audio_SfxVolume", 1f);
+            }
+            set
+            {
+                setFloat("Audio_SfxVolume", value);
+            }
+        }
+        #endregion
 
 
         private static int loadInt(string identifier, int fallback)
