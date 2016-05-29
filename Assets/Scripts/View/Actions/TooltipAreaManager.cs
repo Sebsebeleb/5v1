@@ -1,7 +1,5 @@
-using System.Linq;
-
 using DG.Tweening;
-
+using System.Linq;
 using UnityEngine;
 
 namespace BBG.View.Actions
@@ -42,9 +40,11 @@ namespace BBG.View.Actions
             this.seq.SetAutoKill(false);
         }
 
-        private void Update(){
+        private void Update()
+        {
             // Stop displaying the description for a tooltip if it is no longer selected
-            if (!this.currentlyHovering && this.currentlyDisplaying != "" && !this.SkillButtonToggles.AnyTogglesOn()){
+            if (!this.currentlyHovering && this.currentlyDisplaying != "" && !this.SkillButtonToggles.AnyTogglesOn())
+            {
                 this.Clear();
             }
         }
@@ -82,14 +82,16 @@ namespace BBG.View.Actions
             this.seq.Append(this.CooldownText.transform.parent.DOScale(new Vector3(1, 1, 1), 0.15f));
         }
 
-        public void HoverEnter(BaseSkill skill){
+        public void HoverEnter(BaseSkill skill)
+        {
 
             this.currentlyHovering = true;
 
             this.SetTooltip(skill);
         }
 
-        public void HoverExit(){
+        public void HoverExit()
+        {
             this.currentlyHovering = false;
 
             this.Clear();

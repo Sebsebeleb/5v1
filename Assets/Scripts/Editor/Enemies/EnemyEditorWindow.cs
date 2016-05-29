@@ -1,10 +1,9 @@
 ﻿namespace Assets.Scripts.Editor.Enemies
 {
-    using System;
-    using System.Linq;
-
     using BBG.Actor;
     using BBG.Data;
+    using System;
+    using System.Linq;
 
     using UnityEditor;
     using UnityEngine;
@@ -62,7 +61,7 @@
             }
             else if (e.type == EventType.ExecuteCommand && e.commandName == "ObjectSelectorClosed")
             {
-                
+
                 var picker = EditorGUIUtility.GetObjectPickerObject();
             }
 
@@ -88,7 +87,7 @@
 
             GUI.DrawTexture(new Rect(rect.x, rect.y, min, min), currentDisplayData.Image.texture);
 
-            
+
             //Button to change sprite of the enemy
             if (GUILayout.Button("Change sprite"))
             {
@@ -131,7 +130,36 @@
             sDamage.ApplyModifiedProperties();
             sAttack.ApplyModifiedProperties();
             sCountdown.ApplyModifiedProperties();
+
+            EditorGUILayout.Separator();
+
+
+
         }
+
+        /*
+
+        private void DisplayEffectsOnload()
+        {
+            
+            Assembly asm = Assembly.GetCallingAssembly();
+
+
+            //asm.
+            string[] effects = AssetDatabase.FindAssets("", new string[] {  });
+
+            var paths = enemies.Select(x => AssetDatabase.GUIDToAssetPath(x)).ToList();
+
+            var names =
+                paths.Select(x => x.Split(Convert.ToChar("/")).Last().Split(Convert.ToChar(".")).First()).ToArray();
+
+
+
+            index = EditorGUILayout.Popup(index, names);
+
+            DisplayEnemy(paths[index]);
+        }
+        */
 
     }
 }
