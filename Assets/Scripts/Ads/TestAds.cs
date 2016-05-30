@@ -8,6 +8,7 @@ public class TestAds : MonoBehaviour
     {
         this.ShowRewardedAd();
     }
+
     public void ShowAd()
     {
         if (Advertisement.IsReady())
