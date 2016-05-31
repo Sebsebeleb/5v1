@@ -3,6 +3,7 @@
     using BBG.Actor;
     using BBG.Items;
 
+    [System.Serializable]
     class Thorny : ItemEffect
     {
 

@@ -1,21 +1,21 @@
 ﻿namespace BBG.Data.Skills.Warrior
 {
-    using System.Collections.Generic;
-    using System.Linq;
-
     using BBG.Actor;
     using BBG.BaseClasses;
     using BBG.Map;
+    using System.Collections.Generic;
+    using System.Linq;
 
     /// <summary>
     /// Deals x damage (based on weapon damage) to enemy. If this attack kills the enemy, deal x * 1.25 damage to a random adjacent enemy. Repeat up to 6 times.
     /// </summary>
+    [System.Serializable]
     public class HungeringStrike : BaseSkill
     {
         public HungeringStrike(int PlayerLevel)
             : base(PlayerLevel)
         {
-            this.Category =SkillCategory.Warrior;
+            this.Category = SkillCategory.Warrior;
 
 
             this.SkillName = "Hungering Strike";
@@ -57,7 +57,7 @@
 
         public override List<GridPosition> GetAffectedTargets(GridPosition target)
         {
-            return Targeting.Targets.AffectedSingleTarget(target).Concat( Targeting.Targets.Adjacent(target)).ToList();
+            return Targeting.Targets.AffectedSingleTarget(target).Concat(Targeting.Targets.Adjacent(target)).ToList();
         }
 
         public override string GetTooltip()

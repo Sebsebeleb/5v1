@@ -1,12 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-
-using UnityEngine;
-using UnityEngine.Assertions;
-
-namespace BBG.Actor
+﻿namespace BBG.Actor
 {
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq;
+
     using BBG.BaseClasses;
+
+    using UnityEngine;
+    using UnityEngine.Assertions;
 
     public class EffectHolder : MonoBehaviour, IEnumerable
     {
@@ -90,12 +91,14 @@ namespace BBG.Actor
             }
             effect.SetOwner(this.actor);
 
-            if (effect.IsTrait){
+            /*if (effect.IsTrait){
                 this._traits.Add(effect);
             }
             else{
                 this._effects.Add(effect);
-            }
+            }*/
+
+            this._effects.Add(effect);
         }
 
         // Checks only if a similiar (same type) effect exists
@@ -150,6 +153,16 @@ namespace BBG.Actor
             }
 
             this._effects.AddRange(_data);
+        }
+
+        public Effect[] GetRawDataYo()
+        {
+            return this._effects.ToArray();
+        }
+
+        public void SetRawDataYo(Effect[] effects)
+        {
+            this._effects = effects.ToList();
         }
     }
 }

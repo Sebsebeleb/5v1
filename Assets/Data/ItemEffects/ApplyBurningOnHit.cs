@@ -4,6 +4,7 @@
     using BBG.Data.Effects.ThemeDebuffs;
     using BBG.Items;
 
+    [System.Serializable]
     public class ApplyBurningOnHit : ItemEffect
     {
 

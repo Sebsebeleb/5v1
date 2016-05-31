@@ -1,18 +1,19 @@
 ﻿namespace BBG.Data.Traits
 {
-    using System.Collections.Generic;
-
     using BBG.Actor;
     using BBG.BaseClasses;
     using BBG.Data.Effects;
     using BBG.View;
+    using System.Collections.Generic;
 
     // The priest will buff a random enemy's attack each turn
+    [System.Serializable]
     internal class NecroPriestHealthBuffer : Effect
     {
         private int _attackBonus = 2;
 
-        public NecroPriestHealthBuffer() : base() {
+        public NecroPriestHealthBuffer() : base()
+        {
             this.IsHidden = true;
             this.IsTrait = true;
         }
@@ -38,7 +39,8 @@
             this.owner.ai.AddAction(buffAction);
         }
 
-        private string GetDescription(){
+        private string GetDescription()
+        {
             return "Buffs a random creature, increasing it's attack by " + TextUtilities.Bold(TextUtilities.FontColor("#FF2222", "2"));
         }
 
@@ -48,9 +50,11 @@
 
             var PossibleTargets = new List<Actor>();
 
-            foreach (var enemy in enemies) {
-                if (enemy.tag != "Corpse" && enemy != this.owner) {
-                PossibleTargets.Add(enemy);
+            foreach (var enemy in enemies)
+            {
+                if (enemy.tag != "Corpse" && enemy != this.owner)
+                {
+                    PossibleTargets.Add(enemy);
                 }
             }
 

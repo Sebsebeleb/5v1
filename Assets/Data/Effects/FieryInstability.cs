@@ -5,6 +5,7 @@
     using BBG.Data.Effects.ThemeDebuffs;
     using BBG.View;
 
+    [System.Serializable]
     class FieryInstability : Effect
     {
         private readonly int _damage;

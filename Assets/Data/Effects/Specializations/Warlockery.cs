@@ -3,6 +3,7 @@
     using BBG.Actor;
     using BBG.BaseClasses;
 
+    [System.Serializable]
     public class Warlockery : Effect
     {
         public Warlockery()

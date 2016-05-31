@@ -2,6 +2,7 @@
 {
     using BBG.BaseClasses;
 
+    [System.Serializable]
     public class Toiletery : Effect
     {
         public Toiletery()

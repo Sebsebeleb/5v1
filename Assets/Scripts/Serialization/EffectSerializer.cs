@@ -1,10 +1,10 @@
 namespace BBG.Serialization
 {
+    using BBG.BaseClasses;
     using System;
     using System.Collections.Generic;
     using System.Reflection;
-
-    using BBG.BaseClasses;
+    using System.Runtime.Serialization;
 
     /// Intermediate class for serializing effects
     public static class EffectSerializer
@@ -19,7 +19,8 @@ namespace BBG.Serialization
         {
             List<Dictionary<string, object>> dict = new List<Dictionary<string, object>>();
 
-            foreach(Effect eff in effs){
+            foreach (Effect eff in effs)
+            {
                 // Create a new dictionary to store the data in;
                 Dictionary<string, object> effectData = new Dictionary<string, object>();
 
@@ -45,29 +46,39 @@ namespace BBG.Serialization
             Effect[] result = new Effect[data.Count];
             int i = 0;
 
-            foreach(Dictionary<string, object> effData in data){
+            foreach (Dictionary<string, object> effData in data)
+            {
                 // First find the type of the serialized effect
-                var typ = assemb.GetType(effData["Class"] as string);
+                Type typ = assemb.GetType(effData["Class"] as string);
 
-                // Then create a new instance of the class using the default parameterless constructor
-                Effect instance = typ.GetConstructor(Type.EmptyTypes).Invoke(null) as Effect;
+                // Create an instance of the class without calling any constructors, we manually feed the data to it instead.
+                Effect instance = FormatterServices.GetUninitializedObject(typ) as Effect;
+
+                // Make sure the "Created" method is called, it is responsible for setting up important callbacks and other initalization
+                typ.GetMethod("Created", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(instance, null);
 
                 // Finally populate it with the field data
-                foreach(var fieldInfos in (effData["Fields"] as Dictionary<string, object>)){
-                    typ.GetField(fieldInfos.Key, flags).SetValue(instance, fieldInfos.Value, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance, null, null);
+                foreach (var fieldInfos in (effData["Fields"] as Dictionary<string, object>))
+                {
+                    typ.GetField(fieldInfos.Key, flags)
+                        .SetValue(
+                            instance,
+                            fieldInfos.Value,
+                            BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance,
+                            null,
+                            null);
                 }
 
                 // Load the special actor field
-                instance.owner = Utils.IDToActor((int) effData["ActorPosition"]);
+                instance.owner = Utils.IDToActor((int)effData["ActorPosition"]);
 
                 //Now store it in the result
-                result[i] = instance as Effect;
+                result[i] = instance;
                 i++;
             }
 
             return result;
         }
-
 
         // Uses reflection to save all the fields that should be saved to the dict for the given effect.
         private static Dictionary<string, object> SaveFields(Effect eff)
@@ -80,11 +91,13 @@ namespace BBG.Serialization
             // Store all fields as {fieldname : value} in the dict
             foreach (MemberInfo info in f)
             {
-                if (info.MemberType != MemberTypes.Field){
+                if (info.MemberType != MemberTypes.Field)
+                {
                     continue;
                 }
                 // Ignore fields with the NonSerialized attribute
-                if (info.GetCustomAttributes(typeof(NonSerializedAttribute), false).Length != 0){
+                if (info.GetCustomAttributes(typeof(NonSerializedAttribute), false).Length != 0)
+                {
                     continue;
                 }
                 var effectType = eff.GetType();

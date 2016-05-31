@@ -3,6 +3,7 @@ namespace BBG.Data.Effects.ThemeDebuffs
     using BBG.BaseClasses;
     using BBG.View;
 
+    [System.Serializable]
     public class Electrified : Effect
     {
         public Electrified()

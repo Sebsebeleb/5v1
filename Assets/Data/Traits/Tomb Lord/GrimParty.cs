@@ -3,6 +3,7 @@ namespace BBG.Data.Traits
     using BBG.Actor;
     using BBG.BaseClasses;
 
+    [System.Serializable]
     public class GrimParty : Effect
     {
         private const int BonusPerEnemy = 2;

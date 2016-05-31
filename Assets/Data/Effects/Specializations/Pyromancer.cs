@@ -4,6 +4,7 @@
     using BBG.BaseClasses;
     using BBG.Data.Effects.ThemeDebuffs;
 
+    [System.Serializable]
     public class Pyromancer : Effect
     {
         private int currentBonus;

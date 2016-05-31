@@ -6,6 +6,7 @@ namespace BBG.Data.Traits
     using System.Collections.Generic;
 
     // The tomb lord summons two random enemies from the current spawn list to his side.
+    [System.Serializable]
     internal class TombLordSummons : Effect
     {
 

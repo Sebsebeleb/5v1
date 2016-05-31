@@ -7,6 +7,7 @@ namespace BBG.BaseClasses
     using BBG.Interfaces;
     using BBG.Map;
 
+    [Serializable]
     public abstract class BaseSkill : ITooltip, IRankCalculatable
     {
         [Flags]
@@ -19,8 +20,8 @@ namespace BBG.BaseClasses
             Warlockery,
         }
         // Indices = rank level, value = min level/max level to get it. (example, if RankLevelMin = [1, 4, 6] and RankLevelMax = [2, 6, 8] the player can only get rank 1 from level 1-2, rank 2 from 4-6 and rank 3 from 6-8
-        public static readonly int[] RankLevelMin = new int[5]{0, 3, 5, 7, 9};
-        public static readonly int[] RankLevelMax = new int[5]{4, 6, 8, 11, int.MaxValue};
+        public static readonly int[] RankLevelMin = new int[5] { 0, 3, 5, 7, 9 };
+        public static readonly int[] RankLevelMax = new int[5] { 4, 6, 8, 11, int.MaxValue };
 
         public string SkillName = "Undefined";
         public string Tooltip = "Undefined";
@@ -56,7 +57,8 @@ namespace BBG.BaseClasses
             this.Rank = this.GetRank(PlayerLevel);
         }
 
-    
+
+
         /// <summary>
         /// Can we target this position?
         /// </summary>
@@ -66,7 +68,7 @@ namespace BBG.BaseClasses
         public virtual bool CanTargetGrid(int x, int y)
         {
             GridPosition pos = new GridPosition(x, y);
-        
+
             return this.GetValidTargets().Contains(pos);
         }
 
@@ -87,7 +89,7 @@ namespace BBG.BaseClasses
         public virtual List<GridPosition> GetAffectedTargets(GridPosition target)
         {
             return Targeting.Targets.AffectedSingleTarget(target);
-        } 
+        }
 
         /// <summary>
         /// Is called when the player actually tries to use his skill on the targeted enemy.
@@ -160,6 +162,5 @@ namespace BBG.BaseClasses
         }
 
         public abstract string GetTooltip();
-
     }
 }

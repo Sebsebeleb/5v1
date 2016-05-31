@@ -5,6 +5,7 @@
 
     using UnityEngine;
 
+    [System.Serializable]
     class CooldownReductionOnDeath : ItemEffect
     {
 

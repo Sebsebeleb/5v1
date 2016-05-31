@@ -3,9 +3,10 @@
     using BBG.Actor;
     using BBG.Interfaces;
     using BBG.ResourceManagement;
-
+    using System;
     using UnityEngine;
 
+    [Serializable]
     public class Specialization : ITooltip
     {
         private readonly string Name;
@@ -14,6 +15,7 @@
 
         private readonly string effectName;
 
+        [NonSerialized]
         private Color displayColor;
 
         private BaseSkill.SkillCategory focus;
@@ -74,13 +76,23 @@
         }
 
         /// <summary>
-        /// Called when the player learns this specialization. Should init effects etc.
+        /// Called when the player learns this specialization (but not when loaded). 
+        /// Stuff that also needs to happen when the game is loaded (for initialization etc.) should not go here, but in Initialize()
         /// </summary>
         public void OnLearned()
+        {
+            this.Initialize();
+        }
+
+        /// <summary>
+        /// Some effects need to be initialized both when learned and when loaded. These go here
+        /// </summary>
+        public void Initialize()
         {
             Effect v = GameResources.LoadEffect(this.effectName);
 
             Actor.Player.effects.AddEffect(v);
+
         }
     }
 }

@@ -1,14 +1,13 @@
 ﻿namespace BBG.BaseClasses
 {
-    using System;
-    using System.Runtime.Serialization;
-
     using BBG.Actor;
     using BBG.Interfaces;
     using BBG.View;
+    using System;
+    using System.Runtime.Serialization;
 
     [System.Serializable]
-    public abstract class Effect : ITooltip, IAnimatableChange
+    public class Effect : ITooltip, IAnimatableChange
     {
 
         protected EffectData data;
@@ -64,13 +63,14 @@
 
         // Should be called when the effects wants to remove itself
         // DontDestory: if this is true, the effect itself will not be destroyed. Only the reference to it will be removed from the effectholder
-        protected void ForceRemoveMe(bool DontDestroy=false)
+        protected void ForceRemoveMe(bool DontDestroy = false)
         {
             this.owner.effects.RemoveEffect(this, DontDestroy);
         }
 
         // Called by the system to destroy this
-        public void Destroy(){
+        public void Destroy()
+        {
             this.Destroyed();
         }
 
@@ -127,26 +127,31 @@
             this.OnAdded();
         }
 
-        public string GetTooltip(){
+        public string GetTooltip()
+        {
             return this.Description.GetDescription();
         }
 
-        public string GetName(){
+        public string GetName()
+        {
             return this.Description.Name;
         }
 
         // IAnimatableChange methods
 
-        public virtual bool ShouldAnimate(){
+        public virtual bool ShouldAnimate()
+        {
             return false;
         }
-        public virtual ChangeAnimation GetAnimationInfo(){
+        public virtual ChangeAnimation GetAnimationInfo()
+        {
             return new ChangeAnimation();
         }
 
         // Serialization
 
-        public virtual void GetObjectData(SerializationInfo info, StreamingContext context){
+        public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
             info.AddValue("IsInfinite", this.IsInfinite);
             info.AddValue("Purgable", this.Purgable);
             info.AddValue("Duration", this.Duration);
@@ -156,8 +161,9 @@
             info.AddValue("_actor", Utils.ActorToID(this.owner));
         }
 
-                // This constructor is called when it is loaded from a saved game
-        public Effect(SerializationInfo info, StreamingContext context){
+        // This constructor is called when it is loaded from a saved game
+        public Effect(SerializationInfo info, StreamingContext context)
+        {
             this.IsInfinite = info.GetBoolean("IsInfinite");
             this.Purgable = info.GetBoolean("Purgable");
             this.Duration = info.GetInt32("Duration");
@@ -166,29 +172,34 @@
             this.owner = Utils.IDToActor(info.GetInt32("_actor"));
         }
 
-        public void _SetRawData(EffectData _data){
+        public void _SetRawData(EffectData _data)
+        {
             this.data = _data;
         }
 
-        public EffectData _GetRawData(){
+        public EffectData _GetRawData()
+        {
             return this.data;
         }
     }
 
     [System.Serializable]
     // Holds the data for tooltip
-    public class EffectDescription{
+    public class EffectDescription
+    {
         public string Name;
         public Func<string> GetDescription;
 
-        public EffectDescription(string name, Func<string> description){
+        public EffectDescription(string name, Func<string> description)
+        {
             this.Name = name;
             this.GetDescription = description;
         }
     }
 
     [System.Serializable]
-    public class EffectData{
+    public class EffectData
+    {
 
     }
 }

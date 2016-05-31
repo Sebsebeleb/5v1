@@ -6,12 +6,58 @@ namespace BBG
 {
     using BBG.BaseClasses;
     using BBG.Data.Skills;
+    using System.Linq;
 
+    [System.Serializable]
     public class SkillBehaviour : MonoBehaviour
     {
-        private BaseSkill[] _knownSkills = new BaseSkill[4];
-        private List<Specialization> specializations = new List<Specialization>();
-    
+
+        [System.Serializable]
+        public struct SkillData
+        {
+
+            public BaseSkill[] _knownSkills;
+            public List<Specialization> specializations;
+
+            public SkillData(BaseSkill[] skills, Specialization[] specializations)
+            {
+                this._knownSkills = skills;
+                this.specializations = specializations.ToList();
+            }
+        }
+
+        private SkillData data;
+
+        public BaseSkill[] KnownSkills
+        {
+            get
+            {
+                return this.data._knownSkills;
+            }
+
+            set
+            {
+                this.data._knownSkills = value;
+            }
+        }
+
+        public List<Specialization> Specializations
+        {
+            get
+            {
+                return this.data.specializations;
+            }
+
+            set
+            {
+                this.data.specializations = value;
+            }
+        }
+
+        void Awake()
+        {
+            this.data = new SkillData(new BaseSkill[4], new Specialization[0]);
+        }
 
         void Start()
         {
@@ -21,7 +67,8 @@ namespace BBG
 
         public void CountDown()
         {
-            foreach (var skill in this.GetKnownSkills()) {
+            foreach (var skill in this.GetKnownSkills())
+            {
                 if (skill == null) continue;
                 skill.CurrentCooldown--;
                 skill.CurrentCooldown = Mathf.Max(skill.CurrentCooldown, 0);
@@ -29,10 +76,13 @@ namespace BBG
         }
 
 
-        public void LearnSkill(BaseSkill skill){
-            for (int i = 0; i<4; i++){
-                if (this._knownSkills[i] == null){
-                    this._knownSkills[i] = skill;
+        public void LearnSkill(BaseSkill skill)
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                if (this.KnownSkills[i] == null)
+                {
+                    this.KnownSkills[i] = skill;
                     return;
                 }
             }
@@ -40,7 +90,7 @@ namespace BBG
 
         public void LearnSpecialization(Specialization specialization)
         {
-            this.specializations.Add(specialization);
+            this.Specializations.Add(specialization);
             specialization.OnLearned();
         }
 
@@ -51,30 +101,58 @@ namespace BBG
         /// <param name="slot">Slot place/replace it in</param>
         public void LearnSkillInSlot(BaseSkill skill, int slot)
         {
-            this._knownSkills[slot] = skill;
+            this.KnownSkills[slot] = skill;
         }
 
-        public BaseSkill[] GetKnownSkills(){
-            return this._knownSkills;
+        public BaseSkill[] GetKnownSkills()
+        {
+            return this.KnownSkills;
         }
 
         public Specialization[] GetKnownSpecializations()
         {
-            return this.specializations.ToArray();
+            return this.Specializations.ToArray();
         }
 
         // TODO: Cleanup shitty code
         // If we have the same skill AND rank, we know it
-        public bool KnowsSkill(BaseSkill skill){
-            for (int i = 0; i < 4; i++){
-                if (this._knownSkills[i] == null){
+        public bool KnowsSkill(BaseSkill skill)
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                if (this.KnownSkills[i] == null)
+                {
                     return false;
                 }
-                if (this._knownSkills[i].GetType() == skill.GetType() && this._knownSkills[i].Rank == skill.Rank){
+                if (this.KnownSkills[i].GetType() == skill.GetType() && this.KnownSkills[i].Rank == skill.Rank)
+                {
                     return true;
                 }
             }
             return false;
+        }
+
+        /// <summary>
+        /// Get the raw data associated with this class. Used for serialization/deserialization for save/load purposes
+        /// </summary>
+        /// <returns></returns>
+        public SkillData GetRawData()
+        {
+            return this.data;
+        }
+
+        /// <summary>
+        /// Set the raw data associated with this class. Used for serialization/deserialization for save/load purposes
+        /// </summary>
+        /// <param name="newData"></param>
+        public void SetRawData(SkillData newData)
+        {
+            this.data = newData;
+
+            foreach (Specialization spec in this.data.specializations)
+            {
+                spec.Initialize();
+            }
         }
     }
 }

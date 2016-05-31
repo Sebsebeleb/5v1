@@ -3,7 +3,9 @@
     using BBG.Actor;
     using BBG.Data;
     using System;
+    using System.Collections.Generic;
     using System.Linq;
+    using System.Reflection;
 
     using UnityEditor;
     using UnityEngine;
@@ -12,9 +14,12 @@
     {
         private static string EnemyPath = "Assets/Data/Resources/Enemies";
 
-        public int index = 0;
+        public int index = 0, effectIndex;
 
         private static DisplayData currentDisplayData;
+
+        private Assembly asm = Assembly.Load("Assembly-CSharp");
+
 
         [MenuItem("Editors/Enemy Editor")]
         public static void Init()
@@ -134,32 +139,32 @@
             EditorGUILayout.Separator();
 
 
+            // Doesn't actually do anything atm. But could be very useful
+            //this.DisplayEffects();
 
         }
 
-        /*
 
-        private void DisplayEffectsOnload()
+        /// <summary>
+        /// Lets the designer choose a trait found in the assembly
+        /// </summary>
+        private void DisplayEffects()
         {
-            
-            Assembly asm = Assembly.GetCallingAssembly();
+
+            List<String> effectTypes = new List<string>();
+
+            foreach (Type typ in this.asm.GetTypes())
+            {
+                if (typ.Namespace == "BBG.Data.Traits")
+                {
+                    effectTypes.Add(typ.Name);
+                }
+            }
 
 
-            //asm.
-            string[] effects = AssetDatabase.FindAssets("", new string[] {  });
+            effectIndex = EditorGUILayout.Popup(this.effectIndex, effectTypes.ToArray());
 
-            var paths = enemies.Select(x => AssetDatabase.GUIDToAssetPath(x)).ToList();
-
-            var names =
-                paths.Select(x => x.Split(Convert.ToChar("/")).Last().Split(Convert.ToChar(".")).First()).ToArray();
-
-
-
-            index = EditorGUILayout.Popup(index, names);
-
-            DisplayEnemy(paths[index]);
         }
-        */
 
     }
 }

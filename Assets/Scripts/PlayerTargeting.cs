@@ -63,6 +63,11 @@ namespace BBG
                 Toggle active = this.SkillGroupRef.ActiveToggles().ToList()[0];
                 BaseSkill skill = active.GetComponent<SkillUseButton>().AssociatedSkill;
 
+                if (skill == null)
+                {
+                    return;
+                }
+
                 //TODO: Error log telling the reason
                 if (skill.CanTargetGrid(x, y) && skill.CanUse(x, y) && !this._playerActor.status.Silenced)
                 {

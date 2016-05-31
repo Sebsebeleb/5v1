@@ -1,13 +1,14 @@
 ﻿namespace BBG.Data.Skills.Fire
 {
-    using System.Collections.Generic;
-    using System.Linq;
-
     using BBG.Actor;
     using BBG.BaseClasses;
     using BBG.Data.Effects.ThemeDebuffs;
     using BBG.Map;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
+    [Serializable]
     class HolyFire : BaseSkill
     {
         public HolyFire(int playerLevel) : base(playerLevel)
@@ -32,7 +33,7 @@
             int damage = this.getDamage();
             int duration = this.getBurningDuration();
 
-            foreach(Actor enemy in targets)
+            foreach (Actor enemy in targets)
             {
                 enemy.damagable.TakeDamage(damage);
                 enemy.effects.AddEffect(new Burning(duration));
@@ -41,7 +42,7 @@
 
         public override List<GridPosition> GetAffectedTargets(GridPosition target)
         {
-            return Targeting.Targets.AffectedSingleTarget(target).Concat( Targeting.Targets.Adjacent(target)).ToList();
+            return Targeting.Targets.AffectedSingleTarget(target).Concat(Targeting.Targets.Adjacent(target)).ToList();
         }
 
         private int getDamage()

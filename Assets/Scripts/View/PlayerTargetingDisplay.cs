@@ -90,6 +90,11 @@
 
             BaseSkill skill = activeButton.AssociatedSkill;
 
+            if (skill == null)
+            {
+                return;
+            }
+
             this.displayForSkill = skill;
 
             List<GridPosition> targets = skill.GetValidTargets();

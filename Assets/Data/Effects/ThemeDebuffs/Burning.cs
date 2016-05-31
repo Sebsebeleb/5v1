@@ -3,6 +3,7 @@ namespace BBG.Data.Effects.ThemeDebuffs
     using BBG.BaseClasses;
     using BBG.View;
 
+    [System.Serializable]
     public class Burning : Effect
     {
 
@@ -19,7 +20,8 @@ namespace BBG.Data.Effects.ThemeDebuffs
         }
 
 
-        public override void OnTurn(){
+        public override void OnTurn()
+        {
             this.Burn();
         }
 

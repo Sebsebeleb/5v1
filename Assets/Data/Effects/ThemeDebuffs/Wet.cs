@@ -4,6 +4,7 @@ namespace BBG.Data.Effects.ThemeDebuffs
     using BBG.View;
 
     // Actual effect is done in stun
+    [System.Serializable]
     public class Wet : Effect
     {
 

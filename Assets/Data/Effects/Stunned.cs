@@ -6,8 +6,7 @@ namespace BBG.Data.Effects
     using BBG.BaseClasses;
     using BBG.Data.Effects.ThemeDebuffs;
 
-    [
-    System.Serializable]
+    [System.Serializable]
     class Stunned : Effect
     {
 
@@ -15,7 +14,7 @@ namespace BBG.Data.Effects
         public Stunned(int duration) : base(duration)
         {
             this.IsDebuff = true;
-            
+
             this.Description = new EffectDescription("Stunned",
                 this.describe);
         }
@@ -30,7 +29,8 @@ namespace BBG.Data.Effects
             base.OnAdded();
 
             // If wet, stun duration is increased by one
-            if (this.owner.effects.HasEffect<Wet>()){
+            if (this.owner.effects.HasEffect<Wet>())
+            {
                 this.Duration++;
                 this.owner.effects.RemoveEffect(this.owner.effects.GetEffectsOfType<Wet>()[0]);
             }
